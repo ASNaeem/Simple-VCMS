@@ -4,9 +4,9 @@ from PyQt5 import QtCore as qtc
 
 
 class App(qtw.QMainWindow, Ui_MainWindow):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs): 
         super().__init__(*args, **kwargs)
-        self.ui = Ui_MainWindow()  # not needed if Ui_MainWindow was inherited (allows to get rid of the .ui from all lines)
+        #self.ui = Ui_MainWindow()  # not needed if Ui_MainWindow was inherited (allows to get rid of the .ui from all lines)
         self.setupUi(self)
         # self.ui.button_submit.clicked.connect(self.authenticate)
         self.button_home.clicked.connect(self.show_home)
