@@ -21,5 +21,22 @@ Sajin:
      Person
      Service
      
+Design - Part
+---------------
+Tee:
+     Patient Records
+     Report & Analytics
+Uzo:
+     Appointment
+     Billing & Invoices
+Ahon:
+     Employees
+     Services
+Sajin:
+     Inventory
+     Support
+Nemo:
+     Home
+     Setting
     
     
