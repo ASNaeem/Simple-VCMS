@@ -7,12 +7,13 @@ class MainApp(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('main.ui', self)
-        #self.page_test_ui = uic.loadUi('test.ui')
-        #self.stackedWidget.addWidget(self.page_test_ui)
-        #self.button_test.clicked.connect(self.show_test)
+        self.page_setting_ui = uic.loadUi('SettingUI.ui')
+        
+        self.stackedWidget.addWidget(self.page_setting)
+        self.button_setting.clicked.connect(self.show_setting)
 
-   # def show_test(self):
-    #    self.stackedWidget.setCurrentWidget(self.page_test_ui)
+    def show_setting(self):
+        self.stackedWidget.setCurrentWidget(self.page_setting)
 
 
 if __name__ == '__main__':
