@@ -9,8 +9,8 @@ class MainApp(QMainWindow):
         uic.loadUi('MainUI.ui', self)
         self.page_setting = uic.loadUi('SettingUI.ui')
         self.page_patient = uic.loadUi("PatientUI.ui")
-        self.stackedWidget.addWidget(self.page_setting)
         self.stackedWidget.addWidget(self.page_patient)
+        self.stackedWidget.addWidget(self.page_setting)   
         self.button_patients.clicked.connect(self.show_patient)
         self.button_setting.clicked.connect(self.show_setting)
 
