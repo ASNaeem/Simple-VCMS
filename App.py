@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
-import pyqtcss
+#import pyqtcss
 import warnings
 #warnings.filterwarnings('ignore')
 

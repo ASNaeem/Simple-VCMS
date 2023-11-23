@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Animal</string>
+   <string>Patient</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -44,7 +44,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Page_Animal_Information">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -109,7 +109,6 @@
                </font>
               </property>
               <property name="text">
-               <string>ANIMAL INFORMATION</string>
                <string>ANIMAL INFORMATION</string>
               </property>
               <property name="alignment">
@@ -280,12 +279,10 @@
               <column>
                <property name="text">
                 <string>Animal ID</string>
-                <string>Animal ID</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>Animal Name</string>
                 <string>Animal Name</string>
                </property>
               </column>
