@@ -9,22 +9,25 @@ class MainApp(QMainWindow):
         uic.loadUi('MainUI.ui', self)
         
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
-        self.page_patient = uic.loadUi("PatientUI.ui")
+        self.page_animal = uic.loadUi("AnimalUI.ui")
         self.page_inventory = uic.loadUi('InventoryUI.ui')
         self.page_setting = uic.loadUi('SettingUI.ui')
         self.page_support = uic.loadUi("SupportUI.ui")
+        self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
         
         self.stackedWidget.addWidget(self.page_appointment)
-        self.stackedWidget.addWidget(self.page_patient)
+        self.stackedWidget.addWidget(self.page_animal)
         self.stackedWidget.addWidget(self.page_inventory)
         self.stackedWidget.addWidget(self.page_setting)
         self.stackedWidget.addWidget(self.page_support)
+        self.stackedWdget.addWidget(self.page_analytics_report)
    
         self.button_appointments.clicked.connect(self.show_appointment)
-        self.button_patients.clicked.connect(self.show_patient)
+        self.button_animals.clicked.connect(self.show_animal)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_setting.clicked.connect(self.show_setting)
         self.button_support.clicked.connect(self.show_support)
+        self.button_support.clicked.connect(self.show_analytics_report)
         
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
@@ -34,8 +37,8 @@ class MainApp(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.page_inventory)
         self.setWindowTitle("VCMS||Dashboard||Inventory")
     
-    def show_patient(self):
-        self.stackedWidget.setCurrentWidget(self.page_patient)
+    def show_animal(self):
+        self.stackedWidget.setCurrentWidget(self.page_animal)
         self.setWindowTitle("VCMS||Dashboard||Paitient")
         
     def show_inventory(self):
@@ -49,7 +52,11 @@ class MainApp(QMainWindow):
     def show_support(self):
         self.stackedWidget.setCurrentWidget(self.page_support)
         self.setWindowTitle("VCMS||Dashboard||Support")
-           
+
+    def show_analytics_report(self):
+        self.stackedWidget.setCurrentWidget(self.page_analytics_report)
+        self.setWindowTitle("VCMS||Dashboard||AnalyticsReport")
+
 if __name__ == '__main__':
     app = QApplication([])
     window = MainApp()

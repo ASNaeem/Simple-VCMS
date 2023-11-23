@@ -118,7 +118,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Patient ID</string>
+     <string>Animal ID</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">

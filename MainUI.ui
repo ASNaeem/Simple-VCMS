@@ -68,9 +68,9 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QPushButton" name="button_patients">
+       <widget class="QPushButton" name="button_animals">
         <property name="text">
-         <string>Patient Records</string>
+         <string>Animal Records</string>
         </property>
        </widget>
       </item>

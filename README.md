@@ -14,7 +14,7 @@ Uzo:
     BillInvoicing
     
 Ahona:
-     Patient
+     Animal
      appointment
 
 Sajin:
@@ -24,7 +24,7 @@ Sajin:
 Design - Part
 ---------------
 Tee:
-     Patient Records
+     Animal Records
      Report & Analytics
 Uzo:
      Appointment
