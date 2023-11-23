@@ -30,7 +30,7 @@ class MainApp(QMainWindow):
         self.button_setting.clicked.connect(self.show_setting)
         self.button_support.clicked.connect(self.show_support)
         self.button_analytics.clicked.connect(self.show_analytics_report)
-        self.button_employee.clicked.connect(self.show_employee)
+        self.button_employees.clicked.connect(self.show_employee)
         
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
