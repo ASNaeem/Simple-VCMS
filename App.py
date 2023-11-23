@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 
 print("Test Merge")
-
+print ("test merge")
 print("merge?")
 print("Test Merge 2.0")
 class App(qtw.QMainWindow, Ui_MainWindow):
