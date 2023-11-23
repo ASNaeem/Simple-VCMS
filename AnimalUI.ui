@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1095</width>
-    <height>816</height>
+    <height>815</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -52,7 +52,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Page_Animal_Information">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -148,8 +148,10 @@
              <widget class="QPushButton" name="button_animal_register_new">
               <property name="font">
                <font>
-                <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <family>Shonar Bangla</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                 <kerning>true</kerning>
                </font>
               </property>
@@ -172,7 +174,9 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                 <kerning>true</kerning>
                </font>
               </property>
@@ -188,8 +192,10 @@
              <widget class="QLineEdit" name="line_animal_search">
               <property name="font">
                <font>
-                <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <family>Shonar Bangla</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                 <kerning>true</kerning>
                </font>
               </property>
@@ -212,8 +218,10 @@
              <widget class="QPushButton" name="button_animal_view_all">
               <property name="font">
                <font>
-                <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <family>Shonar Bangla</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                 <kerning>true</kerning>
                </font>
               </property>
@@ -255,8 +263,10 @@
               </property>
               <property name="font">
                <font>
-                <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <family>Shonar Bangla</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                 <kerning>true</kerning>
                </font>
               </property>
@@ -349,8 +359,10 @@
              <widget class="QPushButton" name="button_animal_view_details">
               <property name="font">
                <font>
-                <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <family>Shonar Bangla</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                 <kerning>true</kerning>
                </font>
               </property>
@@ -1092,7 +1104,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="7,15,10,7,7,7">
+           <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="10,12,4,7,7,7">
             <item>
              <widget class="QLabel" name="label_44">
               <property name="text">
@@ -1396,17 +1408,10 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="0,0,0">
+           <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="0,0,0,0">
             <property name="bottomMargin">
              <number>20</number>
             </property>
-            <item>
-             <widget class="QPushButton" name="button_reg_back">
-              <property name="text">
-               <string>Back/Cancel</string>
-              </property>
-             </widget>
-            </item>
             <item>
              <spacer name="horizontalSpacer_4">
               <property name="orientation">
@@ -1421,11 +1426,31 @@
              </spacer>
             </item>
             <item>
+             <widget class="QPushButton" name="button_reg_back">
+              <property name="text">
+               <string>Back/Cancel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="button_reg_new">
               <property name="text">
                <string>Register</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_21">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>

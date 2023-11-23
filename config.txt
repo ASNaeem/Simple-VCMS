@@ -1,1 +1,1 @@
-light_lightgreen_500.xml
+light_teal_500.xml
