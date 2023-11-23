@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
-    <height>798</height>
+    <width>799</width>
+    <height>713</height>
    </rect>
   </property>
   <property name="font">
@@ -20,9 +20,9 @@
    <string>Appointments</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5,1,25,1">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5,1,0,25,1">
       <item>
        <layout class="QHBoxLayout" name="horizontal_layout_Label">
         <item>
@@ -36,7 +36,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Appointment</string>
+           <string>APPOINTMENT</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -59,7 +59,7 @@
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontal_layout_search" stretch="0,0,0,0">
+       <layout class="QHBoxLayout" name="horizontal_layout_search" stretch="0,0,0,0,0">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -69,7 +69,7 @@
         <item>
          <widget class="QLineEdit" name="search_line_2">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -92,13 +92,39 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>12</pointsize>
+            <pointsize>8</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="search_button_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>View All</string>
           </property>
          </widget>
         </item>
@@ -125,10 +151,13 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>12</pointsize>
+            <pointsize>8</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="text">
            <string>Create</string>
@@ -138,12 +167,25 @@
        </layout>
       </item>
       <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <layout class="QVBoxLayout" name="vertical_layout_table" stretch="0">
         <property name="leftMargin">
          <number>0</number>
         </property>
         <property name="topMargin">
-         <number>10</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QTableWidget" name="appointment_table_widget_2">
@@ -165,6 +207,15 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <attribute name="horizontalHeaderCascadingSectionResizes">
            <bool>false</bool>
           </attribute>
@@ -183,8 +234,8 @@
            </property>
            <property name="font">
             <font>
-             <weight>75</weight>
-             <bold>true</bold>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </column>
@@ -262,10 +313,13 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>12</pointsize>
+            <pointsize>8</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="text">
            <string>Back</string>
@@ -282,10 +336,13 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>12</pointsize>
+            <pointsize>8</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="text">
            <string>Edit</string>
