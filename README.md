@@ -12,7 +12,7 @@ Uzo:
     Veterinarian
     GeneralStaff
     BillInvoicing
-
+    
 Ahona:
      Patient
      appointment
@@ -35,7 +35,9 @@ Ahon:
 Sajin:
      Inventory
      Support
+     hghjh
 Nemo:
+     Login
      Home
      Setting
     

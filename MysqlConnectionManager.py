@@ -7,4 +7,4 @@ mydb = mysql.connector.connect(
 )
 
 cursor = mydb.cursor()
-cursor.execute("create database vcms")
+cursor.execute("use vcms")
