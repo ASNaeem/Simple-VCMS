@@ -42,11 +42,12 @@ class MainApp(QMainWindow):
         
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
-        with open("config.txt","w") as f:
-            f.write(self.page_setting.comboBox_themes.currentText())
+        
             
     def change_theme(self):
         apply_stylesheet(app, self.page_setting.comboBox_themes.currentText())
+        with open("config.txt","w") as f:
+            f.write(self.page_setting.comboBox_themes.currentText())
         
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
@@ -84,16 +85,12 @@ print(list_themes()[1])
 if __name__ == '__main__':
     
     app = QApplication([])
-    """
-    style_file = open("styles/aqua.qss", "r")
-   
-    with style_file:
-        qss = style_file.read()
-        app.setStyleSheet(qss)
-    """
     window = MainApp()
     #window.show()
-    #apply_stylesheet(app, theme='light_blue.xml')
+    with open("config.txt", 'r') as f:
+        read = f.read()
+        apply_stylesheet(app, theme=read)
+        window.page_setting.comboBox_themes.setCurrentIndex(1)
     #apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
     window.showMaximized()
     sys.exit(app.exec_())
