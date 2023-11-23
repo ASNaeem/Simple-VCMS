@@ -47,7 +47,7 @@ class MainApp(QMainWindow):
         apply_stylesheet(app, self.page_setting.comboBox_themes.currentText(), invert_secondary=False, extra = extra)
         with open("config.txt","w") as f:
             f.write(self.page_setting.comboBox_themes.currentText())
-        self.showMaximized()
+        #self.showMaximized()
         
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
@@ -83,7 +83,7 @@ class MainApp(QMainWindow):
 extra = {
     
     # Density Scale
-    'density_scale': '-2',
+    'density_scale': '-4',
 }
 if __name__ == '__main__':   
     app = QApplication([])
@@ -95,5 +95,6 @@ if __name__ == '__main__':
         window.page_setting.comboBox_themes.setCurrentText(read)
     #apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
     window.adjustSize()
-    window.showMaximized()
+    #window.showMaximized()
+    window.showFullScreen()
     sys.exit(app.exec_())
