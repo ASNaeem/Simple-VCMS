@@ -5,7 +5,7 @@ from qt_material import apply_stylesheet, list_themes
 import warnings
 
 warnings.filterwarnings('ignore')
-
+theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
  
 class MainApp(QMainWindow):
     def __init__(self):
@@ -41,13 +41,14 @@ class MainApp(QMainWindow):
         self.button_services.clicked.connect(self.show_service)
         
         self.page_setting.comboBox_themes.addItems(list_themes())
-        self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
-        
+        self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)       
             
-    def change_theme(self):
-        apply_stylesheet(app, self.page_setting.comboBox_themes.currentText())
+    def change_theme(self):      
+        apply_stylesheet(app, self.page_setting.comboBox_themes.currentText(), invert_secondary=False)
         with open("config.txt","w") as f:
-            f.write(self.page_setting.comboBox_themes.currentText())
+            f.write(str(self.page_setting.comboBox_themes.currentText()))
+        self.adjustSize()
+        self.showMaximized()
         
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
@@ -81,16 +82,15 @@ class MainApp(QMainWindow):
         self.setWindowTitle("VCMS || Dashboard || Service")
 
 
-print(list_themes()[1])  
-if __name__ == '__main__':
-    
+if __name__ == '__main__':   
     app = QApplication([])
     window = MainApp()
     #window.show()
     with open("config.txt", 'r') as f:
         read = f.read()
         apply_stylesheet(app, theme=read)
-        window.page_setting.comboBox_themes.setCurrentIndex(1)
+        window.page_setting.comboBox_themes.setCurrentText(read)
     #apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
+    window.adjustSize()
     window.showMaximized()
     sys.exit(app.exec_())
