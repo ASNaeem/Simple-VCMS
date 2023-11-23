@@ -16,8 +16,14 @@
     <height>16777215</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>Courier New</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Patient</string>
+   <string>AnimalInfo</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -40,11 +46,13 @@
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="font">
        <font>
+        <family>Courier New</family>
+        <pointsize>12</pointsize>
         <kerning>true</kerning>
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Page_Animal_Information">
        <layout class="QVBoxLayout" name="verticalLayout_4">
