@@ -14,13 +14,17 @@ class MainApp(QMainWindow):
         self.page_setting = uic.loadUi('SettingUI.ui')
         self.page_support = uic.loadUi("SupportUI.ui")
         self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
-        
+        self.page_employee = uic.loadUi("EmployeeUI.ui")
+        self.page_service = uic.loadUi("ServiceUI.ui")
+       
         self.stackedWidget.addWidget(self.page_appointment)
         self.stackedWidget.addWidget(self.page_animal)
         self.stackedWidget.addWidget(self.page_inventory)
         self.stackedWidget.addWidget(self.page_setting)
         self.stackedWidget.addWidget(self.page_support)
         self.stackedWidget.addWidget(self.page_analytics_report)
+        self.stackedWidget.addWidget(self.page_employee)
+        self.stackedWidget.addWidget(self.page_service)
    
         self.button_appointments.clicked.connect(self.show_appointment)
         self.button_animals.clicked.connect(self.show_animal)
@@ -28,6 +32,8 @@ class MainApp(QMainWindow):
         self.button_setting.clicked.connect(self.show_setting)
         self.button_support.clicked.connect(self.show_support)
         self.button_analytics.clicked.connect(self.show_analytics_report)
+        self.button_employees.clicked.connect(self.show_employee)
+        self.button_services.clicked.connect(self.show_service)
         
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
@@ -52,6 +58,13 @@ class MainApp(QMainWindow):
     def show_analytics_report(self):
         self.stackedWidget.setCurrentWidget(self.page_analytics_report)
         self.setWindowTitle("VCMS||Dashboard||AnalyticsReport")
+    
+    def show_employee(self):
+        self.stackedWidget.setCurrentWidget(self.page_employee)
+        self.setWindowTitle("VCMS||Dashboard||Employee")
+    def show_service(self):
+        self.stackedWidget.setCurrentWidget(self.page_service)
+        self.setWindowTitle("VCMS||Dashboard||Service")
 
 if __name__ == '__main__':
     app = QApplication([])
