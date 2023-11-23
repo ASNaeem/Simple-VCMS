@@ -44,10 +44,9 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)       
             
     def change_theme(self):      
-        apply_stylesheet(app, self.page_setting.comboBox_themes.currentText(), invert_secondary=False)
+        apply_stylesheet(app, self.page_setting.comboBox_themes.currentText(), invert_secondary=False, extra = extra)
         with open("config.txt","w") as f:
             f.write(str(self.page_setting.comboBox_themes.currentText()))
-        self.adjustSize()
         self.showMaximized()
         
     def show_appointment(self):
@@ -81,14 +80,18 @@ class MainApp(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.page_service)
         self.setWindowTitle("VCMS || Dashboard || Service")
 
-
+extra = {
+    
+    # Density Scale
+    'density_scale': '-2',
+}
 if __name__ == '__main__':   
     app = QApplication([])
     window = MainApp()
     #window.show()
     with open("config.txt", 'r') as f:
         read = f.read()
-        apply_stylesheet(app, theme=read)
+        apply_stylesheet(app, theme=read, extra = extra)
         window.page_setting.comboBox_themes.setCurrentText(read)
     #apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
     window.adjustSize()
