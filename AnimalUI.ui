@@ -2,8 +2,6 @@
 <ui version="4.0">
  <class>AnimalUI_Window</class>
  <widget class="QMainWindow" name="AnimalUI_Window">
- <class>AnimalUI_Window</class>
- <widget class="QMainWindow" name="AnimalUI_Window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,7 +17,6 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Animal</string>
    <string>Animal</string>
   </property>
   <widget class="QWidget" name="centralwidget">
