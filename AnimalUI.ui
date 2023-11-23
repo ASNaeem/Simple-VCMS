@@ -52,7 +52,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Page_Animal_Information">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -77,16 +77,16 @@
            <number>10</number>
           </property>
           <property name="leftMargin">
-           <number>10</number>
+           <number>50</number>
           </property>
           <property name="topMargin">
-           <number>10</number>
+           <number>50</number>
           </property>
           <property name="rightMargin">
-           <number>10</number>
+           <number>50</number>
           </property>
           <property name="bottomMargin">
-           <number>10</number>
+           <number>50</number>
           </property>
           <item>
            <layout class="QGridLayout" name="gridLayout_11">
@@ -432,13 +432,13 @@
            <number>50</number>
           </property>
           <property name="topMargin">
-           <number>10</number>
+           <number>50</number>
           </property>
           <property name="rightMargin">
            <number>50</number>
           </property>
           <property name="bottomMargin">
-           <number>10</number>
+           <number>50</number>
           </property>
           <item>
            <layout class="QGridLayout" name="gridLayout_3">
@@ -1004,7 +1004,7 @@
            <number>50</number>
           </property>
           <property name="topMargin">
-           <number>10</number>
+           <number>50</number>
           </property>
           <property name="rightMargin">
            <number>50</number>
