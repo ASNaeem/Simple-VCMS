@@ -1,7 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
-import pyqtcss
 import warnings
 #warnings.filterwarnings('ignore')
 
@@ -76,7 +75,7 @@ class MainApp(QMainWindow):
 if __name__ == '__main__':
     
     app = QApplication([])
-    style_file = open("MaterialDark.qss", "r")
+    style_file = open("styles/ManjaroMix.qss", "r")
     with style_file:
         qss = style_file.read()
         app.setStyleSheet(qss)
