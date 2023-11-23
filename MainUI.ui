@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>817</width>
     <height>600</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>VCMS || Dashboard</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="17,93">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
     <item>
      <widget class="QScrollArea" name="scrollArea">
       <property name="widgetResizable">
@@ -25,7 +25,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>118</width>
+         <width>130</width>
          <height>580</height>
         </rect>
        </property>
@@ -36,7 +36,7 @@
            <number>0</number>
           </property>
           <property name="topMargin">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
            <number>5</number>
@@ -49,6 +49,14 @@
           </property>
           <item row="13" column="0">
            <widget class="QPushButton" name="button_support">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Support</string>
             </property>
@@ -56,6 +64,14 @@
           </item>
           <item row="10" column="0">
            <widget class="QPushButton" name="button_services">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Services</string>
             </property>
@@ -63,6 +79,14 @@
           </item>
           <item row="4" column="0">
            <widget class="QPushButton" name="button_patients">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Patient Records</string>
             </property>
@@ -70,6 +94,14 @@
           </item>
           <item row="9" column="0">
            <widget class="QPushButton" name="button_employees">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Employees</string>
             </property>
@@ -103,6 +135,14 @@
           </item>
           <item row="3" column="0">
            <widget class="QPushButton" name="button_appointments">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Appointments</string>
             </property>
@@ -110,6 +150,14 @@
           </item>
           <item row="12" column="0">
            <widget class="QPushButton" name="button_setting">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Setting</string>
             </property>
@@ -117,6 +165,14 @@
           </item>
           <item row="2" column="0">
            <widget class="QPushButton" name="button_home">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Home</string>
             </property>
@@ -124,6 +180,14 @@
           </item>
           <item row="8" column="0">
            <widget class="QPushButton" name="button_inventory">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Inventory</string>
             </property>
@@ -131,6 +195,14 @@
           </item>
           <item row="6" column="0">
            <widget class="QPushButton" name="button_billing">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Billing &amp; Invoices</string>
             </property>
@@ -138,6 +210,14 @@
           </item>
           <item row="7" column="0">
            <widget class="QPushButton" name="button_analytics">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Report &amp; Analytics</string>
             </property>
@@ -145,6 +225,14 @@
           </item>
           <item row="5" column="0">
            <widget class="QPushButton" name="pushButton">
+            <property name="font">
+             <font>
+              <family>Yu Gothic UI</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>DayCare</string>
             </property>
