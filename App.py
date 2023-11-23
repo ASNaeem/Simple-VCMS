@@ -3,16 +3,13 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
 import pyqtcss
 import warnings
-warnings.filterwarnings('ignore')
+#warnings.filterwarnings('ignore')
 
-pyqtcss.available_styles()
-['classic', 'dark_blue', 'dark_orange']
-    
-#style_string = pyqtcss.get_style("classic")
-style_string = "classic/style.style.qss"
+ 
 class MainApp(QMainWindow):
     def __init__(self):
         super().__init__()
+        
         uic.loadUi('MainUI.ui', self)
         
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
@@ -41,6 +38,7 @@ class MainApp(QMainWindow):
         self.button_analytics.clicked.connect(self.show_analytics_report)
         self.button_employees.clicked.connect(self.show_employee)
         self.button_services.clicked.connect(self.show_service)
+        
         
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
@@ -73,10 +71,14 @@ class MainApp(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.page_service)
         self.setWindowTitle("VCMS||Dashboard||Service")
 
+style_file = open("MaterialDark.qss", "r")
+with style_file:
+    qss = file.read()
+   
 if __name__ == '__main__':
     app = QApplication([])
     window = MainApp()
-    window.setStyleSheet(style_string)
     #window.show()
     window.showMaximized()
+    app.setStyleSheet("MaterialDark.qss")
     sys.exit(app.exec_())
