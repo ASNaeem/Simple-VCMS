@@ -6,6 +6,7 @@ QTableWidget = table_table_name
 QRadioButton = rb_button_name
 QPlainTextEdit = pte_variable_name
 QPushButton = button_varibale_name
+QDateEdit = date_file_func
 
 Tee: 
    AnimalOwner

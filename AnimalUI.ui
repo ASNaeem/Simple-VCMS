@@ -21,6 +21,21 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>10</number>
+    </property>
+    <property name="leftMargin">
+     <number>10</number>
+    </property>
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
+    <property name="bottomMargin">
+     <number>10</number>
+    </property>
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="font">
@@ -29,20 +44,59 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
-      <widget class="QWidget" name="Page_View">
+      <widget class="QWidget" name="Page_Animal_Information">
        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,1,1,15,1">
+          <property name="spacing">
+           <number>10</number>
+          </property>
           <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
            <number>10</number>
           </property>
           <property name="rightMargin">
            <number>10</number>
           </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
           <item>
            <layout class="QGridLayout" name="gridLayout_11">
+            <property name="leftMargin">
+             <number>5</number>
+            </property>
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="rightMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <property name="spacing">
+             <number>5</number>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="label_2">
               <property name="font">
@@ -55,6 +109,7 @@
                </font>
               </property>
               <property name="text">
+               <string>ANIMAL INFORMATION</string>
                <string>ANIMAL INFORMATION</string>
               </property>
               <property name="alignment">
@@ -79,18 +134,41 @@
           </item>
           <item>
            <layout class="QGridLayout" name="gridLayout_9">
+            <property name="spacing">
+             <number>10</number>
+            </property>
             <item row="1" column="5">
-             <widget class="QPushButton" name="push_button_add_new_2">
+             <widget class="QPushButton" name="button_animal_register_new">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+                <kerning>true</kerning>
+               </font>
+              </property>
               <property name="cursor">
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="text">
-               <string>Add New Animal</string>
+               <string>Register New Animal</string>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>16</width>
+                <height>16</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="push_button_search_2">
+             <widget class="QPushButton" name="button_animal_search">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+                <kerning>true</kerning>
+               </font>
+              </property>
               <property name="cursor">
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
@@ -100,7 +178,15 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLineEdit" name="animal_search_field"/>
+             <widget class="QLineEdit" name="line_animal_search">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+                <kerning>true</kerning>
+               </font>
+              </property>
+             </widget>
             </item>
             <item row="1" column="4">
              <spacer name="horizontalSpacer_3">
@@ -116,7 +202,14 @@
              </spacer>
             </item>
             <item row="1" column="3">
-             <widget class="QPushButton" name="push_button_view_2">
+             <widget class="QPushButton" name="button_animal_view_all">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+                <kerning>true</kerning>
+               </font>
+              </property>
               <property name="cursor">
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
@@ -146,12 +239,19 @@
              <number>10</number>
             </property>
             <item row="3" column="0">
-             <widget class="QTableWidget" name="table_animal_2">
+             <widget class="QTableWidget" name="table_animal">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>100</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+                <kerning>true</kerning>
+               </font>
               </property>
               <property name="cursor" stdset="0">
                <cursorShape>ArrowCursor</cursorShape>
@@ -166,7 +266,7 @@
                <number>39</number>
               </attribute>
               <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>175</number>
+               <number>230</number>
               </attribute>
               <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
                <bool>false</bool>
@@ -180,10 +280,12 @@
               <column>
                <property name="text">
                 <string>Animal ID</string>
+                <string>Animal ID</string>
                </property>
               </column>
               <column>
                <property name="text">
+                <string>Animal Name</string>
                 <string>Animal Name</string>
                </property>
               </column>
@@ -199,6 +301,11 @@
               </column>
               <column>
                <property name="text">
+                <string>Behavioral Warning</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
                 <string>Owner Name</string>
                </property>
               </column>
@@ -207,30 +314,41 @@
                 <string>Phone Number</string>
                </property>
               </column>
+              <column>
+               <property name="text">
+                <string>Address</string>
+               </property>
+              </column>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_10" columnstretch="25,0,0,0,0,25">
+           <layout class="QGridLayout" name="gridLayout_10" columnstretch="0,0,0,0">
+            <property name="leftMargin">
+             <number>10</number>
+            </property>
+            <property name="topMargin">
+             <number>10</number>
+            </property>
+            <property name="rightMargin">
+             <number>10</number>
+            </property>
             <property name="bottomMargin">
              <number>10</number>
             </property>
-            <item row="0" column="3">
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="button_animal_view_details">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+                <kerning>true</kerning>
+               </font>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="4">
-             <widget class="QPushButton" name="push_button_view_details_2">
               <property name="cursor">
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
@@ -252,17 +370,7 @@
               </property>
              </spacer>
             </item>
-            <item row="0" column="1">
-             <widget class="QPushButton" name="push_button_back_2">
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string>Back</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="5">
+            <item row="0" column="3">
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -282,7 +390,22 @@
        </layout>
       </widget>
       <widget class="QWidget" name="Page_Animal_Details">
-       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="5,0,2,5,5,5,5,5,5,5,5,0,40,5">
           <property name="spacing">
@@ -291,8 +414,14 @@
           <property name="leftMargin">
            <number>50</number>
           </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
           <property name="rightMargin">
            <number>50</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
           </property>
           <item>
            <layout class="QGridLayout" name="gridLayout_3">
@@ -353,7 +482,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_32">
+             <widget class="QLineEdit" name="line_animal_id">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -383,14 +512,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton">
+             <widget class="QRadioButton" name="rb_gender_male">
               <property name="text">
                <string>Male</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_2">
+             <widget class="QRadioButton" name="rb_gender_female">
               <property name="text">
                <string>Female</string>
               </property>
@@ -411,7 +540,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_37"/>
+             <widget class="QLineEdit" name="line_animal_name"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_2">
@@ -437,14 +566,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_3">
+             <widget class="QRadioButton" name="rb_sterilized_yes">
               <property name="text">
                <string>Yes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_4">
+             <widget class="QRadioButton" name="rb_sterilized_no">
               <property name="text">
                <string>No</string>
               </property>
@@ -465,7 +594,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="dateEdit_2"/>
+             <widget class="QDateEdit" name="date_animal_registration"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_7">
@@ -491,7 +620,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_46"/>
+             <widget class="QLineEdit" name="line_animal_condition"/>
             </item>
            </layout>
           </item>
@@ -508,7 +637,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_47"/>
+             <widget class="QLineEdit" name="line_animal_species"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_8">
@@ -534,7 +663,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_48"/>
+             <widget class="QLineEdit" name="line_owner_name"/>
             </item>
            </layout>
           </item>
@@ -551,7 +680,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_49"/>
+             <widget class="QLineEdit" name="line_animal_breed"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_9">
@@ -577,7 +706,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_50">
+             <widget class="QLineEdit" name="line_owner_phone">
               <property name="placeholderText">
                <string>eg. 01XXX-XXXXXX</string>
               </property>
@@ -598,7 +727,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_51"/>
+             <widget class="QLineEdit" name="line_animal_color"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_10">
@@ -624,7 +753,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_52">
+             <widget class="QLineEdit" name="line_owner_email">
               <property name="placeholderText">
                <string>eg. abc@xyz.com</string>
               </property>
@@ -645,7 +774,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="dateEdit"/>
+             <widget class="QDateEdit" name="date_animal_birth"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_11">
@@ -671,7 +800,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_54"/>
+             <widget class="QLineEdit" name="line_owner_address"/>
             </item>
            </layout>
           </item>
@@ -691,7 +820,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_55"/>
+             <widget class="QLineEdit" name="line_animal_warning"/>
             </item>
            </layout>
           </item>
@@ -723,7 +852,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QTableWidget" name="tableWidget_3">
+               <widget class="QTableWidget" name="table_animal_record">
                 <attribute name="horizontalHeaderDefaultSectionSize">
                  <number>290</number>
                 </attribute>
@@ -760,30 +889,37 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_6">
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="button_animal_edit">
                 <property name="text">
                  <string>Enable Edit</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="button_animal_save">
                 <property name="text">
-                 <string>Update</string>
+                 <string>Save</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_3">
+               <widget class="QPushButton" name="button_animal_delete">
                 <property name="text">
                  <string>Delete</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_4">
+               <widget class="QPushButton" name="button_animal_cancel">
                 <property name="text">
-                 <string>Cancel/Back</string>
+                 <string>Cancel</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="button_animal_back">
+                <property name="text">
+                 <string>Back</string>
                 </property>
                </widget>
               </item>
@@ -797,14 +933,14 @@
              <number>20</number>
             </property>
             <item>
-             <widget class="QPushButton" name="pushButton_5">
+             <widget class="QPushButton" name="button_add_record">
               <property name="text">
                <string>Add New Record</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_29"/>
+             <widget class="QLineEdit" name="line_new_record"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_13">
@@ -825,17 +961,38 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Page_Animal_Create">
-       <layout class="QVBoxLayout" name="verticalLayout_11">
+      <widget class="QWidget" name="Page_Animal_Register">
+       <layout class="QVBoxLayout" name="verticalLayout_11" stretch="0">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_8" stretch="5,0,2,5,5,5,5,5,5,5,5,0,40,5">
+         <layout class="QVBoxLayout" name="verticalLayout_8" stretch="5,0,5,5,5,5,5,5,5,5,0,5">
           <property name="spacing">
-           <number>20</number>
+           <number>30</number>
           </property>
           <property name="leftMargin">
            <number>50</number>
           </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
           <property name="rightMargin">
+           <number>50</number>
+          </property>
+          <property name="bottomMargin">
            <number>50</number>
           </property>
           <item>
@@ -872,19 +1029,6 @@
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="7,15,10,7,7,7">
             <item>
              <widget class="QLabel" name="label_43">
@@ -897,7 +1041,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_33">
+             <widget class="QLineEdit" name="line_reg_animal_id">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -927,14 +1071,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_5">
+             <widget class="QRadioButton" name="rb_reg_gender_male">
               <property name="text">
                <string>Male</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_6">
+             <widget class="QRadioButton" name="rb_reg_gender_female">
               <property name="text">
                <string>Female</string>
               </property>
@@ -955,7 +1099,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_38"/>
+             <widget class="QLineEdit" name="line_reg_animal_name"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_15">
@@ -981,14 +1125,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_7">
+             <widget class="QRadioButton" name="rb_reg_sterilized_yes">
               <property name="text">
                <string>Yes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_8">
+             <widget class="QRadioButton" name="rb_reg_sterilized_no">
               <property name="text">
                <string>No</string>
               </property>
@@ -1009,7 +1153,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="dateEdit_3"/>
+             <widget class="QDateEdit" name="date_reg_animal_reg"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_16">
@@ -1035,7 +1179,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_53"/>
+             <widget class="QLineEdit" name="line_reg_animal_condition"/>
             </item>
            </layout>
           </item>
@@ -1052,7 +1196,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_56"/>
+             <widget class="QLineEdit" name="line_reg_animal_species"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_17">
@@ -1078,7 +1222,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_57"/>
+             <widget class="QLineEdit" name="line_reg_owner_name"/>
             </item>
            </layout>
           </item>
@@ -1095,7 +1239,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_58"/>
+             <widget class="QLineEdit" name="line_reg_animal_breed"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_18">
@@ -1121,7 +1265,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_59">
+             <widget class="QLineEdit" name="line_reg_owner_phone">
               <property name="placeholderText">
                <string>eg. 01XXX-XXXXXX</string>
               </property>
@@ -1142,7 +1286,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_60"/>
+             <widget class="QLineEdit" name="line_reg_animal_color"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_19">
@@ -1168,7 +1312,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_61">
+             <widget class="QLineEdit" name="line_reg_owner_email">
               <property name="placeholderText">
                <string>eg. abc@xyz.com</string>
               </property>
@@ -1189,7 +1333,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="dateEdit_4"/>
+             <widget class="QDateEdit" name="date_reg_animal_birth"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_20">
@@ -1215,7 +1359,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_62"/>
+             <widget class="QLineEdit" name="line_reg_owner_address"/>
             </item>
            </layout>
           </item>
@@ -1235,7 +1379,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_63"/>
+             <widget class="QLineEdit" name="line_reg_animal_warning"/>
             </item>
            </layout>
           </item>
@@ -1247,97 +1391,19 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="6,0,1">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,1">
-              <item>
-               <widget class="QLabel" name="label_37">
-                <property name="lineWidth">
-                 <number>1</number>
-                </property>
-                <property name="text">
-                 <string>Medical Records</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-                <property name="indent">
-                 <number>-1</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTableWidget" name="tableWidget_4">
-                <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>290</number>
-                </attribute>
-                <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                 <bool>false</bool>
-                </attribute>
-                <column>
-                 <property name="text">
-                  <string>Date</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Record</string>
-                 </property>
-                </column>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_21">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_10">
-              <item>
-               <widget class="QPushButton" name="pushButton_8">
-                <property name="text">
-                 <string>Register</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_9">
-                <property name="text">
-                 <string>Cancel/Back</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="10,86,20">
+           <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="0,0,0">
             <property name="bottomMargin">
              <number>20</number>
             </property>
             <item>
-             <widget class="QPushButton" name="pushButton_10">
+             <widget class="QPushButton" name="button_reg_back">
               <property name="text">
-               <string>Add New Record</string>
+               <string>Back/Cancel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_30"/>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_22">
+             <spacer name="horizontalSpacer_4">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -1348,6 +1414,13 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_reg_new">
+              <property name="text">
+               <string>Register</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
