@@ -1,8 +1,15 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
+import pyqtcss
+import warnings
+warnings.filterwarnings('ignore')
 
-
+pyqtcss.available_styles()
+['classic', 'dark_blue', 'dark_orange']
+    
+#style_string = pyqtcss.get_style("classic")
+style_string = "classic/style.style.qss"
 class MainApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -27,7 +34,7 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_service)
    
         self.button_appointments.clicked.connect(self.show_appointment)
-        self.button_animals.clicked.connect(self.show_animal)
+        self.button_animal.clicked.connect(self.show_animal)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_setting.clicked.connect(self.show_setting)
         self.button_support.clicked.connect(self.show_support)
@@ -69,5 +76,7 @@ class MainApp(QMainWindow):
 if __name__ == '__main__':
     app = QApplication([])
     window = MainApp()
-    window.show()
+    window.setStyleSheet(style_string)
+    #window.show()
+    window.showMaximized()
     sys.exit(app.exec_())

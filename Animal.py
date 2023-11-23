@@ -1,6 +1,6 @@
-class Patient:
-    def __init__ (self, patient_id:str, breed:str, species:str, color:str, gender:str, age:str, registration_date:str, sterillized:bool, behavioral_warning:str, medical_condition:str):
-         self.patient_id = patient_id
+class Animal:
+    def __init__ (self, animal_id:str, breed:str, species:str, color:str, gender:str, age:str, registration_date:str, sterillized:bool, behavioral_warning:str, medical_condition:str):
+         self.animal_id = animal_id
          self.breed = breed
          self.species = species
          self.color = color
@@ -11,11 +11,11 @@ class Patient:
          self.behavioral_warning = behavioral_warning 
          self.medical_condition = medical_condition
     @property
-    def patient_id(self):
-        return self._patient_id
-    @patient_id.setter
-    def patient_id(self, patient_id: str):
-        self._patient_id = patient_id
+    def animal_id(self):
+        return self._animal_id
+    @animal_id.setter
+    def animal_id(self, animal_id: str):
+        self._animal_id = animal_id
     
     @property
     def breed(self):
