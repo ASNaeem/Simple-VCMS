@@ -75,7 +75,7 @@ class MainApp(QMainWindow):
 if __name__ == '__main__':
     
     app = QApplication([])
-    style_file = open("styles/ManjaroMix.qss", "r")
+    style_file = open("styles/aqua.qss", "r")
     with style_file:
         qss = style_file.read()
         app.setStyleSheet(qss)
