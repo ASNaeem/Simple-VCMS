@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+light_teal_500.xml
+=======
 dark_amber.xml
+>>>>>>> ddd4d369d4ceed708e4b77f8f023321f1776f289
