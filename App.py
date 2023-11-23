@@ -20,11 +20,15 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_setting)
         self.stackedWidget.addWidget(self.page_support)
    
-        self.button_patients.clicked.connect(self.show_appointment)
+        self.button_appointments.clicked.connect(self.show_appointment)
         self.button_patients.clicked.connect(self.show_patient)
-        self.button_patients.clicked.connect(self.show_inventory)
+        self.button_inventory.clicked.connect(self.show_inventory)
         self.button_setting.clicked.connect(self.show_setting)
         self.button_support.clicked.connect(self.show_support)
+        
+    def show_appointment(self):
+        self.stackedWidget.setCurrentWidget(self.page_appointment)
+        self.setWindowTitle("VCMS||Dashboard||Appointment")
         
     def show_inventory(self):
         self.stackedWidget.setCurrentWidget(self.page_inventory)
