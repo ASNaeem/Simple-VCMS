@@ -1,8 +1,13 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
+import pyqtcss
 
-
+pyqtcss.available_styles()
+['classic', 'dark_blue', 'dark_orange']
+    
+#style_string = pyqtcss.get_style("classic")
+style_string = "classic/style.style.qss"
 class MainApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -53,5 +58,6 @@ class MainApp(QMainWindow):
 if __name__ == '__main__':
     app = QApplication([])
     window = MainApp()
+    window.setStyleSheet(style_string)
     window.show()
     sys.exit(app.exec_())
