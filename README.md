@@ -1,6 +1,12 @@
 file name = class name =  PascalCase
 variable = method = snake_case
 
+QLineEdit = line_variable_name
+QTableWidget = table_table_name
+QRadioButton = rb_button_name
+QPlainTextEdit = pte_variable_name
+QPushButton = button_varibale_name
+
 Tee: 
    AnimalOwner
    Inventory
@@ -14,7 +20,7 @@ Uzo:
     BillInvoicing
     
 Ahona:
-     Patient
+     Animal
      appointment
 
 Sajin:
@@ -24,7 +30,7 @@ Sajin:
 Design - Part
 ---------------
 Tee:
-     Patient Records
+     Animal Records
      Report & Analytics
 Uzo:
      Appointment

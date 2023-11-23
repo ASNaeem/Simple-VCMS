@@ -1,7 +1,7 @@
 class BillInvoice:
-    def __init__(self, billing_id:str, patient_id:str, total_amount:float):
+    def __init__(self, billing_id:str, animal_id:str, total_amount:float):
         self.billing_id = billing_id
-        self.patient_id = patient_id
+        self.animal_id = animal_id
         self.total_amount = total_amount
     
     @property
@@ -13,12 +13,12 @@ class BillInvoice:
         self._billing_id = billing_id
 
     @property
-    def patient_id(self):
-        return self._patient_id
+    def animal_id(self):
+        return self._animal_id
 
-    @patient_id.setter
-    def patient_id(self, patient_id:str):
-        self._patient_id = patient_id
+    @animal_id.setter
+    def animal_id(self, animal_id:str):
+        self._animal_id = animal_id
 
     @property
     def total_amount(self):

@@ -37,7 +37,7 @@
           </font>
          </property>
          <property name="text">
-          <string>New Appointment</string>
+          <string>MAKE APPOINTMENT</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -51,8 +51,8 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>210</y>
+      <x>270</x>
+      <y>220</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -61,8 +61,8 @@
    <widget class="QLineEdit" name="lineEdit_2">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>250</y>
+      <x>270</x>
+      <y>260</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -71,8 +71,8 @@
    <widget class="QLineEdit" name="lineEdit_3">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>290</y>
+      <x>270</x>
+      <y>300</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -81,8 +81,8 @@
    <widget class="QLineEdit" name="lineEdit_4">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>330</y>
+      <x>270</x>
+      <y>340</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -91,8 +91,8 @@
    <widget class="QLineEdit" name="lineEdit_6">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>330</y>
+      <x>600</x>
+      <y>340</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -101,8 +101,8 @@
    <widget class="QLineEdit" name="lineEdit_8">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>290</y>
+      <x>600</x>
+      <y>300</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -111,21 +111,21 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>210</y>
+      <x>180</x>
+      <y>220</y>
       <width>91</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Patient ID</string>
+     <string>Animal ID</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>250</y>
+      <x>180</x>
+      <y>260</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -137,8 +137,8 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>290</y>
+      <x>180</x>
+      <y>300</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -150,8 +150,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>330</y>
+      <x>180</x>
+      <y>340</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -163,8 +163,8 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>210</y>
+      <x>510</x>
+      <y>220</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -176,8 +176,8 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>250</y>
+      <x>510</x>
+      <y>260</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -189,8 +189,8 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>290</y>
+      <x>510</x>
+      <y>300</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -202,8 +202,8 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>330</y>
+      <x>510</x>
+      <y>340</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -215,8 +215,8 @@
    <widget class="QDateEdit" name="dateEdit">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>210</y>
+      <x>600</x>
+      <y>220</y>
       <width>110</width>
       <height>22</height>
      </rect>
@@ -225,8 +225,8 @@
    <widget class="QTimeEdit" name="timeEdit">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>250</y>
+      <x>600</x>
+      <y>260</y>
       <width>111</width>
       <height>22</height>
      </rect>
