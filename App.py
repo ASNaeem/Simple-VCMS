@@ -42,11 +42,11 @@ class MainApp(QMainWindow):
         
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)       
-            
+        self.change_theme()   
     def change_theme(self):      
         apply_stylesheet(app, self.page_setting.comboBox_themes.currentText(), invert_secondary=False, extra = extra)
         with open("config.txt","w") as f:
-            f.write(str(self.page_setting.comboBox_themes.currentText()))
+            f.write(self.page_setting.comboBox_themes.currentText())
         self.showMaximized()
         
     def show_appointment(self):
