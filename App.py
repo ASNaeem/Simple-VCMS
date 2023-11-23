@@ -2,6 +2,8 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
 import pyqtcss
+import warnings
+warnings.filterwarnings('ignore')
 
 pyqtcss.available_styles()
 ['classic', 'dark_blue', 'dark_orange']
