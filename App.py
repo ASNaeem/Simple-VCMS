@@ -32,7 +32,7 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_service)
    
         self.button_appointments.clicked.connect(self.show_appointment)
-        self.button_animals.clicked.connect(self.show_animal)
+        self.button_animal.clicked.connect(self.show_animal)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_setting.clicked.connect(self.show_setting)
         self.button_support.clicked.connect(self.show_support)
@@ -75,5 +75,6 @@ if __name__ == '__main__':
     app = QApplication([])
     window = MainApp()
     window.setStyleSheet(style_string)
-    window.show()
+    #window.show()
+    window.showMaximized()
     sys.exit(app.exec_())
