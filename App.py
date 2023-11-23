@@ -71,14 +71,16 @@ class MainApp(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.page_service)
         self.setWindowTitle("VCMS||Dashboard||Service")
 
-style_file = open("MaterialDark.qss", "r")
-with style_file:
-    qss = file.read()
+
    
 if __name__ == '__main__':
+    
     app = QApplication([])
+    style_file = open("MaterialDark.qss", "r")
+    with style_file:
+        qss = style_file.read()
+        app.setStyleSheet(qss)
     window = MainApp()
     #window.show()
     window.showMaximized()
-    app.setStyleSheet("MaterialDark.qss")
     sys.exit(app.exec_())
