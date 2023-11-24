@@ -47,5 +47,17 @@ Nemo:
      Login
      Home
      Setting
+
+MySQL
+     Nemo: 
+          Employee
+
+     UZO: 
+
+     Sajin: 
+
+     Ahona: 
+
+     Tee: 
     
     
