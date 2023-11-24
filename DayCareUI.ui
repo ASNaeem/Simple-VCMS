@@ -45,7 +45,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Day Care</string>
+           <string>DAY CARE</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -62,34 +62,71 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="10,10,10,70,10">
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>10</number>
+          </property>
           <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>PushButton</string>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="spacing">
+             <number>10</number>
             </property>
-           </widget>
+            <item>
+             <widget class="QPushButton" name="button_care_edit">
+              <property name="text">
+               <string>Enable Edit</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_care_update">
+              <property name="text">
+               <string>Update</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="text">
-             <string>PushButton</string>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <property name="spacing">
+             <number>10</number>
             </property>
-           </widget>
+            <item>
+             <widget class="QPushButton" name="button_care_delete">
+              <property name="text">
+               <string>Delete</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_care_cancel">
+              <property name="text">
+               <string>Cancel</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="button_care_details">
             <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="text">
-             <string>PushButton</string>
+             <string>View Animal Details</string>
             </property>
            </widget>
           </item>
@@ -109,9 +146,15 @@
          </spacer>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="50,10,20">
+          <property name="spacing">
+           <number>10</number>
+          </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="30,60">
+            <property name="spacing">
+             <number>10</number>
+            </property>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout">
               <item>
@@ -192,12 +235,28 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="font">
+                 <font>
+                  <family>Courier New</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Status</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </item>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <widget class="QLineEdit" name="lineEdit">
+               <widget class="QLineEdit" name="line_care_id">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="font">
                  <font>
                   <family>Courier New</family>
@@ -207,7 +266,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QDateEdit" name="dateEdit">
+               <widget class="QDateEdit" name="date_care">
                 <property name="font">
                  <font>
                   <family>Courier New</family>
@@ -217,7 +276,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QTimeEdit" name="timeEdit">
+               <widget class="QTimeEdit" name="time_care_start">
                 <property name="font">
                  <font>
                   <family>Courier New</family>
@@ -227,7 +286,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QTimeEdit" name="timeEdit_2">
+               <widget class="QTimeEdit" name="time_care_end">
                 <property name="font">
                  <font>
                   <family>Courier New</family>
@@ -237,7 +296,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_2">
+               <widget class="QLineEdit" name="line_care_hour">
                 <property name="font">
                  <font>
                   <family>Courier New</family>
@@ -247,7 +306,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_3">
+               <widget class="QLineEdit" name="line_care_penalty">
                 <property name="font">
                  <font>
                   <family>Courier New</family>
@@ -255,15 +314,31 @@
                  </font>
                 </property>
                </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="line_care_status"/>
               </item>
              </layout>
             </item>
            </layout>
           </item>
           <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <layout class="QGridLayout" name="gridLayout_2">
             <item row="0" column="0">
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="label_image">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -297,6 +372,19 @@
           </item>
          </layout>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item>
@@ -311,7 +399,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLineEdit" name="line_animal_search_2">
+           <widget class="QLineEdit" name="line_care_search">
             <property name="font">
              <font>
               <family>Courier New</family>
@@ -324,7 +412,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="button_animal_search">
+           <widget class="QPushButton" name="button_care_search">
             <property name="font">
              <font>
               <family>Courier New</family>
@@ -343,7 +431,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="button_animal_view_all">
+           <widget class="QPushButton" name="button_care_view_all">
             <property name="font">
              <font>
               <family>Courier New</family>
@@ -364,7 +452,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="table_care">
           <property name="font">
            <font>
             <family>Courier New</family>
@@ -372,7 +460,7 @@
            </font>
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>150</number>
+           <number>225</number>
           </attribute>
           <column>
            <property name="text">
@@ -402,6 +490,16 @@
           <column>
            <property name="text">
             <string>Penalty Per Hour</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Total Price</string>
            </property>
           </column>
          </widget>
