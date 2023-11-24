@@ -44,7 +44,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_31" stretch="10,30,10,30,10">
+      <layout class="QHBoxLayout" name="horizontalLayout_31" stretch="10,30,0,30,20">
        <item>
         <spacer name="horizontalSpacer_46">
          <property name="orientation">
