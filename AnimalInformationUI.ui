@@ -89,7 +89,7 @@
          <number>10</number>
         </property>
         <item row="1" column="5">
-         <widget class="QPushButton" name="button_animal_register_new">
+         <widget class="QPushButton" name="button_animal_reg">
           <property name="font">
            <font>
             <family>Courier New</family>
@@ -300,7 +300,7 @@
          <number>10</number>
         </property>
         <item row="0" column="2">
-         <widget class="QPushButton" name="button_animal_view_details">
+         <widget class="QPushButton" name="button_animal_details">
           <property name="font">
            <font>
             <family>Courier New</family>

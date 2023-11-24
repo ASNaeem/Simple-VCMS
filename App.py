@@ -14,49 +14,74 @@ class MainApp(QMainWindow):
         uic.loadUi('MainUI.ui', self)
        
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
-        self.page_animal = uic.loadUi("AnimalUI.ui")
+        #self.page_animal = uic.loadUi("AnimalUI.ui")
+        self.page_animal_info = uic.loadUi("AnimalInformationUI.ui")
+        self.page_animal_reg = uic.loadUi("AnimalRegistrationUI.ui")
+        self.page_animal_details = uic.loadUi("AnimalDetailsUI.ui")
+        
         self.page_inventory = uic.loadUi('InventoryUI.ui')
         self.page_setting = uic.loadUi('SettingUI.ui')
         self.page_support = uic.loadUi("SupportUI.ui")
         self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
         self.page_employee = uic.loadUi("EmployeeUI.ui")
         self.page_service = uic.loadUi("ServiceUI.ui")
-       
+        self.page_daycare = uic.loadUi("DayCareUI.ui")
+
+        
         self.stackedWidget.addWidget(self.page_appointment)
-        self.stackedWidget.addWidget(self.page_animal)
+        #self.stackedWidget.addWidget(self.page_animal)
+        self.stackedWidget.addWidget(self.page_animal_info)
+        self.stackedWidget.addWidget(self.page_animal_reg)
+        self.stackedWidget.addWidget(self.page_animal_details)
+        
         self.stackedWidget.addWidget(self.page_inventory)
-        self.stackedWidget.addWidget(self.page_setting)
-        self.stackedWidget.addWidget(self.page_support)
+        self.stackedWidget.addWidget(self.page_daycare)
         self.stackedWidget.addWidget(self.page_analytics_report)
         self.stackedWidget.addWidget(self.page_employee)
         self.stackedWidget.addWidget(self.page_service)
-   
+        self.stackedWidget.addWidget(self.page_setting)
+        self.stackedWidget.addWidget(self.page_support)
+        
         self.button_appointments.clicked.connect(self.show_appointment)
-        self.button_animal.clicked.connect(self.show_animal)
-        self.button_inventory.clicked.connect(self.show_inventory)
-        self.button_setting.clicked.connect(self.show_setting)
-        self.button_support.clicked.connect(self.show_support)
+        #self.button_animal.clicked.connect(self.show_animal)
+        self.button_animal.clicked.connect(self.show_animal_info)
+        self.page_animal_info.button_animal_reg.clicked.connect(self.show_animal_reg)
+        self.page_animal_reg.button_reg_back.clicked.connect(self.show_animal_info)
+        self.page_animal_info.button_animal_details.clicked.connect(self.show_animal_details)
+        self.page_animal_details.button_animal_back.clicked.connect(self.show_animal_info)
+        self.button_daycare.clicked.connect(self.show_daycare)
+        self.button_inventory.clicked.connect(self.show_inventory)  
         self.button_analytics.clicked.connect(self.show_analytics_report)
         self.button_employees.clicked.connect(self.show_employee)
         self.button_services.clicked.connect(self.show_service)
+        self.button_setting.clicked.connect(self.show_setting)
+        self.button_support.clicked.connect(self.show_support)
         
+       # self.page_animal.button_animal_register_new.clicked.connect(self.show_animal_reg)
+       # self.page_animal.button_reg_back.clicked.connect(self.show_animal_)
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)       
-        self.change_theme()   
-    def change_theme(self):      
-        apply_stylesheet(app, self.page_setting.comboBox_themes.currentText(), invert_secondary=False, extra = extra)
-        with open("config.txt","w") as f:
-            f.write(self.page_setting.comboBox_themes.currentText())
-        #self.showMaximized()
-        
+        self.change_theme()
+           
+    
+    
+    
+    def show_daycare(self):
+        self.stackedWidget.setCurrentWidget(self.page_daycare)        
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
         self.setWindowTitle("VCMS || Dashboard || Appointment")
     
-    def show_animal(self):
-        self.stackedWidget.setCurrentWidget(self.page_animal)
-        self.setWindowTitle("VCMS || Dashboard || Animal")
-        
+    def show_animal_info(self):
+        self.stackedWidget.setCurrentWidget(self.page_animal_info)
+        self.setWindowTitle("VCMS || Dashboard || Animals")
+    def show_animal_reg(self):
+        self.stackedWidget.setCurrentWidget(self.page_animal_reg)
+        #self.setWindowTitle("VCMS || Dashboard || Animals")
+    def show_animal_details(self):
+        self.stackedWidget.setCurrentWidget(self.page_animal_details)
+        #self.setWindowTitle("VCMS || Dashboard || Animal")
+            
     def show_inventory(self):
         self.stackedWidget.setCurrentWidget(self.page_inventory)
         self.setWindowTitle("VCMS || Dashboard || Inventory") 
@@ -76,10 +101,16 @@ class MainApp(QMainWindow):
     def show_employee(self):
         self.stackedWidget.setCurrentWidget(self.page_employee)
         self.setWindowTitle("VCMS || Dashboard || Employee")
+    
     def show_service(self):
         self.stackedWidget.setCurrentWidget(self.page_service)
         self.setWindowTitle("VCMS || Dashboard || Service")
 
+    def change_theme(self):      
+        apply_stylesheet(app, self.page_setting.comboBox_themes.currentText(), invert_secondary=False, extra = extra)
+        with open("config.txt","w") as f:
+            f.write(self.page_setting.comboBox_themes.currentText())
+            
 extra = {
     
     # Density Scale
