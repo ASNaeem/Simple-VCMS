@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1101</width>
+    <width>1095</width>
     <height>721</height>
    </rect>
   </property>
@@ -273,12 +273,17 @@
           </column>
           <column>
            <property name="text">
-            <string>Owner Name</string>
+            <string>Animal ID</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Animal Name</string>
+            <string>Veterinarian Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Owner Name</string>
            </property>
           </column>
           <column>
@@ -294,11 +299,6 @@
           <column>
            <property name="text">
             <string>Visit Reason</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Veterinarian Name</string>
            </property>
           </column>
           <column>
@@ -401,7 +401,7 @@
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="text">
-           <string>Edit</string>
+           <string>Details</string>
           </property>
          </widget>
         </item>

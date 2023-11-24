@@ -6,17 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1097</width>
-    <height>894</height>
+    <width>1114</width>
+    <height>949</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="2,2,2,2,2,2,0,2">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="2,0,0,0,0,2,0,0,2,0,2">
       <property name="spacing">
        <number>10</number>
       </property>
@@ -33,25 +33,66 @@
        <number>50</number>
       </property>
       <item>
-       <widget class="QLabel" name="label">
-        <property name="font">
-         <font>
-          <family>Courier New</family>
-          <pointsize>20</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
-        <property name="text">
-         <string>MAKE APPOINTMENT</string>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
+       </spacer>
       </item>
       <item>
-       <spacer name="verticalSpacer_2">
+       <layout class="QVBoxLayout" name="verticalLayout_Main_label">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <family>Courier New</family>
+            <pointsize>20</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>MAKE APPOINTMENT</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_3">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -131,21 +172,185 @@
        </layout>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_new_animal" rowstretch="0,0,0,0,0,0,0,0" columnstretch="3,9">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_DOA_Image" stretch="0,0,0">
         <property name="rightMargin">
-         <number>0</number>
+         <number>100</number>
         </property>
-        <property name="bottomMargin">
-         <number>20</number>
-        </property>
-        <property name="verticalSpacing">
-         <number>10</number>
-        </property>
-        <item row="4" column="1">
-         <spacer name="horizontalSpacer_15">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_new_animal" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="4,0">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>20</number>
+            </property>
+            <property name="verticalSpacing">
+             <number>20</number>
+            </property>
+            <item row="7" column="0">
+             <widget class="QComboBox" name="cb_service">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <item>
+               <property name="text">
+                <string>Select Service</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Visiting</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Vaccination</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Neutering </string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Grooming</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Visit Reason</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Type of Service</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Date of Appointment</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Time of Appointment</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="0">
+             <widget class="QDateEdit" name="date_appt">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QTimeEdit" name="time_appt">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLineEdit" name="lineEdit"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -157,135 +362,69 @@
           </property>
          </spacer>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>25</number>
           </property>
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Time of Appointment</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Type of Service</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_6">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Date of Appointment</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QDateEdit" name="date_appt">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QComboBox" name="cb_service">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>10</pointsize>
-           </font>
+          <property name="bottomMargin">
+           <number>20</number>
           </property>
           <item>
-           <property name="text">
-            <string>Select Service</string>
-           </property>
+           <widget class="QLabel" name="label_10">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Animal Image</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
           </item>
           <item>
-           <property name="text">
-            <string>Visiting</string>
-           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Add Image</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item>
-           <property name="text">
-            <string>Vaccination</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Neutering </string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grooming</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QTimeEdit" name="time_appt">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-         </widget>
+         </layout>
         </item>
        </layout>
       </item>
@@ -303,7 +442,7 @@
        </spacer>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0">
+       <layout class="QGridLayout" name="gridLayout_info_label" columnstretch="0,0">
         <property name="horizontalSpacing">
          <number>0</number>
         </property>
@@ -440,14 +579,14 @@
           <item row="4" column="0">
            <widget class="QLabel" name="label_5">
             <property name="text">
-             <string>Email(Optional)</string>
+             <string>Email (Optional)</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="label_20">
             <property name="text">
-             <string>Home Phone(Optional)bel</string>
+             <string>Home Phone (Optional)</string>
             </property>
            </widget>
           </item>
