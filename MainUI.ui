@@ -162,7 +162,8 @@
          <string>Home</string>
         </property>
         <property name="icon">
-         <iconset theme="resources/windowIcon.png"/>
+         <iconset theme="resources/windowIcon.png">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>
@@ -212,7 +213,7 @@
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="button_daycare">
         <property name="font">
          <font>
           <family>Tahoma</family>
