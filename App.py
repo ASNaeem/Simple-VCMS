@@ -90,7 +90,7 @@ class MainApp(QMainWindow):
 extra = {
     
     # Density Scale
-    'density_scale': '-4',
+    'density_scale': '-2',
 }
 if __name__ == '__main__':   
     app = QApplication([])
