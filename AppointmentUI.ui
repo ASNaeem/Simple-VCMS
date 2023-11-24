@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1128</width>
-    <height>738</height>
+    <width>1101</width>
+    <height>721</height>
    </rect>
   </property>
   <property name="font">
@@ -113,7 +113,8 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Courier New</family>
+            <pointsize>10</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
@@ -136,7 +137,8 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Courier New</family>
+            <pointsize>10</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
@@ -172,7 +174,8 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Courier New</family>
+            <pointsize>10</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
@@ -181,7 +184,7 @@
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="text">
-           <string>Create</string>
+           <string>Create New</string>
           </property>
          </widget>
         </item>
@@ -236,6 +239,8 @@
           </property>
           <property name="font">
            <font>
+            <family>Courier New</family>
+            <pointsize>10</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
@@ -349,7 +354,8 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Courier New</family>
+            <pointsize>10</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
@@ -385,7 +391,8 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Courier New</family>
+            <pointsize>10</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
