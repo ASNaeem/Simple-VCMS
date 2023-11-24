@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="resources">
+    <file>resources/user.png</file>
+    <file>resources/lock.png</file>
+    <file>resources/mail.png</file>
+    <file>resources/WindowIcon.png</file>
+  </qresource>
+</RCC>
