@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_101">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_84" stretch="0,0,0,0,0,0">
+    <layout class="QVBoxLayout" name="verticalLayout_84" stretch="0,0,0,0,0">
      <property name="leftMargin">
       <number>50</number>
      </property>
@@ -36,7 +36,7 @@
         </font>
        </property>
        <property name="text">
-        <string> Employee Information</string>
+        <string>EMPLOYEE INFORMATION</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -442,11 +442,20 @@
       </layout>
      </item>
      <item>
-      <widget class="Line" name="line">
+      <spacer name="verticalSpacer_2">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Vertical</enum>
        </property>
-      </widget>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="0,20,0,0,0">
@@ -635,9 +644,6 @@
         </spacer>
        </item>
       </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_100"/>
      </item>
     </layout>
    </item>
