@@ -82,7 +82,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="button_service_search">
+         <widget class="QPushButton" name="button_billing_search">
           <property name="font">
            <font>
             <family>Courier New</family>
