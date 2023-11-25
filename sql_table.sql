@@ -17,7 +17,7 @@ create table animal(id int primary key auto_increment,
 
 create table records(id int, record varchar(100), rdate date);
 
-create table bill()
+create table bill(bid int primary key auto_increment, aid int, total_amount decimal(10,2));
 
 
 #create table phone(id int, phone varchar(16) primary key)
@@ -27,10 +27,10 @@ create table bill()
 
 
 Create table service( id int auto_increment primary key, 
-                name varchar(45),
-                cost decimal(10,2),
-                details varchar(50), 
-                availability boolean);
+name varchar(45),
+cost decimal(10,2),
+details varchar(50), 
+availability boolean);
 
 Create table day_care( dos date,
                 start_time time,
