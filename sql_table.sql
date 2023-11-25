@@ -10,12 +10,14 @@ create table animal(id int primary key auto_increment,
                     sterilized varchar(5),
                     current_condition  varchar(100),
                     behave_warning varchar(100),
-                    owner_name varchar(50),
-                    owner_email varchar(100),
-                    owner_phone varchar(20),
-                    owner_address varchar(100));
+                    oname varchar(50),
+                    email varchar(100),
+                    phone varchar(20),
+                    address varchar(100));
 
-create table 
+create table records(id int, record varchar(100), rdate date);
+
+create table bill()
 
 
 #create table phone(id int, phone varchar(16) primary key)
@@ -25,10 +27,10 @@ create table
 
 
 Create table service( id int auto_increment primary key, 
-Service name varchar(45),
-Cost decimal(10,2),
-Details varchar(50), 
-Availability boolean);
+name varchar(45),
+cost decimal(10,2),
+details varchar(50), 
+availability boolean);
 
 
 create table appointment(id int auto_increment primary key, a_time time a_date date, visit_reason varchar(100), a_status varchar(100));
