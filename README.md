@@ -53,6 +53,7 @@ MySQL
           Employee
 
      UZO: 
+          Appointment
 
      Sajin: 
 
