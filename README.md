@@ -1,3 +1,4 @@
+https://www.mockaroo.com/
 file name = class name =  PascalCase
 variable = method = snake_case
 
