@@ -1,3 +1,4 @@
+https://www.mockaroo.com/
 file name = class name =  PascalCase
 variable = method = snake_case
 
@@ -51,14 +52,25 @@ Nemo:
 MySQL
      Nemo: 
           Employee
+          phone
 
      UZO: 
           Appointment
+          vet
 
      Sajin: 
+          invoice
+          receipt
 
      Ahona: 
+          service
+          daycare
+          item
 
      Tee: 
-    
+          animal
+          record
+          bill
+          
+
     
