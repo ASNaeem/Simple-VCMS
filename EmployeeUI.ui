@@ -362,9 +362,15 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Courier New</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <item>
                 <property name="text">
-                 <string/>
+                 <string>Select</string>
                 </property>
                </item>
                <item>
@@ -436,9 +442,15 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Courier New</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <item>
                 <property name="text">
-                 <string/>
+                 <string>Select</string>
                 </property>
                </item>
                <item>
@@ -734,7 +746,7 @@ p, li { white-space: pre-wrap; }
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="20,0,0,0">
+      <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="20,0,0,0,0">
        <property name="rightMargin">
         <number>600</number>
        </property>
@@ -784,6 +796,19 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>View All</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -813,6 +838,9 @@ p, li { white-space: pre-wrap; }
              <pointsize>10</pointsize>
             </font>
            </property>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>145</number>
+           </attribute>
            <column>
             <property name="text">
              <string>Employee Name</string>
