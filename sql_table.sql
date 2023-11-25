@@ -25,10 +25,10 @@ create table
 
 
 Create table service( id int auto_increment primary key, 
-Service name varchar(45),
-Cost decimal(10,2),
-Details varchar(50), 
-Availability boolean);
+name varchar(45),
+cost decimal(10,2),
+details varchar(50), 
+availability boolean);
 
 
 create table appointment()
