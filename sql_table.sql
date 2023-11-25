@@ -15,7 +15,7 @@ create table animal(id int primary key auto_increment,
                     owner_phone varchar(20),
                     owner_address varchar(100));
 
-create table 
+
 
 
 #create table phone(id int, phone varchar(16) primary key)
@@ -25,10 +25,25 @@ create table
 
 
 Create table service( id int auto_increment primary key, 
-Service name varchar(45),
-Cost decimal(10,2),
-Details varchar(50), 
-Availability boolean);
+                name varchar(45),
+                cost decimal(10,2),
+                Details varchar(50), 
+                availability boolean);
+
+Create table day_care(dos date, 
+                start_time time, 
+                end_time time, 
+                s_hours int,
+                pnalty_per_hour decimal(10,2), 
+                status varchar(50),
+                id int);
+
+create table item(id int auto_increment primary key, 
+                name varchar(50), 
+                manufacture varchar(50), 
+                i_type varchar(50), 
+                price decimal(10,2), 
+                amount int,
+                id int);
 
 
-create table appointment()
