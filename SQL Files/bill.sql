@@ -1,0 +1,25 @@
+create table record (
+	bid INT,
+	aid INT,
+	total_amount DECIMAL(8,2)
+);
+insert into record (bid, aid, total_amount) values (1, 1, 3485.66);
+insert into record (bid, aid, total_amount) values (2, 2, 58931.1);
+insert into record (bid, aid, total_amount) values (3, 3, 74487.41);
+insert into record (bid, aid, total_amount) values (4, 4, 88543.11);
+insert into record (bid, aid, total_amount) values (5, 5, 40304.25);
+insert into record (bid, aid, total_amount) values (6, 6, 40528.17);
+insert into record (bid, aid, total_amount) values (7, 7, 98476.73);
+insert into record (bid, aid, total_amount) values (8, 8, 72891.13);
+insert into record (bid, aid, total_amount) values (9, 9, 13374.11);
+insert into record (bid, aid, total_amount) values (10, 10, 49016.59);
+insert into record (bid, aid, total_amount) values (11, 11, 753.72);
+insert into record (bid, aid, total_amount) values (12, 12, 97596.8);
+insert into record (bid, aid, total_amount) values (13, 13, 66320.01);
+insert into record (bid, aid, total_amount) values (14, 14, 4268.68);
+insert into record (bid, aid, total_amount) values (15, 15, 33879.89);
+insert into record (bid, aid, total_amount) values (16, 16, 90037.03);
+insert into record (bid, aid, total_amount) values (17, 17, 67672.74);
+insert into record (bid, aid, total_amount) values (18, 18, 61583.37);
+insert into record (bid, aid, total_amount) values (19, 19, 32007.61);
+insert into record (bid, aid, total_amount) values (20, 20, 56551.29);

@@ -9,7 +9,7 @@ create table animal(id int primary key auto_increment,
                     birth_date date,
                     sterilized varchar(5),
                     current_condition  varchar(100),
-                    behave_warning varchar(100),
+                    behavioral_warning varchar(100),
                     oname varchar(50),
                     email varchar(100),
                     phone varchar(20),
@@ -17,7 +17,7 @@ create table animal(id int primary key auto_increment,
 
 create table records(id int, record varchar(100), rdate date);
 
-create table bill()
+create table bill(bid int primary key auto_increment, aid int, total_amount decimal(10,2));
 
 #create table phone(id int, phone varchar(16) primary key)
 
@@ -29,6 +29,20 @@ cost decimal(10,2),
 details varchar(50), 
 availability boolean);
 
+Create table day_care( dos date,
+                start_time time,
+                end_time time,
+                s_hours int,
+                penalty_per_hour decimal(10,2),
+                status varchar(50),
+                id int);
+Create table item( id int auto_increment primary key, 
+                name varchar(45),
+                manufacture varchar(50),
+                i_type varchar(50),
+                amount int,
+                price decimal(10,2), 
+                id int);
 
 create table appointment(id int auto_increment primary key, a_date date, a_time time, visit_reason varchar(100), a_status varchar(100));
 create table veterinarian(id int, spec varchar(100), totalcase int);
