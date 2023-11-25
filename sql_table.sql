@@ -10,12 +10,14 @@ create table animal(id int primary key auto_increment,
                     sterilized varchar(5),
                     current_condition  varchar(100),
                     behave_warning varchar(100),
-                    owner_name varchar(50),
-                    owner_email varchar(100),
-                    owner_phone varchar(20),
-                    owner_address varchar(100));
+                    oname varchar(50),
+                    email varchar(100),
+                    phone varchar(20),
+                    address varchar(100));
 
-create table 
+create table records(id int, record varchar(100), rdate date);
+
+create table bill()
 
 
 #create table phone(id int, phone varchar(16) primary key)

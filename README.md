@@ -51,14 +51,25 @@ Nemo:
 MySQL
      Nemo: 
           Employee
+          phone
 
      UZO: 
           Appointment
+          vet
 
      Sajin: 
+          invoice
+          receipt
 
      Ahona: 
+          service
+          daycare
+          item
 
      Tee: 
-    
+          animal
+          record
+          bill
+          
+
     
