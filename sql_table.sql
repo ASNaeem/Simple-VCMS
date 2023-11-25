@@ -31,4 +31,5 @@ Details varchar(50),
 Availability boolean);
 
 
-create table appointment()
+create table appointment(id int auto_increment primary key, a_time time a_date date, visit_reason varchar(100), a_status varchar(100));
+create table veterinarian(id int auto_increment primary key, spec varchar(100), totalcase int);
