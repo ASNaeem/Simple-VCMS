@@ -19,12 +19,9 @@ create table records(id int, record varchar(100), rdate date);
 
 create table bill()
 
-
 #create table phone(id int, phone varchar(16) primary key)
 
 #alter table employees rename column employee_id to id;
-
-
 
 Create table service( id int auto_increment primary key, 
 name varchar(45),
@@ -33,5 +30,5 @@ details varchar(50),
 availability boolean);
 
 
-create table appointment(id int auto_increment primary key, a_time time a_date date, visit_reason varchar(100), a_status varchar(100));
-create table veterinarian(id int auto_increment primary key, spec varchar(100), totalcase int);
+create table appointment(id int auto_increment primary key, a_date date, a_time time, visit_reason varchar(100), a_status varchar(100));
+create table veterinarian(id int, spec varchar(100), totalcase int);

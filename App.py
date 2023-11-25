@@ -28,6 +28,7 @@ class MainApp(QMainWindow):
         self.page_service = uic.loadUi("ServiceUI.ui")
         self.page_daycare = uic.loadUi("DayCareUI.ui")
         self.page_billing = uic.loadUi("BillingUI.ui")
+        self.page_invoicing = uic.loadUi("InvoicingUI.ui")
 
         self.stackedWidget.addWidget(self.page_appointment)
         # self.stackedWidget.addWidget(self.page_animal)
@@ -37,12 +38,13 @@ class MainApp(QMainWindow):
 
         self.stackedWidget.addWidget(self.page_inventory)
         self.stackedWidget.addWidget(self.page_daycare)
+        self.stackedWidget.addWidget(self.page_billing)
         self.stackedWidget.addWidget(self.page_analytics_report)
         self.stackedWidget.addWidget(self.page_employee)
         self.stackedWidget.addWidget(self.page_service)
         self.stackedWidget.addWidget(self.page_setting)
         self.stackedWidget.addWidget(self.page_support)
-        self.stackedWidget.addWidget(self.page_billing)
+        
         
         self.button_appointments.clicked.connect(self.show_appointment)
         # self.button_animal.clicked.connect(self.show_animal)

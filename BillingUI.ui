@@ -145,7 +145,7 @@
            </font>
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>150</number>
+           <number>230</number>
           </attribute>
           <column>
            <property name="text">
@@ -204,7 +204,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Total Amount</string>
+            <string>Other Expenses</string>
            </property>
            <property name="font">
             <font>
@@ -215,7 +215,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Other Expense</string>
+            <string>Total Amount</string>
            </property>
            <property name="font">
             <font>
@@ -257,7 +257,7 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>14</pointsize>
+                <pointsize>20</pointsize>
                </font>
               </property>
               <property name="text">
@@ -454,7 +454,7 @@
                  </font>
                 </property>
                 <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>150</number>
+                 <number>230</number>
                 </attribute>
                 <column>
                  <property name="text">
@@ -569,6 +569,9 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Delete Selected</string>
           </property>
@@ -581,6 +584,9 @@
             <family>Courier New</family>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="text">
            <string>Enable Edit</string>
@@ -595,6 +601,9 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Save</string>
           </property>
@@ -607,6 +616,9 @@
             <family>Courier New</family>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="text">
            <string>Add New Bill</string>
