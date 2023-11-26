@@ -29,7 +29,7 @@ cost decimal(10,2),
 details varchar(50), 
 availability boolean);
 
-Create table day_care( dos date,
+Create table day_care(dos date,
                 start_time time,
                 end_time time,
                 s_hours int,
@@ -44,5 +44,5 @@ Create table item( id int auto_increment primary key,
                 price decimal(10,2), 
                 id int);
 
-create table appointment(id int auto_increment primary key, a_date date, a_time time, visit_reason varchar(100), a_status varchar(100));
+create table appointment(id int auto_increment primary key, animal_id int, a_date date, a_time time, visit_reason varchar(100), a_status varchar(100));
 create table veterinarian(id int, spec varchar(100), totalcase int);
