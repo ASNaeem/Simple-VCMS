@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>997</width>
+    <width>1007</width>
     <height>777</height>
    </rect>
   </property>
@@ -718,6 +718,9 @@ p, li { white-space: pre-wrap; }
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
              <property name="text">
               <string>Add Image</string>
              </property>
@@ -746,9 +749,18 @@ p, li { white-space: pre-wrap; }
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="20,0,0,0,0">
+      <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="20,0,0">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
        <property name="rightMargin">
         <number>600</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
        </property>
        <item>
         <widget class="QLineEdit" name="line_search_6">
@@ -767,28 +779,15 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_51">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Minimum</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <widget class="QPushButton" name="button_search_6">
          <property name="font">
           <font>
            <family>Courier New</family>
            <pointsize>10</pointsize>
           </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="text">
           <string>Seach</string>
@@ -803,26 +802,13 @@ p, li { white-space: pre-wrap; }
            <pointsize>10</pointsize>
           </font>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="text">
           <string>View All</string>
          </property>
         </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Minimum</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </item>
@@ -839,7 +825,7 @@ p, li { white-space: pre-wrap; }
             </font>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>145</number>
+            <number>200</number>
            </attribute>
            <column>
             <property name="text">
@@ -918,8 +904,33 @@ p, li { white-space: pre-wrap; }
              <pointsize>10</pointsize>
             </font>
            </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Register Employee</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string>Enable Edit</string>
            </property>
           </widget>
          </item>
@@ -931,8 +942,11 @@ p, li { white-space: pre-wrap; }
              <pointsize>10</pointsize>
             </font>
            </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
-            <string>Edit Information</string>
+            <string>Save</string>
            </property>
           </widget>
          </item>
@@ -943,6 +957,9 @@ p, li { white-space: pre-wrap; }
              <family>Courier New</family>
              <pointsize>10</pointsize>
             </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
             <string>Delete Information</string>

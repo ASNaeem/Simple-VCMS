@@ -3,11 +3,11 @@ create table record (
 	record TEXT,
 	rdate DATE
 );
-insert into record (id, record, rdate) values (1, 'Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus.', '2022-01-31');
-insert into record (id, record, rdate) values (2, 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla.', '2023-09-25');
-insert into record (id, record, rdate) values (3, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', '2022-08-08');
-insert into record (id, record, rdate) values (4, 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.', '2022-10-15');
-insert into record (id, record, rdate) values (5, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo.', '2023-10-18');
+insert into record (id, record, rdate) values (1, 'Got bit by a cat in the leg.', '2023-01-31');
+insert into record (id, record, rdate) values (3, 'Got into fight with another cat, got bitten by a cat on front leg.', '2023-09-13');
+insert into record (id, record, rdate) values (3, 'Twisted left back leg, having trouble walking.', '2022-12-08');
+insert into record (id, record, rdate) values (4, 'No Previous Record.', '2023-10-15');
+insert into record (id, record, rdate) values (5, 'Feathers are falling of off the skin for some unknown  reason.', '2023-10-18');
 insert into record (id, record, rdate) values (6, 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.', '2022-03-10');
 insert into record (id, record, rdate) values (7, 'Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '2022-02-03');
 insert into record (id, record, rdate) values (8, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.', '2023-08-24');

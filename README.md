@@ -73,4 +73,12 @@ MySQL
           bill
           
 
-    
+    Services
+          Flu Vaccine - 1500
+          Rabies Vaccine - 500
+          Spay - 1500
+          Neuter - 1000
+          Regular Checkup - 500
+          C-Section - 5000
+          Wound Dressing - 300
+
