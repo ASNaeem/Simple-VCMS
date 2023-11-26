@@ -204,7 +204,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Other Expenses</string>
+            <string>Adjustments</string>
            </property>
            <property name="font">
             <font>

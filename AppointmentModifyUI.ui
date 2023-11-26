@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1009</width>
+    <width>1007</width>
     <height>712</height>
    </rect>
   </property>
@@ -412,9 +412,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_animal_name_2">
+           <widget class="QComboBox" name="comboBox">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -425,6 +425,41 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <item>
+             <property name="text">
+              <string>Select</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Check-up</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Vaccination</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Surgery</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Neutering/spaying</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Grooming</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Day-care</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
