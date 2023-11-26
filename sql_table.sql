@@ -27,10 +27,10 @@ create table bill(bid int primary key auto_increment, aid int, total_amount deci
 
 
 Create table service( id int auto_increment primary key, 
-name varchar(45),
-cost decimal(10,2),
-details varchar(50), 
-availability boolean);
+                name varchar(45),
+                cost decimal(10,2),
+                details varchar(50), 
+                availability boolean);
 
 Create table day_care( dos date,
                 start_time time,
@@ -38,14 +38,14 @@ Create table day_care( dos date,
                 s_hours int,
                 penalty_per_hour decimal(10,2),
                 status varchar(50),
-                id int);
+                app_id int);
 Create table item( id int auto_increment primary key, 
                 name varchar(45),
                 manufacture varchar(50),
                 i_type varchar(50),
                 amount int,
                 price decimal(10,2), 
-                id int);
+                em_id int);
 
 create table appointment(id int auto_increment primary key, a_time time a_date date, visit_reason varchar(100), a_status varchar(100));
 create table veterinarian(id int auto_increment primary key, spec varchar(100), totalcase int);
