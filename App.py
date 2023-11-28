@@ -28,7 +28,7 @@ class MainApp(QMainWindow):
         self.page_service = uic.loadUi("ServiceUI.ui")
         self.page_daycare = uic.loadUi("DayCareUI.ui")
         self.page_billing = uic.loadUi("BillingUI.ui")
-        self.page_invoicing = uic.loadUi("InvoicingUI.ui")
+        self.page_expenses = uic.loadUi("ExpensesUI.ui")
 
         self.stackedWidget.addWidget(self.page_appointment)
         # self.stackedWidget.addWidget(self.page_animal)
@@ -40,6 +40,7 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_daycare)
         self.stackedWidget.addWidget(self.page_billing)
         self.stackedWidget.addWidget(self.page_analytics_report)
+        self.stackedWidget.addWidget(self.page_expenses)
         self.stackedWidget.addWidget(self.page_employee)
         self.stackedWidget.addWidget(self.page_service)
         self.stackedWidget.addWidget(self.page_setting)
@@ -60,6 +61,7 @@ class MainApp(QMainWindow):
         self.button_daycare.clicked.connect(self.show_daycare)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_analytics.clicked.connect(self.show_analytics_report)
+        self.button_expenses.clicked.connect(self.show_expenses)
         self.button_employees.clicked.connect(self.show_employee)
         self.button_services.clicked.connect(self.show_service)
         self.button_setting.clicked.connect(self.show_setting)
@@ -118,6 +120,10 @@ class MainApp(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.page_billing)
         self.setWindowTitle("VCMS || Dashboard || Billing")
 
+    def show_expenses(self):
+        self.stackedWidget.setCurrentWidget(self.page_expenses)
+        self.setWindowTitle("VCMS || Dashboard || Expenses")
+        
     def change_theme(self):
         apply_stylesheet(
             app,
