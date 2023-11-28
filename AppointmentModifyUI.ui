@@ -114,7 +114,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_animal_id">
+           <widget class="QLineEdit" name="line_app_id">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -155,7 +155,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_owner_address_2">
+           <widget class="QLineEdit" name="line_app_owner_address">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -196,7 +196,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_animal_name">
+           <widget class="QLineEdit" name="line_app_animal_id">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -234,7 +234,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_animal_species">
+           <widget class="QLineEdit" name="line_app_vet_name">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -272,7 +272,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="date_animal_registration">
+           <widget class="QDateEdit" name="date_app">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -330,7 +330,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_animal_id_2">
+           <widget class="QLineEdit" name="line_app_species">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -371,7 +371,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_owner_address_4">
+           <widget class="QLineEdit" name="line_app_phone">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -412,7 +412,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox">
+           <widget class="QComboBox" name="cb_app_visit_reason">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -485,7 +485,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_animal_species_2">
+           <widget class="QLineEdit" name="line_app_status">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -523,7 +523,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTimeEdit" name="time_appt">
+           <widget class="QTimeEdit" name="time_app">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -590,7 +590,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="button_app_image">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -652,7 +652,7 @@
          <number>50</number>
         </property>
         <item>
-         <widget class="QPushButton" name="pushButton_8">
+         <widget class="QPushButton" name="button_app_back">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -677,7 +677,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_9">
+         <widget class="QPushButton" name="button_app_delete">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -702,7 +702,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_10">
+         <widget class="QPushButton" name="button_app_save">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -727,7 +727,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_11">
+         <widget class="QPushButton" name="button_app_edit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -752,7 +752,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="button_app_patient_details">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
