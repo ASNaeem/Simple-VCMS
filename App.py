@@ -57,6 +57,9 @@ class MainApp(QMainWindow):
         self.page_appointment.button_app_details.clicked.connect(self.show_appointment_modify)
         self.page_appointment_modify.button_app_back.clicked.connect(self.show_appointment)
         self.page_appointment_create.button_back_cancel.clicked.connect(self.show_appointment)
+        self.page_appointment_create.button_create.clicked.connect(
+            self.show_appointment
+        )
 
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
@@ -68,6 +71,10 @@ class MainApp(QMainWindow):
         self.page_animal_details.button_animal_back.clicked.connect(
             self.show_animal_info
         )
+        self.page_animal_reg.button_reg.clicked.connect(
+            self.show_animal_info
+        )
+
         self.button_daycare.clicked.connect(self.show_daycare)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_analytics.clicked.connect(self.show_analytics_report)
