@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic, QtCore, QtGui
 from qt_material import apply_stylesheet, list_themes
 import warnings
+import os 
+os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 
 warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
