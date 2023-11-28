@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1114</width>
+    <width>1163</width>
     <height>949</height>
    </rect>
   </property>
@@ -343,7 +343,7 @@
              </widget>
             </item>
             <item row="9" column="0">
-             <widget class="QLineEdit" name="lineEdit"/>
+             <widget class="QLineEdit" name="line_reason"/>
             </item>
            </layout>
           </item>
@@ -905,7 +905,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="button_back">
+         <widget class="QPushButton" name="button_back_cancel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -919,26 +919,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Back</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="button_cancel">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Cancel</string>
+           <string>Back/Cancel</string>
           </property>
          </widget>
         </item>
@@ -957,7 +938,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Create</string>
+           <string>   Create   </string>
           </property>
          </widget>
         </item>

@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic, QtCore, QtGui
 from qt_material import apply_stylesheet, list_themes
 import warnings
+import os 
+os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 
 warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
@@ -15,6 +17,9 @@ class MainApp(QMainWindow):
         uic.loadUi("MainUI.ui", self)
 
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
+        self.page_appointment_create = uic.loadUi("ApppointmentCreateUI.ui")
+        self.page_appointment_modify = uic.loadUi("AppointmentModifyUI.ui")
+
         # self.page_animal = uic.loadUi("AnimalUI.ui")
         self.page_animal_info = uic.loadUi("AnimalInformationUI.ui")
         self.page_animal_reg = uic.loadUi("AnimalRegistrationUI.ui")
@@ -31,6 +36,9 @@ class MainApp(QMainWindow):
         self.page_expenses = uic.loadUi("ExpensesUI.ui")
 
         self.stackedWidget.addWidget(self.page_appointment)
+        self.stackedWidget.addWidget(self.page_appointment_create)
+        self.stackedWidget.addWidget(self.page_appointment_modify)
+
         # self.stackedWidget.addWidget(self.page_animal)
         self.stackedWidget.addWidget(self.page_animal_info)
         self.stackedWidget.addWidget(self.page_animal_reg)
@@ -48,6 +56,14 @@ class MainApp(QMainWindow):
         
         
         self.button_appointments.clicked.connect(self.show_appointment)
+        self.page_appointment.button_app_create.clicked.connect(self.show_appointment_create)
+        self.page_appointment.button_app_details.clicked.connect(self.show_appointment_modify)
+        self.page_appointment_modify.button_app_back.clicked.connect(self.show_appointment)
+        self.page_appointment_create.button_back_cancel.clicked.connect(self.show_appointment)
+        self.page_appointment_create.button_create.clicked.connect(
+            self.show_appointment
+        )
+
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
         self.page_animal_info.button_animal_reg.clicked.connect(self.show_animal_reg)
@@ -58,6 +74,10 @@ class MainApp(QMainWindow):
         self.page_animal_details.button_animal_back.clicked.connect(
             self.show_animal_info
         )
+        self.page_animal_reg.button_reg.clicked.connect(
+            self.show_animal_info
+        )
+
         self.button_daycare.clicked.connect(self.show_daycare)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_analytics.clicked.connect(self.show_analytics_report)
@@ -79,6 +99,14 @@ class MainApp(QMainWindow):
     def show_appointment(self):
         self.stackedWidget.setCurrentWidget(self.page_appointment)
         self.setWindowTitle("VCMS || Dashboard || Appointment")
+
+    def show_appointment_modify(self):
+        self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
+        self.setWindowTitle("VCMS || Dashboard || Appointment Details")
+
+    def show_appointment_create(self):
+        self.stackedWidget.setCurrentWidget(self.page_appointment_create)
+        self.setWindowTitle("VCMS || Dashboard || Create New Appointment")
 
     def show_animal_info(self):
         self.stackedWidget.setCurrentWidget(self.page_animal_info)
