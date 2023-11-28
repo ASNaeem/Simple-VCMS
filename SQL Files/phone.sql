@@ -1,3 +1,5 @@
+create table phone(id int, phone varchar(16) primary key);
+
 insert into phone (id, phone) values (1, '+880-115-557-8653');
 insert into phone (id, phone) values (1, '+880-115-552-5559');
 insert into phone (id, phone) values (2, '+880-155-550-7452');

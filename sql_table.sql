@@ -27,7 +27,7 @@ create table record (
 	total_amount DECIMAL(10,2)
 );
 
-#create table phone(id int, phone varchar(16) primary key)
+#create table phone(id int, phone varchar(16) primary key);
 
 #alter table employees rename column employee_id to id;
 

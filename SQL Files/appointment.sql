@@ -1,3 +1,11 @@
+create table appointment(
+             id int auto_increment primary key,
+             animal_id int,
+             a_date date,
+             a_time time,
+             visit_reason varchar(100),
+             a_status varchar(100));
+
 insert into appointment (id, animal_id, a_date, appointment_time, visit_reason, a_status) values (1, 13, '2023/03/15', '10:26 AM', 'Treatment', 'completed');
 insert into appointment (id, animal_id, a_date, appointment_time, visit_reason, a_status) values (2, 12, '2023/08/12', '2:21 PM', 'Neutering/Spaying', 'scheduled');
 insert into appointment (id, animal_id, a_date, appointment_time, visit_reason, a_status) values (3, 17, '2023/06/09', '8:02 PM', 'Neutering/Spaying', 'scheduled');

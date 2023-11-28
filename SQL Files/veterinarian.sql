@@ -1,3 +1,8 @@
+create table veterinarian(
+             id int,
+             spec varchar(100),
+             totalcase int);
+
 insert into veterinarian (id, spec, totalcase) values (1, 'Veterinary Dermatologist', 85);
 insert into veterinarian (id, spec, totalcase) values (2, 'Veterinary Dermatologist', 29);
 insert into veterinarian (id, spec, totalcase) values (3, 'Veterinary Oncologist', 0);
