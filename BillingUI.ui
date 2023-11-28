@@ -16,21 +16,21 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_4" stretch="10,0,10,90,0,10">
+     <layout class="QVBoxLayout" name="verticalLayout_4" stretch="10,10,90,0,10">
       <property name="spacing">
        <number>10</number>
       </property>
       <property name="leftMargin">
-       <number>30</number>
+       <number>50</number>
       </property>
       <property name="topMargin">
-       <number>30</number>
+       <number>50</number>
       </property>
       <property name="rightMargin">
-       <number>30</number>
+       <number>50</number>
       </property>
       <property name="bottomMargin">
-       <number>30</number>
+       <number>50</number>
       </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -52,14 +52,14 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
        </layout>
-      </item>
-      <item>
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout" stretch="30,10,10,50">
