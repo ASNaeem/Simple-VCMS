@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1163</width>
-    <height>949</height>
+    <width>1119</width>
+    <height>1084</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,15 +16,15 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="2,0,0,0,0,2,0,0,2,0,2">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,2,0,0,2,0,2">
       <property name="spacing">
-       <number>10</number>
+       <number>20</number>
       </property>
       <property name="leftMargin">
        <number>50</number>
       </property>
       <property name="topMargin">
-       <number>0</number>
+       <number>50</number>
       </property>
       <property name="rightMargin">
        <number>50</number>
@@ -33,26 +33,25 @@
        <number>50</number>
       </property>
       <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <layout class="QVBoxLayout" name="verticalLayout_Main_label">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
+         <number>5</number>
+        </property>
         <item>
          <widget class="QLabel" name="label">
           <property name="font">
            <font>
             <family>Courier New</family>
-            <pointsize>20</pointsize>
+            <pointsize>26</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -68,41 +67,11 @@
        </layout>
       </item>
       <item>
-       <spacer name="verticalSpacer_4">
+       <widget class="Line" name="line_4">
         <property name="orientation">
-         <enum>Qt::Vertical</enum>
+         <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <widget class="Line" name="line_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,1">
@@ -116,7 +85,7 @@
          <number>0</number>
         </property>
         <property name="bottomMargin">
-         <number>20</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label_2">
@@ -129,7 +98,7 @@
           <property name="font">
            <font>
             <family>Courier New</family>
-            <pointsize>10</pointsize>
+            <pointsize>12</pointsize>
            </font>
           </property>
           <property name="text">
@@ -147,6 +116,11 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>Yes</string>
@@ -173,13 +147,16 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_DOA_Image" stretch="0,0,0">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <property name="rightMargin">
          <number>100</number>
         </property>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <layout class="QGridLayout" name="gridLayout_new_animal" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="4,0">
+           <layout class="QGridLayout" name="gridLayout_new_animal" rowstretch="0,0,0,0,0,0,0,0" columnstretch="4,0">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -192,8 +169,8 @@
             <property name="verticalSpacing">
              <number>20</number>
             </property>
-            <item row="7" column="0">
-             <widget class="QComboBox" name="cb_service">
+            <item row="5" column="0">
+             <widget class="QTimeEdit" name="time_appt">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -203,47 +180,15 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
-              <item>
-               <property name="text">
-                <string>Select Service</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Visiting</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Vaccination</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Neutering </string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Grooming</string>
-               </property>
-              </item>
              </widget>
             </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>Visit Reason</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="label_9">
+            <item row="3" column="0">
+             <widget class="QDateEdit" name="date_appt">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -251,11 +196,31 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Type of Service</string>
+               <string>Visit Reason</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLineEdit" name="line_reason">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
               </property>
              </widget>
             </item>
@@ -270,7 +235,7 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
               <property name="text">
@@ -289,7 +254,7 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
               <property name="text">
@@ -309,41 +274,6 @@
                </size>
               </property>
              </spacer>
-            </item>
-            <item row="3" column="0">
-             <widget class="QDateEdit" name="date_appt">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QTimeEdit" name="time_appt">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="0">
-             <widget class="QLineEdit" name="line_reason"/>
             </item>
            </layout>
           </item>
@@ -393,7 +323,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -416,6 +346,12 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
               </property>
               <property name="text">
                <string>Add Image</string>
@@ -527,6 +463,12 @@
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_3">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>First Name</string>
             </property>
@@ -534,29 +476,68 @@
           </item>
           <item row="6" column="0">
            <widget class="QLabel" name="label_8">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Address</string>
             </property>
            </widget>
           </item>
           <item row="7" column="0">
-           <widget class="QLineEdit" name="line_address"/>
+           <widget class="QLineEdit" name="line_address">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLineEdit" name="line_phone">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="placeholderText">
              <string>eg. 01XXX-XXXXXX</string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLineEdit" name="line_o_fname"/>
+           <widget class="QLineEdit" name="line_o_fname">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="line_o_lname"/>
+           <widget class="QLineEdit" name="line_o_lname">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLineEdit" name="line_email">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="placeholderText">
              <string>eg. abc@xyz.com</string>
             </property>
@@ -564,6 +545,12 @@
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="label_12">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Last Name</string>
             </property>
@@ -571,6 +558,12 @@
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_4">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Cell Phone</string>
             </property>
@@ -578,6 +571,12 @@
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="label_5">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Email (Optional)</string>
             </property>
@@ -585,13 +584,26 @@
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="label_20">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Home Phone (Optional)</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="line_home_phone"/>
+           <widget class="QLineEdit" name="line_home_phone">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -628,7 +640,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -641,7 +653,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -650,10 +662,24 @@
            </widget>
           </item>
           <item row="9" column="1">
-           <widget class="QDateEdit" name="date_appt_birth"/>
+           <widget class="QDateEdit" name="date_appt_birth">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="7" column="2">
-           <widget class="QLineEdit" name="line_behave"/>
+           <widget class="QLineEdit" name="line_behave">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="3" column="2">
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -662,7 +688,7 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
               <property name="text">
@@ -678,7 +704,7 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
               <property name="text">
@@ -699,6 +725,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
            </widget>
           </item>
           <item row="4" column="2">
@@ -706,7 +738,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -719,7 +751,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -732,7 +764,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -741,10 +773,23 @@
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="line_species"/>
+           <widget class="QLineEdit" name="line_species">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="3" column="1">
            <widget class="QLineEdit" name="line_a_name">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -755,7 +800,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -764,17 +809,31 @@
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QLineEdit" name="line_breed"/>
+           <widget class="QLineEdit" name="line_breed">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="5" column="2">
-           <widget class="QLineEdit" name="line_colors"/>
+           <widget class="QLineEdit" name="line_colors">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item row="8" column="2">
            <widget class="QLabel" name="label_23">
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -787,7 +846,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -802,7 +861,7 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
               <property name="text">
@@ -830,7 +889,7 @@
               <property name="font">
                <font>
                 <family>Courier New</family>
-                <pointsize>10</pointsize>
+                <pointsize>12</pointsize>
                </font>
               </property>
               <property name="text">
@@ -848,7 +907,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -861,6 +920,12 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
            </widget>
           </item>
           <item row="6" column="2">
@@ -868,7 +933,7 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="text">
@@ -886,7 +951,7 @@
          <number>20</number>
         </property>
         <property name="topMargin">
-         <number>50</number>
+         <number>10</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -915,7 +980,7 @@
           <property name="font">
            <font>
             <family>Courier New</family>
-            <pointsize>10</pointsize>
+            <pointsize>12</pointsize>
            </font>
           </property>
           <property name="text">
@@ -934,7 +999,7 @@
           <property name="font">
            <font>
             <family>Courier New</family>
-            <pointsize>10</pointsize>
+            <pointsize>12</pointsize>
            </font>
           </property>
           <property name="text">
