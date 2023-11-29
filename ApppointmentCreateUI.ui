@@ -327,7 +327,7 @@
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
+             <string notr="true">background-color: rgb(170, 170, 255);</string>
             </property>
             <property name="text">
              <string>Animal Image</string>
@@ -582,29 +582,6 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_20">
-            <property name="font">
-             <font>
-              <family>Courier New</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Home Phone (Optional)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="line_home_phone">
-            <property name="font">
-             <font>
-              <family>Courier New</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -783,7 +760,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="line_a_name">
+           <widget class="QLineEdit" name="line_aname">
             <property name="font">
              <font>
               <family>Courier New</family>
@@ -916,7 +893,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_10">
+           <widget class="QLineEdit" name="line_aid">
             <property name="enabled">
              <bool>false</bool>
             </property>
