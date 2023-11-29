@@ -162,7 +162,7 @@
            </font>
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>131</number>
+           <number>230</number>
           </attribute>
           <column>
            <property name="text">

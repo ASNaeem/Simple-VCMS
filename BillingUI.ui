@@ -205,17 +205,6 @@
           </column>
           <column>
            <property name="text">
-            <string>Tax</string>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier New</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
             <string>Adjustments</string>
            </property>
            <property name="font">
@@ -228,6 +217,17 @@
           <column>
            <property name="text">
             <string>Total Amount</string>
+           </property>
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Due</string>
            </property>
            <property name="font">
             <font>
