@@ -5,8 +5,8 @@ from qt_material import apply_stylesheet, list_themes
 import warnings
 import os 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
-
-warnings.filterwarnings("ignore")
+import Operations as op
+#warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
 
@@ -92,7 +92,8 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         self.change_theme()
-
+        
+##################### Page switching#####################
     def show_daycare(self):
         self.stackedWidget.setCurrentWidget(self.page_daycare)
 
@@ -151,7 +152,7 @@ class MainApp(QMainWindow):
     def show_expenses(self):
         self.stackedWidget.setCurrentWidget(self.page_expenses)
         self.setWindowTitle("VCMS || Dashboard || Expenses")
-        
+#####   Setting    #####        
     def change_theme(self):
         apply_stylesheet(
             app,
@@ -162,7 +163,30 @@ class MainApp(QMainWindow):
         with open("config.txt", "w") as f:
             f.write(self.page_setting.comboBox_themes.currentText())
 
-
+################### Appointment ##################
+    def make_appointment(self):     
+        apt = self.page_appointment_create
+        date = apt.date_apt.selectedDate()
+        time = apt.time_apt.selectedTime()
+        #appointment_service = self.page_appointment_create.cb_service.currentText()
+        reason = apt.line_reason.currentText()
+        first_name = apt.line_oname.currentText()
+        last_name = apt.line_lname.currentText()
+        phone = apt.line_phone.currentText()
+        email = apt.line_email.currentText()
+        address = apt.line_address.currentText()
+        #animal_id = apt.line_aid.currentText()
+        animal_name = apt.line_aname.currentText()
+        specicies = apt.line_species.currentText()
+        breed = apt.line_breed.currentText()
+        color = apt.line_colors.currentText()
+        behaviour = apt.line_behave.currentText()
+        birth = apt.date_appt_birth.selectedDate()
+        reg_date = apt.date_appt_reg.selectedDate()
+        name = first_name + " " +last_name
+        op.add_appointment_db(date, time, reason, name, phone, address, animal_name, species, breed,
+                              color, behaviour, birth, reg_date)
+#### UI density Scaling modifier ####
 extra = {
     # Density Scale
     "density_scale": "-1",
