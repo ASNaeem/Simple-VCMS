@@ -90,6 +90,7 @@ Rebuilding Class:
           C-Section - 5000
           Wound Dressing - 300
 
-     Modified Class
-          Tamanna
-               Animal
+Modified Class
+     Tamanna
+          Animal
+          Item
