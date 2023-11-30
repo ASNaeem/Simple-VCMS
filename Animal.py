@@ -1,22 +1,45 @@
 class Animal:
-    def __init__ (self, animal_id:str, breed:str, species:str, color:str, gender:str, age:str, registration_date:str, sterillized:bool, behavioral_warning:str, medical_condition:str):
-         self.animal_id = animal_id
-         self.breed = breed
-         self.species = species
-         self.color = color
-         self.gender = gender
-         self.age = age
-         self.registration_date = registration_date
-         self.sterillized = sterillized
-         self.behavioral_warning = behavioral_warning 
-         self.medical_condition = medical_condition
+    def __init__ (self, animal_id:int, animal_name:str, reg_date:str, birth_date:str, 
+                    sterilized:bool, gender:str, species:str, breed:str, 
+                    color:str, med_condition:str, behavioral_warning:str, 
+                    owner_name:str, email:str, phone:str, address:str):
+        self.animal_id = animal_id
+        self.animal_name = animal_name
+        self.reg_date = reg_date
+        self.birth_date = birth_date
+        self.sterilized = sterilized
+        self.gender = gender
+        self.species = species
+        self.breed = breed
+        self.color = color
+        self.med_condition = med_condition
+        self.behavioral_warning = behavioral_warning
+        self.owner_name = owner_name
+        self.email = email
+        self.phone = phone
+        self.address = address
+
     @property
     def animal_id(self):
         return self._animal_id
     @animal_id.setter
-    def animal_id(self, animal_id: str):
+    def animal_id(self, animal_id:int):
         self._animal_id = animal_id
-    
+
+    @property
+    def animal_name(self):
+        return self._animal_name
+    @animal_name.setter
+    def animal_name(self, animal_name:str):
+        self._animal_name = animal_name
+
+    @property
+    def birth_date(self):
+        return self._birth_date
+    @birth_date.setter
+    def birth_date(self, birth_date:str):
+        self._birth_date = birth_date
+
     @property
     def breed(self):
         return self._breed
@@ -44,20 +67,13 @@ class Animal:
     @gender.setter
     def gender(self, gender: str):
         self._gender = gender
-   
+
     @property
-    def age(self):
-        return self._age
-    @age.setter
-    def age(self, age: str):
-        self._age = age
-    
-    @property
-    def registration_date(self):
-        return self._registration_date
-    @registration_date.setter
-    def registration_date(self, registration_date: str):
-        self._registration_date = registration_date
+    def reg_date(self):
+        return self._reg_date
+    @reg_date.setter
+    def reg_date(self, reg_date: str):
+        self._reg_date = reg_date
    
     @property
     def sterillized(self):
@@ -73,8 +89,36 @@ class Animal:
         self._behavioral_warning = behavioral_warning
     
     @property
-    def medical_condition(self):
-        return self._medical_condition
-    @medical_condition.setter
-    def medical_condition(self, medical_condition: str):
-        self._medical_condition = medical_condition
+    def med_condition(self):
+        return self._med_condition
+    @med_condition.setter
+    def med_condition(self, med_condition: str):
+        self._med_condition = med_condition
+
+    @property
+    def owner_name(self):
+        return self._owner_name
+    @owner_name.setter
+    def owner_name(self, owner_name: str):
+        self._owner_name = owner_name
+
+    @property
+    def email(self):
+        return self._email
+    @email.setter
+    def email(self, email: str):
+        self._email = email
+
+    @property
+    def phone(self):
+        return self._phone
+    @phone.setter
+    def phone(self, phone: str):
+        self._phone = phone
+
+    @property
+    def address(self):
+        return self._address
+    @address.setter
+    def address(self, address: str):
+        self._address = address
