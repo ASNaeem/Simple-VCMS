@@ -71,6 +71,13 @@ MySQL
           animal
           record
           bill
+
+Rebuilding Class:
+     UZO:
+          Appointment
+          Person
+          Employee
+          Veterinarian
           
 
     Services
@@ -82,9 +89,3 @@ MySQL
           C-Section - 5000
           Wound Dressing - 300
 
-Rebuilding Class:
-     UZO:
-          Appointment
-          Person
-          Employee
-          Veterinarian
