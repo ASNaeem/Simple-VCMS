@@ -18,7 +18,7 @@ Tee:
 Uzo:
     Employee
     Veterinarian
-    GeneralStaff
+    ❌GeneralStaff
     BillInvoicing
     
 Ahona:
@@ -82,3 +82,9 @@ MySQL
           C-Section - 5000
           Wound Dressing - 300
 
+Rebuilding Class:
+     UZO:
+          Appointment
+          Person
+          Employee
+          Veterinarian
