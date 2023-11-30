@@ -10,7 +10,7 @@ class Appointment :
         self.animal_species = animal_species
         self.visit_reason = visit_reason
         self.veterinarian_name = veterinarian_name
-        self.appoinmrnt_status = appoinmrnt_status
+        self.appointment_status = appointment_status
    
     @property
     def appointment_id(self):
