@@ -1,9 +1,18 @@
 class Service:
-   def __init__(self, name:str, cost:float, service_availability:bool, service_details:str):
+   def __init__(self, service_id:int, name:str, cost:float, service_availability:bool, service_details:str):
+      self.service_id = service_id
       self.name = name
       self.cost = cost
       self.service_availability = service_availability
       self.service_details = service_details
+
+      @property
+      def service_id(self):
+         return self._service_id
+
+      @name.setter
+      def name(self, service_id:str):
+         self._service_id = service_id
 
       @property
       def name(self):

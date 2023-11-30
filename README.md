@@ -21,6 +21,7 @@ Uzo:
     ❌GeneralStaff
     BillInvoicing
     
+    
 Ahona:
      Animal
      appointment
@@ -78,7 +79,7 @@ Rebuilding Class:
           Person
           Employee
           Veterinarian
-          
+          Service
 
     Services
           Flu Vaccine - 1500
