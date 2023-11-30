@@ -1,10 +1,12 @@
 import mysql.connector
- 
-mydb = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = "root"
-)
+def establish_connection():
+    
+    mydb = mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        password = "root"
+    )
 
-cursor = mydb.cursor()
-cursor.execute("use vcms")
+    cursor = mydb.cursor()
+    cursor.execute("use vcms")
+    return cursor
