@@ -10,8 +10,8 @@ class Service:
       def service_id(self):
          return self._service_id
 
-      @name.setter
-      def name(self, service_id:str):
+      @service_id.setter
+      def service_id(self, service_id:str):
          self._service_id = service_id
 
       @property
@@ -36,7 +36,7 @@ class Service:
 
       @service_availability.setter
       def service_availability(self, service_availability:bool):
-         self._name = service_availability
+         self._service_availability = service_availability
 
       @property
       def service_details(self):

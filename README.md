@@ -80,6 +80,7 @@ Rebuilding Class:
           Employee
           Veterinarian
           Service
+          Billing
 
     Services
           Flu Vaccine - 1500
