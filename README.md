@@ -18,8 +18,9 @@ Tee:
 Uzo:
     Employee
     Veterinarian
-    GeneralStaff
+    ❌GeneralStaff
     BillInvoicing
+    
     
 Ahona:
      Animal
@@ -71,7 +72,14 @@ MySQL
           animal
           record
           bill
-          
+
+Rebuilding Class:
+     UZO:
+          Appointment
+          Person
+          Employee
+          Veterinarian
+          Service
 
     Services
           Flu Vaccine - 1500

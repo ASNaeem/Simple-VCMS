@@ -1,6 +1,6 @@
-class Veterinarian(Employee):
-    def __init__ (self, name:str, phone:str, email:str, address:str, employee_id:str, user_name:str, password:str, access_level:int, working_hours:str, total_cases:int, specialization:str):
-        super().__init__(name, phone, email, address, employee_id, user_name, password, access_level, working_hours)
+class Veterinarian(Person):
+    def __init__ (self, name:str, phone:str, email:str, address:str, employee_id:str, password:str, access_level:int, working_hours:str, total_cases:int, specialization:str):
+        super().__init__(name, phone, email, address, employee_id, password, access_level, working_hours)
         self.total_cases = total_cases
         self.specialization = specialization
     
