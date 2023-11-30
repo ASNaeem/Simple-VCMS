@@ -186,6 +186,11 @@ class MainApp(QMainWindow):
         name = first_name + " " +last_name
         op.add_appointment_db(date, time, reason, name, phone, address, animal_name, species, breed,
                               color, behaviour, birth, reg_date)
+        def populate_appointment(self):
+            
+            ...
+####
+
 #### UI density Scaling modifier ####
 extra = {
     # Density Scale
