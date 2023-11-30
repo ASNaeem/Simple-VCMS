@@ -6,14 +6,14 @@ class Appointment:
         appointment_date: str,
         appointment_time: str,
         visit_reason: str,
-        appoinmrnt_status: str,
+        appointment_status: str,
     ):
         self.appointment_id = appointment_id
         self.animal_id = animal_id
+        self.owner_name = owner_name
         self.appointment_date = appointment_date
         self.appointment_time = appointment_time
         self.visit_reason = visit_reason
-
         self.appointment_status = appointment_status
 
     @property
