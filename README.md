@@ -85,6 +85,7 @@ MySQL
      Modified Class
           Tamanna
                Animal
+               Inventory
 
           UZO:
                Appointment
