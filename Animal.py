@@ -76,15 +76,16 @@ class Animal:
         self._reg_date = reg_date
    
     @property
-    def sterillized(self):
-        return self._sterillized
-    @sterillized.setter
-    def sterillized(self, sterillized: bool):
-        self._sterillized = sterillized
+    def sterilized(self):
+        return self._sterilized
+    @sterilized.setter
+    def sterilized(self, sterilized: bool):
+        self._sterilized = sterilized
    
     @property
     def behavioral_warning(self):
         return self._behavioral_warning
+    @behavioral_warning.setter
     def behavioral_warning(self, behavioral_warning: str):
         self._behavioral_warning = behavioral_warning
     

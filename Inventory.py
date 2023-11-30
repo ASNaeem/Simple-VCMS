@@ -13,48 +13,48 @@ class Inventory:
     def name(self):
         return self._name
     @name.setter
-    def name(self, name:str):
-        return self._name
+    def name(self, name:int):
+        self._name = name
     
     @property
     def item_id(self):
         return self._item_id
     @item_id.setter
-    def item_id(self, item_id:str):
-        return self._item_id
+    def item_id(self, item_id:int):
+        self._item_id = item_id
 
     @property
     def manager_id(self):
         return self._manager_id
     @manager_id.setter
-    def manager_id(self, manager_id:str):
-        return self._manager_id
+    def manager_id(self, manager_id:int):
+        self._manager_id = manager_id
 
     @property
     def item_type(self):
         return self._item_type
     @item_type.setter
-    def item_type(self, item_type:str):
-        return self._item_type
+    def item_type(self, item_type:int):
+        self._item_type = item_type
 
 
     @property
     def manufacturer(self):
         return self._manufacturer
     @manufacturer.setter
-    def manufacturer(self, manufacturer:str):
-        return self._manufacturer
+    def manufacturer(self, manufacturer:int):
+        self._manufacturer = manufacturer
 
     @property
     def price(self):
         return self._price
     @price.setter
-    def price(self, price:float):
-        return self._price
+    def animal_id(self, animal_id:int):
+        self._animal_id = animal_id
 
     @property
     def amount(self):
         return self._amount
     @amount.setter
-    def amount(self, amount:float):
-        return self._amount
+    def amount(self, amount:int):
+        self._amount = amount
