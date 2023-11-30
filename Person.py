@@ -5,7 +5,6 @@ class Person:
         self.email = email
         self.password = password
         self.address = address
-        self.employee_id = employee_id
         self.access_level = access_level
         self.working_hours = working_hours
 
