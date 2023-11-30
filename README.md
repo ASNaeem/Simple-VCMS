@@ -73,15 +73,6 @@ MySQL
           record
           bill
 
-Rebuilding Class:
-     UZO:
-          Appointment
-          Person
-          Employee
-          Veterinarian
-          Service
-          Billing
-
     Services
           Flu Vaccine - 1500
           Rabies Vaccine - 500
@@ -94,3 +85,12 @@ Rebuilding Class:
      Modified Class
           Tamanna
                Animal
+
+          UZO:
+               Appointment
+               Person
+               Employee
+               Veterinarian
+               Service
+               Billing
+               Expenses
