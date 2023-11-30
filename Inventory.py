@@ -1,6 +1,6 @@
 class Inventory:
     def __init__(self, item_id:int, manager_id:int, name:str, 
-                manufacturer:str, type:str, price:float, amount:int):
+                manufacturer:str, item_type:str, price:float, amount:int):
         self.item_id = item_id
         self.name = name
         self.manager_id = manager_id
@@ -34,7 +34,7 @@ class Inventory:
     def item_type(self):
         return self._item_type
     @item_type.setter
-    def item_type(self, item_type:int):
+    def item_type(self, item_type:str):
         self._item_type = item_type
 
 
@@ -42,14 +42,14 @@ class Inventory:
     def manufacturer(self):
         return self._manufacturer
     @manufacturer.setter
-    def manufacturer(self, manufacturer:int):
+    def manufacturer(self, manufacturer:str):
         self._manufacturer = manufacturer
 
     @property
     def price(self):
         return self._price
     @price.setter
-    def animal_id(self, animal_id:int):
+    def price(self, price:float):
         self._price = price
 
     @property

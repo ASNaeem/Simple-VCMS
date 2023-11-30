@@ -1,8 +1,9 @@
+from datetime import date
 class Animal:
     def __init__ (self, animal_id:int, animal_name:str, birth_date:str, 
                     sterilized:bool, gender:str, species:str, breed:str, 
                     color:str, behavioral_warning:str, 
-                    owner_name:str, email:str, phone:str, address:str, med_condition:str = Null):
+                    owner_name:str, email:str, phone:str, address:str, reg_date:str, med_condition:str = Null):
         self.animal_id = animal_id
         self.animal_name = animal_name
         self.reg_date = reg_date
@@ -18,8 +19,16 @@ class Animal:
         self.email = email
         self.phone = phone
         self.address = address
-        self.medical_records{"Date":"", "Record":""}
+        self.medical_records = []
 
+
+    def add_record(self, diagnosis:str):
+        current_date = date.today()
+        record = {"Date":current_date,"Record":diagnosis}
+        self.medical_records.append(record)
+
+    
+    ### getter, setter###########    
     @property
     def animal_id(self):
         return self._animal_id

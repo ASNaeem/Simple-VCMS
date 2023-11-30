@@ -7,15 +7,13 @@ class Veterinarian(Employee):
     @property
     def total_cases(self):
         return self._total_cases
-
     @total_cases.setter
-    def total_cases(self, total_cases:str):
+    def total_cases(self, total_cases:int):
         self._total_cases = total_cases
 
     @property
     def specialization(self):
         return self._specialization
-
     @specialization.setter
     def specialization(self, specialization:str):
         self._specialization = specialization

@@ -1,5 +1,44 @@
 import MysqlConnectionManager as db
 import Appointment
+import Animal
+import Billing
+import Employee
+import Expenses
+import Inventory
+import Service
+import Veterinarian
+from datetime import date
+###Animal#
+Animals=[]
+def add_animal(animal_id:int, animal_name:str, birth_date:str, 
+                    sterilized:bool, gender:str, species:str, breed:str, 
+                    color:str, behavioral_warning:str, 
+                    owner_name:str, email:str, phone:str, address:str, med_condition:str = Null):
+    currentDate = date.today()
+    new_animal = Animal(animal_id, animal_name, birth_date, sterilized, gender, species, breed,
+                        color, behavioral_warning, owner_name, email, phone, address, currentDate, med_condition)
+    Animals.append(new_animal)
+    cursor = db.establish_connection()
+    query = "insert into animal (name, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email,phone, address, reg_date)"
+    data = f" values ({animal_name, species, breed, color, gender, birth_date, sterilized, med_condition, behavioral_warning, owner_name, email, phone, address, currentDate});"
+    run_query(query+data)
+    return "Entry Success!"
+    
+
+def run_query(query:str, data=Null):
+    cursor(query)
+    
+def delete_animal(id:int):
+    exists = False
+    index = -1
+    for animal in Animals:
+        if id == animal.id:
+            run_query(f"delete from animal where id = {animal.id}")
+            Animals.remove(animal)
+            return "Delete Success!"
+
+###  Appointment #####
+
 def add_appointment_db(date, time, reason:str, name:str, phone:str, address:str, animal_name:str, species:str, breed:str,
                               color:str, behaviour:str, birth:str, reg_date:str):
     apt = Appointment(date, time, re)
