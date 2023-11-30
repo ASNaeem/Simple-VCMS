@@ -12,15 +12,13 @@ class Expenses:
     @property
     def invoice_id(self):
          return self._invoice_id
-
     @invoice_id.setter
     def invoice_id(self, invoice_id:int):
          self.invoice_id = invoice_id
-
+    
     @property
     def issuer_id(self):
          return self._issuer_id
-
     @issuer_id.setter
     def issuer_id(self, issuer_id:int):
          self._issuer_id = issuer_id
@@ -28,7 +26,6 @@ class Expenses:
     @property
     def handler_id(self):
          return self._handler_id
-
     @handler_id.setter
     def handler_id(self, handler_id:int):
          self._handler_id = handler_id
@@ -36,7 +33,6 @@ class Expenses:
     @property
     def invoice_date(self):
          return self._invoice_date
-
     @invoice_date.setter
     def invoice_date(self, invoice_date:str):
          self._invoice_date = invoice_date
@@ -44,7 +40,6 @@ class Expenses:
     @property
     def handle_date(self):
          return self._handle_date
-
     @handler_id.setter
     def handle_date(self, handle_date:str):
          self._handle_date = handle_date
@@ -52,7 +47,6 @@ class Expenses:
     @property
     def amount(self):
          return self._amount
-
     @amount.setter
     def amount(self, amount:float):
          self._amount = amount
@@ -60,7 +54,6 @@ class Expenses:
     @property
     def justification(self):
          return self._justification
-
     @justification.setter
     def justification(self, justification:str):
          self._justification = justification

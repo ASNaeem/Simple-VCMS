@@ -1,29 +1,60 @@
 class Inventory:
-    def __init__(self, item_name:str, item_manufacture:str, item_price:float):
-        self.item_name - item_name
-        self.item_manufacture = item_manufacture
-        self.item_price = item_price
+    def __init__(self, item_id:int, manager_id:int, name:str, 
+                manufacturer:str, type:str, price:float, amount:int):
+        self.item_id = item_id
+        self.name = name
+        self.manager_id = manager_id
+        self.manufacturer = manufacturer
+        self.price = price
+        self.item_type = item_type
+        self.amount = amount
 
     @property
-    def item_name(self):
-        return self._item_name
-    
-    @item_name.setter
-    def item_name(self, item_name:str):
-        return self._item_name
+    def name(self):
+        return self._name
+    @name.setter
+    def name(self, name:int):
+        self._name = name
     
     @property
-    def item_manufacture(self):
-        return self._item_manufacture
-    
-    @item_manufacture.setter
-    def item_manufacture(self, item_manufacture:str):
-        return self._item_manufacture
+    def item_id(self):
+        return self._item_id
+    @item_id.setter
+    def item_id(self, item_id:int):
+        self._item_id = item_id
 
     @property
-    def item_price(self):
-        return self._item_price
-    
-    @item_price.setter
-    def item_price(self, item_price:float):
-        return self._item_price
+    def manager_id(self):
+        return self._manager_id
+    @manager_id.setter
+    def manager_id(self, manager_id:int):
+        self._manager_id = manager_id
+
+    @property
+    def item_type(self):
+        return self._item_type
+    @item_type.setter
+    def item_type(self, item_type:int):
+        self._item_type = item_type
+
+
+    @property
+    def manufacturer(self):
+        return self._manufacturer
+    @manufacturer.setter
+    def manufacturer(self, manufacturer:int):
+        self._manufacturer = manufacturer
+
+    @property
+    def price(self):
+        return self._price
+    @price.setter
+    def animal_id(self, animal_id:int):
+        self._animal_id = animal_id
+
+    @property
+    def amount(self):
+        return self._amount
+    @amount.setter
+    def amount(self, amount:int):
+        self._amount = amount
