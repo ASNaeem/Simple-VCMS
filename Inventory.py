@@ -13,7 +13,7 @@ class Inventory:
     def name(self):
         return self._name
     @name.setter
-    def name(self, name:int):
+    def name(self, name:str):
         self._name = name
     
     @property
@@ -50,7 +50,7 @@ class Inventory:
         return self._price
     @price.setter
     def animal_id(self, animal_id:int):
-        self._animal_id = animal_id
+        self._price = price
 
     @property
     def amount(self):
