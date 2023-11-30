@@ -6,7 +6,7 @@ import warnings
 import os 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 import Operations as op
-#warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
 
@@ -91,7 +91,7 @@ class MainApp(QMainWindow):
         # self.page_animal.button_reg_back.clicked.connect(self.show_animal_)
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
-        self.change_theme()
+        #self.change_theme()
         
 ##################### Page switching#####################
     def show_daycare(self):

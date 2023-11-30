@@ -572,7 +572,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QTextEdit" name="textEdit">
+           <widget class="QLabel" name="label">
             <property name="minimumSize">
              <size>
               <width>200</width>
@@ -584,6 +584,15 @@
               <width>200</width>
               <height>200</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(170, 170, 255);</string>
+            </property>
+            <property name="text">
+             <string>Animal Image</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
