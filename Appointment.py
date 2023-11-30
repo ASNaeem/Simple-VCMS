@@ -10,10 +10,10 @@ class Appointment:
     ):
         self.appointment_id = appointment_id
         self.animal_id = animal_id
+        self.owner_name = owner_name
         self.appointment_date = appointment_date
         self.appointment_time = appointment_time
         self.visit_reason = visit_reason
-
         self.appointment_status = appointment_status
 
     @property
