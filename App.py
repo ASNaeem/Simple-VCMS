@@ -187,8 +187,9 @@ class MainApp(QMainWindow):
         address_item = QTableWidgetItem(animal.address)
         currentDate_item = QTableWidgetItem(animal.currentDate)
         med_condition_item = QTableWidgetItem(animal.med_condition)
-        
-        
+
+        def add_animal_to_table(self, row, animal):
+            self.page_animal_info    
     
 
 ################### Appointment ##################
