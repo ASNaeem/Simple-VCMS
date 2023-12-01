@@ -1,5 +1,5 @@
 -- SQLBook: Code
-create table animal (
+create table animals (
 	animal_id INT auto_increment primary key,
 	animal_name varchar(50),
 	birth_date date,

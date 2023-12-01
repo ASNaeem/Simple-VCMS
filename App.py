@@ -172,21 +172,22 @@ class MainApp(QMainWindow):
             self.add_animal_to_table(row,animal)
     def add_animal_to_table(self, row, animal):
         self.page_animal_info.animal_table.insertRow(row)
+        
         animal_name_item = QTableWidgetItem(animal.animal_name)
-        species_item = QTableWidgetItem(animal.animal_name)
-        breed_item = QTableWidgetItem(animal.animal_name)
-        color_item = QTableWidgetItem(animal.animal_name)
-        gender_item = QTableWidgetItem(animal.animal_name)
-        birth_date_item = QTableWidgetItem(animal.animal_name)
+        birth_date_item = QTableWidgetItem(animal.birth_date_)
         sterilized_item = QTableWidgetItem(animal.sterilized)
-        med_condition_item = QTableWidgetItem(animal.med_condition)
+        gender_item = QTableWidgetItem(animal.gender)
+        species_item = QTableWidgetItem(animal.species)
+        breed_item = QTableWidgetItem(animal.breed)
+        color_item = QTableWidgetItem(animal.color)
         behavioral_warning_item = QTableWidgetItem(animal.behavioral_warning)
         owner_name_item = QTableWidgetItem(animal.owner_name)
         email_item = QTableWidgetItem(animal.email)
-        pphone_item = QTableWidgetItem(animal.phone)
+        phone_item = QTableWidgetItem(animal.phone)
         address_item = QTableWidgetItem(animal.address)
-        currentDate_item = QTableWidgetItem(animal.rage_date)
-
+        currentDate_item = QTableWidgetItem(animal.currentDate)
+        med_condition_item = QTableWidgetItem(animal.med_condition)
+        
         
     
 
