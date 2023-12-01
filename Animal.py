@@ -1,10 +1,10 @@
 from datetime import date
 class Animal:
     def __init__ (self, animal_name:str, birth_date:str, 
-                    sterilized:bool, gender:str, species:str, breed:str, 
+                    sterilized:str, gender:str, species:str, breed:str, 
                     color:str, behavioral_warning:str, 
                     owner_name:str, email:str, phone:str, address:str, reg_date:str, med_condition:str = None):
-        self.animal_id = None
+        self.animal_id:int = None
         self.animal_name = animal_name
         self.reg_date = reg_date
         self.birth_date = birth_date
@@ -57,7 +57,7 @@ class Animal:
         return self._breed
     @breed.setter
     def breed(self, breed: str):
-        self._breed_ = breed
+        self._breed = breed
    
     @property
     def species(self):
