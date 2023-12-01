@@ -1,12 +1,12 @@
 class Service:
     def __init__(
-        self, name: str, cost: float, service_availability: bool, service_details: str
+        self, name: str, cost: float, service_details: str, service_availability: bool
     ):
         self.service_id = None
         self.name = name
         self.cost = cost
-        self.service_availability = service_availability
         self.service_details = service_details
+        self.service_availability = service_availability
 
         ########getter, setter###########
         @property

@@ -13,7 +13,7 @@ drop table if exists day_care;
 drop table if exists billings;
 drop table if exists bill_services;
 create table employees (
-	id int auto_increment primary key,
+	employee_id int auto_increment primary key,
 	name varchar(45), email varchar(100),
 	password varchar(50), address varchar(100),
 	designation varchar(10), access_level int,
@@ -21,7 +21,7 @@ create table employees (
 	joining_date date
 );
 create table phones (
-	     id int, phone varchar(50) primary key
+	     employee_id int, phone varchar(50) primary key
 );
 create table animals (
 	animal_id int auto_increment primary key,
@@ -41,7 +41,7 @@ create table animals (
 	med_condition TEXT
 );
 create table appointments (
-             id int auto_increment primary key,
+             appointment_id int auto_increment primary key,
              animal_id int,
              a_date date,
              a_time time,
@@ -49,7 +49,7 @@ create table appointments (
              a_status varchar(100)
 );
 create table expenses (expense_id int auto_increment primary key,
-		issuer_id int,
+		        issuer_id int,
                 handler_id int,               
                 expense_date date,
                 handle_date date,
@@ -64,24 +64,26 @@ Create table inventory (item_id int auto_increment primary key,
                 price decimal(10,2),
                 amount int
 );
-Create table services (id int auto_increment primary key, 
+Create table services (service_id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2),
-                availability varchar(5), 
-                details varchar(50)
+				service_details varchar(50),
+                service_availability varchar(5) 
+                
 );
 create table veterinarians (
-             id int,
+             employee_id int,
              totalcase int,
              specialization varchar(100)
 );
-create table records (
-	id INT,
+create table records (record_id int auto_increment primary key, 
+	animal_id INT,
 	record TEXT,
 	rdate DATE
 );
-Create table day_care (animal_id int,
-		dos date,
+Create table day_care (day_care_id int auto_increment  primary key,
+                animal_id int,
+		        dos date,
                 start_time time,
                 end_time time,
                 notes TEXT
