@@ -1,14 +1,13 @@
 class Appointment:
     def __init__(
         self,
-        appointment_id: int,
         animal_id: int,
         appointment_date: str,
         appointment_time: str,
         visit_reason: str,
         appointment_status: str,
     ):
-        self.appointment_id = appointment_id
+        self.appointment_id = None
         self.animal_id = animal_id
         self.owner_name = owner_name
         self.appointment_date = appointment_date
@@ -16,13 +15,15 @@ class Appointment:
         self.visit_reason = visit_reason
         self.appointment_status = appointment_status
 
+    ### getter, setter########### 
     @property
     def appointment_id(self):
         return self._appointment_id
+    """
     @appointment_id.setter
     def appointment_id(self, appointment_id: int):
         self._appointment_id = appointment_id
-
+    """
     @property
     def animal_id(self):
         return self.animal_id

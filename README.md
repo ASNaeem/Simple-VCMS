@@ -89,7 +89,6 @@ MySQL
 
           UZO:
                Appointment
-               Person
                Employee
                Veterinarian
                Service

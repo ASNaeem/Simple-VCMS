@@ -1,6 +1,6 @@
 class Bill:
-    def __init__(self, billing_id:int, day_care_id:int, appointment_id:int, payment_date:str, total_amount:float):
-        self.billing_id = billing_id
+    def __init__(self, day_care_id:int, appointment_id:int, payment_date:str, total_amount:float):
+        self.billing_id = None
         self.day_care_id = day_care_id
         self.appointment_id = appointment_id
         self.payment_date = payment_date
@@ -9,9 +9,6 @@ class Bill:
     @property
     def billing_id(self):
         return self._billing_id
-    @billing_id.setter
-    def billing_id(self, billing_id:int):
-        self._billing_id = billing_id
 
     @property
     def day_care_id(self):

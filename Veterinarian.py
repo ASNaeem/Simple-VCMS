@@ -1,9 +1,10 @@
 class Veterinarian(Employee):
-    def __init__ (self, name:str, phone:str, email:str, address:str, employee_id:int, password:str, access_level:int, working_hours:str, designation:str, total_cases:int, specialization:str):
-        super().__init__(name, phone, email, address, employee_id, password, access_level, working_hours, designation)
+    def __init__ (self, name:str, phone:str, email:str, address:str, password:str, access_level:int, working_hours:str, designation:str, total_cases:int, specialization:str):
+        super().__init__(name, phone, email, address, password, access_level, working_hours, designation)
         self.total_cases = total_cases
         self.specialization = specialization
-    
+        
+    ### getter, setter########### 
     @property
     def total_cases(self):
         return self._total_cases

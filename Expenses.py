@@ -1,20 +1,22 @@
 class Expenses:
-    def __init__(self, invoice_id:int, issuer_id:int, handler_id:int, invoice_date:str, handle_date:str, amount:float, justification:str):
-        self.invoice_id = invoice_id
-        self.issuer_id = issuer_id
+    def __init__(self, handler_id:int, invoice_date:str, handle_date:str, amount:float, justification:str):
+        self.issuer_id = None
         self.handler_id = handler_id
         self.invoice_date = invoice_date
         self.handle_date = handle_date
         self.amount = amount
         self.justification = justification
 
+     ### getter, setter########### 
     @property
     def invoice_id(self):
          return self._invoice_id
+    
+    """
     @invoice_id.setter
     def invoice_id(self, invoice_id:int):
          self.invoice_id = invoice_id
-    
+    """
     @property
     def issuer_id(self):
          return self._issuer_id
