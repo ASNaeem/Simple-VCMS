@@ -1,7 +1,17 @@
-drop database if exists VCMS;
-create database VCMS;
+create database if not exists VCMS;
 use VCMS;
 drop table if exists employees;
+drop table if exists phones;
+drop table if exists animals;
+drop table if exists appointments;
+drop table if exists expenses;
+drop table if exists inventory;
+drop table if exists services;
+drop table if exists veterinarians;
+drop table if exists records;
+drop table if exists day_care;
+drop table if exists billings;
+drop table if exists bill_services;
 create table employees (
 	id int auto_increment primary key,
 	name varchar(45), email varchar(100),
@@ -10,11 +20,9 @@ create table employees (
 	working_hours varchar(50), salary decimal(10,2),
 	joining_date date
 );
-drop table if exists phones;
 create table phones (
 	     id int, phone varchar(16) primary key
 );
-drop table if exists animals;
 create table animals (
 	animal_id int auto_increment primary key,
 	animal_name varchar(50),
@@ -32,7 +40,6 @@ create table animals (
 	reg_date date,
 	med_condition TEXT
 );
-drop table if exists appointments;
 create table appointments (
              id int auto_increment primary key,
              animal_id int,
@@ -41,7 +48,6 @@ create table appointments (
              visit_reason varchar(100),
              a_status varchar(100)
 );
-drop table if exists expenses;
 create table expenses (expense_id int auto_increment primary key,
 		issuer_id int,
                 handler_id int,               
@@ -50,7 +56,6 @@ create table expenses (expense_id int auto_increment primary key,
                 amount decimal(10,2),
                 justification varchar(100)
 );
-drop table if exists inventory;
 Create table inventory (item_id int auto_increment primary key,
 		name varchar(45),
                 mng_id int,            
@@ -59,33 +64,28 @@ Create table inventory (item_id int auto_increment primary key,
                 price decimal(10,2),
                 amount int
 );
-drop table if exists services;
 Create table services ( id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2),
                 availability boolean, 
                 details varchar(50)
 );
-drop table if exists veterinarians;
 create table veterinarians (
              id int,
              totalcase int,
              specialization varchar(100)
 );
-drop table if exists records;
 create table records (
 	id INT,
 	record TEXT,
 	rdate DATE
 );
-drop table if exists day_care;
 Create table day_care (animal_id int,
 		dos date,
                 start_time time,
                 end_time time,
                 notes TEXT
 );
-drop table if exists billings;
 create table billings (
 	bid int,
 	day_care_id int,
@@ -94,7 +94,6 @@ create table billings (
 	total_amount DECIMAL(8,2),
 	status varchar(10)
 );
-drop table if exists bill_services;
 create table bill_services (
 	bid int,
 	service_id int
