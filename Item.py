@@ -1,5 +1,5 @@
 class Item:
-    def __init__(self, mng_id:int, name:str, 
+    def __init__(self, name:str, mng_id:int,  
                 manufacturer:str, item_type:str, price:float, amount:int):
         self.item_id = None
         self.name = name

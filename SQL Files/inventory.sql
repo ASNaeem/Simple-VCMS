@@ -1,6 +1,6 @@
-Create table inventory( item_id int auto_increment primary key,
-                mng_id int
-                name varchar(45),
+Create table inventory (item_id int auto_increment primary key,
+		name varchar(45),
+                mng_id int            
                 manufacturer varchar(50),
                 item_type varchar(50),
                 price decimal(10,2),
