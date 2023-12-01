@@ -4,7 +4,7 @@ class Animal:
                     sterilized:bool, gender:str, species:str, breed:str, 
                     color:str, behavioral_warning:str, 
                     owner_name:str, email:str, phone:str, address:str, reg_date:str, med_condition:str = None):
-        #self.animal_id = animal_id
+        self.animal_id = None
         self.animal_name = animal_name
         self.reg_date = reg_date
         self.birth_date = birth_date
@@ -29,10 +29,11 @@ class Animal:
 
     
     ### getter, setter###########    
-    """
     @property
     def animal_id(self):
         return self._animal_id
+    
+    """
     @animal_id.setter
     def animal_id(self, animal_id:int):
         self._animal_id = animal_id
