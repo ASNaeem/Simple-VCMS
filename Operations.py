@@ -72,10 +72,10 @@ def add_employee(name: str, email: str, password: str, address: str, access_leve
         Employee.append(new_employee)
         mysql.connect()
         que = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date)"
-        data  = f"values({name, email, password, address, designation, access_level, working_hours, salary, joining_date})"
+        data  = f"values({name, email, password, address, designation, access_level, working_hours, salary, joining_date});"
         query(que, data)
         que = "insert into phone (id, phone_number)"
-        #que
+        data = f"values({id, phone});"
     except:
         ...
     

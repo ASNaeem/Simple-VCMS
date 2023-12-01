@@ -1,21 +1,13 @@
 -- SQLBook: Code
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (1, 'Jessica Scoggins', 'Manager', 'jscoggins0@eventbrite.com', 'Apt 1306', 4, 'e2499');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (2, 'Madonna Heigold', 'Nurse', 'mheigold1@sbwire.com', 'PO Box 11084', 3, 'k2377');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (3, 'Valaria Purchase', 'Nurse', 'vpurchase2@tripod.com', '11th Floor', 4, 'c3069');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (4, 'Dacie Linney', 'Veterinarian', 'dlinney3@reverbnation.com', 'Room 206', 3, 'k1753');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (5, 'Ikey Ateridge', 'General Staff', 'iateridge4@miitbeian.gov.cn', '9th Floor', 2, 'n1413');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (6, 'Stephana Necrews', 'Veterinarian', 'snecrews5@businesswire.com', '7th Floor', 1, 'b7606');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (7, 'Matthiew Botte', 'Manager', 'mbotte6@xing.com', 'PO Box 16701', 3, 'c4166');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (8, 'Jenna Zorzetti', 'General Staff', 'jzorzetti7@whitehouse.gov', 'Suite 89', 2, 'e2852');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (9, 'Steffie Patkin', 'Receptionist', 'spatkin8@hud.gov', 'Suite 64', 3, 's6029');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (10, 'Abbey Shelly', 'Nurse', 'ashelly9@bloglines.com', 'Room 1314', 4, 'f5736');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (11, 'Sashenka Haythorn', 'Nurse', 'shaythorna@simplemachines.org', 'Suite 21', 2, 'g0525');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (12, 'Dane Causey', 'Manager', 'dcauseyb@hp.com', 'Suite 17', 3, 'x4407');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (13, 'Essa Angelini', 'Veterinarian', 'eangelinic@sphinn.com', 'Suite 89', 4, 'l9418');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (14, 'Caleb Clashe', 'Veterinarian', 'cclashed@discovery.com', 'Apt 1811', 1, 'e7635');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (15, 'Sherilyn Huddy', 'Receptionist', 'shuddye@paginegialle.it', 'PO Box 63060', 3, 'a7542');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (16, 'Tommy Le Prevost', 'Receptionist', 'tlef@smh.com.au', 'Room 159', 3, 'o7553');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (17, 'Liliane Scammell', 'Manager', 'lscammellg@japanpost.jp', 'PO Box 75373', 3, 'l7201');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (18, 'Korney Stopforth', 'General Staff', 'kstopforthh@cbslocal.com', '2nd Floor', 1, 'd1836');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (19, 'Hildy Narracott', 'General Staff', 'hnarracotti@cdc.gov', 'PO Box 28874', 2, 'a7811');
-insert into employees (employee_id, name, designation, email, address, access_level, password) values (20, 'Sherlocke Bunston', 'Receptionist', 'sbunstonj@hhs.gov', 'Suite 88', 4, 'y8651');
+create table employees (id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(10), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date);
+
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022/09/23');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Korey MacCaull', 'kmaccaull1@multiply.com', 'lU6{)3gfw', '25 Hoard Terrace', 'Manager', 3, '7am - 3pm', 45196.66, '2022/06/04');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Avivah Barnard', 'abarnard2@mayoclinic.com', 'lF7*b!yxT#Vy8s', '766 Schmedeman Terrace', 'Manager', 3, '11pm - 7am', 27244.32, '2022/05/08');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Fred Nelsen', 'fnelsen3@ed.gov', 'zI9>ZBaM}{NWN', '44 Becker Court', 'Manager', 2, '3pm - 11pm', 18299.92, '2022/11/20');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Lola Rossetti', 'lrossetti4@howstuffworks.com', 'xB1}}S?Z', '32 Tony Alley', 'General Staff', 3, '7am - 3pm', 32075.0, '2022/07/13');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Maryl Skacel', 'mskacel5@alibaba.com', 'sS1!+ZWYl_l''s"n', '8 Pleasure Plaza', 'Receptionist', 3, '3pm - 11pm', 14217.02, '2022/11/19');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Ethelbert Huckstepp', 'ehuckstepp6@myspace.com', 'kT9~ONq{(L4', '22385 Duke Terrace', 'Veterinarian', 2, '7am - 3pm', 14082.95, '2022/06/22');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Shayne Laydel', 'slaydel7@tinypic.com', 'yG7/~@<>cAoPYD68', '46453 Lukken Road', 'Manager', 1, '9am - 5pm', 35247.04, '2022/04/23');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Ayn Masseo', 'amasseo8@discuz.net', 'gG1&ia|_<', '738 Becker Court', 'Veterinarian', 3, '3pm - 11pm', 20005.48, '2022/09/05');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Emlynn Leipoldt', 'eleipoldt9@flavors.me', 'uW6?9y3qG''''&6', '8202 Michigan Alley', 'Manager', 1, '9am - 5pm', 23582.69, '2022/04/19');
