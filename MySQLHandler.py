@@ -33,6 +33,7 @@ class MySQLHandler:
             #self.connection.rollback()
         finally:
             cursor.close()
+            
     def fetch_data(self, query, values=None):
         try:
             cursor = self.connection.cursor()
