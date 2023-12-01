@@ -5,9 +5,8 @@ from qt_material import apply_stylesheet, list_themes
 import warnings
 import os 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
-import Operations as op
-
-warnings.filterwarnings("ignore")
+from Operations import Animals, fetch_animals
+#warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
 
@@ -18,7 +17,7 @@ class MainApp(QMainWindow):
         uic.loadUi("MainUI.ui", self)
 
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
-        self.page_appointment_create = uic.loadUi("ApppointmentCreateUI.ui")
+        self.page_appointment_create = uic.loadUi("AppointmentCreateUI.ui")
         self.page_appointment_modify = uic.loadUi("AppointmentModifyUI.ui")
 
         # self.page_animal = uic.loadUi("AnimalUI.ui")
@@ -59,11 +58,9 @@ class MainApp(QMainWindow):
         self.button_appointments.clicked.connect(self.show_appointment)
         self.page_appointment.button_app_create.clicked.connect(self.show_appointment_create)
         self.page_appointment.button_app_details.clicked.connect(self.show_appointment_modify)
-        self.page_appointment_modify.button_app_back.clicked.connect(self.show_appointment)
+        self.page_appointment_modify.button_apt_back.clicked.connect(self.show_appointment)
         self.page_appointment_create.button_back_cancel.clicked.connect(self.show_appointment)
-        self.page_appointment_create.button_create.clicked.connect(
-            self.show_appointment
-        )
+        self.page_appointment_create.button_create.clicked.connect(self.show_appointment)
 
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
@@ -93,7 +90,7 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         #self.change_theme()
-        
+        self.set_animal_table()
 ##################### Page switching#####################
     def show_daycare(self):
         self.stackedWidget.setCurrentWidget(self.page_daycare)
@@ -167,30 +164,31 @@ class MainApp(QMainWindow):
 
 ## Animal ##
     def set_animal_table(self):
-        op.fetch_animals()
-        for row, animal in enumerate(op.Animals):
+        fetch_animals()
+        for row, animal in enumerate(Animals):
             self.add_animal_to_table(row,animal)
+            
     def add_animal_to_table(self, row, animal):
-        self.page_animal_info.animal_table.insertRow(row)
+        self.page_animal_info.animal_table.insertRow(row)   
+        self.page_animal_info.animal_table.setItem(row, 0, QTableWidgetItem(str(animal.animal_id()))) 
+        self.page_animal_info.animal_table.setItem(row, 1, QTableWidgetItem(animal.animal_name()))
+        self.page_animal_info.animal_table.setItem(row, 2, QTableWidgetItem(str(animal.birth_date())))
+        self.page_animal_info.animal_table.setItem(row, 3, QTableWidgetItem(str(animal.sterilized())))
+        self.page_animal_info.animal_table.setItem(row, 4, QTableWidgetItem(animal.gender()))
+        self.page_animal_info.animal_table.setItem(row, 5, QTableWidgetItem(animal.species()))
+        self.page_animal_info.animal_table.setItem(row, 6, QTableWidgetItem(animal.breed()))
+        self.page_animal_info.animal_table.setItem(row, 7, QTableWidgetItem(animal.color()))
+        self.page_animal_info.animal_table.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning()))
+        self.page_animal_info.animal_table.setItem(row, 9, QTableWidgetItem(animal.owner_name()))
+        self.page_animal_info.animal_table.setItem(row, 10, QTableWidgetItem(animal.email()))
+        self.page_animal_info.animal_table.setItem(row, 11, QTableWidgetItem(animal.phone()))
+        self.page_animal_info.animal_table.setItem(row, 12, QTableWidgetItem(animal.address()))
+        self.page_animal_info.animal_table.setItem(row, 13, QTableWidgetItem(str(animal.reg_date())))
+        self.page_animal_info.animal_table.setItem(row, 14, QTableWidgetItem(animal.med_condition()))
         
-        animal_name_item = QTableWidgetItem(animal.animal_name)
-        birth_date_item = QTableWidgetItem(animal.birth_date_)
-        sterilized_item = QTableWidgetItem(animal.sterilized)
-        gender_item = QTableWidgetItem(animal.gender)
-        species_item = QTableWidgetItem(animal.species)
-        breed_item = QTableWidgetItem(animal.breed)
-        color_item = QTableWidgetItem(animal.color)
-        behavioral_warning_item = QTableWidgetItem(animal.behavioral_warning)
-        owner_name_item = QTableWidgetItem(animal.owner_name)
-        email_item = QTableWidgetItem(animal.email)
-        phone_item = QTableWidgetItem(animal.phone)
-        address_item = QTableWidgetItem(animal.address)
-        currentDate_item = QTableWidgetItem(animal.currentDate)
-        med_condition_item = QTableWidgetItem(animal.med_condition)
+        
+       
 
-        def add_animal_to_table(self, row, animal):
-            self.page_animal_info    
-    
 
 ################### Appointment ##################
     def make_appointment(self):     

@@ -1,6 +1,6 @@
 import Operations as op
 
-service_id_input = input()
+#service_id_input = input()
 
 class Bill:
     def __init__(self, 
