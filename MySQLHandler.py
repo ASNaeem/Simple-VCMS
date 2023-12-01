@@ -3,7 +3,7 @@ class MySQLHandler:
     def __init__(self, host = "localhost", user="root", password="root", database="vcsm"):
         self.host = host
         self.user = user
-        self = password = password
+        self.password = password
         self.database = database
         self.connection = None
         
