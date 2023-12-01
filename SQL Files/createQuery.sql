@@ -1,4 +1,4 @@
-drop database VCMS;
+drop database if exists VCMS;
 create database VCMS;
 use VCMS;
 drop table if exists employees;
