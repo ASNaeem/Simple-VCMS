@@ -4,7 +4,7 @@ import Animal
 import Billing
 import Employee
 import Expenses
-import Inventory
+import Item
 import Service
 import Veterinarian
 from datetime import date
@@ -37,7 +37,7 @@ def add_animal(animal_name:str, birth_date:str,
                             color, behavioral_warning, owner_name, email, phone, address, currentDate, med_condition)
         Animals.append(new_animal)
         
-        query = "insert into animal (%s, %s, %s, %s, %s, %s, %s, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -71,10 +71,9 @@ Employee = []
 def add_employee(name: str, email: str, password: str, address: str, access_level: int,
                 working_hours: str, designation: str, salary: float, joining_date: str, phone:str = []):
     try:
-        mysql_handler = MySQLHandler(host, user, password)
-        mysql_handler.connect()
-        new_employee = Employee(name, email, password, address, access_level, working_hours, designation, salary, joining_date, phone)
+        new_employee = Employee(name, email, password, address, access_level,working_hours, designation, salary, joining_date, phone)
         Employee.append(new_employee)
+<<<<<<< HEAD
 
         query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
         data  = values(name, email, password, address, designation, access_level, working_hours, salary, joining_date)
@@ -93,6 +92,16 @@ def add_employee(name: str, email: str, password: str, address: str, access_leve
         return "Entry Failed!"
     finally:
         mysql_handler.disconnect()
+=======
+        mysql.connect()
+        que = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date)"
+        data  = f"values({name, email, password, address, designation, access_level, working_hours, salary, joining_date});"
+        query(que, data)
+        que = "insert into phone (id, phone_number)"
+        data = f"values({id, phone});"
+    except:
+        ...
+>>>>>>> 68457789be82d1484413a06064c8946190bf3d92
     
 ### Services List For Billing###
 Services = []
@@ -102,7 +111,31 @@ Services = []
 
 
 
-###### Inventory#####
-Inventory =[]
+###### Item add and delete #####
+Items =[]
 
-def add_inventory ():...
+def add_item (mng_id:int, name:str,manufacturer:str, item_type:str, price:float, amount:int):
+
+    try:
+        new_item = Item(mng_id,name,manufacturer,item_type,price,amount)
+        Items.append(new_item)
+        mysql.connect()
+        que ="insert into item (mng_id,name, manufacturer, item_type,price,amount)"
+        data = f"values({mng_id,name, manufacturer, item_type,price,amount})"
+        query (que+data)
+        mysql.close()
+        return "Entry success"
+    except Exception as err:
+         return "Entry failed"
+
+def remove_item (id:int):
+    try:
+        for item in Items:
+            if id == item.id:
+               mysql.connect()
+               run_query(f"Delete from item where id= {item.id}")
+               Items.remove(item)
+               mysql.close()
+               return "Delete success!"
+    except Exception as err:
+        print(f"Error: {err}")
