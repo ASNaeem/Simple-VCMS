@@ -27,7 +27,7 @@ create table animals (
 	animal_id int auto_increment primary key,
 	animal_name varchar(50),
 	birth_date date,
-	sterilized bool,
+	sterilized varchar(5),
 	gender varchar(10),
 	species varchar(50),
 	breed varchar(50),
@@ -67,7 +67,7 @@ Create table inventory (item_id int auto_increment primary key,
 Create table services ( id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2),
-                availability boolean, 
+                availability varchar(5), 
                 details varchar(50)
 );
 create table veterinarians (

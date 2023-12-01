@@ -5,7 +5,7 @@ Create table expenses (expense_id int auto auto_increment primary key,
                 handle_date date,
                 amount decimal(10,2),
                 justification varchar(100));
-insert into expenses (handler_id, handle_date, amount, justification) values ( 1, '2022-12-23', 40195, 'reason for the expense was to repair the x-ray machine');
+insert into expenses (handler_id, expense_date, handle_date, amount, justification) values ( 1, '2022-12-23', '2023-02-26', 40195, 'reason for the expense was to repair the x-ray machine');
 insert into expenses (handler_id, handle_date, amount, justification) values ( 2, '2023-02-26', 45764, 'updated the emergency medicine stock so this was the cost');
 insert into expenses (handler_id, handle_date, amount, justification) values ( 3, '2023-09-07', 19715, 'Air conditioner servicing was done this was the cost');
 insert into expenses (handler_id, handle_date, amount, justification) values ( 4, '2023-08-19', 18399, 'new set of sofa was bought');
