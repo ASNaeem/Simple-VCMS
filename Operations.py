@@ -1,4 +1,4 @@
-import MysqlConnectionManager as db
+import MysqlConnectionManager as mysql
 import Appointment
 import Animal
 import Billing
@@ -13,28 +13,29 @@ Animals=[]
 def add_animal(animal_id:int, animal_name:str, birth_date:str, 
                     sterilized:bool, gender:str, species:str, breed:str, 
                     color:str, behavioral_warning:str, 
-                    owner_name:str, email:str, phone:str, address:str, med_condition:str = Null):
+                    owner_name:str, email:str, phone:str, address:str, med_condition:str = None):
     currentDate = date.today()
     new_animal = Animal(animal_id, animal_name, birth_date, sterilized, gender, species, breed,
                         color, behavioral_warning, owner_name, email, phone, address, currentDate, med_condition)
     Animals.append(new_animal)
-    cursor = db.establish_connection()
+    mysql.connect()
     query = "insert into animal (name, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email,phone, address, reg_date)"
     data = f" values ({animal_name, species, breed, color, gender, birth_date, sterilized, med_condition, behavioral_warning, owner_name, email, phone, address, currentDate});"
     run_query(query+data)
+    mysql.close()
     return "Entry Success!"
     
 
-def run_query(query:str, data=Null):
+def run_query(query:str, data=None):
     cursor(query)
     
 def delete_animal(id:int):
-    exists = False
-    index = -1
     for animal in Animals:
         if id == animal.id:
+            mysql.connect()
             run_query(f"delete from animal where id = {animal.id}")
             Animals.remove(animal)
+            mysql.close()
             return "Delete Success!"
 
 ###  Appointment #####
