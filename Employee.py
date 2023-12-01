@@ -55,7 +55,7 @@ class Employee:
         return self._employee_id
 
     @employee_id.setter
-    def employee_id(self, employee_id: str):
+    def employee_id(self, employee_id: int):
         self._employee_id = employee_id
 
     @property
@@ -63,7 +63,7 @@ class Employee:
         return self._access_level
     
     @access_level.setter
-    def access_level(self, access_level:str):
+    def access_level(self, access_level:int):
         self._access_level = access_level
 
     @property

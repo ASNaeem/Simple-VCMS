@@ -20,14 +20,14 @@ class Appointment:
     def appointment_id(self):
         return self._appointment_id
     @appointment_id.setter
-    def appointment_id(self, appointment_id: str):
+    def appointment_id(self, appointment_id: int):
         self._appointment_id = appointment_id
 
     @property
     def animal_id(self):
         return self.animal_id
     @animal_id.setter
-    def animal_id(self, animal_id: str):
+    def animal_id(self, animal_id: int):
         self._animal_id = animal_id
 
     @property

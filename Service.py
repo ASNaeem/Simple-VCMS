@@ -11,7 +11,7 @@ class Service:
          return self._service_id
 
       @service_id.setter
-      def service_id(self, service_id:str):
+      def service_id(self, service_id:int):
          self._service_id = service_id
 
       @property
