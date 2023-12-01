@@ -10,13 +10,9 @@ class Bill:
         self.appointment_id = appointment_id
         self.payment_date = payment_date
         self.total_amount = total_amount
-        self.services = []
-
-    def add_service(self, diagnosis:str):
-        current_date = date.today()
-        record = {"Date":current_date,"Record":diagnosis}
-        self.medical_records.append(record)
+        #self.service_id = []
     
+    ########getter, setter###########
     @property
     def billing_id(self):
         return self._billing_id

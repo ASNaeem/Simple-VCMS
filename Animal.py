@@ -19,7 +19,7 @@ class Animal:
         self.email = email
         self.phone = phone
         self.address = address
-        self.medical_records = []
+        self.medical_records:str = []
 
 
     def add_record(self, diagnosis:str):
@@ -28,7 +28,7 @@ class Animal:
         self.medical_records.append(record)
 
     
-    ### getter, setter###########    
+    ### getter, setter ###########    
     @property
     def animal_id(self):
         return self._animal_id
