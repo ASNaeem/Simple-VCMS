@@ -13,7 +13,8 @@ def connect():
         cursor.execute("use vcms")
     except Exception as err:
         print(f"Error: {err}")
-
+def query(que:str, data = None):
+    cursor.execute(que, data)
 def close():
     try:
         cursor.close()

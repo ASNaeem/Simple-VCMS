@@ -20,27 +20,26 @@ def add_animal(animal_id:int, animal_name:str, birth_date:str,
                             color, behavioral_warning, owner_name, email, phone, address, currentDate, med_condition)
         Animals.append(new_animal)
         mysql.connect()
-        query = "insert into animal (name, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email,phone, address, reg_date)"
-        data = f" values ({animal_name, species, breed, color, gender, birth_date, sterilized, med_condition, behavioral_warning, owner_name, email, phone, address, currentDate});"
-        run_query(query+data)
+        que = "insert into animal (name, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email,phone, address, reg_date)"
+        data = f"values({animal_name, species, breed, color, gender, birth_date, sterilized, med_condition, behavioral_warning, owner_name, email, phone, address, currentDate});"
+        query(que, data)
         mysql.close()
         return "Entry Success!"
     except Exception as err:
         return "Entry Failed!"
     
-
-def run_query(query:str, data=None):
-    cursor(query)
-    
 def delete_animal(id:int):
-    for animal in Animals:
-        if id == animal.id:
-            mysql.connect()
-            run_query(f"delete from animal where id = {animal.id}")
-            Animals.remove(animal)
-            mysql.close()
-            return "Delete Success!"
-    return "Delete Failed!"
+    try:
+        for animal in Animals:
+            if id == animal.id:
+                mysql.connect()
+                run_query(f"delete from animal where id = {animal.id}")
+                Animals.remove(animal)
+                mysql.close()
+                return "Delete Success!"
+        return "Delete Failed!"
+    except Exception as err:
+        print(f"Error: {err}")
 ###  Appointment #####
 
 def add_appointment_db(date, time, reason:str, name:str, phone:str, address:str, animal_name:str, species:str, breed:str,
