@@ -1,10 +1,21 @@
 class Bill:
-    def __init__(self, day_care_id:int, appointment_id:int, payment_date:str, total_amount:float):
+    def __init__(self, 
+                day_care_id:int, 
+                appointment_id:int, 
+                payment_date:str, 
+                total_amount:float, 
+                services:int = none):
         self.billing_id = None
         self.day_care_id = day_care_id
         self.appointment_id = appointment_id
         self.payment_date = payment_date
         self.total_amount = total_amount
+        self.services = []
+
+    def add_service(self, diagnosis:str):
+        current_date = date.today()
+        record = {"Date":current_date,"Record":diagnosis}
+        self.medical_records.append(record)
     
     @property
     def billing_id(self):
