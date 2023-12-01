@@ -1,0 +1,1 @@
+create table employees (id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(10), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date);

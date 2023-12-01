@@ -11,3 +11,5 @@ insert into employees (name, email, password, address, designation, access_level
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Shayne Laydel', 'slaydel7@tinypic.com', 'yG7/~@<>cAoPYD68', '46453 Lukken Road', 'Manager', 1, '9am - 5pm', 35247.04, '2022/04/23');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Ayn Masseo', 'amasseo8@discuz.net', 'gG1&ia|_<', '738 Becker Court', 'Veterinarian', 3, '3pm - 11pm', 20005.48, '2022/09/05');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Emlynn Leipoldt', 'eleipoldt9@flavors.me', 'uW6?9y3qG''''&6', '8202 Michigan Alley', 'Manager', 1, '9am - 5pm', 23582.69, '2022/04/19');
+
+
