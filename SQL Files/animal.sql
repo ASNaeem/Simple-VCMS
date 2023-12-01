@@ -1,26 +1,39 @@
 -- SQLBook: Code
 create table animal (
-	animal_id INT auto_increment primary key,
+	animal_id int auto_increment primary key,
 	animal_name varchar(50),
 	birth_date date,
+	sterilized bool,
+	gender varchar(10),
+	species varchar(50),
+	breed varchar(50),
+	color varchar(50),
+	behavioral_warning TEXT,
+	owner_name varchar(50),
+	email varchar(50),
+	phone varchar(20),
+	address varchar(50),
+	reg_date date,
+	med_condition TEXT
 );
-animal_name:str, 
-birth_date:str,
-sterilized:bool, 
-gender:str, 
-species:str, 
-breed:str, 
-color:str, 
-behavioral_warning:str, 
-owner_name:str, 
-email:str, 
-phone:str, 
-address:str, 
-reg_date:str, 
-med_condition:str = None
 
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (1, 'Ruby', '2022-03-14', 'Rabbit', 'Dutch Rabbit', 'Brown', 'male', '2020-03-16', 'yes', 'injured', 'Gets aggresive if someone tries to hold for a long period of time. Might bite.', 'Valera Schleicher', 'vschleicher0@upenn.edu', '+7-555-802-2801', '549 Center Hill');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (2, 'Sky', '2023-08-10', 'Bird', 'Parrot', 'Green', 'female', '2020-04-10', 'no', 'healthy', 'Pecks.', 'Niven Synan', 'nsynan1@earthlink.net', '+352-586-400-3477', '728 Rusk Circle');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (3, 'Clay', '2023-11-25', 'Cat', 'Local Breed', 'Jet Black', 'male', '2022-05-28', 'no', 'injured', 'Good Boy.', 'Tamanna K', 'tamannak@gmail.com', '01827453830', 'Rajabari, Genda, Savar');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (4, 'Oreo', '2023-10-07', 'cat', 'Persian', 'Brown, White, Black Mixed', 'female', '2018-12-30', 'no', 'healthy', 'None.', 'Jesse Adamolli', 'jadamolli3@vk.com', '+86-216-370-8399', '2531 Bultman Court');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (5, 'Nugget', '2022-08-23', 'chicken', 'Silkie', 'Brown-Black', 'female', '2022-01-02', 'no', 'unhealthy', 'None', 'Gracie Wyper', 'gwyper4@simplemachines.org', '+351-321-443-3930', '3011 Bellgrove Court');
+insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
+					owner_name, email, phone, address, reg_date, med_condition) 
+values ('Ruby', '2020-03-16', 'yes', 'male', 'Rabbit', 'Dutch Rabbit', 'Brown', 'Gets aggresive if someone tries to hold for a long period of time. Might bite.', 
+		'Valera Schleicher', 'vschleicher0@upenn.edu', '+7-555-802-2801', '549 Center Hill', '2022-03-14', 'injured');
+insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
+					owner_name, email, phone, address, reg_date, med_condition) 
+values ('Sky', '2020-04-10', 'no', 'Female', 'Bird', 'Parrot', 'Green', 'Pecks.', 
+		'Niven Synan', 'nsynan1@earthlink.net', '+352-586-400-3477', '728 Rusk Circle', '2023-08-10', 'healthy');
+insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
+					owner_name, email, phone, address, reg_date, med_condition) 
+values ('Clay', '2022-05-28', 'no', 'male', 'Cat', 'Local Breed', 'Jet Black', 'Good Boy.', 
+		'Tamanna K', 'tamannak@gmail.com', '01827453830', 'Rajabari, Genda, Savar', '2023-11-25', 'injured');
+insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
+					owner_name, email, phone, address, reg_date, med_condition) 
+values ('Oreo', '2018-12-30', 'no', 'female', 'cat', 'Persian', 'Brown, White, Black Mixed', 'None.', 
+		'Jesse Adamolli', 'jadamolli3@vk.com', '+86-216-370-8399', '2531 Bultman Court', '2023-10-07', 'healthy');
+insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
+					owner_name, email, phone, address, reg_date, med_condition) 
+values ('Nugget', '2022-01-02', 'no', 'female', 'chicken', 'Silkie', 'Brown-Black', 'None', 
+		'Gracie Wyper', 'gwyper4@simplemachines.org', '+351-321-443-3930', '3011 Bellgrove Court', '2022-08-23', 'unhealthy');

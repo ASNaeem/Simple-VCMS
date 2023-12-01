@@ -5,9 +5,9 @@ class Employee:
         email: str,
         password: str,
         address: str,
+        designation: str,
         access_level: int,
         working_hours: str,
-        designation: str,
         salary: float,
         joining_date: str,
         phone:str = []
@@ -18,9 +18,9 @@ class Employee:
         self.email = email
         self.password = password
         self.address = address
-        self.access_level = access_level
-        self.working_hours = working_hours
         self.designation = designation
+        self.access_level = access_level
+        self.working_hours = working_hours  
         self.salary = salary
         self.joining_date = joining_date
 

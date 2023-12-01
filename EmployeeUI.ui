@@ -195,7 +195,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Phone (Personal)</string>
+                <string>Phone Number</string>
                </property>
               </widget>
              </item>
@@ -233,7 +233,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Phone (Home)</string>
+                <string>Alternate Phone Number</string>
                </property>
               </widget>
              </item>

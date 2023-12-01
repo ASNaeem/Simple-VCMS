@@ -167,10 +167,27 @@ class MainApp(QMainWindow):
 
 ## Animal ##
     def set_animal_table(self):
-        table = self.page_animal_info.table_animal
-        op.Animals = self.fetch_animals_from_database()
+        op.fetch_animals()
         for row, animal in enumerate(op.Animals):
             self.add_animal_to_table(row,animal)
+    def add_animal_to_table(self, row, animal):
+        self.page_animal_info.animal_table.insertRow(row)
+        
+        animal_name_item = QTableWidgetItem(animal.animal_name)
+        birth_date_item = QTableWidgetItem(animal.birth_date_)
+        sterilized_item = QTableWidgetItem(animal.sterilized)
+        gender_item = QTableWidgetItem(animal.gender)
+        species_item = QTableWidgetItem(animal.species)
+        breed_item = QTableWidgetItem(animal.breed)
+        color_item = QTableWidgetItem(animal.color)
+        behavioral_warning_item = QTableWidgetItem(animal.behavioral_warning)
+        owner_name_item = QTableWidgetItem(animal.owner_name)
+        email_item = QTableWidgetItem(animal.email)
+        phone_item = QTableWidgetItem(animal.phone)
+        address_item = QTableWidgetItem(animal.address)
+        currentDate_item = QTableWidgetItem(animal.currentDate)
+        med_condition_item = QTableWidgetItem(animal.med_condition)
+        
         
     
 
