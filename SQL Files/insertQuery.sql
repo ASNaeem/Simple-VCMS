@@ -3,7 +3,7 @@ insert into animals (animal_name, birth_date, sterilized, gender, species, breed
 values ('Ruby', '2020-03-16', 'yes', 'male', 'Rabbit', 'Dutch Rabbit', 'Brown', 'Gets aggresive if someone tries to hold for a long period of time. Might bite.', 
 		'Valera Schleicher', 'vschleicher0@upenn.edu', '+7-555-802-2801', '549 Center Hill', '2022-03-14', 'injured');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) 
-values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022/09/23');
+values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022-09-23');
 insert into appointments (animal_id, a_date, a_time, visit_reason, a_status) 
 values (13, '2023-03-15', '10:26', 'Flu Vaccine', 'completed');
 insert into phones (id, phone) values (1, '+880-115-557-8653');
