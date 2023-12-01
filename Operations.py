@@ -37,7 +37,7 @@ def add_animal(animal_name:str, birth_date:str,
                             color, behavioral_warning, owner_name, email, phone, address, currentDate, med_condition)
         Animals.append(new_animal)
         
-        query = "insert into animal (%s, %s, %s, %s, %s, %s, %s, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -68,31 +68,19 @@ def add_appointment(date, time, reason:str, name:str, phone:str, address:str, an
 
 ### Employee ###
 Employee = []
-
 def add_employee(name: str, email: str, password: str, address: str, access_level: int,
                 working_hours: str, designation: str, salary: float, joining_date: str, phone:str = []):
     try:
-        mysql_handler = MySQLHandler(host, user, password)
-        mysql_handler.connect()
-        new_employee = Employee(name, email, password, address, access_level, working_hours, designation, salary, joining_date, phone)
+        new_employee = Employee(name, email, password, address, access_level,working_hours, designation, salary, joining_date, phone)
         Employee.append(new_employee)
-
-        query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
-        data  = values(name, email, password, address, designation, access_level, working_hours, salary, joining_date)
-        mysql_handler.execute_query(query, data)
-        query = "insert into phone (id, phone_number) values(%s, %s);"
-        query_fetch_id = "select id from employee order by id desc limit 1;"
-        row = mysql_handler.fetch_data(query_fetch_id)
-        id = row[0]
-        #data = values(row[0][0], phone)
-        data1 = values(id, phone[0])
-        data2 = values(id, phone[1])
-        mysql_handler.execute_query(query, data1)
-        mysql_handler.execute_query(query, data2)
-    except Exception as err: 
-        print(f"Error: {err}")
-    finally:
-        mysql_handler.disconnect()
+        mysql.connect()
+        que = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date)"
+        data  = f"values({name, email, password, address, designation, access_level, working_hours, salary, joining_date});"
+        query(que, data)
+        que = "insert into phone (id, phone_number)"
+        data = f"values({id, phone});"
+    except:
+        ...
     
 ### Services List For Billing###
 Services = []
