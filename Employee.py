@@ -1,5 +1,5 @@
 class Employee:
-    def __init__(self, name:str, phone:str, email:str, password:str, address:str, employee_id:str, access_level:int, working_hours:str, designation:str):
+    def __init__(self, name:str, phone:str, email:str, password:str, address:str, employee_id:int, access_level:int, working_hours:str, designation:str):
         self.name = name
         self.phone = phone
         self.email = email
