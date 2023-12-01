@@ -1,3 +1,4 @@
+drop table if exists employees;
 create table employees (
 	id int auto_increment primary key,
 	name varchar(45), email varchar(100),
@@ -6,10 +7,12 @@ create table employees (
 	working_hours varchar(50), salary decimal(10,2),
 	joining_date date
 );
-create table phone(
+drop table if exists phones;
+create table phones (
 	     id int, phone varchar(16) primary key
 );
-create table animal (
+drop table if exists animals;
+create table animals (
 	animal_id int auto_increment primary key,
 	animal_name varchar(50),
 	birth_date date,
@@ -26,7 +29,8 @@ create table animal (
 	reg_date date,
 	med_condition TEXT
 );
-create table appointment(
+drop table if exists appointments;
+create table appointments (
              id int auto_increment primary key,
              animal_id int,
              a_date date,
@@ -34,6 +38,7 @@ create table appointment(
              visit_reason varchar(100),
              a_status varchar(100)
 );
+drop table if exists expenses;
 create table expenses (expense_id int auto auto_increment primary key,
 		issuer_id int,
                 handler_id int,               
@@ -42,7 +47,8 @@ create table expenses (expense_id int auto auto_increment primary key,
                 amount decimal(10,2),
                 justification varchar(100)
 );
-Create table inventory (item_id int auto_increment primary key,
+drop table if exists inventorys;
+Create table inventorys (item_id int auto_increment primary key,
 		name varchar(45),
                 mng_id int            
                 manufacturer varchar(50),
@@ -50,29 +56,34 @@ Create table inventory (item_id int auto_increment primary key,
                 price decimal(10,2),
                 amount int
 );
-Create table service( id int auto_increment primary key, 
+drop table if exists services;
+Create table services ( id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2),
                 availability boolean, 
                 details varchar(50)
 );
-create table veterinarian(
+drop table if exists veterinarians;
+create table veterinarians (
              id int,
              totalcase int,
              specialization varchar(100)
 );
-create table record (
+drop table if exists records;
+create table records (
 	id INT,
 	record TEXT,
 	rdate DATE
 );
+drop table if exists day_care;
 Create table day_care (animal_id int,
 		dos date,
                 start_time time,
                 end_time time,
                 notes TEXT
 );
-create table billing (
+drop table if exists billings;
+create table billings (
 	bid int,
 	day_care_id int
 	aid int,
@@ -80,6 +91,7 @@ create table billing (
 	total_amount DECIMAL(8,2),
 	status varchar(10)
 );
+drop table if exists bill_services;
 create table bill_services (
 	bid int,
 	service_id int
