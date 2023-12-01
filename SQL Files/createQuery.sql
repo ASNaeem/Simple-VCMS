@@ -1,3 +1,6 @@
+drop database VCMS;
+create database VCMS;
+use VCMS;
 drop table if exists employees;
 create table employees (
 	id int auto_increment primary key,
