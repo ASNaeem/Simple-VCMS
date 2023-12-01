@@ -1,9 +1,8 @@
 class Expenses:
-    def __init__(self, invoice_id:int, issuer_id:int, handler_id:int, handler_name:str, invoice_date:str, handle_date:str, amount:float, justification:str):
+    def __init__(self, invoice_id:int, issuer_id:int, handler_id:int, invoice_date:str, handle_date:str, amount:float, justification:str):
         self.invoice_id = invoice_id
         self.issuer_id = issuer_id
         self.handler_id = handler_id
-        self.handler_name = handler_name
         self.invoice_date = invoice_date
         self.handle_date = handle_date
         self.amount = amount
@@ -40,7 +39,7 @@ class Expenses:
     @property
     def handle_date(self):
          return self._handle_date
-    @handler_id.setter
+    @handle_date.setter
     def handle_date(self, handle_date:str):
          self._handle_date = handle_date
 
