@@ -6,7 +6,8 @@ insert into employees (name, email, password, address, designation, access_level
 values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022-09-23');
 insert into appointments (animal_id, a_date, a_time, visit_reason, a_status) 
 values (13, '2023-03-15', '10:26', 'Flu Vaccine', 'completed');
-insert into phones (employee_id, phone) values (1, '+880-115-557-8653');
+insert into phone (animal_id, phone) values (1, '+880-115-557-8653');
+insert into phone (animal_id, phone) values (1, '+880-115-552-5559');
 insert into veterinarians (employee_id, totalcase, specialization) 
 values (1, 6, 'Veterinary Dermatologist');
 insert into day_care (dos, start_time, end_time, notes) values ("2023-05-16", "7:42","9:51", "allergic to nut");
