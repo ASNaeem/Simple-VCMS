@@ -37,7 +37,7 @@ def add_animal(animal_name:str, birth_date:str,
                             color, behavioral_warning, owner_name, email, phone, address, currentDate, med_condition)
         Animals.append(new_animal)
         
-        query = "insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "insert into animal (%s, %s, %s, %s, %s, %s, %s, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
