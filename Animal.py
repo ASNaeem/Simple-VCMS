@@ -33,11 +33,11 @@ class Animal:
     def animal_id(self):
         return self._animal_id
     
-    """
+   
     @animal_id.setter
     def animal_id(self, animal_id:int):
         self._animal_id = animal_id
-    """
+ 
     @property
     def animal_name(self):
         return self._animal_name

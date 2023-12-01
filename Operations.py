@@ -11,9 +11,18 @@ from datetime import date
 ###Animal#
 Animals=[]
 def fetch_animals():
-    mysql.connect()
-    que = "select animal_id, animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date"
-    query()
+    try:
+        mysql.connect()
+        que = "select animal_id, animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date from animals"
+        query(que)
+        for row in cursor.fetchall():
+            animal_id, animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date = row
+            animal = Animal(animal_id, animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date)
+            animal.animal_id(animal_id)
+            Animals.append(animal)
+    except Exception as err:
+        print(f"Error: {err}")
+    finally: mysql.close()
         
 def add_animal(animal_name:str, birth_date:str, 
                     sterilized:bool, gender:str, species:str, breed:str, 
@@ -25,7 +34,7 @@ def add_animal(animal_name:str, birth_date:str,
                             color, behavioral_warning, owner_name, email, phone, address, currentDate, med_condition)
         Animals.append(new_animal)
         mysql.connect()
-        que = "insert into animal (name, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email,phone, address, reg_date)"
+        que = "insert into animal (name,  birth_date, sterilized, species, breed, color, gender, current_condition, behavioral_warning, oname, email,phone, address, reg_date)"
         data = f"values({animal_name, species, breed, color, gender, birth_date, sterilized, med_condition, behavioral_warning, owner_name, email, phone, address, currentDate});"
         query(que, data)
         mysql.close()
