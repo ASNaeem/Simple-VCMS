@@ -2,7 +2,6 @@ class Employee:
     def __init__(
         self,
         name: str,
-        phone: str,
         email: str,
         password: str,
         address: str,
@@ -11,6 +10,7 @@ class Employee:
         designation: str,
         salary: float,
         joining_date: str,
+        phone:str = []
     ):
         self.employee_id = None
         self.name = name
@@ -44,7 +44,7 @@ class Employee:
     def phone(self):
         return self._phone
     @phone.setter
-    def phone(self, phone: str):
+    def phone(self, phone:str = []):
        self._phone = phone
     @property
     def email(self):
