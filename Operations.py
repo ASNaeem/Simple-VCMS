@@ -88,8 +88,9 @@ def add_employee(name: str, email: str, password: str, address: str, access_leve
         data2 = values(id, phone[1])
         mysql_handler.execute_query(query, data1)
         mysql_handler.execute_query(query, data2)
+        return "Entry Success!"
     except Exception as err: 
-        print(f"Error: {err}")
+        return "Entry Failed!"
     finally:
         mysql_handler.disconnect()
     
