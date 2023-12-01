@@ -215,8 +215,10 @@ class MainApp(QMainWindow):
         fetch_billings()
         for row, billing in enumerate(Billings):
             self.add_billing_to_table(row,billing)
+            for rowService, service in enumerate(billing.services):
+                self.add_billing_service_to_service_table(rowService,service)
 
-    def add_billing_to_table(self, row, animal):
+    def add_billing_to_table(self, row, billing):
         header = self.page_billing.table_bill.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         table=self.page_billing.table_bill
@@ -235,6 +237,22 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 6, QTableWidgetItem(billing.status))
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+
+    def add_billing_service_to_service_table(self, rowService,service):
+        header = self.page_billing.table_show_service.horizontalHeader()
+        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+
+        table=self.page_billing.table_show_service
+
+        table.setItem(rowService, 0, QTableWidgetItem(billing.service_id))
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+
+        if billing.service_id == Services.service_id:
+            table.setItem(rowService, 1, QTableWidgetItem(Services.name))
+            header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+
+            table.setItem(rowService, 2, QTableWidgetItem(Services.cost))
+            header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
 
 ################### Appointment ##################
     def make_appointment(self):     
