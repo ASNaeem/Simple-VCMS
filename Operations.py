@@ -110,30 +110,34 @@ Services = []
 
 
 ###### Item add and delete #####
-Items =[]
+Items:Item =[]
+def fetch_items():   
+    
+    try:
+        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler.connect()     
+        query = "select * from inventory"
+        data = mysql_handler.execute_query(query)
+        for row in data:
+            item = Item(row[1], row[2], row[3], row[4], row[5])
+            item.item_id (row[0])
+            Items.append(item)
+        mysql_handler.disconnect()
+        print(f"Er")
+    except Exception as err:
+        print(f"Error: {err}")
 
 def add_item (mng_id:int, name:str,manufacturer:str, item_type:str, price:float, amount:int):
 
     try:
         new_item = Item(mng_id,name,manufacturer,item_type,price,amount)
         Items.append(new_item)
-        mysql.connect()
-        que ="insert into item (mng_id,name, manufacturer, item_type,price,amount)"
-        data = f"values({mng_id,name, manufacturer, item_type,price,amount})"
-        query (que+data)
-        mysql.close()
+        query ="insert into item (mng_id,name, manufacturer, item_type,price,amount)"
+        values = (mng_id,name, manufacturer, item_type,price,amount)
+        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler.connect()
+        mysql_handler.execute_query(query, values)
         return "Entry success"
     except Exception as err:
          return "Entry failed"
 
-def remove_item (id:int):
-    try:
-        for item in Items:
-            if id == item.id:
-               mysql.connect()
-               run_query(f"Delete from item where id= {item.id}")
-               Items.remove(item)
-               mysql.close()
-               return "Delete success!"
-    except Exception as err:
-        print(f"Error: {err}")

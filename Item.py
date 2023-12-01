@@ -1,9 +1,8 @@
 class Item:
-    def __init__(self, name:str, mng_id:int,  
+    def __init__(self, name:str,  
                 manufacturer:str, item_type:str, price:float, amount:int):
         self.item_id = None
         self.name = name
-        self.mng_id = None
         self.manufacturer = manufacturer
         self.price = price
         self.item_type = item_type
@@ -20,20 +19,11 @@ class Item:
     @property
     def item_id(self):
         return self._item_id
-    '''
+    
     @item_id.setter
     def item_id(self, item_id:int):
         self._item_id = item_id
-    '''
 
-    @property
-    def mng_id(self):
-        return self._mng_id
-    '''
-    @mng_id.setter
-    def mng_id(self, mng_id:int):
-        self._mng_id = mng_id
-    '''
     @property
     def item_type(self):
         return self._item_type
