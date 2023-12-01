@@ -5,7 +5,7 @@ from qt_material import apply_stylesheet, list_themes
 import warnings
 import os 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
-from Operations import Animals, fetch_animals
+from Operations import Animals, fetch_animals, Billing, fetch_billings
 #warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
@@ -91,6 +91,8 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         #self.change_theme()
         self.set_animal_table()
+        set_bill_table()
+
 ##################### Page switching#####################
     def show_daycare(self):
         self.stackedWidget.setCurrentWidget(self.page_daycare)
@@ -194,12 +196,45 @@ class MainApp(QMainWindow):
         #self.page_animal_info.table_animal.setItem(row, 12, QTableWidgetItem(animal.address))
         #self.page_animal_info.table_animal.setItem(row, 13, QTableWidgetItem(str(animal.reg_date)))
         #self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
-        
-              
-        
-        
-       
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+################### Billing ##################              
+    def set_bill_table(self):        
+        fetch_billings()
+        for row, billing in enumerate(Billings):
+            self.add_billing_to_table(row,billing)
+
+    def add_billing_to_table(self, row, animal):
+        header = self.page_billing.table_bill.horizontalHeader()
+        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        table=self.page_billing.table_bill
+        table.insertRow(row)
+        table.setItem(row, 0, QTableWidgetItem(billing.billing_id))
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 1, QTableWidgetItem(billing.day_care_id))
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 2, QTableWidgetItem(billing.appointment_id))
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)   
+        table.setItem(row, 3, QTableWidgetItem(billing.payment_date))
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 4, QTableWidgetItem(billing.total_amount))
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 5, QTableWidgetItem(billing.adjustment))
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 6, QTableWidgetItem(billing.status))
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
 
 ################### Appointment ##################
     def make_appointment(self):     

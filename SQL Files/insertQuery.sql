@@ -1,5 +1,5 @@
 insert into animals (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
-		owner_name, email, phone, address, reg_date, med_condition) 
+		owner_name, email, phone, address, reg_date, med_condition);
 values ('Ruby', '2020-03-16', 'yes', 'male', 'Rabbit', 'Dutch Rabbit', 'Brown', 'Gets aggresive if someone tries to hold for a long period of time. Might bite.', 
 		'Valera Schleicher', 'vschleicher0@upenn.edu', '+7-555-802-2801', '549 Center Hill', '2022-03-14', 'injured');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) 
@@ -20,4 +20,4 @@ insert into records (animal_id, record, rdate) values (1, 'Got bit by a cat in t
 insert into services (name, cost, service_details, service_availability) 
 values ("Rabies Vaccine",1084.8,"scale B2C technologies","No");
 insert into bill_services (bid, service_id) values (1,1);
-insert into bill_services(bid, service_id) values(1, 1);
+insert into bill_services(bid, service_id) values(1,1);

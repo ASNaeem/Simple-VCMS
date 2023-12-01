@@ -1,34 +1,37 @@
 from MySQLHandler import MySQLHandler
 import Appointment
 from Animal import Animal
-import Billing
+from Billing import Bill
 import Employee
 import Expenses
 import Item
 import Service
+
+user = "root"
+password = "1234"
+host = "localhost"
+port = 3307
 
 # import Veterinarian
 from datetime import date
 
 ###Animal#
 Animals = []
-user = "root"
-password = "root"
-host = "localhost"
-
 
 def fetch_animals():
     try:
-        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
         query = "select * from animals"
         data = mysql_handler.fetch_data(query)
+        query = "select * from records" 
+        dataRecords = mysql_handler.fetch_data(query)
 
         for row in data:
             animal = Animal(
                 animal_name=row[1],
                 birth_date=str(row[2]),
-                sterilized=str(row[3]),
+                sterilized=(row[3]),
                 gender=row[4],
                 species=row[5],
                 breed=row[6],
@@ -42,9 +45,12 @@ def fetch_animals():
                 med_condition=row[14],
             )
             animal.animal_id = int(row[0])
+            for rowRecords in dataRecords:
+                if animal.animal_id == rowRecords[0]:
+                    animal.add_record()
+
             Animals.append(animal)
         mysql_handler.disconnect()
-        print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
 
@@ -100,7 +106,7 @@ def add_animal(
             address,
             reg_date,
         )
-        mysql_handler = MySQLHandler()
+        mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
         return "Entry Success!"
@@ -187,7 +193,7 @@ def add_employee(
             joining_date,
         )
 
-        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
 
         mysql_handler.execute_query(query, data)
@@ -205,6 +211,40 @@ def add_employee(
         return "Entry Failed!"
     finally:
         mysql_handler.disconnect()
+
+###Billings###
+Billing = []
+
+def fetch_billings():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from billings"
+        data = mysql_handler.fetch_data(query)
+        query = "select * from bill_services"
+        dataServices = mysql_handler.connect()
+
+        for row in data:
+            billing = Billing(
+                day_care_id=int(row[1]),
+                appointment_id=int(row[2]),
+                payment_date=str(row[3]),
+                total_amount=float(row[4]),
+                adjustment=float(row[5]),
+                status=row[6]
+            )
+            billing.billing_id=int(row[0])
+            for rowServices in dataServices:
+                if billing.billing_id == rowServices[0]:
+                    billing.add_services(rowServices[1])
+
+            Billings.append(billing)
+        mysql_handler.disconnect()
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+
+###Day_Care_Service###
+
 
 
 ### Services List For Billing###
