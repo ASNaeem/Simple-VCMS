@@ -1,6 +1,6 @@
 from MySQLHandler import MySQLHandler
 import Appointment
-import Animal
+from Animal import Animal
 import Billing
 import Employee
 import Expenses
@@ -19,16 +19,31 @@ def fetch_animals():
         mysql_handler = MySQLHandler(host, user, password)
         mysql_handler.connect()     
         query = "select * from animals"
-        data = mysql_handler.execute_query(query)
-        print(f"Err")
-        for row in data:
-            animal = Animal(row[1], row[2], row[3], row[4], row, [5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13])
-            animal.animal_id(row[0])
-            Animals.append(animal)
+        data = mysql_handler.fetch_data(query)
+        
+        for row in data:        
+            animal = Animal(
+                    animal_name=row[1],
+                    birth_date=str(row[2]),
+                    sterilized=str(row[3]),
+                    gender=row[4],
+                    species=row[5],
+                    breed=row[6],
+                    color=row[7],
+                    behavioral_warning=row[8],
+                    owner_name=row[9],
+                    email=row[10],
+                    phone=row[11],
+                    address=row[12],
+                    reg_date=str(row[13]),
+                    med_condition=row[14])
+        animal.animal_id = int(row[0])
+        print(f"{data}")
+        Animals.append(animal)
         mysql_handler.disconnect()
         print(f"Er")
     except Exception as err:
-        print(f"Error: {err}")
+        print(f"Error Fetching: {err}")
         
 
         
