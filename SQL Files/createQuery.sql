@@ -42,7 +42,7 @@ create table appointments (
              a_status varchar(100)
 );
 drop table if exists expenses;
-create table expenses (expense_id int auto auto_increment primary key,
+create table expenses (expense_id int auto_increment primary key,
 		issuer_id int,
                 handler_id int,               
                 expense_date date;
@@ -88,7 +88,7 @@ Create table day_care (animal_id int,
 drop table if exists billings;
 create table billings (
 	bid int,
-	day_care_id int
+	day_care_id int,
 	aid int,
 	payment_date date,
 	total_amount DECIMAL(8,2),
