@@ -45,15 +45,15 @@ drop table if exists expenses;
 create table expenses (expense_id int auto_increment primary key,
 		issuer_id int,
                 handler_id int,               
-                expense_date date;
+                expense_date date,
                 handle_date date,
                 amount decimal(10,2),
                 justification varchar(100)
 );
-drop table if exists inventorys;
-Create table inventorys (item_id int auto_increment primary key,
+drop table if exists inventory;
+Create table inventory (item_id int auto_increment primary key,
 		name varchar(45),
-                mng_id int            
+                mng_id int,            
                 manufacturer varchar(50),
                 item_type varchar(50),
                 price decimal(10,2),
