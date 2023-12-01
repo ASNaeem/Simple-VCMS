@@ -1,7 +1,10 @@
 create table record (
-	bid INT,
-	aid INT,
-	total_amount DECIMAL(8,2)
+	bid int,
+	day_care_id int
+	aid int,
+	payment_date date,
+	total_amount DECIMAL(8,2),
+	status varchar(10)
 );
 insert into record (bid, aid, total_amount) values (1, 1, 2000.00);
 insert into record (bid, aid, total_amount) values (2, 2, 1000.00);

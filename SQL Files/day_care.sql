@@ -1,10 +1,8 @@
-Create table day_care( dos date,
+Create table day_care( animal_id int,
+		dos date,
                 start_time time,
                 end_time time,
-                s_hours int,
-                penalty_per_hour decimal(10,2),
-                status varchar(50),
-                app_id int);
+                notes TEXT);
 
 insert into day_care (dos, start_time, end_time, s_hours, penalty_per_hour, status, app_id) values ("2023-05-16", "7:42 PM","9:51 PM", 1, 35.95, "At daycare", 1)
 insert into day_care (dos, start_time, end_time, s_hours, penalty_per_hour, status, app_id) values("2023-04-05","4:21 PM","1:15 PM",3, 61.09,"At daycare",2);

@@ -1,8 +1,8 @@
 Create table service( id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2),
-                details varchar(50), 
-                availability boolean);
+                availability boolean, 
+                details varchar(50));
 
 insert into service (id, name, cost, details, availability) values (1,"Rabies Vaccine",1084.8,"scale B2C technologies",No);
 insert into service (id, name, cost, details, availability) values (2,"Flu Vaccine",3233.57,"generate customized initiatives",Yes);
