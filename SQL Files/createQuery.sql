@@ -21,7 +21,7 @@ create table employees (
 	joining_date date
 );
 create table phones (
-	     id int, phone varchar(16) primary key
+	     id int, phone varchar(50) primary key
 );
 create table animals (
 	animal_id int auto_increment primary key,
