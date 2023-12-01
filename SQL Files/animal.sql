@@ -3,7 +3,7 @@ create table animal (
 	animal_id int auto_increment primary key,
 	animal_name varchar(50),
 	birth_date date,
-	sterilized bool,
+	sterilized varchar(5);
 	gender varchar(10),
 	species varchar(50),
 	breed varchar(50),
