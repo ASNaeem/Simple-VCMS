@@ -1,4 +1,4 @@
-https://www.mockaroo.com/
+<https://www.mockaroo.com/>
 file name = class name =  PascalCase
 variable = method = snake_case
 LIBRARY REQUIREMENTS:
@@ -14,19 +14,18 @@ QPlainTextEdit = pte_variable_name
 QPushButton = button_varibale_name
 QDateEdit = date_animal_reg,
 
-Tee: 
+Tee:
    AnimalOwner
    Inventory
    Consumable
    Equipment
-    
+
 Uzo:
     Employee
     Veterinarian
     ❌GeneralStaff
     BillInvoicing
-    
-    
+
 Ahona:
      Animal
      appointment
@@ -34,9 +33,10 @@ Ahona:
 Sajin:
      Person
      Service
-     
+
 Design - Part
 ---------------
+
 Tee:
      Animal Records
      Report & Analytics
@@ -56,7 +56,7 @@ Nemo:
      Setting
 
 MySQL
-     Nemo: 
+     Nemo:
           Employee
           phone
 
