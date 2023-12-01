@@ -15,18 +15,21 @@ class Appointment:
         self.visit_reason = visit_reason
         self.appointment_status = appointment_status
 
-    ### getter, setter########### 
+    ########getter, setter###########
     @property
     def appointment_id(self):
         return self._appointment_id
+
     """
     @appointment_id.setter
     def appointment_id(self, appointment_id: int):
         self._appointment_id = appointment_id
     """
+
     @property
     def animal_id(self):
         return self.animal_id
+
     @animal_id.setter
     def animal_id(self, animal_id: int):
         self._animal_id = animal_id
@@ -34,6 +37,7 @@ class Appointment:
     @property
     def appointment_date(self):
         return self._appointment_date
+
     @appointment_date.setter
     def appointment_date(self, appointment_date: str):
         self._appointment_date = appointment_date
@@ -41,6 +45,7 @@ class Appointment:
     @property
     def appointment_time(self):
         return self._appointment_time
+
     @appointment_time.setter
     def appointment_time(self, appointment_time: str):
         self._appointment_time = appointment_time
@@ -48,6 +53,7 @@ class Appointment:
     @property
     def visit_reason(self):
         return self._visit_reason
+
     @visit_reason.setter
     def visit_reason(self, visit_reason: str):
         self._visit_reason = visit_reason
@@ -55,6 +61,7 @@ class Appointment:
     @property
     def appointment_status(self):
         return self._appointment_status
+
     @appointment_status.setter
     def appointment_status(self, appointment_status: str):
         self._appointment_status = appointment_status
