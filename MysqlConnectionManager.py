@@ -7,4 +7,3 @@ def establish_connection():
     )
     cursor = mydb.cursor()
     cursor.execute("use vcms")
-    return cursor
