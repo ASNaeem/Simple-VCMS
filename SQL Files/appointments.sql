@@ -1,5 +1,5 @@
 create table appointments (
-             id int auto_increment primary key,
+             appointment_id int auto_increment primary key,
              animal_id int,
              a_date date,
              a_time time,

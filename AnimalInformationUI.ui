@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>937</width>
-    <height>714</height>
+    <width>1026</width>
+    <height>754</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -207,6 +207,12 @@
           <property name="sizeAdjustPolicy">
            <enum>QAbstractScrollArea::AdjustToContents</enum>
           </property>
+          <property name="showGrid">
+           <bool>true</bool>
+          </property>
+          <property name="rowCount">
+           <number>0</number>
+          </property>
           <attribute name="horizontalHeaderCascadingSectionResizes">
            <bool>false</bool>
           </attribute>
@@ -214,7 +220,7 @@
            <number>39</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>230</number>
+           <number>250</number>
           </attribute>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>false</bool>
@@ -242,12 +248,12 @@
           </column>
           <column>
            <property name="text">
-            <string>Medical Condition</string>
+            <string>Breed</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Behavioral Warning</string>
+            <string>Color</string>
            </property>
           </column>
           <column>
@@ -258,11 +264,6 @@
           <column>
            <property name="text">
             <string>Phone Number</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Address</string>
            </property>
           </column>
          </widget>
