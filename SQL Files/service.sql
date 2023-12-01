@@ -1,4 +1,4 @@
-Create table services( id int auto_increment primary key, 
+Create table services (id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2),
                 availability boolean, 
