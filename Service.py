@@ -17,7 +17,8 @@ class Service:
       @service_id.setter
       def service_id(self, service_id:int):
          self._service_id = service_id
-      """
+         
+        """
 
         @property
         def name(self):
