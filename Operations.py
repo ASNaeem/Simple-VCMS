@@ -10,9 +10,12 @@ import Veterinarian
 from datetime import date
 ###Animal#
 Animals=[]
+user = "root"
+password = "root"
+host = "localhost"
 def fetch_animals():   
     try:
-        mysql_handler = MySQLHandler()
+        mysql_handler = MySQLHandler(host, user, password)
         mysql_handler.connect()     
         query = "select * from animals"
         data = mysql_handler.execute_query(query)
