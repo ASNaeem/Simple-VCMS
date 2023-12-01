@@ -18,3 +18,5 @@ values ( 1, '2022-12-23', '2023-02-26', 40195, 'reason for the expense was to re
 insert into inventory (name, mng_id, manufacturer, item_type, price, amount) 
 values (1,"Carprofen","Rimadyl","Tablet",1606.47,61);
 insert into records (id, record, rdate) values (1, 'Got bit by a cat in the leg.', '2023-01-31');
+
+insert into bill_services(bid, service_id) values(1, 1);
