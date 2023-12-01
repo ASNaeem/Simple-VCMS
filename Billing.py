@@ -5,7 +5,9 @@ class Bill:
         self.appointment_id = appointment_id
         self.payment_date = payment_date
         self.total_amount = total_amount
+        #self.service_id = []
     
+    ########getter, setter###########
     @property
     def billing_id(self):
         return self._billing_id

@@ -24,7 +24,7 @@ class Employee:
         self.salary = salary
         self.joining_date = joining_date
 
-    ### getter, setter########### 
+    ########getter, setter########### 
     @property
     def employee_id(self):
         return self._employee_id

@@ -86,11 +86,11 @@ MySQL
           Tamanna
                Animal
                Inventory
+               Service
 
           UZO:
                Appointment
                Employee
                Veterinarian
-               Service
                Billing
                Expenses

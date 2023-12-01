@@ -4,7 +4,7 @@ class Veterinarian(Employee):
         self.total_cases = total_cases
         self.specialization = specialization
         
-    ### getter, setter########### 
+    ########getter, setter########### 
     @property
     def total_cases(self):
         return self._total_cases
