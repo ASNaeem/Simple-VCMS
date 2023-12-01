@@ -73,6 +73,8 @@ def add_employee(name: str, email: str, password: str, address: str, access_leve
     try:
         new_employee = Employee(name, email, password, address, access_level,working_hours, designation, salary, joining_date, phone)
         Employee.append(new_employee)
+<<<<<<< HEAD
+
         query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
         data  = values(name, email, password, address, designation, access_level, working_hours, salary, joining_date)
         mysql_handler.execute_query(query, data)
@@ -90,7 +92,16 @@ def add_employee(name: str, email: str, password: str, address: str, access_leve
         return "Entry Failed!"
     finally:
         mysql_handler.disconnect()
-
+=======
+        mysql.connect()
+        que = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date)"
+        data  = f"values({name, email, password, address, designation, access_level, working_hours, salary, joining_date});"
+        query(que, data)
+        que = "insert into phone (id, phone_number)"
+        data = f"values({id, phone});"
+    except:
+        ...
+>>>>>>> 68457789be82d1484413a06064c8946190bf3d92
     
 ### Services List For Billing###
 Services = []
