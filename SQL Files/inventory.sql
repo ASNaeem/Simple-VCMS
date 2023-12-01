@@ -6,7 +6,7 @@ Create table inventory (item_id int auto_increment primary key,
                 price decimal(10,2),
                 amount int
                 );
-insert into inventory (name, mng_id, manufacturer, item_type, price, amount) values (1,"Carprofen","Rimadyl","Tablet",1606.47,61);
+insert into inventory (mng_id, name, manufacturer, item_type, price, amount) values (1,"Carprofen","Rimadyl","Tablet",1606.47,61);
 insert into inventory (mng_id, name, manufacturer, item_type, price, amount) values (2,"Clavamox","Clavulanic Acid","Tablet",970.05,9);
 insert into inventory (mng_id, name, manufacturer, item_type, price, amount) values (3,"Baytril","Enrofloxacin","Tablet",1474.47,77);
 insert into inventory (mng_id, name, manufacturer, item_type, price, amount) values (4,"Metacam","Meloxicam","Injection",2290.18,7);
