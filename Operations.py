@@ -72,16 +72,27 @@ Employee = []
 def add_employee(name: str, email: str, password: str, address: str, access_level: int,
                 working_hours: str, designation: str, salary: float, joining_date: str, phone:str = []):
     try:
-        new_employee = Employee(name, email, password, address, access_level,working_hours, designation, salary, joining_date, phone)
+        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler.connect()
+        new_employee = Employee(name, email, password, address, access_level, working_hours, designation, salary, joining_date, phone)
         Employee.append(new_employee)
-        db_handler = MySQLHandler()
-        que = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date)"
-        data  = f"values({name, email, password, address, designation, access_level, working_hours, salary, joining_date});"
-        query(que, data)
-        que = "insert into phone (id, phone_number)"
-        data = f"values({id, phone});"
-    except:
-        ...
+
+        query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
+        data  = values(name, email, password, address, designation, access_level, working_hours, salary, joining_date)
+        mysql_handler.execute_query(query, data)
+        query = "insert into phone (id, phone_number) values(%s, %s);"
+        query_fetch_id = "select id from employee order by id desc limit 1;"
+        row = mysql_handler.fetch_data(query_fetch_id)
+        id = row[0]
+        #data = values(row[0][0], phone)
+        data1 = values(id, phone[0])
+        data2 = values(id, phone[1])
+        mysql_handler.execute_query(query, data1)
+        mysql_handler.execute_query(query, data2)
+    except Exception as err: 
+        print(f"Error: {err}")
+    finally:
+        mysql_handler.disconnect()
     
 ### Services List For Billing###
 Services = []
