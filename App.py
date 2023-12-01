@@ -163,6 +163,12 @@ class MainApp(QMainWindow):
         with open("config.txt", "w") as f:
             f.write(self.page_setting.comboBox_themes.currentText())
 
+
+## Animal ##
+    def set_animal_table(self):
+        table = self.page_animal_info.table_animal
+        
+
 ################### Appointment ##################
     def make_appointment(self):     
         apt = self.page_appointment_create
@@ -184,7 +190,7 @@ class MainApp(QMainWindow):
         birth = apt.date_appt_birth.selectedDate()
         reg_date = apt.date_appt_reg.selectedDate()
         name = first_name + " " +last_name
-        op.add_appointment_db(date, time, reason, name, phone, address, animal_name, species, breed,
+        op.add_appointment(date, time, reason, name, phone, address, animal_name, species, breed,
                               color, behaviour, birth, reg_date)
         def populate_appointment(self):
             
