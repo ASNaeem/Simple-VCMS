@@ -280,11 +280,6 @@
           </column>
           <column>
            <property name="text">
-            <string>Veterinarian Name</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
             <string>Owner Name</string>
            </property>
           </column>

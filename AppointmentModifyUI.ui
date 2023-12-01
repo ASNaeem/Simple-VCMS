@@ -706,7 +706,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Delete</string>
+           <string>Cancel Appointment</string>
           </property>
          </widget>
         </item>

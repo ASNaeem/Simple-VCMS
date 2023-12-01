@@ -84,7 +84,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <layout class="QGridLayout" name="gridLayout_new_animal" rowstretch="0,0,0,0,0,0,0,0,0" columnstretch="4,0,0">
+           <layout class="QGridLayout" name="gridLayout_new_animal" rowstretch="0,0,0,0,0,0,0,0,0" columnstretch="4,0">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -293,7 +293,7 @@
          </spacer>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_Day_care" rowstretch="0,0,0,0,0,0" columnstretch="4,0,0">
+         <layout class="QGridLayout" name="gridLayout_Day_care" rowstretch="0,0,0,0,0,0" columnstretch="4,0">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -612,7 +612,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Cell Phone</string>
+             <string>Phone Number</string>
             </property>
            </widget>
           </item>
@@ -625,7 +625,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Email (Optional)</string>
+             <string>Email Address</string>
             </property>
            </widget>
           </item>

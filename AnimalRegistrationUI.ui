@@ -750,7 +750,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Birth Date</string>
+               <string>Date of Birth</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

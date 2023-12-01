@@ -874,12 +874,12 @@
            </column>
            <column>
             <property name="text">
-             <string>Personal Contact</string>
+             <string>Phone (Personal)</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Home</string>
+             <string>Phone (Home)</string>
             </property>
            </column>
            <column>
