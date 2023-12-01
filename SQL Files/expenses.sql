@@ -1,6 +1,6 @@
-Create table expenses( expense_id int auto auto_increment primary key,
-                handler_id int,
-                issuer_id int,
+Create table expenses (expense_id int auto auto_increment primary key,
+		issuer_id int,
+                handler_id int,               
                 expense_date date;
                 handle_date date,
                 amount decimal(10,2),

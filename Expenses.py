@@ -1,7 +1,7 @@
 class Expenses:
     def __init__(self, handler_id:int, expense_date:str, handle_date:str, amount:float, justification:str):
-        self.issuer_id = None
         self.expense_id= None
+        self.issuer_id = None
         self.handler_id = handler_id
         self.expense_date = expense_date
         self.handle_date = handle_date
