@@ -68,7 +68,7 @@ Create table services (service_id int auto_increment primary key,
                 name varchar(45),
                 cost decimal(10,2),
 		service_details varchar(50),
-                service_availability varchar(5) 
+                service_availability varchar(10) 
                 
 );
 create table veterinarians (
