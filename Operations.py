@@ -4,7 +4,7 @@ import Animal
 import Billing
 import Employee
 import Expenses
-import Inventory
+import Item
 import Service
 import Veterinarian
 from datetime import date
@@ -75,7 +75,31 @@ Services = []
 
 
 
-###### Inventory#####
-Inventory =[]
+###### Item add and delete #####
+Items =[]
 
-def add_inventory ():...
+def add_item (mng_id:int, name:str,manufacturer:str, item_type:str, price:float, amount:int):
+
+    try:
+        new_item = Item(mng_id,name,manufacturer,item_type,price,amount)
+        Items.append(new_item)
+        mysql.connect()
+        que ="insert into item (mng_id,name, manufacturer, item_type,price,amount)"
+        data = f"values({mng_id,name, manufacturer, item_type,price,amount})"
+        query (que+data)
+        mysql.close()
+        return "Entry success"
+    except Exception as err:
+         return "Entry failed"
+
+def remove_item (id:int):
+    try:
+        for item in Items:
+            if id == item.id:
+               mysql.connect()
+               run_query(f"Delete from item where id= {item.id}")
+               Items.remove(item)
+               mysql.close()
+               return "Delete success!"
+    except Exception as err:
+        print(f"Error: {err}")
