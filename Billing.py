@@ -1,18 +1,28 @@
+import Operations as op
+
+service_id_input = input()
+
 class Bill:
     def __init__(self, 
                 day_care_id:int, 
                 appointment_id:int, 
                 payment_date:str, 
                 total_amount:float, 
-                services:int = none):
+                services:int = None,
+                status:str = "Due"):
         self.billing_id = None
         self.day_care_id = day_care_id
         self.appointment_id = appointment_id
         self.payment_date = payment_date
         self.total_amount = total_amount
-        #self.service_id = []
+        self.status = status
+        self.services = []
     
     ########getter, setter###########
+    def add_services(self, service_id_input:int):
+        #if service_id_input in op.Services
+        ...
+    
     @property
     def billing_id(self):
         return self._billing_id
@@ -44,3 +54,10 @@ class Bill:
     @payment_date.setter
     def payment_date(self, payment_date:str):
         self._payment_date = payment_date
+
+    @property
+    def status(self):
+        return self._status
+    @status.setter
+    def status(self, status:str):
+        self._status = status

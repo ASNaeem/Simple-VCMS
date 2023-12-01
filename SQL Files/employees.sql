@@ -1,3 +1,4 @@
+-- SQLBook: Code
 insert into employees (employee_id, name, designation, email, address, access_level, password) values (1, 'Jessica Scoggins', 'Manager', 'jscoggins0@eventbrite.com', 'Apt 1306', 4, 'e2499');
 insert into employees (employee_id, name, designation, email, address, access_level, password) values (2, 'Madonna Heigold', 'Nurse', 'mheigold1@sbwire.com', 'PO Box 11084', 3, 'k2377');
 insert into employees (employee_id, name, designation, email, address, access_level, password) values (3, 'Valaria Purchase', 'Nurse', 'vpurchase2@tripod.com', '11th Floor', 4, 'c3069');

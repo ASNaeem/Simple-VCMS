@@ -1,4 +1,4 @@
-class Inventory:
+class Item:
     def __init__(self, manager_id:int, name:str, 
                 manufacturer:str, item_type:str, price:float, amount:int):
         self.item_id = None

@@ -1,38 +1,26 @@
 -- SQLBook: Code
 create table animal (
-	id INT,
-	name VARCHAR(50),
-	reg_date DATE,
-	species VARCHAR(10),
-	breed TEXT,
-	color VARCHAR(50),
-	gender VARCHAR(6),
-	birth_date DATE,
-	sterilized VARCHAR(3),
-	current_condition VARCHAR(7),
-	behavioral_warning TEXT,
-	oname VARCHAR(50),
-	email VARCHAR(50),
-	phone VARCHAR(50),
-	address VARCHAR(50)
+	animal_id INT auto_increment primary key,
+	animal_name varchar(50),
+	birth_date date,
 );
+animal_name:str, 
+birth_date:str,
+sterilized:bool, 
+gender:str, 
+species:str, 
+breed:str, 
+color:str, 
+behavioral_warning:str, 
+owner_name:str, 
+email:str, 
+phone:str, 
+address:str, 
+reg_date:str, 
+med_condition:str = None
+
 insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (1, 'Ruby', '2022-03-14', 'Rabbit', 'Dutch Rabbit', 'Brown', 'male', '2020-03-16', 'yes', 'injured', 'Gets aggresive if someone tries to hold for a long period of time. Might bite.', 'Valera Schleicher', 'vschleicher0@upenn.edu', '+7-555-802-2801', '549 Center Hill');
 insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (2, 'Sky', '2023-08-10', 'Bird', 'Parrot', 'Green', 'female', '2020-04-10', 'no', 'healthy', 'Pecks.', 'Niven Synan', 'nsynan1@earthlink.net', '+352-586-400-3477', '728 Rusk Circle');
 insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (3, 'Clay', '2023-11-25', 'Cat', 'Local Breed', 'Jet Black', 'male', '2022-05-28', 'no', 'injured', 'Good Boy.', 'Tamanna K', 'tamannak@gmail.com', '01827453830', 'Rajabari, Genda, Savar');
 insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (4, 'Oreo', '2023-10-07', 'cat', 'Persian', 'Brown, White, Black Mixed', 'female', '2018-12-30', 'no', 'healthy', 'None.', 'Jesse Adamolli', 'jadamolli3@vk.com', '+86-216-370-8399', '2531 Bultman Court');
 insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (5, 'Nugget', '2022-08-23', 'chicken', 'Silkie', 'Brown-Black', 'female', '2022-01-02', 'no', 'unhealthy', 'None', 'Gracie Wyper', 'gwyper4@simplemachines.org', '+351-321-443-3930', '3011 Bellgrove Court');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (6, 'Emu', '2023-04-21', 'dog', 'dictumst etiam', 'Khaki', 'female', '2023-03-15', 'no', 'injured', 'Fusce consequat. Nulla nisl. Nunc nisl.', 'Obed Banane', 'obanane5@mediafire.com', '+380-590-765-4761', '8 Laurel Hill');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (7, 'Tenrec, tailless', '2022-05-20', 'cat', 'sociis natoque penatibus et magnis dis parturient', 'Puce', 'male', '2012-04-08', 'no', 'healthy', 'In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl.', 'Massimiliano Pendell', 'mpendell6@exblog.jp', '+51-666-298-9860', '086 Bonner Center');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (8, 'Tsessebe', '2023-09-17', 'cow', 'arcu libero rutrum ac lobortis vel', 'Orange', 'male', '2021-01-29', 'no', 'injured', 'Vivamus vestibulum sagittis sapien.', 'Emiline Sharram', 'esharram7@narod.ru', '+46-810-432-8429', '53850 Linden Crossing');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (9, 'Black-crowned crane', '2023-12-01', 'fish', 'libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer', 'Red', 'female', '2016-06-07', 'no', 'healthy', 'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'Isabelita Willison', 'iwillison8@dropbox.com', '+62-465-956-3370', '1 Moose Point');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (10, 'Spoonbill, white', '2022-10-03', 'cat', 'felis ut at dolor quis', 'Yellow', 'male', '2020-04-16', 'no', 'injured', 'Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', 'Rori Ascroft', 'rascroft9@economist.com', '+46-911-446-1515', '1789 Tomscot Point');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (11, 'Margay', '2023-09-24', 'rabbit', 'turpis eget elit', 'Khaki', 'female', '2023-10-31', 'no', 'healthy', 'Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.', 'Delcina Troctor', 'dtroctora@youtube.com', '+385-164-117-4070', '0115 Oneill Point');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (12, 'Common eland', '2023-07-21', 'fish', 'at turpis a pede posuere nonummy integer non', 'Fuscia', 'female', '2017-05-09', 'no', 'injured', 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.', 'Lev McCartney', 'lmccartneyb@jugem.jp', '+86-192-702-3528', '6 Michigan Junction');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (13, 'American racer', '2022-11-20', 'cow', 'tristique fusce congue diam id ornare imperdiet sapien urna pretium nisl', 'Blue', 'male', '2014-09-09', 'yes', 'injured', 'Nullam molestie nibh in lectus. Pellentesque at nulla.', 'Georgi Barnsley', 'gbarnsleyc@bizjournals.com', '+249-949-721-7279', '5552 Express Court');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (14, 'Caribou', '2023-07-22', 'dog', 'amet sem fusce', 'Puce', 'female', '2022-07-22', 'yes', 'healthy', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.', 'Simmonds Sherrell', 'ssherrelld@bigcartel.com', '+47-867-263-8018', '61534 Farwell Terrace');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (15, 'Stork, marabou', '2023-09-04', 'fish', 'pretium nisl ut volutpat sapien arcu', 'Puce', 'female', '2011-03-14', 'no', 'healthy', 'Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.', 'Seumas Dulinty', 'sdulintye@privacy.gov.au', '+351-133-464-8614', '86555 Moland Circle');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (16, 'Gecko, ring-tailed', '2023-06-17', 'chicken', 'nisl', 'Fuscia', 'female', '2012-12-14', 'yes', 'sick', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum.', 'Kirsti Choppin', 'kchoppinf@dailymail.co.uk', '+86-235-967-1694', '3 Junction Place');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (17, 'Vulture, bengal', '2023-06-21', 'cow', 'risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie', 'Khaki', 'female', '2016-05-26', 'no', 'sick', 'Nam nulla.', 'Kelci Bosket', 'kbosketg@ning.com', '+86-852-854-0713', '52 Warner Alley');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (18, 'Coqui francolin', '2022-02-28', 'chicken', 'habitasse platea', 'Purple', 'male', '2022-01-09', 'no', 'sick', 'Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla.', 'Lolita Cheetham', 'lcheethamh@yahoo.co.jp', '+261-955-997-0877', '4 Golden Leaf Junction');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (19, 'Snake, buttermilk', '2022-02-19', 'chicken', 'vivamus vestibulum sagittis sapien cum sociis', 'Puce', 'male', '2016-06-10', 'no', 'healthy', 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius.', 'Mac Gouinlock', 'mgouinlocki@ocn.ne.jp', '+7-654-853-2137', '2 Eliot Court');
-insert into animal (id, name, reg_date, species, breed, color, gender, birth_date, sterilized, current_condition, behavioral_warning, oname, email, phone, address) values (20, 'Dragon, ornate rock', '2023-03-08', 'cow', 'tellus semper interdum mauris', 'Orange', 'female', '2015-07-27', 'yes', 'injured', 'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat.', 'Sunshine Michelet', 'smicheletj@sciencedaily.com', '+63-648-814-9931', '198 American Center');

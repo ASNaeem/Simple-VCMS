@@ -6,6 +6,7 @@ import warnings
 import os 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 import Operations as op
+
 warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
@@ -167,7 +168,11 @@ class MainApp(QMainWindow):
 ## Animal ##
     def set_animal_table(self):
         table = self.page_animal_info.table_animal
+        op.Animals = self.fetch_animals_from_database()
+        for row, animal in enumerate(op.Animals):
+            self.add_animal_to_table(row,animal)
         
+    
 
 ################### Appointment ##################
     def make_appointment(self):     
