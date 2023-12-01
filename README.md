@@ -6,6 +6,7 @@ pip install PyQt5
 pip install qt5_tools
 pip install qt_material
 pip install MySQL-python
+pip install mysql-connector-python
 
 QLineEdit = line_variable_name
 QTableWidget = table_table_name

@@ -1,4 +1,4 @@
-import MySQLHandler
+from MySQLHandler import MySQLHandler
 import Appointment
 import Animal
 import Billing
@@ -6,26 +6,31 @@ import Employee
 import Expenses
 import Item
 import Service
-import Veterinarian
+#import Veterinarian
 from datetime import date
 ###Animal#
-Animals=[]
+Animals:Animal=[]
 user = "root"
 password = "root"
 host = "localhost"
 def fetch_animals():   
+    
     try:
         mysql_handler = MySQLHandler(host, user, password)
         mysql_handler.connect()     
         query = "select * from animals"
         data = mysql_handler.execute_query(query)
+        print(f"Err")
         for row in data:
             animal = Animal(row[1], row[2], row[3], row[4], row, [5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13])
             animal.animal_id(row[0])
             Animals.append(animal)
+        mysql_handler.disconnect()
+        print(f"Er")
     except Exception as err:
         print(f"Error: {err}")
-    finally: mysql.close()
+        
+
         
 def add_animal(animal_name:str, birth_date:str, 
                     sterilized:bool, gender:str, species:str, breed:str, 
@@ -73,9 +78,13 @@ def add_employee(name: str, email: str, password: str, address: str, access_leve
     try:
         new_employee = Employee(name, email, password, address, access_level,working_hours, designation, salary, joining_date, phone)
         Employee.append(new_employee)
-
+        
         query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
         data  = values(name, email, password, address, designation, access_level, working_hours, salary, joining_date)
+        
+        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler.connect()
+        
         mysql_handler.execute_query(query, data)
         query = "insert into phone (id, phone_number) values(%s, %s);"
         query_fetch_id = "select id from employee order by id desc limit 1;"

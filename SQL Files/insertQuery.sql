@@ -20,3 +20,5 @@ insert into records (id, record, rdate) values (1, 'Got bit by a cat in the leg.
 insert into services (name, cost, details, availability) 
 values ("Rabies Vaccine",1084.8,"scale B2C technologies","No");
 insert into bill_services (bid, service_id) values (1,1);
+
+insert into bill_services(bid, service_id) values(1, 1);

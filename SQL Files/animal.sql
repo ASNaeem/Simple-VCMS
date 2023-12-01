@@ -17,9 +17,9 @@ create table animals (
 	med_condition TEXT
 );
 
-insert into animals (animals_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
+insert into animals (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
 					owner_name, email, phone, address, reg_date, med_condition) 
-values ('Ruby', '2020-03-16', 'yes', 'male', 'Rabbit', 'Dutch Rabbit', 'Brown', 'Gets aggresive if someone tries to hold for a long period of time. Might bite.', 
+values ('Ruby', '2020-03-16', 1, 'male', 'Rabbit', 'Dutch Rabbit', 'Brown', 'Gets aggresive if someone tries to hold for a long period of time. Might bite.', 
 		'Valera Schleicher', 'vschleicher0@upenn.edu', '+7-555-802-2801', '549 Center Hill', '2022-03-14', 'injured');
 insert into animals (animals_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, 
 					owner_name, email, phone, address, reg_date, med_condition) 
