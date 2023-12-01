@@ -21,7 +21,8 @@ class Animal:
         self.address = address
         self.medical_records:str = []
 
-
+    def __str__(self):
+        return f"{self.animal.name}"
     def add_record(self, diagnosis:str):
         current_date = date.today()
         record = {"Date":current_date,"Record":diagnosis}

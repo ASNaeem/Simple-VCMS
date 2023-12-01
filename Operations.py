@@ -11,9 +11,9 @@ import Service
 from datetime import date
 
 ###Animal#
-Animals: Animal = []
+Animals = []
 user = "root"
-password = ""
+password = "root"
 host = "localhost"
 
 
@@ -41,9 +41,8 @@ def fetch_animals():
                 reg_date=str(row[13]),
                 med_condition=row[14],
             )
-        animal.animal_id = int(row[0])
-        print(f"{data}")
-        Animals.append(animal)
+            animal.animal_id = int(row[0])
+            Animals.append(animal)
         mysql_handler.disconnect()
         print(f"Er")
     except Exception as err:
