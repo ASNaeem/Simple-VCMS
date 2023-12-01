@@ -1,4 +1,3 @@
--- SQLBook: Code
 create table animals (
 	animals_id int auto_increment primary key,
 	animals_name varchar(50),
