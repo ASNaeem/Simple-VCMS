@@ -1,3 +1,5 @@
+create database if not exists VCMS;
+use VCMS;
 /* animal */
 create table animals (
 	animals_id int auto_increment primary key,
@@ -68,11 +70,11 @@ create table billings (
 	adjustment DECIMAL(8,2),
 	status varchar(10) DEFAULT "Due"
 );
-insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (1, 1, "", 1500.00, 300.00, "Due");
-insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (2, 2, "", 1000.00, 550.00, "Paid");
-insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (3, 3, "", 1800.00, 280.00, "Due");
-insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (4, 4, "", 1500.00, 650.00,"Paid");
-insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (5, 5, "", 1000.00, 100.00,"Paid");
+insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (1, 1, "2022-01-21", 1500.00, 300.00, "Due");
+insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (2, 2, "2021-05-30", 1000.00, 550.00, "Paid");
+insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (3, 3, "2022-12-11", 1800.00, 280.00, "Due");
+insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (4, 4, "2020-04-11", 1500.00, 650.00,"Paid");
+insert into billings ( day_care_id, aid, payment_date, total_amount, adjustment, status) values (5, 5, "2020-10-12", 1000.00, 100.00,"Paid");
 
 /* day_care*/
 Create table day_care (day_care_id int auto_increment  primary key,
@@ -95,7 +97,7 @@ insert into day_care (animal_id, dos, start_time, end_time, notes) values (9, '2
 insert into day_care (animal_id, dos, start_time, end_time, notes) values (10, '2020-12-26', "12:00", "14:00", 'allergic to egg');
 
 /* employee */
-create table employees (id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(10), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date);
+create table employees (id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(50), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date);
 
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022-09-23');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Korey MacCaull', 'kmaccaull1@multiply.com', 'lU6{)3gfw', '25 Hoard Terrace', 'Manager', 3, '7am - 3pm', 45196.66, '2022-06-04');
@@ -145,7 +147,7 @@ insert into inventory (name, manufacturer, item_type, price, amount) values ("Pa
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Revolution","Burt's Bees","lotion",2912.56,17);
 
 /* phone */
-create table phone(animal_id int, phone varchar(16) primary key);
+create table phone (animal_id int, phone varchar(50) primary key);
 
 insert into phone (animal_id, phone) values (2, '+880-155-550-7452');
 insert into phone (animal_id, phone) values (2, '+880-155-555-8888');
@@ -187,7 +189,7 @@ insert into record (animal_id, record, rdate) values (10, 'Cras in purus eu magn
 Create table services( service_id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2), 
-                service_details varchar(50),
+                service_details text,
                 service_availability varchar(10));
 
 insert into services (name, cost, service_details, service_availability) values ('Regular Checkup', 500, 'Routine examination to monitor and maintain pet health.', 'Yes');
