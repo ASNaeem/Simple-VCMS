@@ -11,8 +11,7 @@ insert into phone (animal_id, phone) values (1, '+880-115-552-5559');
 insert into veterinarians (employee_id, totalcase, specialization) 
 values (1, 6, 'Veterinary Dermatologist');
 insert into day_care (dos, start_time, end_time, notes) values ("2023-05-16", "7:42","9:51", "allergic to nut");
-insert into billings (bid, day_care_id, aid, payment_date, total_amount, status) 
-values (1, 1, 1, "2023-04-01", 2000.00, "Paid");
+insert into billings (bid, day_care_id, aid, payment_date, total_amount, adjustment, status) values (1, 1, "", 1500.00, 300.00, "Due");
 insert into expenses (handler_id, expense_date, handle_date, amount, justification) 
 values ( 1, '2022-12-23', '2023-02-26', 40195, 'reason for the expense was to repair the x-ray machine');
 insert into inventory (name, mng_id, manufacturer, item_type, price, amount) 
