@@ -90,7 +90,7 @@ Create table day_care (day_care_id int auto_increment  primary key,
 );
 create table billings (
 	bid int auto_increment primary key,
-	day_care_id int
+	day_care_id int,
 	aid int,
 	payment_date date,
 	total_amount DECIMAL(8,2),
