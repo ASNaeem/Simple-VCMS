@@ -1,8 +1,6 @@
 import Operations as op
 from datetime import date
 
-#service_id_input = input()
-
 class Bill:
     def __init__(self, 
                 day_care_id:int, 
@@ -10,7 +8,6 @@ class Bill:
                 payment_date:str, 
                 total_amount:float, 
                 adjustment:float,
-                services:int = None,
                 status:str = "Due"):
         self.billing_id = None
         self.day_care_id = day_care_id
@@ -22,7 +19,7 @@ class Bill:
         self.services = []
     
     ########getter, setter###########
-    def add_services(self, service_id_input:int):
+    def add_services(self, service_id:int):
         self.services.append(service_id)
         ...
     

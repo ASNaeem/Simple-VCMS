@@ -215,7 +215,8 @@ class MainApp(QMainWindow):
         fetch_billings()
         for row, billing in enumerate(Billings):
             self.add_billing_to_table(row,billing)
-            for rowService, service in enumerate(billing.services):
+            service_details = get_service_details(billing.services, Services)
+            for rowService, service in enumerate(service_details):
                 self.add_billing_service_to_service_table(rowService,service)
 
     def add_billing_to_table(self, row, billing):
@@ -237,6 +238,9 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 6, QTableWidgetItem(billing.status))
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+    
+    def get_service_details(self, service_ids,services):
+        return [service for service in services if service.service_id in service_ids]
 
     def add_billing_service_to_service_table(self, rowService,service):
         header = self.page_billing.table_show_service.horizontalHeader()
@@ -244,15 +248,15 @@ class MainApp(QMainWindow):
 
         table=self.page_billing.table_show_service
 
-        table.setItem(rowService, 0, QTableWidgetItem(billing.service_id))
+        table.setItem(rowService, 0, QTableWidgetItem(service.service_id))
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
 
-        if billing.service_id == Services.service_id:
-            table.setItem(rowService, 1, QTableWidgetItem(Services.name))
-            header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        table.setItem(rowService, 1, QTableWidgetItem(service.name))
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 
-            table.setItem(rowService, 2, QTableWidgetItem(Services.cost))
-            header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        table.setItem(rowService, 2, QTableWidgetItem(service.cost))
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+                
 
 ################### Appointment ##################
     def make_appointment(self):     
