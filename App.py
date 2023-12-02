@@ -5,7 +5,7 @@ from qt_material import apply_stylesheet, list_themes
 import warnings
 import os 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
-from Operations import Animals, fetch_animals, Billing, fetch_billings
+from Operations import Animals, fetch_animals, Billings, fetch_billings
 #warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
@@ -91,7 +91,7 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         #self.change_theme()
         self.set_animal_table()
-        set_bill_table()
+        self.set_bill_table()
 
 ##################### Page switching#####################
     def show_daycare(self):
