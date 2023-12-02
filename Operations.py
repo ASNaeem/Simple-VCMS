@@ -1,22 +1,21 @@
 from MySQLHandler import MySQLHandler
 import Appointment
 from Animal import Animal
-from Billing import Bill
+import Billing
 import Employee
 import Expenses
 import Item
 import Service
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
-
 # import Veterinarian
 from datetime import date
 
 ###Animal#
-Animals:Animal = []
+Animals = []
+user = "root"
+password = "root"
+host = "localhost"
+
 
 def fetch_animals():
     try:
@@ -43,14 +42,6 @@ def fetch_animals():
                 med_condition=row[14],
             )
             animal.animal_id = int(row[0])
-            #query = "select * from records where animal_id = %s"
-            #value = animal.animal_id
-            #data = mysql_handler.fetch_data(query, value)
-            """
-            for rec in data:
-                print(rec)               
-                animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
-            """
             Animals.append(animal)
         mysql_handler.disconnect()
         print(f"Er")
@@ -120,7 +111,6 @@ def add_animal(
 
 
 def delete_animal(id: int):
-    mysql = MySQLHandler(host, user, password, port)
     try:
         for animal in Animals:
             if id == animal.id:
@@ -216,37 +206,6 @@ def add_employee(
     finally:
         mysql_handler.disconnect()
 
-### Billing ####
-Billings = []
-def fetch_billings():
-    try:
-        mysql_handler = MySQLHandler(host, user, password, port)
-        mysql_handler.connect()
-        query = "select * from billings"
-        data = mysql_handler.fetch_data(query)
-        query = "select * from bill_services"
-        dataServices = mysql_handler.connect()
-
-        for row in data:
-            billing = Bill(
-                day_care_id=int(row[1]),
-                appointment_id=int(row[2]),
-                payment_date=str(row[3]),
-                total_amount=float(row[4]),
-                adjustment=float(row[5]),
-                status=row[6]
-            )
-            billing.billing_id=int(row[0])
-            """
-            for rowServices in dataServices:
-                if billing.billing_id == rowServices[0]:
-                    billing.add_services(rowServices[1])
-            """
-            Billings.append(billing)
-        mysql_handler.disconnect()
-    except Exception as err:
-        print(f"Error Fetching: {err}")
-
 
 ### Services List For Billing###
 Services = []
@@ -255,39 +214,18 @@ Services = []
 ###### Item add and delete #####
 Items = []
 
-def fetch_items():
-    try:
-        mysql_handler = MySQLHandler(host, user, password)
-        mysql_handler.connect()
-        query = "select * from inventory"
-        data = mysql_handler.fetch_data(query)
 
-        for row in data:
-            item = Item(
-                name=row[1],
-                manufacturer=str(row[2]),
-                item_type=str(row[3]),
-                price =row[4],
-                amount=row[5],
-            
-            )
-            item.item_id = int(row[0])
-            Items.append(item)
-        mysql_handler.disconnect()
-        print(f"Er")
-    except Exception as err:
-        print(f"Error Fetching: {err}")
 def add_item(
-     name: str, manufacturer: str, item_type: str, price: float, amount: int
+    mng_id: int, name: str, manufacturer: str, item_type: str, price: float, amount: int
 ):
     try:
-        new_item = Item(name, manufacturer, item_type, price, amount)
+        new_item = Item(mng_id, name, manufacturer, item_type, price, amount)
         Items.append(new_item)
-        query = "insert into item (name, manufacturer, item_type,price,amount)"
-        values = (name, manufacturer, item_type,price,amount)
-        mysql_handler = MySQLHandler()
-        mysql_handler.connect()
-        mysql_handler.execute_query(query, values)
+        mysql.connect()
+        que = "insert into item (mng_id,name, manufacturer, item_type,price,amount)"
+        data = f"values({mng_id,name, manufacturer, item_type,price,amount})"
+        query(que + data)
+        mysql.close()
         return "Entry success"
     except Exception as err:
         return "Entry failed"
