@@ -91,7 +91,7 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         #self.change_theme()
         self.set_animal_table()
-        self.set_bill_table()
+        #self.set_bill_table()
 
 ##################### Page switching#####################
     def show_daycare(self):

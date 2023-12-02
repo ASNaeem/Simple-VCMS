@@ -16,7 +16,7 @@ port = 3306
 from datetime import date
 
 ###Animal#
-Animals = []
+Animals:Animal = []
 
 def fetch_animals():
     try:
@@ -24,8 +24,6 @@ def fetch_animals():
         mysql_handler.connect()
         query = "select * from animals"
         data = mysql_handler.fetch_data(query)
-        query = "select * from records" 
-        dataRecords = mysql_handler.fetch_data(query)
 
         for row in data:
             animal = Animal(
@@ -45,10 +43,14 @@ def fetch_animals():
                 med_condition=row[14],
             )
             animal.animal_id = int(row[0])
-            for rowRecords in dataRecords:
-                if animal.animal_id == rowRecords[0]:
-                    animal.add_record()
-
+            #query = "select * from records where animal_id = %s"
+            #value = animal.animal_id
+            #data = mysql_handler.fetch_data(query, value)
+            """
+            for rec in data:
+                print(rec)               
+                animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
+            """
             Animals.append(animal)
         mysql_handler.disconnect()
     except Exception as err:
