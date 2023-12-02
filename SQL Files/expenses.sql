@@ -1,7 +1,7 @@
-Create table expenses (expense_id int auto auto_increment primary key,
+Create table expenses (expense_id int  auto_increment primary key,
 		issuer_id int,
                 handler_id int,               
-                expense_date date;
+                expense_date date,
                 handle_date date,
                 amount decimal(10,2),
                 justification varchar(100));

@@ -26,7 +26,10 @@ class Bill:
     @property
     def billing_id(self):
         return self._billing_id
-
+    @billing_id.setter
+    def billing_id(self, billing_id:int):
+        self._billing_id = billing_id
+        
     @property
     def day_care_id(self):
         return self._day_care_id
