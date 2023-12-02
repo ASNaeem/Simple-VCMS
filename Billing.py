@@ -1,6 +1,5 @@
 import Operations as op
-
-#service_id_input = input()
+from datetime import date
 
 class Bill:
     def __init__(self, 
@@ -8,19 +7,20 @@ class Bill:
                 appointment_id:int, 
                 payment_date:str, 
                 total_amount:float, 
-                services:int = None,
+                adjustment:float,
                 status:str = "Due"):
         self.billing_id = None
         self.day_care_id = day_care_id
         self.appointment_id = appointment_id
         self.payment_date = payment_date
         self.total_amount = total_amount
+        self.adjustment = adjustment
         self.status = status
         self.services = []
     
     ########getter, setter###########
-    def add_services(self, service_id_input:int):
-        #if service_id_input in op.Services
+    def add_services(self, service_id:int):
+        self.services.append(service_id)
         ...
     
     @property
@@ -47,6 +47,13 @@ class Bill:
     @total_amount.setter
     def total_amount(self, total_amount:float):
         self._total_amount = total_amount
+
+    @property
+    def adjustment(self):
+        return self._adjustment
+    @adjustment.setter
+    def adjustment(self, adjustment:float):
+        self._adjustment = adjustment
 
     @property
     def payment_date(self):

@@ -68,7 +68,7 @@ Create table services (service_id int auto_increment primary key,
                 name varchar(45),
                 cost decimal(10,2),
 		service_details varchar(50),
-                service_availability varchar(5) 
+                service_availability varchar(10) 
                 
 );
 create table veterinarians (
@@ -89,12 +89,13 @@ Create table day_care (day_care_id int auto_increment  primary key,
                 notes TEXT
 );
 create table billings (
-	bid int,
+	bid int auto_increment primary key,
 	day_care_id int,
 	aid int,
 	payment_date date,
 	total_amount DECIMAL(8,2),
-	status varchar(10)
+	adjustment DECIMAL(8,2),
+	status varchar(10) DEFAULT "Due"
 );
 create table bill_services (
 	bid int,
