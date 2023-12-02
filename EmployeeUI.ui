@@ -864,6 +864,11 @@
            </attribute>
            <column>
             <property name="text">
+             <string>Employee ID</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
              <string>Employee Name</string>
             </property>
            </column>
@@ -900,11 +905,6 @@
            <column>
             <property name="text">
              <string>Salary</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Status</string>
             </property>
            </column>
            <column>
