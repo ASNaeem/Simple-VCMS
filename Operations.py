@@ -86,7 +86,7 @@ def add_animal(
             email,
             phone,
             address,
-            currentDate,
+            reg_date,
             med_condition,
         )
         Animals.append(new_animal)
@@ -454,7 +454,6 @@ def add_animal(
 
 
 def delete_animal(id: int):
-    mysql = MySQLHandler(host, user, password, port)
     try:
         for animal in Animals:
             if id == animal.id:
@@ -622,7 +621,7 @@ def fetch_items():
 
 def add_item(name: str, manufacturer: str, item_type: str, price: float, amount: int):
     try:
-        new_item = Item(name, manufacturer, item_type, price, amount)
+        new_item = Item(mng_id, name, manufacturer, item_type, price, amount)
         Items.append(new_item)
         query = "insert into item (name, manufacturer, item_type,price,amount)"
         values = (name, manufacturer, item_type, price, amount)
