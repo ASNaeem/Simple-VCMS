@@ -86,7 +86,7 @@ def add_animal(
             email,
             phone,
             address,
-            currentDate,
+            reg_date,
             med_condition,
         )
         Animals.append(new_animal)
@@ -205,7 +205,7 @@ def add_employee(
         mysql_handler.connect()
 
         mysql_handler.execute_query(query, data)
-        query = "insert into phone (id, phone_number) values(%s, %s);"
+        query = "insert into phones (employee_id, phone_number) values(%s, %s);"
         query_fetch_id = "select id from employee order by id desc limit 1;"
         row = mysql_handler.fetch_data(query_fetch_id)
         id = row[0]

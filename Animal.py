@@ -5,20 +5,20 @@ class Animal:
                     color:str, behavioral_warning:str, 
                     owner_name:str, email:str, phone:str, address:str, reg_date:str, med_condition:str = None):
         self.animal_id:int = None
-        self.animal_name = animal_name
-        self.reg_date = reg_date
+        self.animal_name = animal_name  
         self.birth_date = birth_date
         self.sterilized = sterilized
         self.gender = gender
         self.species = species
         self.breed = breed
         self.color = color
-        self.med_condition = med_condition
         self.behavioral_warning = behavioral_warning
         self.owner_name = owner_name
         self.email = email
         self.phone = phone
         self.address = address
+        self.reg_date = reg_date
+        self.med_condition = med_condition
         self.medical_records = []
 
     def __str__(self):
