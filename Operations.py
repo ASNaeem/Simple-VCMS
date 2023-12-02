@@ -9,7 +9,9 @@ import Service
 
 user = "root"
 password = "1234"
+password = "1234"
 host = "localhost"
+port = 3307
 port = 3307
 
 # import Veterinarian
@@ -57,7 +59,6 @@ def fetch_animals():
         print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
-
 
 def add_animal(
     animal_name: str,
@@ -117,18 +118,21 @@ def add_animal(
         mysql_handler.disconnect()
     except Exception as err:
         return "Entry Failed!"
-        
-
 
 def delete_animal(id: int):
     try:
         for animal in Animals:
             if id == animal.id:
-                mysql.connect()
-                run_query(f"delete from animal where id = {animal.id}")
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from animal where id = %s;"
+                data = animal.id
+                mysql_handler.execute_query(query, data)
                 Animals.remove(animal)
-                mysql.close()
+                mysql_handler.disconnect()
+                print("Delete Success!")
                 return "Delete Success!"
+        print("Delete Failed!")
         return "Delete Failed!"
     except Exception as err:
         print(f"Error: {err}")
@@ -152,75 +156,6 @@ def add_appointment(
 ):
     apt = Appointment(date, time, re)
 
-
-### Employee ###
-Employee = []
-def fetch_employees():
-    try:
-        mysql_handler = MySQLHandler(host, user, password, port)
-        mysql_handler.connect()
-        query = "select * from employees;"
-        data = mysql_handler.fetch_data(query)
-    except:
-        pass
-
-def add_employee(
-    name: str,
-    email: str,
-    password: str,
-    address: str,
-    access_level: int,
-    working_hours: str,
-    designation: str,
-    salary: float,
-    joining_date: str,
-    phone: str = [],
-):
-    try:
-        new_employee = Employee(
-            name,
-            email,
-            password,
-            address,
-            access_level,
-            working_hours,
-            designation,
-            salary,
-            joining_date,
-            phone,
-        )
-        Employee.append(new_employee)
-
-        query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
-        data = values(
-            name,
-            email,
-            password,
-            address,
-            designation,
-            access_level,
-            working_hours,
-            salary,
-            joining_date,
-        )
-
-        mysql_handler = MySQLHandler(host, user, password)
-        mysql_handler.connect()
-        mysql_handler.execute_query(query, data)
-        query = "insert into phone (id, phone_number) values(%s, %s);"
-        query_fetch_id = "select id from employee order by id desc limit 1;"
-        row = mysql_handler.fetch_data(query_fetch_id)
-        id = row[0]
-        # data = values(row[0][0], phone)
-        data1 = values(id, phone[0])
-        data2 = values(id, phone[1])
-        mysql_handler.execute_query(query, data1)
-        mysql_handler.execute_query(query, data2)       
-        mysql_handler.disconnect()
-        print("Entry Success!")
-    except Exception as err:
-        print("Entry Failed: {err}")
-        
 
 ### Billing ####
 Billings = []
@@ -308,6 +243,7 @@ def delete_bill(id:int):
 ### Services List For Billing###
 Services = []
 
+
 def fetch_services():
     try:
         mysql_handler = MySQLHandler(host, user, password, port)
@@ -375,6 +311,7 @@ def delete_service(id:int):
 ###### Item add and delete #####
 Items = []
 
+
 def fetch_items():
     try:
         mysql_handler = MySQLHandler(host, user, password)
@@ -397,6 +334,7 @@ def fetch_items():
     except Exception as err:
         print(f"Error Fetching: {err}")
 
+
 def add_item(name: str, manufacturer: str, item_type: str, price: float, amount: int):
     try:
         new_item = Item(mng_id, name, manufacturer, item_type, price, amount)
@@ -409,6 +347,7 @@ def add_item(name: str, manufacturer: str, item_type: str, price: float, amount:
         return "Entry success"
     except Exception as err:
         return "Entry failed"
+
 
 def remove_item(id: int):
     try:
