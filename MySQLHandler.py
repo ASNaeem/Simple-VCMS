@@ -18,8 +18,11 @@ class MySQLHandler:
     
     def disconnect(self):
         if self.connection:
-            self.connection.close()
-            print("Disconnected from MySQL database")
+            try:
+                self.connection.close()
+                print("Disconnected from MySQL database")
+            except Exception as err:
+                 print(f"Failed to disconnect from MYSQL database: {err}") 
             
     def execute_query(self, query, values=None):
         cursor = self.connection.cursor()

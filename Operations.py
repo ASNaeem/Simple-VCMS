@@ -110,11 +110,11 @@ def add_animal(
         mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
         return "Entry Success!"
     except Exception as err:
         return "Entry Failed!"
-    finally:
-        mysql_handler.disconnect()
+        
 
 
 def delete_animal(id: int):
@@ -131,7 +131,7 @@ def delete_animal(id: int):
                 # mysql_handler.disconnect()
                 Animals.remove(animal)
                 return "Delete Success!"
-        mysql_handler.disconnect()
+                mysql_handler.disconnect()
         return "Delete Failed!"
     except Exception as err:
         print(f"Error: {err}")
@@ -157,10 +157,7 @@ def add_appointment(
 
 
 ############ Employee ###############
-
 Employees = []
-
-
 def add_employee(
     name: str,
     email: str,
@@ -205,7 +202,7 @@ def add_employee(
         mysql_handler.connect()
 
         mysql_handler.execute_query(query, data)
-        query = "insert into phone (id, phone_number) values(%s, %s);"
+        query = "insert into phones (employee_id, phone_number) values(%s, %s);"
         query_fetch_id = "select id from employee order by id desc limit 1;"
         row = mysql_handler.fetch_data(query_fetch_id)
         id = row[0]
@@ -214,9 +211,11 @@ def add_employee(
         data2 = values(id, phone[1])
         mysql_handler.execute_query(query, data1)
         mysql_handler.execute_query(query, data2)
+        print("Entry Success!")
         return "Entry Success!"
     except Exception as err:
         return "Entry Failed!"
+        print("Entry Failed!")
     finally:
         mysql_handler.disconnect()
 
@@ -232,7 +231,7 @@ def delete_employee(id: int):
                 mysql_handler.execute_query(query, data)
                 Employees.remove(employee)
                 return "Delete Success!"
-        mysql_handler.disconnect()
+                mysql_handler.disconnect()
         return "Delete Failed!"
     except Exception as err:
         print(f"Error: {err}")
@@ -330,6 +329,8 @@ def remove_item(id: int):
                 return "Delete success!"
     except Exception as err:
         print(f"Error: {err}")
+
+
 from MySQLHandler import MySQLHandler
 import Appointment
 from Animal import Animal
@@ -348,7 +349,8 @@ port = 3306
 from datetime import date
 
 ###Animal#
-Animals:Animal = []
+Animals: Animal = []
+
 
 def fetch_animals():
     try:
@@ -375,9 +377,9 @@ def fetch_animals():
                 med_condition=row[14],
             )
             animal.animal_id = int(row[0])
-            #query = "select * from records where animal_id = %s"
-            #value = animal.animal_id
-            #data = mysql_handler.fetch_data(query, value)
+            # query = "select * from records where animal_id = %s"
+            # value = animal.animal_id
+            # data = mysql_handler.fetch_data(query, value)
             """
             for rec in data:
                 print(rec)               
@@ -487,8 +489,12 @@ def add_appointment(
 
 ### Employee ###
 Employee = []
-
-
+def fetch_employees():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from employees;"
+        data = mysql_handler.fetch_data(query)
 def add_employee(
     name: str,
     email: str,
@@ -548,15 +554,18 @@ def add_employee(
     finally:
         mysql_handler.disconnect()
 
+
 ### Billing ####
 Billings = []
+
+
 def fetch_billings():
     try:
         mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
-        query = "select * from billings"
+        query = "select * from billings;"
         data = mysql_handler.fetch_data(query)
-        query = "select * from bill_services"
+        query = "select * from bill_services;"
         dataServices = mysql_handler.fetch_data(query)
 
         for row in data:
@@ -566,14 +575,14 @@ def fetch_billings():
                 payment_date=str(row[3]),
                 total_amount=float(row[4]),
                 adjustment=float(row[5]),
-                status=row[6]
+                status=row[6],
             )
-            billing.billing_id=int(row[0])
-            
+            billing.billing_id = int(row[0])
+
             for rowServices in dataServices:
                 if billing.billing_id == rowServices[0]:
                     billing.add_services(rowServices[1])
-            
+
             Billings.append(billing)
         mysql_handler.disconnect()
     except Exception as err:
@@ -587,6 +596,7 @@ Services = []
 ###### Item add and delete #####
 Items = []
 
+
 def fetch_items():
     try:
         mysql_handler = MySQLHandler(host, user, password)
@@ -599,9 +609,8 @@ def fetch_items():
                 name=row[1],
                 manufacturer=str(row[2]),
                 item_type=str(row[3]),
-                price =row[4],
+                price=row[4],
                 amount=row[5],
-            
             )
             item.item_id = int(row[0])
             Items.append(item)
@@ -609,14 +618,14 @@ def fetch_items():
         print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
-def add_item(
-     name: str, manufacturer: str, item_type: str, price: float, amount: int
-):
+
+
+def add_item(name: str, manufacturer: str, item_type: str, price: float, amount: int):
     try:
         new_item = Item(name, manufacturer, item_type, price, amount)
         Items.append(new_item)
         query = "insert into item (name, manufacturer, item_type,price,amount)"
-        values = (name, manufacturer, item_type,price,amount)
+        values = (name, manufacturer, item_type, price, amount)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
