@@ -49,7 +49,7 @@ create table appointments (
              a_status varchar(100)
 );
 create table expenses (expense_id int auto_increment primary key,
-		        issuer_id int,
+		issuer_id int,
                 handler_id int,               
                 expense_date date,
                 handle_date date,
@@ -67,7 +67,7 @@ Create table inventory (item_id int auto_increment primary key,
 Create table services (service_id int auto_increment primary key, 
                 name varchar(45),
                 cost decimal(10,2),
-				service_details varchar(50),
+		service_details varchar(50),
                 service_availability varchar(5) 
                 
 );
@@ -83,7 +83,7 @@ create table records (record_id int auto_increment primary key,
 );
 Create table day_care (day_care_id int auto_increment  primary key,
                 animal_id int,
-		        dos date,
+		dos date,
                 start_time time,
                 end_time time,
                 notes TEXT

@@ -1,6 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5 import uic, QtCore, QtGui
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from qt_material import apply_stylesheet, list_themes
 import warnings
 import os 
@@ -169,22 +169,33 @@ class MainApp(QMainWindow):
             self.add_animal_to_table(row,animal)
             
     def add_animal_to_table(self, row, animal):
-        self.page_animal_info.animal_table.insertRow(row)   
-        self.page_animal_info.animal_table.setItem(row, 0, QTableWidgetItem(str(animal.animal_id()))) 
-        self.page_animal_info.animal_table.setItem(row, 1, QTableWidgetItem(animal.animal_name()))
-        self.page_animal_info.animal_table.setItem(row, 2, QTableWidgetItem(str(animal.birth_date())))
-        self.page_animal_info.animal_table.setItem(row, 3, QTableWidgetItem(str(animal.sterilized())))
-        self.page_animal_info.animal_table.setItem(row, 4, QTableWidgetItem(animal.gender()))
-        self.page_animal_info.animal_table.setItem(row, 5, QTableWidgetItem(animal.species()))
-        self.page_animal_info.animal_table.setItem(row, 6, QTableWidgetItem(animal.breed()))
-        self.page_animal_info.animal_table.setItem(row, 7, QTableWidgetItem(animal.color()))
-        self.page_animal_info.animal_table.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning()))
-        self.page_animal_info.animal_table.setItem(row, 9, QTableWidgetItem(animal.owner_name()))
-        self.page_animal_info.animal_table.setItem(row, 10, QTableWidgetItem(animal.email()))
-        self.page_animal_info.animal_table.setItem(row, 11, QTableWidgetItem(animal.phone()))
-        self.page_animal_info.animal_table.setItem(row, 12, QTableWidgetItem(animal.address()))
-        self.page_animal_info.animal_table.setItem(row, 13, QTableWidgetItem(str(animal.reg_date())))
-        self.page_animal_info.animal_table.setItem(row, 14, QTableWidgetItem(animal.med_condition()))
+        header = self.page_animal_info.table_animal.horizontalHeader()
+        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        self.page_animal_info.table_animal.insertRow(row)   
+        self.page_animal_info.table_animal.setItem(row, 0, QTableWidgetItem(str(animal.animal_id))) 
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        self.page_animal_info.table_animal.setItem(row, 1, QTableWidgetItem(animal.animal_name))
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        #self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
+        #self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
+        #self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
+        self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(animal.species))
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(animal.breed))
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.color))
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        #self.page_animal_info.table_animal.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning))
+        self.page_animal_info.table_animal.setItem(row, 5, QTableWidgetItem(animal.owner_name))
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
+        #self.page_animal_info.table_animal.setItem(row, 10, QTableWidgetItem(animal.email))
+        self.page_animal_info.table_animal.setItem(row, 6, QTableWidgetItem(animal.phone))
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+        #self.page_animal_info.table_animal.setItem(row, 12, QTableWidgetItem(animal.address))
+        #self.page_animal_info.table_animal.setItem(row, 13, QTableWidgetItem(str(animal.reg_date)))
+        #self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
+        
+              
         
         
        
