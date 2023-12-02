@@ -1,7 +1,7 @@
 from MySQLHandler import MySQLHandler
 import Appointment
 from Animal import Animal
-import Billing
+from Billing import Bill
 import Employee
 import Expenses
 import Item
@@ -214,6 +214,37 @@ def add_employee(
         return "Entry Failed!"
     finally:
         mysql_handler.disconnect()
+
+### Billing ####
+Billings = []
+def fetch_billings():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from billings"
+        data = mysql_handler.fetch_data(query)
+        query = "select * from bill_services"
+        dataServices = mysql_handler.connect()
+
+        for row in data:
+            billing = Bill(
+                day_care_id=int(row[1]),
+                appointment_id=int(row[2]),
+                payment_date=str(row[3]),
+                total_amount=float(row[4]),
+                adjustment=float(row[5]),
+                status=row[6]
+            )
+            billing.billing_id=int(row[0])
+            """
+            for rowServices in dataServices:
+                if billing.billing_id == rowServices[0]:
+                    billing.add_services(rowServices[1])
+            """
+            Billings.append(billing)
+        mysql_handler.disconnect()
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
 
 ### Services List For Billing###
