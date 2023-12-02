@@ -19,17 +19,33 @@ class Animal:
         self.email = email
         self.phone = phone
         self.address = address
-        self.medical_records:str = []
+        self.medical_records = []
 
     def __str__(self):
         return f"{self.animal.name}"
-    def add_record(self, diagnosis:str):
-        current_date = date.today()
-        record = {"Date":current_date,"Record":diagnosis}
-        self.medical_records.append(record)
+    def add_record(self, record_id:int, record:str, report_date:str = None):
+        if record.strip():
+            if not report_date:
+                report_date = date.today()
+            data = {"record_id":record_id,"record":record, "date":report_date,}
+            data = {"record_id":"1","date":"some","record":"rec"}
+            self.medical_records.append(data)
+        else:
+            raise ValueError("Record field can not be empty!")
 
     
-    ### getter, setter ###########    
+    ### getter, setter ########### 
+    @property
+    def medical_records(self):
+        return self.medical_records
+    
+    @medical_records.setter
+    def medical_records(self, medical_records):
+        if all(isinstance(item, dict) and "record_id" in item and "record" in item and "date" in item for item in medical_records):
+            self._medical_records = medical_records
+        else:
+            raise ValueError("Input must be a list of dictionaries with a date and record keys!")
+    
     @property
     def animal_id(self):
         return self._animal_id
