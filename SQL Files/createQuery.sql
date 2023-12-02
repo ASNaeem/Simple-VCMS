@@ -89,12 +89,13 @@ Create table day_care (day_care_id int auto_increment  primary key,
                 notes TEXT
 );
 create table billings (
-	bid int,
+	bid int auto_increment primary key,
 	day_care_id int,
 	aid int,
 	payment_date date,
 	total_amount DECIMAL(8,2),
-	status varchar(10)
+	adjustment DECIMAL(8,2),
+	status varchar(10) DEFAULT "Due"
 );
 create table bill_services (
 	bid int,
