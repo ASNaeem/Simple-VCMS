@@ -161,6 +161,9 @@ def fetch_employees():
         mysql_handler.connect()
         query = "select * from employees;"
         data = mysql_handler.fetch_data(query)
+    except:
+        pass
+
 def add_employee(
     name: str,
     email: str,
@@ -203,7 +206,6 @@ def add_employee(
 
         mysql_handler = MySQLHandler(host, user, password)
         mysql_handler.connect()
-
         mysql_handler.execute_query(query, data)
         query = "insert into phone (id, phone_number) values(%s, %s);"
         query_fetch_id = "select id from employee order by id desc limit 1;"
@@ -213,11 +215,11 @@ def add_employee(
         data1 = values(id, phone[0])
         data2 = values(id, phone[1])
         mysql_handler.execute_query(query, data1)
-        mysql_handler.execute_query(query, data2)
-        return "Entry Success!"
+        mysql_handler.execute_query(query, data2)       
         mysql_handler.disconnect()
+        print("Entry Success!")
     except Exception as err:
-        return "Entry Failed!"
+        print("Entry Failed: {err}")
         
 
 ### Billing ####
@@ -253,14 +255,31 @@ def fetch_billings():
     except Exception as err:
         print(f"Error Fetching: {err}")
 
-
 ### Services List For Billing###
 Services = []
 
+def fetch_services():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from services"
+        data = mysql_handler.fetch_data(query)
+
+        for row in data:
+            services = Services(
+                name=row[1],
+                cost=float(row[2]),
+                service_details=row[3],
+                service_availability=row[4],
+            )
+            services.service_id = int(row[0])
+            Services.append(services)
+        mysql_handler.disconnect()
+    except Exception as err:
+        print(f"Error Fethcing: {err}")
 
 ###### Item add and delete #####
 Items = []
-
 
 def fetch_items():
     try:
@@ -284,7 +303,6 @@ def fetch_items():
     except Exception as err:
         print(f"Error Fetching: {err}")
 
-
 def add_item(name: str, manufacturer: str, item_type: str, price: float, amount: int):
     try:
         new_item = Item(mng_id, name, manufacturer, item_type, price, amount)
@@ -297,7 +315,6 @@ def add_item(name: str, manufacturer: str, item_type: str, price: float, amount:
         return "Entry success"
     except Exception as err:
         return "Entry failed"
-
 
 def remove_item(id: int):
     try:
