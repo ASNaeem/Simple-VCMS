@@ -250,6 +250,25 @@ def fetch_billings():
 ### Services List For Billing###
 Services = []
 
+def fetch_services():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from services"
+        data = mysql_handler.fetch_data(query)
+
+        for row in data:
+            services = Services(
+                name =row[1],
+                cost = float(row[2]),
+                service_details = row[3],
+                service_availability = row[4]
+            )
+            services.service_id = int(row[0])
+            Services.append(services)
+        mysql_handler.disconnect()
+    except Exception as err:
+        print(f"Error Fethcing: {err}")
 
 ###### Item add and delete #####
 Items = []
