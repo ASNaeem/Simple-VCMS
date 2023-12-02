@@ -12,4 +12,4 @@ insert into inventory (name, manufacturer, item_type, price, amount) values ("Me
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Convenia","Cefovecin","Ointment",2924.3,9);
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Heartgard","Nitenpyram","Cream",2747.87,7);
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Panacur","Johnson & Johnson","Topical Cream",1632.83,7);
-insert into inventory (name, manufacturer, item_type, price, amount) values ("Revolution",8,"Burt's Bees","lotion",2912.56,17);
+insert into inventory (name, manufacturer, item_type, price, amount) values ("Revolution","Burt's Bees","lotion",2912.56,17);

@@ -214,18 +214,39 @@ Services = []
 ###### Item add and delete #####
 Items = []
 
+def fetch_items():
+    try:
+        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler.connect()
+        query = "select * from inventory"
+        data = mysql_handler.fetch_data(query)
 
+        for row in data:
+            item = Item(
+                name=row[1],
+                manufacturer=str(row[2]),
+                item_type=str(row[3]),
+                price =row[4],
+                amount=row[5],
+            
+            )
+            item.item_id = int(row[0])
+            Items.append(item)
+        mysql_handler.disconnect()
+        print(f"Er")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 def add_item(
-    mng_id: int, name: str, manufacturer: str, item_type: str, price: float, amount: int
+     name: str, manufacturer: str, item_type: str, price: float, amount: int
 ):
     try:
-        new_item = Item(mng_id, name, manufacturer, item_type, price, amount)
+        new_item = Item(name, manufacturer, item_type, price, amount)
         Items.append(new_item)
-        mysql.connect()
-        que = "insert into item (mng_id,name, manufacturer, item_type,price,amount)"
-        data = f"values({mng_id,name, manufacturer, item_type,price,amount})"
-        query(que + data)
-        mysql.close()
+        query = "insert into item (name, manufacturer, item_type,price,amount)"
+        values = (name, manufacturer, item_type,price,amount)
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        mysql_handler.execute_query(query, values)
         return "Entry success"
     except Exception as err:
         return "Entry failed"
