@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>924</width>
-    <height>704</height>
+    <height>755</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -155,6 +155,12 @@
             <family>Courier New</family>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>230</number>
