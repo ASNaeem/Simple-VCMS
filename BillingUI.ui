@@ -178,7 +178,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Animal ID</string>
+            <string>Day Care ID</string>
            </property>
            <property name="font">
             <font>
@@ -189,7 +189,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Owner Name</string>
+            <string>Appointment ID</string>
            </property>
            <property name="font">
             <font>
@@ -200,18 +200,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Species</string>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier New</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Adjustments</string>
+            <string>Payment Date</string>
            </property>
            <property name="font">
             <font>
@@ -223,6 +212,17 @@
           <column>
            <property name="text">
             <string>Total Amount</string>
+           </property>
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Adjustment</string>
            </property>
            <property name="font">
             <font>
