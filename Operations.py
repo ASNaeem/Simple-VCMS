@@ -8,9 +8,9 @@ import Item
 import Service
 
 user = "root"
-password = "1234"
+password = "root"
 host = "localhost"
-port = 3307
+port = 3306
 
 # import Veterinarian
 from datetime import date
@@ -213,7 +213,7 @@ def add_employee(
         mysql_handler.disconnect()
 
 ###Billings###
-Billing = []
+Billings = []
 
 def fetch_billings():
     try:
@@ -225,7 +225,7 @@ def fetch_billings():
         dataServices = mysql_handler.connect()
 
         for row in data:
-            billing = Billing(
+            billing = Bill(
                 day_care_id=int(row[1]),
                 appointment_id=int(row[2]),
                 payment_date=str(row[3]),
