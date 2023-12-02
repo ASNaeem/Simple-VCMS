@@ -120,6 +120,7 @@ def add_animal(
 
 
 def delete_animal(id: int):
+    mysql = MySQLHandler(host, user, password, port)
     try:
         for animal in Animals:
             if id == animal.id:
