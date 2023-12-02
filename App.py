@@ -93,7 +93,10 @@ class MainApp(QMainWindow):
         self.set_animal_table()
         self.set_bill_table()
 
-##################### Page switching#####################
+        ##################### End Init #####################
+
+
+    ##################### Page switching#####################
     def show_daycare(self):
         self.stackedWidget.setCurrentWidget(self.page_daycare)
 
@@ -259,7 +262,8 @@ class MainApp(QMainWindow):
 
         table.setItem(rowService, 2, QTableWidgetItem(service.cost))
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
-                
+
+################### End Billing ##################                
 
 ################### Appointment ##################
     def make_appointment(self):     
