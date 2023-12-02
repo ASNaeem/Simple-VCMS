@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>924</width>
-    <height>704</height>
+    <height>755</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,6 +156,12 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>230</number>
           </attribute>
@@ -172,7 +178,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Animal ID</string>
+            <string>Day Care ID</string>
            </property>
            <property name="font">
             <font>
@@ -183,7 +189,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Owner Name</string>
+            <string>Appointment ID</string>
            </property>
            <property name="font">
             <font>
@@ -194,18 +200,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Species</string>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier New</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Adjustments</string>
+            <string>Payment Date</string>
            </property>
            <property name="font">
             <font>
@@ -217,6 +212,17 @@
           <column>
            <property name="text">
             <string>Total Amount</string>
+           </property>
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Adjustment</string>
            </property>
            <property name="font">
             <font>

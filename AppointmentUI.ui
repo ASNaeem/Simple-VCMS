@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>935</width>
-    <height>705</height>
+    <height>728</height>
    </rect>
   </property>
   <property name="font">
@@ -249,6 +249,12 @@
           </property>
           <property name="cursor" stdset="0">
            <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <attribute name="horizontalHeaderCascadingSectionResizes">
            <bool>false</bool>

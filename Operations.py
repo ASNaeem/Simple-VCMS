@@ -9,7 +9,9 @@ import Service
 
 user = "root"
 password = "1234"
+password = "1234"
 host = "localhost"
+port = 3307
 port = 3307
 
 # import Veterinarian
@@ -158,7 +160,6 @@ def add_appointment(
 ### Billing ####
 Billings = []
 
-
 def fetch_billings():
     try:
         mysql_handler = MySQLHandler(host, user, password, port)
@@ -188,6 +189,56 @@ def fetch_billings():
     except Exception as err:
         print(f"Error Fetching: {err}")
 
+def add_bill(
+    day_care_id:int,
+    appointment_id:int,
+    payment_date:str,
+    total_amount:float,
+    adjustment:float,
+    status:str
+):
+    try:
+        payment_date = date.today()
+        new_bill = Bill(
+            day_Care_id,
+            appointment_id,
+            currentDate,
+            total_amount,
+            adjustment,
+            status
+        )
+        Billings.append(new_bill)
+
+        query = "insert into animal (day_care_id, appointment_id, payment_date, total_amount, adjustment, status) values(%s,%s,%s,%s,%s,%s)"
+        values = (
+            day_care_id,
+            appointment_id,
+            payment_date,
+            total_amount,
+            adjustment,
+            status
+        )
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        mysql_handler.execute_query(query, values)
+        return "Entry Success!"
+        mysql_handler.disconnect()
+    except Exception as err:
+        return "Entry Failed!"
+
+def delete_bill(id:int):
+    try:
+        for bill in Billings:
+            if id == billing.billing_id:
+                mysql.connect()
+                run_query(f"delete from billings where id = {billing.id}")
+                Billings.remove(billing)
+                mysql.close()
+                return "Delete Success!"
+        return "Delete Failed!"
+    except Exception as err:
+        print(f"Error: {err}")
+### End Billing ####
 
 ### Services List For Billing###
 Services = []
@@ -213,6 +264,8 @@ def fetch_services():
     except Exception as err:
         print(f"Error Fethcing: {err}")
 
+
+### End Services List For Billing###
 
 ###### Item add and delete #####
 Items = []
