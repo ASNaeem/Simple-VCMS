@@ -20,4 +20,4 @@ insert into records (animal_id, record, rdate) values (1, 'Got bit by a cat in t
 insert into services (name, cost, service_details, service_availability) 
 values ("Rabies Vaccine",1084.8,"scale B2C technologies","No");
 insert into bill_services (bid, service_id) values (1,1);
-insert into bill_services(bid, service_id) values(1,1);
+insert into bill_services(bid, service_id) values(1,2);

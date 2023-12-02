@@ -5,7 +5,7 @@ from qt_material import apply_stylesheet, list_themes
 import warnings
 import os 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
-from Operations import Animals, fetch_animals, Billings, fetch_billings
+from Operations import Animals, fetch_animals, Billings, fetch_billings, Services
 #warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
@@ -210,16 +210,20 @@ class MainApp(QMainWindow):
 
 
 
-################### Billing ##################              
+################### Billing ##################
+              
     def set_bill_table(self):        
         fetch_billings()
         for row, billing in enumerate(Billings):
             self.add_billing_to_table(row,billing)
-            """
-            service_details = get_service_details(billing.services, Services)
+            
+            service_details = self.get_service_details(billing.services, Services)
             for rowService, service in enumerate(service_details):
                 self.add_billing_service_to_service_table(rowService,service)
-            """
+     
+    def get_service_details(self, service_ids,services):
+        return [service for service in services if service.service_id in service_ids]
+           
     def add_billing_to_table(self, row, billing):
         header = self.page_billing.table_bill.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
@@ -240,8 +244,6 @@ class MainApp(QMainWindow):
         table.setItem(row, 6, QTableWidgetItem(str(billing.status)))
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
     
-    def get_service_details(self, service_ids,services):
-        return [service for service in services if service.service_id in service_ids]
 
     def add_billing_service_to_service_table(self, rowService,service):
         header = self.page_billing.table_show_service.horizontalHeader()

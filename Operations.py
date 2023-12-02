@@ -557,7 +557,7 @@ def fetch_billings():
         query = "select * from billings"
         data = mysql_handler.fetch_data(query)
         query = "select * from bill_services"
-        dataServices = mysql_handler.connect()
+        dataServices = mysql_handler.fetch_data(query)
 
         for row in data:
             billing = Bill(
@@ -569,11 +569,11 @@ def fetch_billings():
                 status=row[6]
             )
             billing.billing_id=int(row[0])
-            """
+            
             for rowServices in dataServices:
                 if billing.billing_id == rowServices[0]:
                     billing.add_services(rowServices[1])
-            """
+            
             Billings.append(billing)
         mysql_handler.disconnect()
     except Exception as err:
