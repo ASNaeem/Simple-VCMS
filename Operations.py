@@ -256,7 +256,7 @@ def fetch_services():
                 name=row[1],
                 cost=float(row[2]),
                 service_details=row[3],
-                service_availability=row[4],
+                service_availability=bool(row[4]),
             )
             services.service_id = int(row[0])
             Services.append(services)
@@ -264,7 +264,48 @@ def fetch_services():
     except Exception as err:
         print(f"Error Fethcing: {err}")
 
+def add_service(
+    name:str,
+    cost:float,
+    service_details:str,
+    service_availability:bool
+):
+    try:
+        new_service = Service(
+            name,
+            cost,
+            service_details,
+            service_availability
+        )
+        Services.append(new_service)
 
+        query = "insert into services (name, cost, service_details, service_availibility) values(%s,%s,%s,%s)"
+        values = (
+            name,
+            cost,
+            service_details,
+            service_availability
+        )
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        mysql_handler.execute_query(query, values)
+        return "Entry Success!"
+        mysql_handler.disconnect()
+    except Exception as err:
+        return "Entry Failed!"
+
+def delete_service(id:int):
+    try:
+        for service in Services:
+            if id == service.id:
+                mysql.connect()
+                run_query(f"delete from service where id = {service.id}")
+                Services.remove(service)
+                mysql.close()
+                return "Delete Success!"
+        return "Delete Failed!"
+    except Exception as err:
+        print(f"Error: {err}")
 ### End Services List For Billing###
 
 ###### Item add and delete #####
