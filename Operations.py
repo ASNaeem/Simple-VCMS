@@ -8,9 +8,9 @@ import Item
 import Service
 
 user = "root"
-password = "root"
+password = "1234"
 host = "localhost"
-port = 3306
+port = 3307
 
 # import Veterinarian
 from datetime import date
@@ -18,13 +18,14 @@ from datetime import date
 ###Animal#
 Animals = []
 
+
 def fetch_animals():
     try:
         mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
         query = "select * from animals"
         data = mysql_handler.fetch_data(query)
-        query = "select * from records" 
+        query = "select * from records"
         dataRecords = mysql_handler.fetch_data(query)
 
         for row in data:
@@ -120,11 +121,17 @@ def delete_animal(id: int):
     try:
         for animal in Animals:
             if id == animal.id:
-                mysql.connect()
-                run_query(f"delete from animal where id = {animal.id}")
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                # mysql.connect()
+                query = "delete from animal where id = %s"
+                data = animal.id
+                mysql_handler.execute_query(query, data)
+                # mysql.close()
+                # mysql_handler.disconnect()
                 Animals.remove(animal)
-                mysql.close()
                 return "Delete Success!"
+        mysql_handler.disconnect()
         return "Delete Failed!"
     except Exception as err:
         print(f"Error: {err}")
@@ -149,8 +156,9 @@ def add_appointment(
     apt = Appointment(date, time, re)
 
 
-### Employee ###
-Employee = []
+############ Employee ###############
+
+Employees = []
 
 
 def add_employee(
@@ -181,7 +189,7 @@ def add_employee(
         Employee.append(new_employee)
 
         query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
-        data = values(
+        data = (
             name,
             email,
             password,
@@ -212,8 +220,27 @@ def add_employee(
     finally:
         mysql_handler.disconnect()
 
+
+def delete_employee(id: int):
+    try:
+        for employee in Employees:
+            if id == employee.id:
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from employees where employee_id = %s"
+                data = employee.id
+                mysql_handler.execute_query(query, data)
+                Employees.remove(employee)
+                return "Delete Success!"
+        mysql_handler.disconnect()
+        return "Delete Failed!"
+    except Exception as err:
+        print(f"Error: {err}")
+
+
 ###Billings###
 Billings = []
+
 
 def fetch_billings():
     try:
@@ -231,9 +258,9 @@ def fetch_billings():
                 payment_date=str(row[3]),
                 total_amount=float(row[4]),
                 adjustment=float(row[5]),
-                status=row[6]
+                status=row[6],
             )
-            billing.billing_id=int(row[0])
+            billing.billing_id = int(row[0])
             for rowServices in dataServices:
                 if billing.billing_id == rowServices[0]:
                     billing.add_services(rowServices[1])
@@ -243,12 +270,13 @@ def fetch_billings():
     except Exception as err:
         print(f"Error Fetching: {err}")
 
-###Day_Care_Service###
 
+###Day_Care_Service###
 
 
 ### Services List For Billing###
 Services = []
+
 
 def fetch_services():
     try:
@@ -259,16 +287,17 @@ def fetch_services():
 
         for row in data:
             services = Services(
-                name =row[1],
-                cost = float(row[2]),
-                service_details = row[3],
-                service_availability = row[4]
+                name=row[1],
+                cost=float(row[2]),
+                service_details=row[3],
+                service_availability=row[4],
             )
             services.service_id = int(row[0])
             Services.append(services)
         mysql_handler.disconnect()
     except Exception as err:
         print(f"Error Fethcing: {err}")
+
 
 ###### Item add and delete #####
 Items = []
