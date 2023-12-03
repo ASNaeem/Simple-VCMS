@@ -8,9 +8,9 @@ import Item
 import Service
 
 user = "root"
-password = "1234"
+password = "root"
 host = "localhost"
-port = 3307
+port = 3306
 
 # import Veterinarian
 from datetime import date

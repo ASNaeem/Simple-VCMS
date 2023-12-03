@@ -2,9 +2,9 @@ from datetime import date
 from MySQLHandler import MySQLHandler
 
 user = "root"
-password = "1234"
+password = "root"
 host = "localhost"
-port = 3307
+port = 3306
 class Animal:
     def __init__ (self, animal_name:str, birth_date:str, 
                     sterilized:str, gender:str, species:str, breed:str, 
@@ -190,14 +190,14 @@ def fetch_animals():
                 med_condition=row[14],
             )
             animal.animal_id = int(row[0])
-            # query = "select * from records where animal_id = %s"
-            # value = animal.animal_id
-            # data = mysql_handler.fetch_data(query, value)
-            """
-            for rec in data:
-                print(rec)               
-                animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
-            """
+            query = "select * from record where animal_id = %s"
+            value = animal.animal_id
+            data = mysql_handler.fetch_data(query, value)
+           # if data:
+             #   for rec in data:
+            #        print(rec)               
+                    #animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
+            
             Animals.append(animal)
         mysql_handler.disconnect()
         print(f"Er")
@@ -234,7 +234,7 @@ def add_animal(
             email,
             phone,
             address,
-            currentDate,
+            reg_date,
             med_condition,
         )
         Animals.append(new_animal)
