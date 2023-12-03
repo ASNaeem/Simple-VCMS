@@ -132,7 +132,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QTableWidget" name="table_bill">
+           <widget class="QTableWidget" name="table_expense">
             <property name="minimumSize">
              <size>
               <width>449</width>

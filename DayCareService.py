@@ -110,7 +110,7 @@ def add_day_care(
     notes: str,
 ):
     try:
-        new_day_care = Day_Care_Service(
+        new_day_care = DayCareService(
             animal_id, day_care_date, start_time, end_time, notes
         )
         Day_Care_Service.append(new_day_care)

@@ -12,6 +12,7 @@ from Animal import Animals, fetch_animals
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
+from Expense import Expenses, fetch_expenses
 
 # warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
@@ -108,6 +109,7 @@ class MainApp(QMainWindow):
         self.set_bill_table()
         self.set_employee_table()
         self.set_day_care_table()
+        self.set_expense_table()
 
         ##################### End Init #####################
 
@@ -190,41 +192,41 @@ class MainApp(QMainWindow):
 
     def add_animal_to_table(self, row, animal):
         header = self.page_animal_info.table_animal.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.page_animal_info.table_animal.insertRow(row)
         self.page_animal_info.table_animal.setItem(
             row, 0, QTableWidgetItem(str(animal.animal_id))
         )
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         self.page_animal_info.table_animal.setItem(
             row, 1, QTableWidgetItem(animal.animal_name)
         )
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
         # self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
         # self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
         self.page_animal_info.table_animal.setItem(
             row, 2, QTableWidgetItem(animal.species)
         )
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         self.page_animal_info.table_animal.setItem(
             row, 3, QTableWidgetItem(animal.breed)
         )
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         self.page_animal_info.table_animal.setItem(
             row, 4, QTableWidgetItem(animal.color)
         )
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning))
         self.page_animal_info.table_animal.setItem(
             row, 5, QTableWidgetItem(animal.owner_name)
         )
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 10, QTableWidgetItem(animal.email))
         self.page_animal_info.table_animal.setItem(
             row, 6, QTableWidgetItem(animal.phone)
         )
-        header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 12, QTableWidgetItem(animal.address))
         # self.page_animal_info.table_animal.setItem(row, 13, QTableWidgetItem(str(animal.reg_date)))
         # self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
@@ -276,23 +278,46 @@ class MainApp(QMainWindow):
             self.add_day_care_to_table(row, day_care)
 
     def add_day_care_to_table(self, row, day_care):
-        # table.verticalHeader().setVisible(False)
         header = self.page_daycare.table_care.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         table = self.page_daycare.table_care
         table.insertRow(row)
         table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
+
+    ################### Day Care Service End ##################
+
+    ################### Expenses ################## 
+    def set_expense_table(self):
+        fetch_expenses()
+        for row, expense in enumerate(Expenses):
+            self.add_expense_to_table(row, expense)
+    def add_expense_to_table(self, row, expense):
+        header = self.page_expenses.table_expense.horizontalHeader()
+        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        table = self.page_expenses.table_expense
+        table.insertRow(row)
+        table.setItem(row, 0, QTableWidgetItem(str(expense.expense_id)))
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        table.setItem(row, 1, QTableWidgetItem(str(expense.issuer_id)))
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        table.setItem(row, 2, QTableWidgetItem(str(expense.expense_date)))
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        table.setItem(row, 3, QTableWidgetItem(str(expense.amount)))
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+        table.setItem(row, 4, QTableWidgetItem(str(expense.justification)))
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+      
 
     ################### Billing ##################
 
@@ -310,38 +335,38 @@ class MainApp(QMainWindow):
 
     def add_billing_to_table(self, row, billing):
         header = self.page_billing.table_bill.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         table = self.page_billing.table_bill
         table.insertRow(row)
         table.setItem(row, 0, QTableWidgetItem(str(billing.billing_id)))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 1, QTableWidgetItem(str(billing.day_care_id)))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 2, QTableWidgetItem(str(billing.appointment_id)))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 3, QTableWidgetItem(str(billing.payment_date)))
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 4, QTableWidgetItem(str(billing.total_amount)))
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 5, QTableWidgetItem(str(billing.adjustment)))
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 6, QTableWidgetItem(str(billing.status)))
-        header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
 
     def add_billing_service_to_service_table(self, rowService, service):
         header = self.page_billing.table_show_service.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
         table = self.page_billing.table_show_service
 
         table.setItem(rowService, 0, QTableWidgetItem(service.service_id))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
 
         table.setItem(rowService, 1, QTableWidgetItem(service.name))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
 
         table.setItem(rowService, 2, QTableWidgetItem(service.cost))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
 
     ################### End Billing ##################
 
