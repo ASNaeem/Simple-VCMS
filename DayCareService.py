@@ -1,3 +1,11 @@
+from datetime import date
+from MySQLHandler import MySQLHandler
+
+user = "root"
+password = "1234"
+host = "localhost"
+port = 3307
+
 class DayCareService:
     def __init__(self, 
                 animal_id:int, 
@@ -54,3 +62,21 @@ class DayCareService:
     @notes.setter
     def notes(self, notes: str):
         self._notes = notes
+
+##################### Day Care Operations #########################
+
+Day_Care = []
+
+def fetch_day_care():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from day_care;"
+        data = mysql_handler.fetch_data(query)
+        
+        for row in data:
+            #day_care = Day_Care
+            pass
+
+    except Exception as err:
+        pass

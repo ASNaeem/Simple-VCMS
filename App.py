@@ -7,7 +7,7 @@ import warnings
 import os
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
-from Service import  Services, fetch_services
+from Service import Services, fetch_services
 from Animal import Animals, fetch_animals
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
@@ -245,10 +245,10 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 2, QTableWidgetItem(str(employee.email)))
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
-        # table.setItem(row, 3, QTableWidgetItem(str(employee.phone[0])))
-        # header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
-        # table.setItem(row, 4, QTableWidgetItem(str(employee.phone[1])))
-        # header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        #table.setItem(row, 3, QTableWidgetItem(str(employee.phone[0])))
+        #header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        #table.setItem(row, 4, QTableWidgetItem(str(employee.phone[1])))
+        #header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 5, QTableWidgetItem(str(employee.address)))
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 6, QTableWidgetItem(str(employee.designation)))
