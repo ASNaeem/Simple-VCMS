@@ -1,12 +1,15 @@
 from MySQLHandler import MySQLHandler
 
 user = "root"
-password = "root"
+password = "1234"
 host = "localhost"
-port = 3306
+port = 3307
+
+
 class Item:
-    def __init__(self, name:str,  
-                manufacturer:str, item_type:str, price:float, amount:int):
+    def __init__(
+        self, name: str, manufacturer: str, item_type: str, price: float, amount: int
+    ):
         self.item_id = None
         self.name = name
         self.manufacturer = manufacturer
@@ -14,50 +17,55 @@ class Item:
         self.item_type = item_type
         self.amount = amount
 
-###Getter, Setter###
+    ###Getter, Setter###
     @property
     def name(self):
         return self._name
+
     @name.setter
-    def name(self, name:str):
+    def name(self, name: str):
         self._name = name
-    
+
     @property
     def item_id(self):
         return self._item_id
-    
+
     @item_id.setter
-    def item_id(self, item_id:int):
+    def item_id(self, item_id: int):
         self._item_id = item_id
 
     @property
     def item_type(self):
         return self._item_type
-    @item_type.setter
-    def item_type(self, item_type:str):
-        self._item_type = item_type
 
+    @item_type.setter
+    def item_type(self, item_type: str):
+        self._item_type = item_type
 
     @property
     def manufacturer(self):
         return self._manufacturer
+
     @manufacturer.setter
-    def manufacturer(self, manufacturer:str):
+    def manufacturer(self, manufacturer: str):
         self._manufacturer = manufacturer
 
     @property
     def price(self):
         return self._price
+
     @price.setter
-    def price(self, price:float):
+    def price(self, price: float):
         self._price = price
 
     @property
     def amount(self):
         return self._amount
+
     @amount.setter
-    def amount(self, amount:int):
+    def amount(self, amount: int):
         self._amount = amount
+
 
 ###Getter, Setter End###
 
@@ -113,5 +121,6 @@ def remove_item(id: int):
                 return "Delete success!"
     except Exception as err:
         print(f"Error: {err}")
+
 
 ###### Item add and delete end #####

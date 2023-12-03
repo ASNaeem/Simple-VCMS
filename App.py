@@ -11,6 +11,7 @@ from Service import Services, fetch_services
 from Animal import Animals, fetch_animals
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
+from DayCareService import DayCareService, fetch_day_care
 
 # warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
@@ -266,6 +267,17 @@ class MainApp(QMainWindow):
         ############## Need fixing #######################
 
     ################# End of Employee ###################
+
+    ################### Day Care Service ##################
+    def set_day_care_table(self):
+        fetch_day_care
+        for row, day_care in enumerate(DayCareService):
+            self.add_day_care_to_table(row, day_care)
+
+    def add_day_care_to_table(self, row, day_care):
+        #header = self.page_daycare.table_
+
+        ...  
 
     ################### Billing ##################
 
