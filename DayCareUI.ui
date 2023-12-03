@@ -478,6 +478,9 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+          </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
           </property>
@@ -486,6 +489,9 @@
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>225</number>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
           </attribute>
           <column>
            <property name="text">

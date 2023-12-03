@@ -2,16 +2,31 @@ from datetime import date
 from MySQLHandler import MySQLHandler
 
 user = "root"
-password = "root"
+password = "1234"
 host = "localhost"
-port = 3306
+port = 3307
+
+
 class Animal:
-    def __init__ (self, animal_name:str, birth_date:str, 
-                    sterilized:str, gender:str, species:str, breed:str, 
-                    color:str, behavioral_warning:str, 
-                    owner_name:str, email:str, phone:str, address:str, reg_date:str, med_condition:str = None):
-        self.animal_id:int = None
-        self.animal_name = animal_name  
+    def __init__(
+        self,
+        animal_name: str,
+        birth_date: str,
+        sterilized: str,
+        gender: str,
+        species: str,
+        breed: str,
+        color: str,
+        behavioral_warning: str,
+        owner_name: str,
+        email: str,
+        phone: str,
+        address: str,
+        reg_date: str,
+        med_condition: str = None,
+    ):
+        self.animal_id: int = None
+        self.animal_name = animal_name
         self.birth_date = birth_date
         self.sterilized = sterilized
         self.gender = gender
@@ -29,7 +44,8 @@ class Animal:
 
     def __str__(self):
         return f"{self.animal.name}"
-    def add_record(self, record_id:int, record:str, report_date:str = None):
+
+    def add_record(self, record_id: int, record: str, report_date: str = None):
         if record.strip():
             if not report_date:
                 report_date = date.today()
@@ -38,66 +54,72 @@ class Animal:
         else:
             raise ValueError("Record field can not be empty!")
 
-    
-    ########## getter, setter ########### 
+    ########## getter, setter ###########
     @property
     def medical_records(self):
         return self.medical_records
-    
+
     @medical_records.setter
     def medical_records(self, medical_records):
         if all(isinstance(item, list)):
             self._medical_records = medical_records
         else:
-            raise ValueError("Input must be a list of dictionaries with a date and record keys!")
-    
+            raise ValueError(
+                "Input must be a list of dictionaries with a date and record keys!"
+            )
+
     @property
     def animal_id(self):
         return self._animal_id
-    
-   
+
     @animal_id.setter
-    def animal_id(self, animal_id:int):
+    def animal_id(self, animal_id: int):
         self._animal_id = animal_id
- 
+
     @property
     def animal_name(self):
         return self._animal_name
+
     @animal_name.setter
-    def animal_name(self, animal_name:str):
+    def animal_name(self, animal_name: str):
         self._animal_name = animal_name
 
     @property
     def birth_date(self):
         return self._birth_date
+
     @birth_date.setter
-    def birth_date(self, birth_date:str):
+    def birth_date(self, birth_date: str):
         self._birth_date = birth_date
 
     @property
     def breed(self):
         return self._breed
+
     @breed.setter
     def breed(self, breed: str):
         self._breed = breed
-   
+
     @property
     def species(self):
         return self._species
+
     @species.setter
     def species(self, species: str):
         self._species = species
-   
+
     @property
     def color(self):
         return self._color
+
     @color.setter
     def color(self, color: str):
         self._color = color
-   
+
     @property
     def gender(self):
         return self._gender
+
     @gender.setter
     def gender(self, gender: str):
         self._gender = gender
@@ -105,27 +127,31 @@ class Animal:
     @property
     def reg_date(self):
         return self._reg_date
+
     @reg_date.setter
     def reg_date(self, reg_date: str):
         self._reg_date = reg_date
-   
+
     @property
     def sterilized(self):
         return self._sterilized
+
     @sterilized.setter
     def sterilized(self, sterilized: bool):
         self._sterilized = sterilized
-   
+
     @property
     def behavioral_warning(self):
         return self._behavioral_warning
+
     @behavioral_warning.setter
     def behavioral_warning(self, behavioral_warning: str):
         self._behavioral_warning = behavioral_warning
-    
+
     @property
     def med_condition(self):
         return self._med_condition
+
     @med_condition.setter
     def med_condition(self, med_condition: str):
         self._med_condition = med_condition
@@ -133,6 +159,7 @@ class Animal:
     @property
     def owner_name(self):
         return self._owner_name
+
     @owner_name.setter
     def owner_name(self, owner_name: str):
         self._owner_name = owner_name
@@ -140,6 +167,7 @@ class Animal:
     @property
     def email(self):
         return self._email
+
     @email.setter
     def email(self, email: str):
         self._email = email
@@ -147,6 +175,7 @@ class Animal:
     @property
     def phone(self):
         return self._phone
+
     @phone.setter
     def phone(self, phone: str):
         self._phone = phone
@@ -154,11 +183,13 @@ class Animal:
     @property
     def address(self):
         return self._address
+
     @address.setter
     def address(self, address: str):
         self._address = address
 
     ########getter, setter end###########
+
 
 ########## Animal ##########
 Animals: Animal = []
@@ -202,6 +233,7 @@ def fetch_animals():
         print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
+
 
 def add_animal(
     animal_name: str,
@@ -262,6 +294,7 @@ def add_animal(
     except Exception as err:
         return "Entry Failed!"
 
+
 def delete_animal(id: int):
     try:
         for animal in Animals:
@@ -279,5 +312,6 @@ def delete_animal(id: int):
         return "Delete Failed!"
     except Exception as err:
         print(f"Error: {err}")
+
 
 ##########Animal End ##########

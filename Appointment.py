@@ -92,6 +92,9 @@ def fetch_appointment():
                 appointment_status=row[5]
             )
             appointment.appointment_id = int(row[0])
+            Appointments.append(appointment)
+        mysql_handler.disconnect()
+        print(f"Er")
     except Exception as err:
         print(f"Entry Failed!:{err}") 
 
@@ -122,8 +125,8 @@ def add_appointment(
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
-        print("Entry Success!")
         mysql_handler.disconnect()
+        print("Entry Success!")
 
     except Exception as err:
         print(f"Entry Failed!:{err}") 
@@ -138,8 +141,8 @@ def delete_appointment(id:int):
                 data = appointment.id
                 mysql_handler.execute_query(query, data)
                 Appointments.remove(appointment)
-                mysql_handler.disconnect()
-                print("Delete Success!")
+        mysql_handler.disconnect()
+        print("Delete Success!")
         print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")

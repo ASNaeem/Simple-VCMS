@@ -1,12 +1,14 @@
 from MySQLHandler import MySQLHandler
 
 user = "root"
-password = "root"
+password = "1234"
 host = "localhost"
-port = 3306
+port = 3307
+
 class Item:
-    def __init__(self, name:str,  
-                manufacturer:str, item_type:str, price:float, amount:int):
+    def __init__(
+        self, name: str, manufacturer: str, item_type: str, price: float, amount: int
+    ):
         self.item_id = None
         self.name = name
         self.manufacturer = manufacturer
@@ -14,56 +16,60 @@ class Item:
         self.item_type = item_type
         self.amount = amount
 
-###Getter, Setter###
+    ###Getter, Setter###
     @property
     def name(self):
         return self._name
+
     @name.setter
-    def name(self, name:str):
+    def name(self, name: str):
         self._name = name
-    
+
     @property
     def item_id(self):
         return self._item_id
-    
+
     @item_id.setter
-    def item_id(self, item_id:int):
+    def item_id(self, item_id: int):
         self._item_id = item_id
 
     @property
     def item_type(self):
         return self._item_type
-    @item_type.setter
-    def item_type(self, item_type:str):
-        self._item_type = item_type
 
+    @item_type.setter
+    def item_type(self, item_type: str):
+        self._item_type = item_type
 
     @property
     def manufacturer(self):
         return self._manufacturer
+
     @manufacturer.setter
-    def manufacturer(self, manufacturer:str):
+    def manufacturer(self, manufacturer: str):
         self._manufacturer = manufacturer
 
     @property
     def price(self):
         return self._price
+
     @price.setter
-    def price(self, price:float):
+    def price(self, price: float):
         self._price = price
 
     @property
     def amount(self):
         return self._amount
+
     @amount.setter
-    def amount(self, amount:int):
+    def amount(self, amount: int):
         self._amount = amount
+
 
 ###Getter, Setter End###
 
 ###### Item add and delete #####
 Items = []
-
 
 def fetch_items():
     try:
@@ -92,26 +98,32 @@ def add_item(name: str, manufacturer: str, item_type: str, price: float, amount:
     try:
         new_item = Item(mng_id, name, manufacturer, item_type, price, amount)
         Items.append(new_item)
-        query = "insert into item (name, manufacturer, item_type,price,amount)"
+        query = "insert into inventory (name, manufacturer, item_type,price,amount) values(%s, %s, %s, %s)"
         values = (name, manufacturer, item_type, price, amount)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
-        return "Entry success"
+        mysql_handler.disconnect()
+        print("Entry Success!")
     except Exception as err:
-        return "Entry failed"
+        print(f"Error: {err}")
 
 
-def remove_item(id: int):
+def delete_item(id: int):
     try:
         for item in Items:
             if id == item.id:
-                mysql.connect()
-                run_query(f"Delete from item where id= {item.id}")
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from inventory where id = %s;"
+                data = item.id
+                mysql_handler.execute_query(query, data)
                 Items.remove(item)
-                mysql.close()
-                return "Delete success!"
+        mysql_handler.disconnect()
+        print("Delete Success!")
+        print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")
+
 
 ###### Item add and delete end #####
