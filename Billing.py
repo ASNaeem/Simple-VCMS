@@ -120,6 +120,7 @@ def fetch_billings():
 
             Billings.append(billing)
         mysql_handler.disconnect()
+        print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
 
@@ -153,6 +154,7 @@ def add_bill(
         mysql_handler.execute_query(query, values)
         print("Entry Success!")
         mysql_handler.disconnect()
+        print("Entry Success!")
     except Exception as err:
         print(f"Error: {err}")
 
@@ -167,8 +169,8 @@ def delete_bill(id: int):
                 data = bill.id
                 mysql_handler.execute_query(query, data)
                 Appointments.remove(bill)
-                mysql_handler.disconnect()
-                print("Delete Success!")
+        mysql_handler.disconnect()
+        print("Delete Success!")
         print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")

@@ -49,12 +49,7 @@ class Animal:
         if record.strip():
             if not report_date:
                 report_date = date.today()
-            data = {
-                "record_id": record_id,
-                "record": record,
-                "date": report_date,
-            }
-            data = {"record_id": "1", "date": "some", "record": "rec"}
+            data = [int(record_id), str(record), str(report_date)]
             self.medical_records.append(data)
         else:
             raise ValueError("Record field can not be empty!")
@@ -66,13 +61,7 @@ class Animal:
 
     @medical_records.setter
     def medical_records(self, medical_records):
-        if all(
-            isinstance(item, dict)
-            and "record_id" in item
-            and "record" in item
-            and "date" in item
-            for item in medical_records
-        ):
+        if all(isinstance(item, list)):
             self._medical_records = medical_records
         else:
             raise ValueError(
@@ -234,10 +223,10 @@ def fetch_animals():
             query = "select * from record where animal_id = %s"
             value = animal.animal_id
             data = mysql_handler.fetch_data(query, (value,))
-           # if data:
-             #   for rec in data:
-            #        print(rec)               
-                    #animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
+            if data:
+                for rec in data:
+                    print(rec)               
+                    animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
             
             Animals.append(animal)
         mysql_handler.disconnect()
