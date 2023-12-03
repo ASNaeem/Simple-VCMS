@@ -192,7 +192,7 @@ def fetch_animals():
             animal.animal_id = int(row[0])
             query = "select * from record where animal_id = %s"
             value = animal.animal_id
-            data = mysql_handler.fetch_data(query, value)
+            data = mysql_handler.fetch_data(query, (value,))
            # if data:
              #   for rec in data:
             #        print(rec)               

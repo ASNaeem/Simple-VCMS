@@ -148,6 +148,7 @@ def fetch_employees():
             query = "select phone from phones where employee_id = %s"            
             value = row[0]
             phone_data = mysql_handler.fetch_data(query, (value,))
+            phone_numbers = [phone[0] for phone in phone_data]
             employee = Employee(
                 name=row[1],
                 email=row[2],
@@ -159,8 +160,9 @@ def fetch_employees():
                 salary=row[8],
                 joining_date=row[9],
                 employee_status=row[10],
-                phone=phone_data
+                phone=phone_numbers
             )
+            print(employee.phone)
             employee.employee_id = int(row[0])  
             Employees.append(employee)
         mysql_handler.disconnect()
@@ -179,7 +181,7 @@ def add_employee(
     salary: float,
     joining_date: str,
     employee_status: str,
-    phone: str = [],
+    phone  = [],
 ):
     try:
         new_employee = Employees(
