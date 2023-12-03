@@ -490,6 +490,9 @@
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>225</number>
           </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Day Care ID</string>

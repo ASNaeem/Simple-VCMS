@@ -45,7 +45,7 @@ class DayCareService:
         return self._day_care_date
 
     @day_care_date.setter
-    def day_care_date(self, naday_care_dateme: str):
+    def day_care_date(self, day_care_date: str):
         self._day_care_date = day_care_date
 
     @property
@@ -77,7 +77,7 @@ class DayCareService:
 
 ##################### Day Care Operations #########################
 
-DayCareService = []
+Day_Care_Service = []
 
 
 def fetch_day_care():
@@ -89,13 +89,14 @@ def fetch_day_care():
 
         for row in data:
             dayCareService = DayCareService(
-                day_care_date=row[1],
-                start_time=row[2],
-                end_time=row[3],
-                notes=row[4],
+                animal_id=row[1],
+                day_care_date=str(row[2]),
+                start_time=str(row[3]),
+                end_time=str(row[4]),
+                notes=str(row[5]),
             )
             dayCareService.day_Care_id = int(row[0])
-            DayCareService.append(dayCareService)
+            Day_Care_Service.append(dayCareService)
         mysql_handler.disconnect()
     except Exception as err:
         print(f"Error Fetching: {err}")
@@ -109,10 +110,10 @@ def add_day_care(
     notes: str,
 ):
     try:
-        new_day_care = DayCareService(
+        new_day_care = Day_Care_Service(
             animal_id, day_care_date, start_time, end_time, notes
         )
-        DayCareService.append(new_day_care)
+        Day_Care_Service.append(new_day_care)
 
         query = "insert into day_care (animal_id, dos, start_time, end_time, notes) values (%S, %s, %s, %s, %s);"
         data = values(animal_id, day_care_date, start_time, end_time, notes)
@@ -132,14 +133,14 @@ def add_day_care(
 
 def delete_day_care(id: int):
     try:
-        for day_care in DayCareService:
+        for day_care in Day_Care_Service:
             if id == day_care.id:
                 mysql_handler = MySQLHandler(host, user, password, port)
                 mysql_handler.connect()
                 query = "delete from day_care where day_care_id = %s;"
                 data = day_care.id
                 mysql_handler.execute_query(query, data)
-                DayCareService.remove(day_care)
+                Day_Care_Service.remove(day_care)
                 mysql_handler.disconnect()
                 print("Delete Success!")
         print("Delete Failed!")
