@@ -7,7 +7,10 @@ import warnings
 import os
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
-from Operations import Animals, fetch_animals, Billings, fetch_billings, Services
+from Service import  Services, fetch_services
+from Animal import Animals, fetch_animals
+from Billing import Billings, fetch_billings
+from Item import Items, fetch_items
 
 # warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
