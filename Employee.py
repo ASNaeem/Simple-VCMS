@@ -1,9 +1,9 @@
 from MySQLHandler import MySQLHandler
 
 user = "root"
-password = "1234"
+password = "root"
 host = "localhost"
-port = 3307
+port = 3306
 
 
 class Employee:
@@ -22,8 +22,7 @@ class Employee:
         phone: str = [],
     ):
         self.employee_id = None
-        self.name = name
-        self.phone = phone
+        self.name = name     
         self.email = email
         self.password = password
         self.address = address
@@ -33,7 +32,7 @@ class Employee:
         self.salary = salary
         self.joining_date = joining_date
         self.employee_status = employee_status
-
+        self.phone = phone
     ########getter, setter###########
     @property
     def employee_id(self):
@@ -145,14 +144,12 @@ def fetch_employees():
         mysql_handler.connect()
         query = "select * from employees"
         data = mysql_handler.fetch_data(query)
-
         for row in data:
-            query = "select * from phones where employee_id = %s"
+            query = "select phone from phones where employee_id = %s"            
             value = row[0]
-            phone_data = mysql_handler.fetch_data(query, value)
+            phone_data = mysql_handler.fetch_data(query, (value,))
             employee = Employee(
                 name=row[1],
-                phone=phone_data,
                 email=row[2],
                 password=row[3],
                 address=row[4],
@@ -162,8 +159,9 @@ def fetch_employees():
                 salary=row[8],
                 joining_date=row[9],
                 employee_status=row[10],
+                phone=phone_data
             )
-            employee.employee_id = int(row[0])
+            employee.employee_id = int(row[0])  
             Employees.append(employee)
         mysql_handler.disconnect()
     except Exception as err:
