@@ -233,12 +233,12 @@ def fetch_animals():
             animal.animal_id = int(row[0])
             query = "select * from record where animal_id = %s"
             value = animal.animal_id
-            data = mysql_handler.fetch_data(query, value)
-            # if data:
-            #   for rec in data:
-            #        print(rec)
-            # animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
-
+            data = mysql_handler.fetch_data(query, (value,))
+           # if data:
+             #   for rec in data:
+            #        print(rec)               
+                    #animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
+            
             Animals.append(animal)
         mysql_handler.disconnect()
         print(f"Er")
