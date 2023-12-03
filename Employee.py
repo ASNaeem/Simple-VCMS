@@ -123,6 +123,8 @@ class Employee:
     def joining_date(self, joining_date: str):
         self._joining_date = joining_date
 
+    ########getter, setter end###########
+
 
 ##################### Employee #########################
 

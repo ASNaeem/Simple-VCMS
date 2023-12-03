@@ -1,4 +1,10 @@
 from datetime import date
+from MySQLHandler import MySQLHandler
+
+user = "root"
+password = "1234"
+host = "localhost"
+port = 3307
 class Animal:
     def __init__ (self, animal_name:str, birth_date:str, 
                     sterilized:str, gender:str, species:str, breed:str, 
@@ -34,7 +40,7 @@ class Animal:
             raise ValueError("Record field can not be empty!")
 
     
-    ### getter, setter ########### 
+    ########## getter, setter ########### 
     @property
     def medical_records(self):
         return self.medical_records
@@ -152,3 +158,127 @@ class Animal:
     @address.setter
     def address(self, address: str):
         self._address = address
+
+    ########getter, setter end###########
+
+########## Animal ##########
+Animals: Animal = []
+
+
+def fetch_animals():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from animals"
+        data = mysql_handler.fetch_data(query)
+
+        for row in data:
+            animal = Animal(
+                animal_name=row[1],
+                birth_date=str(row[2]),
+                sterilized=str(row[3]),
+                gender=row[4],
+                species=row[5],
+                breed=row[6],
+                color=row[7],
+                behavioral_warning=row[8],
+                owner_name=row[9],
+                email=row[10],
+                phone=row[11],
+                address=row[12],
+                reg_date=str(row[13]),
+                med_condition=row[14],
+            )
+            animal.animal_id = int(row[0])
+            # query = "select * from records where animal_id = %s"
+            # value = animal.animal_id
+            # data = mysql_handler.fetch_data(query, value)
+            """
+            for rec in data:
+                print(rec)               
+                animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
+            """
+            Animals.append(animal)
+        mysql_handler.disconnect()
+        print(f"Er")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+
+def add_animal(
+    animal_name: str,
+    birth_date: str,
+    sterilized: bool,
+    gender: str,
+    species: str,
+    breed: str,
+    color: str,
+    behavioral_warning: str,
+    owner_name: str,
+    email: str,
+    phone: str,
+    address: str,
+    med_condition: str = None,
+):
+    try:
+        reg_date = date.today()
+        new_animal = Animal(
+            animal_name,
+            birth_date,
+            sterilized,
+            gender,
+            species,
+            breed,
+            color,
+            behavioral_warning,
+            owner_name,
+            email,
+            phone,
+            address,
+            currentDate,
+            med_condition,
+        )
+        Animals.append(new_animal)
+
+        query = "insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        values = (
+            animal_name,
+            birth_date,
+            sterilized,
+            gender,
+            species,
+            breed,
+            color,
+            behavioral_warning,
+            owner_name,
+            email,
+            phone,
+            address,
+            reg_date,
+        )
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        mysql_handler.execute_query(query, values)
+        return "Entry Success!"
+        mysql_handler.disconnect()
+    except Exception as err:
+        return "Entry Failed!"
+
+def delete_animal(id: int):
+    try:
+        for animal in Animals:
+            if id == animal.id:
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from animal where id = %s;"
+                data = animal.id
+                mysql_handler.execute_query(query, data)
+                Animals.remove(animal)
+                mysql_handler.disconnect()
+                print("Delete Success!")
+                return "Delete Success!"
+        print("Delete Failed!")
+        return "Delete Failed!"
+    except Exception as err:
+        print(f"Error: {err}")
+
+##########Animal End ##########
