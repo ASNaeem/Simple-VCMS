@@ -242,10 +242,10 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 2, QTableWidgetItem(str(employee.email)))
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
-        #table.setItem(row, 3, QTableWidgetItem(str(employee.phone[0])))
-        #header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
-        #table.setItem(row, 4, QTableWidgetItem(str(employee.phone[1])))
-        #header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        # table.setItem(row, 3, QTableWidgetItem(str(employee.phone[0])))
+        # header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        # table.setItem(row, 4, QTableWidgetItem(str(employee.phone[1])))
+        # header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 5, QTableWidgetItem(str(employee.address)))
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 6, QTableWidgetItem(str(employee.designation)))
@@ -258,7 +258,7 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(9, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 10, QTableWidgetItem(str(employee.joining_date)))
         header.setSectionResizeMode(10, QtWidgets.QHeaderView.Stretch)
-        table.setItem(row, 11, QTableWidgetItem(str(employee.status)))
+        table.setItem(row, 11, QTableWidgetItem(str(employee.employee_status)))
         header.setSectionResizeMode(11, QtWidgets.QHeaderView.Stretch)
         ############## Need fixing #######################
 
