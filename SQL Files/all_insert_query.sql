@@ -100,15 +100,15 @@ insert into day_care (animal_id, dos, start_time, end_time, notes) values (10, '
 create table employees (employee_id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(50), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date, employee_status varchar(10));
 
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022-09-23', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Korey MacCaull', 'kmaccaull1@multiply.com', 'lU6{)3gfw', '25 Hoard Terrace', 'Manager', 3, '7am - 3pm', 45196.66, '2022-06-04', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Avivah Barnard', 'abarnard2@mayoclinic.com', 'lF7*b!yxT#Vy8s', '766 Schmedeman Terrace', 'Manager', 3, '11pm - 7am', 27244.32, '2022-05-08', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Fred Nelsen', 'fnelsen3@ed.gov', 'zI9>ZBaM}{NWN', '44 Becker Court', 'Manager', 2, '3pm - 11pm', 18299.92, '2022-11-20', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Lola Rossetti', 'lrossetti4@howstuffworks.com', 'xB1}}S?Z', '32 Tony Alley', 'General Staff', 3, '7am - 3pm', 32075.0, '2022-07-13', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Maryl Skacel', 'mskacel5@alibaba.com', 'sS1!+ZWYl_l''s"n', '8 Pleasure Plaza', 'Receptionist', 3, '3pm - 11pm', 14217.02, '2022-11-19', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Ethelbert Huckstepp', 'ehuckstepp6@myspace.com', 'kT9~ONq{(L4', '22385 Duke Terrace', 'Veterinarian', 2, '7am - 3pm', 14082.95, '2022-06-22', 'On leave');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Shayne Laydel', 'slaydel7@tinypic.com', 'yG7-~@<>cAoPYD68', '46453 Lukken Road', 'Manager', 1, '9am - 5pm', 35247.04, '2022-04-23', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Ayn Masseo', 'amasseo8@discuz.net', 'gG1&ia|_<', '738 Becker Court', 'Veterinarian', 3, '3pm - 11pm', 20005.48, '2022-09-05', 'Working');
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Emlynn Leipoldt', 'eleipoldt9@flavors.me', 'uW6?9y3qG''''&6', '8202 Michigan Alley', 'Manager', 1, '9am - 5pm', 23582.69, '2022-04-19', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Korey MacCaull', 'kmaccaull1@multiply.com', 'lU6{)3gfw', '25 Hoard Terrace', 'Manager', 3, '7am - 3pm', 45196.66, '2022-06-04', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Avivah Barnard', 'abarnard2@mayoclinic.com', 'lF7*b!yxT#Vy8s', '766 Schmedeman Terrace', 'Manager', 3, '11pm - 7am', 27244.32, '2022-05-08', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Fred Nelsen', 'fnelsen3@ed.gov', 'zI9>ZBaM}{NWN', '44 Becker Court', 'Manager', 2, '3pm - 11pm', 18299.92, '2022-11-20', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Lola Rossetti', 'lrossetti4@howstuffworks.com', 'xB1}}S?Z', '32 Tony Alley', 'General Staff', 3, '7am - 3pm', 32075.0, '2022-07-13', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Maryl Skacel', 'mskacel5@alibaba.com', 'sS1!+ZWYl_l''s"n', '8 Pleasure Plaza', 'Receptionist', 3, '3pm - 11pm', 14217.02, '2022-11-19', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Ethelbert Huckstepp', 'ehuckstepp6@myspace.com', 'kT9~ONq{(L4', '22385 Duke Terrace', 'Veterinarian', 2, '7am - 3pm', 14082.95, '2022-06-22', 'On leave');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Shayne Laydel', 'slaydel7@tinypic.com', 'yG7-~@<>cAoPYD68', '46453 Lukken Road', 'Manager', 1, '9am - 5pm', 35247.04, '2022-04-23', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Ayn Masseo', 'amasseo8@discuz.net', 'gG1&ia|_<', '738 Becker Court', 'Veterinarian', 3, '3pm - 11pm', 20005.48, '2022-09-05', 'Working');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Emlynn Leipoldt', 'eleipoldt9@flavors.me', 'uW6?9y3qG''''&6', '8202 Michigan Alley', 'Manager', 1, '9am - 5pm', 23582.69, '2022-04-19', 'Working');
 
 /* expenses */
 Create table expenses (expense_id int  auto_increment primary key,
@@ -146,27 +146,30 @@ insert into inventory (name, manufacturer, item_type, price, amount) values ("He
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Panacur","Johnson & Johnson","Topical Cream",1632.83,7);
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Revolution","Burt's Bees","lotion",2912.56,17);
 
-/* phone */
-create table phone (animal_id int, phone varchar(50) primary key);
+/* phones */
+create table phones (employee_id int, phone varchar(50) primary key);
 
-insert into phone (animal_id, phone) values (2, '+880-155-550-7452');
-insert into phone (animal_id, phone) values (2, '+880-155-555-8888');
-insert into phone (animal_id, phone) values (3, '+880-115-553-3834');
-insert into phone (animal_id, phone) values (3, '+880-195-550-0422');
-insert into phone (animal_id, phone) values (4, '+880-115-552-7181');
-insert into phone (animal_id, phone) values (4, '+880-115-559-7397');
-insert into phone (animal_id, phone) values (5, '+880-185-558-5645');
-insert into phone (animal_id, phone) values (5, '+880-185-554-2563');
-insert into phone (animal_id, phone) values (6, '+880-115-553-3505');
-insert into phone (animal_id, phone) values (6, '+880-185-559-1210');
-insert into phone (animal_id, phone) values (7, '+880-155-551-2280');
-insert into phone (animal_id, phone) values (7, '+880-175-558-9049');
-insert into phone (animal_id, phone) values (8, '+880-185-554-1326');
-insert into phone (animal_id, phone) values (8, '+880-185-556-9427');
-insert into phone (animal_id, phone) values (9, '+880-115-553-3523');
-insert into phone (animal_id, phone) values (9, '+880-165-552-4421');
-insert into phone (animal_id, phone) values (10, '+880-115-558-9381');
-insert into phone (animal_id, phone) values (10, '+880-175-559-8778');
+insert into phones (employee_id, phone)values (1, '+880-155-240-7452');
+insert into phones (employee_id, phone)values (1, '+880-155-545-8888');
+insert into phones (employee_id, phone)values (2, '+880-155-550-7452');
+insert into phones (employee_id, phone)values (2, '+880-155-555-8888');
+insert into phones (employee_id, phone)values (3, '+880-115-553-3834');
+insert into phones (employee_id, phone)values (3, '+880-195-550-0422');
+insert into phones (employee_id, phone)values (4, '+880-115-552-7181');
+insert into phones (employee_id, phone)values (4, '+880-115-559-7397');
+insert into phones (employee_id, phone)values (5, '+880-185-558-5645');
+insert into phones (employee_id, phone)values (5, '+880-185-554-2563');
+insert into phones (employee_id, phone)values (6, '+880-115-553-3505');
+insert into phones (employee_id, phone)values (6, '+880-185-559-1210');
+insert into phones (employee_id, phone)values (7, '+880-155-551-2280');
+insert into phones (employee_id, phone)values (7, '+880-175-558-9049');
+insert into phones (employee_id, phone)values (8, '+880-185-554-1326');
+insert into phones (employee_id, phone)values (8, '+880-185-556-9427');
+insert into phones (employee_id, phone)values (9, '+880-115-553-3523');
+insert into phones (employee_id, phone)values (9, '+880-165-552-4421');
+insert into phones (employee_id, phone)values (10, '+880-115-558-9381');
+insert into phones (employee_id, phone)values (10, '+880-175-559-8778');
+
 
 /* record */
 create table record (
@@ -177,13 +180,13 @@ create table record (
 insert into record (animal_id, record, rdate) values (1, 'Got bit by a cat in the leg.', '2023-01-31');
 insert into record (animal_id, record, rdate) values (3, 'Got into fight with another cat, got bitten by a cat on front leg.', '2023-09-13');
 insert into record (animal_id, record, rdate) values (3, 'Twisted left back leg, having trouble walking.', '2022-12-08');
-insert into record (animal_id, record, rdate) values (4, 'No Previous Record.', '2023-10-15');
+insert into record (animal_id, record, rdate) values (4, 'Had a fight.', '2023-10-15');
 insert into record (animal_id, record, rdate) values (5, 'Feathers are falling of off the skin for some unknown  reason.', '2023-10-18');
-insert into record (animal_id, record, rdate) values (6, 'Nullam orci pede, venenatis non, sodales sed, tincanimal_idunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', '2022-03-10');
-insert into record (animal_id, record, rdate) values (7, 'Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincanimal_idunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus.', '2022-02-03');
-insert into record (animal_id, record, rdate) values (8, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.', '2023-08-24');
-insert into record (animal_id, record, rdate) values (9, 'Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros.', '2023-06-09');
-insert into record (animal_id, record, rdate) values (10, 'Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ranimal_idiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ranimal_idiculus mus. Etiam vel augue.', '2022-12-23');
+insert into record (animal_id, record, rdate) values (6, 'experienced lethargy and decreased appetite for two days.', '2022-03-10');
+insert into record (animal_id, record, rdate) values (7, 'a history of vomiting and diarrhea for the past 24 hours', '2022-02-03');
+insert into record (animal_id, record, rdate) values (8, 'a history of excessive urination and water consumption for the past 2 weeks.', '2023-08-24');
+insert into record (animal_id, record, rdate) values (9, 'a history of seizures for the past 6 months.', '2023-06-09');
+insert into record (animal_id, record, rdate) values (10, 'a history of chronic urinary tract infections for the past 3 years.', '2022-12-23');
 
 /* services */
 Create table services( service_id int auto_increment primary key, 
@@ -217,3 +220,20 @@ insert into veterinarians (employee_id, totalcase, specialization) values (7, 46
 insert into veterinarians (employee_id, totalcase, specialization) values (8, 4, 'Veterinary Dermatologis');
 insert into veterinarians (employee_id, totalcase, specialization) values (9, 15, 'Veterinary Surgeon');
 insert into veterinarians (employee_id, totalcase, specialization) values (10, 1, 'Veterinary Surgeon');
+
+/*billing_services*/
+
+create table bill_services (
+	bid int,
+	service_id int
+);
+
+insert into bill_services (bid, service_id) values (1,1);
+insert into bill_services(bid, service_id) values(1,2);
+insert into bill_services (bid, service_id) values (2,2);
+insert into bill_services(bid, service_id) values(2,4);
+insert into bill_services (bid, service_id) values (3,1);
+insert into bill_services(bid, service_id) values(3,2);
+insert into bill_services (bid, service_id) values (4,1);
+insert into bill_services(bid, service_id) values(4,2);
+

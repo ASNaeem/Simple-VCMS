@@ -134,7 +134,7 @@ class Employee:
     ########getter, setter end###########
 
 
-##################### Employee #########################
+##################### Employee Operations #########################
 
 Employees = []
 
@@ -143,11 +143,11 @@ def fetch_employees():
     try:
         mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
-        query = "select * from employees;"
+        query = "select * from employees"
         data = mysql_handler.fetch_data(query)
 
         for row in data:
-            query = "select * from phones where employee_id = %s;"
+            query = "select * from phones where employee_id = %s"
             value = row[0]
             phone_data = mysql_handler.fetch_data(query, value)
             employee = Employee(
@@ -163,7 +163,8 @@ def fetch_employees():
                 joining_date=row[9],
                 employee_status=row[10],
             )
-        Employees.append(employee)
+            employee.employee_id = int(row[0])
+            Employees.append(employee)
         mysql_handler.disconnect()
     except Exception as err:
         print(f"Error Fetching: {err}")

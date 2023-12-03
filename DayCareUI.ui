@@ -489,6 +489,11 @@
           </attribute>
           <column>
            <property name="text">
+            <string>Day Care ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Animal ID</string>
            </property>
           </column>
@@ -509,22 +514,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Hours</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Penalty Per Hour</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Total Price</string>
+            <string>Notes</string>
            </property>
           </column>
          </widget>
