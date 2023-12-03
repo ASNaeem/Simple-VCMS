@@ -39,11 +39,9 @@ class Employee:
     def employee_id(self):
         return self._employee_id
 
-    """ 
     @employee_id.setter
     def employee_id(self, employee_id: int):
         self._employee_id = employee_id
-    """
 
     @property
     def name(self):
@@ -163,6 +161,7 @@ def fetch_employees():
                 working_hours=row[7],
                 salary=row[8],
                 joining_date=row[9],
+                employee_status=row[10],
             )
         Employees.append(employee)
         mysql_handler.disconnect()
@@ -180,6 +179,7 @@ def add_employee(
     designation: str,
     salary: float,
     joining_date: str,
+    employee_status: str,
     phone: str = [],
 ):
     try:
@@ -193,6 +193,7 @@ def add_employee(
             designation,
             salary,
             joining_date,
+            employee_status,
             phone,
         )
         Employee.append(new_employee)
@@ -208,6 +209,7 @@ def add_employee(
             working_hours,
             salary,
             joining_date,
+            employee_status,
         )
 
         mysql_handler = MySQLHandler(host, user, password)

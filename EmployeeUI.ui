@@ -633,7 +633,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QRadioButton" name="radioButton_11">
+                <widget class="QRadioButton" name="rb_working">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                    <horstretch>0</horstretch>
@@ -665,7 +665,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QRadioButton" name="radioButton_12">
+                <widget class="QRadioButton" name="rb_on_leave">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                    <horstretch>0</horstretch>
@@ -904,12 +904,22 @@
            </column>
            <column>
             <property name="text">
+             <string>Working Hours</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
              <string>Salary</string>
             </property>
            </column>
            <column>
             <property name="text">
              <string>Joining Date</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Status</string>
             </property>
            </column>
           </widget>
