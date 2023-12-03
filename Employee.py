@@ -143,11 +143,11 @@ def fetch_employees():
     try:
         mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
-        query = "select * from employees;"
+        query = "select * from employees"
         data = mysql_handler.fetch_data(query)
 
         for row in data:
-            query = "select * from phones where employee_id = %s;"
+            query = "select * from phones where employee_id = %s"
             value = row[0]
             phone_data = mysql_handler.fetch_data(query, value)
             employee = Employee(
