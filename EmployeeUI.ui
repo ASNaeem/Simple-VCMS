@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1056</width>
-    <height>845</height>
+    <width>947</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -852,25 +852,21 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_98">
          <item>
-          <widget class="QTableWidget" name="table_employee_6">
+          <widget class="QTableWidget" name="table_employee">
            <property name="font">
             <font>
              <family>Courier New</family>
              <pointsize>12</pointsize>
             </font>
            </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
-           </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::SingleSelection</enum>
-           </property>
-           <property name="selectionBehavior">
-            <enum>QAbstractItemView::SelectRows</enum>
-           </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
             <number>200</number>
            </attribute>
+           <column>
+            <property name="text">
+             <string>Employee ID</string>
+            </property>
+           </column>
            <column>
             <property name="text">
              <string>Employee Name</string>
@@ -883,12 +879,12 @@
            </column>
            <column>
             <property name="text">
-             <string>Phone (Personal)</string>
+             <string>Phone Number</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Phone (Home)</string>
+             <string>Alternate Phone Number</string>
             </property>
            </column>
            <column>
@@ -909,11 +905,6 @@
            <column>
             <property name="text">
              <string>Salary</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Status</string>
             </property>
            </column>
            <column>

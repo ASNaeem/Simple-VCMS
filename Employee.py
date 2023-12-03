@@ -18,6 +18,7 @@ class Employee:
         working_hours: str,
         salary: float,
         joining_date: str,
+        employee_status: str,
         phone: str = [],
     ):
         self.employee_id = None
@@ -31,6 +32,7 @@ class Employee:
         self.working_hours = working_hours
         self.salary = salary
         self.joining_date = joining_date
+        self.employee_status = employee_status
 
     ########getter, setter###########
     @property
@@ -122,6 +124,14 @@ class Employee:
     @joining_date.setter
     def joining_date(self, joining_date: str):
         self._joining_date = joining_date
+
+    @property
+    def employee_status(self):
+        return self._employee_status
+
+    @employee_status.setter
+    def employee_status(self, employee_status: str):
+        self._employee_status = employee_status
 
     ########getter, setter end###########
 
