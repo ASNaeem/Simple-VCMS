@@ -165,6 +165,9 @@
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>230</number>
           </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Billing ID</string>
@@ -473,6 +476,9 @@
                 </property>
                 <attribute name="horizontalHeaderDefaultSectionSize">
                  <number>230</number>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
                 </attribute>
                 <column>
                  <property name="text">

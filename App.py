@@ -11,7 +11,7 @@ from Service import Services, fetch_services
 from Animal import Animals, fetch_animals
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
-from DayCareService import DayCareService, fetch_day_care
+from DayCareService import Day_Care_Service, fetch_day_care
 
 # warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
@@ -103,10 +103,11 @@ class MainApp(QMainWindow):
         # self.page_animal.button_reg_back.clicked.connect(self.show_animal_)
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
-        # self.change_theme()
-        #self.set_animal_table()
-        #self.set_bill_table()
+        #self.change_theme()
+        self.set_animal_table()
+        self.set_bill_table()
         self.set_employee_table()
+        self.set_day_care_table()
 
         ##################### End Init #####################
 
@@ -270,14 +271,28 @@ class MainApp(QMainWindow):
 
     ################### Day Care Service ##################
     def set_day_care_table(self):
-        fetch_day_care
-        for row, day_care in enumerate(DayCareService):
+        fetch_day_care()
+        for row, day_care in enumerate(Day_Care_Service):
             self.add_day_care_to_table(row, day_care)
 
     def add_day_care_to_table(self, row, day_care):
-        #header = self.page_daycare.table_
-
-        ...  
+        # table.verticalHeader().setVisible(False)
+        header = self.page_daycare.table_care.horizontalHeader()
+        header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        table = self.page_daycare.table_care
+        table.insertRow(row)
+        table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
 
     ################### Billing ##################
 
