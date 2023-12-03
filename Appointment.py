@@ -65,3 +65,22 @@ class Appointment:
     @appointment_status.setter
     def appointment_status(self, appointment_status: str):
         self._appointment_status = appointment_status
+    ########getter, setter end###########
+
+###  Appointment #####
+def add_appointment(
+    date,
+    time,
+    reason: str,
+    name: str,
+    phone: str,
+    address: str,
+    animal_name: str,
+    species: str,
+    breed: str,
+    color: str,
+    behaviour: str,
+    birth: str,
+    reg_date: str,
+):
+    apt = Appointment(date, time, re)
