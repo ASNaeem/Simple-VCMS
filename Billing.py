@@ -151,22 +151,25 @@ def add_bill(
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
-        return "Entry Success!"
+        print("Entry Success!")
         mysql_handler.disconnect()
     except Exception as err:
-        return "Entry Failed!"
+        print(f"Error: {err}")
 
 
 def delete_bill(id: int):
     try:
         for bill in Billings:
             if id == billing.billing_id:
-                mysql.connect()
-                run_query(f"delete from billings where id = {billing.id}")
-                Billings.remove(billing)
-                mysql.close()
-                return "Delete Success!"
-        return "Delete Failed!"
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from Billings where id = %s;"
+                data = bill.id
+                mysql_handler.execute_query(query, data)
+                Appointments.remove(bill)
+                mysql_handler.disconnect()
+                print("Delete Success!")
+        print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")
 
