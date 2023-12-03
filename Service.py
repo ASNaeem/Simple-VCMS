@@ -105,21 +105,24 @@ def add_service(
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
-        return "Entry Success!"
+        print("Entry Success!")
         mysql_handler.disconnect()
     except Exception as err:
-        return "Entry Failed!"
+        print(f"Error: {err}")
 
 def delete_service(id:int):
     try:
         for service in Services:
             if id == service.id:
-                mysql.connect()
-                run_query(f"delete from service where id = {service.id}")
-                Services.remove(service)
-                mysql.close()
-                return "Delete Success!"
-        return "Delete Failed!"
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from services where id = %s;"
+                data = service.id
+                mysql_handler.execute_query(query, data)
+                Appointments.remove(service)
+                mysql_handler.disconnect()
+                print("Delete Success!")
+        print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")
 ### End Services List For Billing###

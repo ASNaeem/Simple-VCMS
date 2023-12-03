@@ -1,3 +1,9 @@
+from MySQLHandler import MySQLHandler
+
+user = "root"
+password = "1234"
+host = "localhost"
+port = 3307
 class Appointment:
     def __init__(
         self,
@@ -9,7 +15,7 @@ class Appointment:
     ):
         self.appointment_id = None
         self.animal_id = animal_id
-        self.owner_name = owner_name
+        self.owner_name = None
         self.appointment_date = appointment_date
         self.appointment_time = appointment_time
         self.visit_reason = visit_reason
@@ -68,19 +74,72 @@ class Appointment:
     ########getter, setter end###########
 
 ###  Appointment #####
+Appointments = []
+
+def fetch_appointment():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from appointment;"
+        data = mysql_handler.fetch_data(query)
+
+        for row in data:
+            appointment = Appointment(
+                animal_id=int(row[1]),
+                appointment_date=str(row[2]),
+                appointment_time=str(row[3]),
+                visit_reason=row[4],
+                appointment_status=row[5]
+            )
+            appointment.appointment_id = int(row[0])
+    except Exception as err:
+        print(f"Entry Failed!:{err}") 
+
 def add_appointment(
-    date,
-    time,
-    reason: str,
-    name: str,
-    phone: str,
-    address: str,
-    animal_name: str,
-    species: str,
-    breed: str,
-    color: str,
-    behaviour: str,
-    birth: str,
-    reg_date: str,
+    animal_id: int,
+    appointment_date: str,
+    appointment_time: str,
+    visit_reason: str,
+    appointment_status: str  
 ):
-    apt = Appointment(date, time, re)
+    try:
+        new_appointment = Appointment(
+            animal_id,
+            appointment_date,
+            appointment_time,
+            visit_reason,
+            appointment_status
+        )
+        Appointments.append(new_appointment)
+
+        query = "insert into appointments(animal_id, appointment_date, appointment_time, visit_reason, appointment_status) values(%s, %s, %s, %s, %s)"
+        values = (animal_id, 
+                    appointment_date, 
+                    appointment_time, 
+                    visit_reason, 
+                    appointment_status
+                    )
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        mysql_handler.execute_query(query, values)
+        print("Entry Success!")
+        mysql_handler.disconnect()
+
+    except Exception as err:
+        print(f"Entry Failed!:{err}") 
+
+def delete_appointment(id:int):
+    try:
+        for appointment in Appointments: 
+            if id == appointment_id:
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from appointments where id = %s;"
+                data = appointment.id
+                mysql_handler.execute_query(query, data)
+                Appointments.remove(appointment)
+                mysql_handler.disconnect()
+                print("Delete Success!")
+        print("Delete Failed!")
+    except Exception as err:
+        print(f"Error: {err}")
