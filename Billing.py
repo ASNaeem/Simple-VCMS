@@ -1,6 +1,11 @@
 import Operations as op
 from datetime import date
+from MySQLHandler import MySQLHandler
 
+user = "root"
+password = "1234"
+host = "localhost"
+port = 3307
 class Bill:
     def __init__(self, 
                 day_care_id:int, 
@@ -71,3 +76,88 @@ class Bill:
     @status.setter
     def status(self, status:str):
         self._status = status
+
+    ########getter, setter end###########
+
+### Billing ####
+Billings = []
+
+def fetch_billings():
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "select * from billings;"
+        data = mysql_handler.fetch_data(query)
+        query = "select * from bill_services;"
+        dataServices = mysql_handler.fetch_data(query)
+
+        for row in data:
+            billing = Bill(
+                day_care_id=int(row[1]),
+                appointment_id=int(row[2]),
+                payment_date=str(row[3]),
+                total_amount=float(row[4]),
+                adjustment=float(row[5]),
+                status=row[6],
+            )
+            billing.billing_id = int(row[0])
+
+            for rowServices in dataServices:
+                if billing.billing_id == rowServices[0]:
+                    billing.add_services(rowServices[1])
+
+            Billings.append(billing)
+        mysql_handler.disconnect()
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+
+def add_bill(
+    day_care_id:int,
+    appointment_id:int,
+    payment_date:str,
+    total_amount:float,
+    adjustment:float,
+    status:str
+):
+    try:
+        payment_date = date.today()
+        new_bill = Bill(
+            day_Care_id,
+            appointment_id,
+            currentDate,
+            total_amount,
+            adjustment,
+            status
+        )
+        Billings.append(new_bill)
+
+        query = "insert into animal (day_care_id, appointment_id, payment_date, total_amount, adjustment, status) values(%s,%s,%s,%s,%s,%s)"
+        values = (
+            day_care_id,
+            appointment_id,
+            payment_date,
+            total_amount,
+            adjustment,
+            status
+        )
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        mysql_handler.execute_query(query, values)
+        return "Entry Success!"
+        mysql_handler.disconnect()
+    except Exception as err:
+        return "Entry Failed!"
+
+def delete_bill(id:int):
+    try:
+        for bill in Billings:
+            if id == billing.billing_id:
+                mysql.connect()
+                run_query(f"delete from billings where id = {billing.id}")
+                Billings.remove(billing)
+                mysql.close()
+                return "Delete Success!"
+        return "Delete Failed!"
+    except Exception as err:
+        print(f"Error: {err}")
+### End Billing ####

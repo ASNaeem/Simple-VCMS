@@ -131,6 +131,8 @@ class Employee:
     def employee_status(self, employee_status: str):
         self._employee_status = employee_status
 
+    ########getter, setter end###########
+
 
 ##################### Employee #########################
 
