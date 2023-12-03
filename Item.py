@@ -5,7 +5,6 @@ password = "1234"
 host = "localhost"
 port = 3307
 
-
 class Item:
     def __init__(
         self, name: str, manufacturer: str, item_type: str, price: float, amount: int
@@ -72,7 +71,6 @@ class Item:
 ###### Item add and delete #####
 Items = []
 
-
 def fetch_items():
     try:
         mysql_handler = MySQLHandler(host, user, password)
@@ -100,25 +98,30 @@ def add_item(name: str, manufacturer: str, item_type: str, price: float, amount:
     try:
         new_item = Item(mng_id, name, manufacturer, item_type, price, amount)
         Items.append(new_item)
-        query = "insert into item (name, manufacturer, item_type,price,amount)"
+        query = "insert into inventory (name, manufacturer, item_type,price,amount) values(%s, %s, %s, %s)"
         values = (name, manufacturer, item_type, price, amount)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
-        return "Entry success"
+        mysql_handler.disconnect()
+        print("Entry Success!")
     except Exception as err:
-        return "Entry failed"
+        print(f"Error: {err}")
 
 
-def remove_item(id: int):
+def delete_item(id: int):
     try:
         for item in Items:
             if id == item.id:
-                mysql.connect()
-                run_query(f"Delete from item where id= {item.id}")
+                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler.connect()
+                query = "delete from inventory where id = %s;"
+                data = item.id
+                mysql_handler.execute_query(query, data)
                 Items.remove(item)
-                mysql.close()
-                return "Delete success!"
+        mysql_handler.disconnect()
+        print("Delete Success!")
+        print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")
 
