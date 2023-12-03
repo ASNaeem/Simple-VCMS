@@ -97,9 +97,9 @@ insert into day_care (animal_id, dos, start_time, end_time, notes) values (9, '2
 insert into day_care (animal_id, dos, start_time, end_time, notes) values (10, '2020-12-26', "12:00", "14:00", 'allergic to egg');
 
 /* employee */
-create table employees (id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(50), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date);
+create table employees (employee_id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(50), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date, employee_status varchar(10));
 
-insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022-09-23');
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7am - 3pm', 32568.01, '2022-09-23', 'Working');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Korey MacCaull', 'kmaccaull1@multiply.com', 'lU6{)3gfw', '25 Hoard Terrace', 'Manager', 3, '7am - 3pm', 45196.66, '2022-06-04');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Avivah Barnard', 'abarnard2@mayoclinic.com', 'lF7*b!yxT#Vy8s', '766 Schmedeman Terrace', 'Manager', 3, '11pm - 7am', 27244.32, '2022-05-08');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values ('Fred Nelsen', 'fnelsen3@ed.gov', 'zI9>ZBaM}{NWN', '44 Becker Court', 'Manager', 2, '3pm - 11pm', 18299.92, '2022-11-20');

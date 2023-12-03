@@ -1,5 +1,5 @@
 import sys
-from employee import Employees, fetch_employees, add_employee, delete_employee
+from Employee import Employees, fetch_employees, add_employee, delete_employee
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from qt_material import apply_stylesheet, list_themes
@@ -102,9 +102,9 @@ class MainApp(QMainWindow):
         # self.change_theme()
         self.set_animal_table()
         self.set_bill_table()
+        self.set_employee_table()
 
         ##################### End Init #####################
-
 
     ##################### Page switching#####################
     def show_daycare(self):
@@ -237,16 +237,29 @@ class MainApp(QMainWindow):
         table = self.page_employee.table_employee
         table.insertRow(row)
         table.setItem(row, 0, QTableWidgetItem(str(employee.employee_id)))
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 1, QTableWidgetItem(str(employee.name)))
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         table.setItem(row, 2, QTableWidgetItem(str(employee.email)))
-        table.setItem(row, 3, QTableWidgetItem(str(employee.phone[0])))
-        table.setItem(row, 3, QTableWidgetItem(str(employee.phone[1])))
-        table.setItem(row, 4, QTableWidgetItem(str(employee.address)))
-        table.setItem(row, 5, QTableWidgetItem(str(employee.designation)))
-        table.setItem(row, 6, QTableWidgetItem(str(employee.access_level)))
-        table.setItem(row, 7, QTableWidgetItem(str(employee.working_hours)))
-        table.setItem(row, 8, QTableWidgetItem(str(employee.salary)))
-        table.setItem(row, 9, QTableWidgetItem(str(employee.joining_date)))
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        #table.setItem(row, 3, QTableWidgetItem(str(employee.phone[0])))
+        #header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        #table.setItem(row, 4, QTableWidgetItem(str(employee.phone[1])))
+        #header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 5, QTableWidgetItem(str(employee.address)))
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 6, QTableWidgetItem(str(employee.designation)))
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 7, QTableWidgetItem(str(employee.access_level)))
+        header.setSectionResizeMode(7, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 8, QTableWidgetItem(str(employee.working_hours)))
+        header.setSectionResizeMode(8, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 9, QTableWidgetItem(str(employee.salary)))
+        header.setSectionResizeMode(9, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 10, QTableWidgetItem(str(employee.joining_date)))
+        header.setSectionResizeMode(10, QtWidgets.QHeaderView.Stretch)
+        table.setItem(row, 11, QTableWidgetItem(str(employee.status)))
+        header.setSectionResizeMode(11, QtWidgets.QHeaderView.Stretch)
         ############## Need fixing #######################
 
     ################# End of Employee ###################
@@ -300,7 +313,7 @@ class MainApp(QMainWindow):
         table.setItem(rowService, 2, QTableWidgetItem(service.cost))
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
 
-################### End Billing ##################                
+    ################### End Billing ##################
 
     ################### Appointment ##################
     def make_appointment(self):
