@@ -65,7 +65,7 @@ class DayCareService:
 
 ##################### Day Care Operations #########################
 
-Day_Care = []
+DayCareService = []
 
 def fetch_day_care():
     try:
@@ -75,7 +75,7 @@ def fetch_day_care():
         data = mysql_handler.fetch_data(query)
         
         for row in data:
-            #day_care = Day_Care
+            DayCareService
             pass
 
     except Exception as err:

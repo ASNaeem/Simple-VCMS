@@ -136,7 +136,7 @@ class Employee:
 
 ##################### Employee Operations #########################
 
-Employees: Employee = []
+Employees = []
 
 
 def fetch_employees():
@@ -163,8 +163,8 @@ def fetch_employees():
                 joining_date=row[9],
                 employee_status=row[10],
             )
-        employee.employee_id = int(row[0])
-        Employees.append(employee)
+            employee.employee_id = int(row[0])
+            Employees.append(employee)
         mysql_handler.disconnect()
     except Exception as err:
         print(f"Error Fetching: {err}")
