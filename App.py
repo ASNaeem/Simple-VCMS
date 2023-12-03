@@ -106,6 +106,10 @@ class MainApp(QMainWindow):
         #self.set_animal_table()
         #self.set_bill_table()
         self.set_employee_table()
+        
+        
+        ############operations##############
+        
 
         ##################### End Init #####################
 
