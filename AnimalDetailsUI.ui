@@ -149,6 +149,9 @@
           <property name="text">
            <string>Male</string>
           </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup</string>
+          </attribute>
          </widget>
         </item>
         <item>
@@ -162,6 +165,9 @@
           <property name="text">
            <string>Female</string>
           </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup</string>
+          </attribute>
          </widget>
         </item>
        </layout>
@@ -234,6 +240,9 @@
           <property name="text">
            <string>Yes</string>
           </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup_2</string>
+          </attribute>
          </widget>
         </item>
         <item>
@@ -247,6 +256,9 @@
           <property name="text">
            <string>No</string>
           </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup_2</string>
+          </attribute>
          </widget>
         </item>
        </layout>
@@ -855,19 +867,6 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QPushButton" name="button_animal_edit">
-            <property name="font">
-             <font>
-              <family>Courier New</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Enable Edit</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="button_animal_save">
             <property name="font">
              <font>
@@ -943,4 +942,8 @@
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
+ </buttongroups>
 </ui>
