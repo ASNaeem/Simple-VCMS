@@ -16,7 +16,7 @@ from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
 from Expense import Expenses, fetch_expenses
 
-# warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
 
 
@@ -104,10 +104,10 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         #self.change_theme()
         self.set_animal_table()
-        #self.set_bill_table()
-        #self.set_employee_table()
-        #self.set_day_care_table()
-        #self.set_expense_table()
+        self.set_bill_table()
+        self.set_employee_table()
+        self.set_day_care_table()
+        self.set_expense_table()
 
         
         
@@ -283,7 +283,7 @@ class MainApp(QMainWindow):
         table.setItem(row, 0, QTableWidgetItem(str(record[1])))
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 1, QTableWidgetItem(str(record[0])))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         
     ################# Employee ###################
 
@@ -470,7 +470,7 @@ class MainApp(QMainWindow):
 #### UI density Scaling modifier ####
 extra = {
     # Density Scale
-    "density_scale": "-3",
+    "density_scale": "-2",
 }
 if __name__ == "__main__":
     app = QApplication([])
