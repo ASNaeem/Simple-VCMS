@@ -1,12 +1,6 @@
 from datetime import date
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
-
-
 class Animal:
     def __init__(
         self,
@@ -46,7 +40,7 @@ class Animal:
         if record.strip():
             if not report_date:
                 report_date = date.today()
-            data = [str(record), str(report_date)]
+            data = [str(record), report_date]
             self.medical_records.append(data)
             add_record_to_db(self.animal_id, data)
         else:
@@ -186,7 +180,7 @@ class Animal:
 Animals = []
 def fetch_animals():
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from animals"
         data = mysql_handler.fetch_data(query)
@@ -217,19 +211,23 @@ def fetch_animals():
         mysql_handler.disconnect()
     except Exception as err:
         print(f"Error Fetching: {err}")
+        
 def add_record_to_db(animal_id:int, data):
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        query = "insert into record values(%s, %s, %s)"
+        print(data)
+        query = "insert into record(animal_id, record, rdate) values(%s, %s, %s)"
         values = animal_id, data[0], data[1]
+        print(values)
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
+        print("New medical record added!")
     except Exception as err:
-        print("Error inserting: {err}")
-    
+        print(f"Error inserting: {err}")
     
 
+    
 def add_animal(
     animal_name: str,
     birth_date: str,

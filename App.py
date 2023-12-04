@@ -1,20 +1,21 @@
 import sys
-from Employee import Employees, fetch_employees, add_employee, delete_employee
+import warnings
+import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, Qt
 from qt_material import apply_stylesheet, list_themes
-from datetime import datetime
-import warnings
-import os
+from datetime import date
 
-os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+from Employee import Employees, fetch_employees, add_employee, delete_employee
 from Service import Services, fetch_services
 from Animal import Animals, fetch_animals
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
 from Expense import Expenses, fetch_expenses
+
+os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 warnings.filterwarnings("ignore")
 theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
@@ -112,10 +113,32 @@ class MainApp(QMainWindow):
         
         
         ### functionalities ######
-        
+        self.page_animal_details.button_add_record.clicked.connect(self.add_record)
         
         ##################### End Init #####################
-
+    def add_record(self, animal_id:int):       
+        page = self.page_animal_details
+        table = page.table_animal_record
+        diagnosis = page.line_new_record.text().strip()
+        if diagnosis:             
+            selected_item = self.page_animal_info.table_animal.selectedItems()
+            animal_id = int(selected_item[0].text())
+            diagnosis = page.line_new_record.text().strip()
+            animal_object = None   
+            for animal in Animals:
+                if animal.animal_id == animal_id:            
+                    animal_object = animal      
+                    break
+            
+            animal.add_record(diagnosis)
+            self.set_records_table(animal)
+            #self.add_records_to_table(-1, animal.medical_records[-1])
+            
+            page.line_new_record.clear()
+            
+        else:
+            print("Input a diagnosis record to add!")
+        
     ##################### Page switching#####################
     def show_daycare(self):
         self.stackedWidget.setCurrentWidget(self.page_daycare)
@@ -189,8 +212,7 @@ class MainApp(QMainWindow):
                 page.rbutton_ster_no.setChecked(True)
                 
             # setting records table #
-            for row, record in enumerate(animal.medical_records):
-                self.add_records_to_table(row, record)
+            self.set_records_table(animal)
             
             # self.setWindowTitle("VCMS || Dashboard || Animal")
         else:
@@ -247,6 +269,12 @@ class MainApp(QMainWindow):
             f.write(self.page_setting.comboBox_themes.currentText())
 
     ## Animal ##
+    def set_records_table(self, animal):  
+        self.page_animal_details.table_animal_record.clearContents()
+        self.page_animal_details.table_animal_record.setRowCount(0)
+        for row, record in enumerate(animal.medical_records):
+            self.add_records_to_table(row, record)
+            
     def set_animal_table(self):
         fetch_animals()
         for row, animal in enumerate(Animals):
@@ -477,7 +505,7 @@ class MainApp(QMainWindow):
 #### UI density Scaling modifier ####
 extra = {
     # Density Scale
-    "density_scale": "-2",
+    "density_scale": "-4",
 }
 if __name__ == "__main__":
     app = QApplication([])

@@ -23,6 +23,7 @@ class MySQLHandler:
                 password=self.password,
                 database=self.database,
                 port=self.port,
+                autocommit=True
             )
             print("Connected to MySQL database!")
         except mysql.connector.Error as err:
