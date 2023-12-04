@@ -2,7 +2,9 @@ import sys
 from Employee import Employees, fetch_employees, add_employee, delete_employee
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
+from PyQt5.QtCore import QDate, Qt
 from qt_material import apply_stylesheet, list_themes
+from datetime import datetime
 import warnings
 import os
 
@@ -83,12 +85,8 @@ class MainApp(QMainWindow):
         self.button_animal.clicked.connect(self.show_animal_info)
         self.page_animal_info.button_animal_reg.clicked.connect(self.show_animal_reg)
         self.page_animal_reg.button_reg_back.clicked.connect(self.show_animal_info)
-        self.page_animal_info.button_animal_details.clicked.connect(
-            self.show_animal_details
-        )
-        self.page_animal_details.button_animal_back.clicked.connect(
-            self.show_animal_info
-        )
+        self.page_animal_info.button_animal_details.clicked.connect(self.show_animal_details)
+        self.page_animal_details.button_animal_back.clicked.connect(self.show_animal_info)
         self.page_animal_reg.button_reg.clicked.connect(self.show_animal_info)
 
         self.button_daycare.clicked.connect(self.show_daycare)
@@ -106,11 +104,16 @@ class MainApp(QMainWindow):
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         #self.change_theme()
         self.set_animal_table()
-        self.set_bill_table()
-        self.set_employee_table()
-        self.set_day_care_table()
-        self.set_expense_table()
+        #self.set_bill_table()
+        #self.set_employee_table()
+        #self.set_day_care_table()
+        #self.set_expense_table()
 
+        
+        
+        ### functionalities ######
+        
+        
         ##################### End Init #####################
 
     ##################### Page switching#####################
@@ -131,6 +134,7 @@ class MainApp(QMainWindow):
 
     def show_animal_info(self):
         self.stackedWidget.setCurrentWidget(self.page_animal_info)
+        self.page_animal_info.table_animal.clearSelection()
         self.setWindowTitle("VCMS || Dashboard || Animals")
 
     def show_animal_reg(self):
@@ -138,9 +142,60 @@ class MainApp(QMainWindow):
         # self.setWindowTitle("VCMS || Dashboard || Animals")
 
     def show_animal_details(self):
-        self.stackedWidget.setCurrentWidget(self.page_animal_details)
-        # self.setWindowTitle("VCMS || Dashboard || Animal")
+        selected_item = self.page_animal_info.table_animal.selectedItems()
+        if selected_item:
+            animal_id = int(selected_item[0].text())
+            animal = None
+            for ob in Animals:
+                if ob.animal_id == animal_id:
+                    animal = ob
+                    break
+            self.stackedWidget.setCurrentWidget(self.page_animal_details)
+            page = self.page_animal_details
 
+            page.line_animal_id.setText(str(animal.animal_id))
+            page.line_animal_name.setText(animal.animal_name)
+            
+            #date_object = datetime.strptime(str(animal.birth_date), "%Y-%m-%d").date()
+            qdate = QDate(animal.birth_date.year,animal.birth_date.month, animal.birth_date.day)
+            page.date_animal_birth.setDate(qdate)
+            
+            #date = QDate.fromString(str(animal.birth_date), date_format)
+            qdate = QDate(animal.reg_date.year,animal.reg_date.month, animal.reg_date.day)
+            page.date_animal_reg.setDate(qdate)
+            
+            page.line_animal_species.setText(animal.species)
+            page.line_animal_breed.setText(animal.breed)
+            page.line_animal_color.setText(animal.color)
+            
+            #date = QDate.fromString(str(animal.birth_date), date_format)
+            #page.date_animal_birth.setDate(date)
+            
+            page.line_animal_warning.setText(animal.behavioral_warning)
+            page.line_animal_condition.setText(animal.med_condition)
+            page.line_owner_name.setText(animal.owner_name)
+            page.line_owner_phone.setText(animal.phone)
+            page.line_owner_email.setText(animal.email)
+            page.line_owner_address.setText(animal.address)
+            
+            if animal.gender == "male": 
+                page.rbutton_gender_male.setChecked(True)
+            else:           
+                page.rbutton_gender_female.setChecked(True)
+                
+            if animal.sterilized == "yes": 
+                page.rbutton_ster_yes.setChecked(True)
+            else:           
+                page.rbutton_ster_no.setChecked(True)
+                
+            # setting records table #
+            for row, record in enumerate(animal.medical_records):
+                self.add_records_to_table(row, record)
+            
+            # self.setWindowTitle("VCMS || Dashboard || Animal")
+        else:
+            print("Select a row to view more details")
+            
     def show_inventory(self):
         self.stackedWidget.setCurrentWidget(self.page_inventory)
         self.setWindowTitle("VCMS || Dashboard || Inventory")
@@ -194,28 +249,18 @@ class MainApp(QMainWindow):
         header = self.page_animal_info.table_animal.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.page_animal_info.table_animal.insertRow(row)
-        self.page_animal_info.table_animal.setItem(
-            row, 0, QTableWidgetItem(str(animal.animal_id))
-        )
+        self.page_animal_info.table_animal.setItem(row, 0, QTableWidgetItem(str(animal.animal_id)))
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        self.page_animal_info.table_animal.setItem(
-            row, 1, QTableWidgetItem(animal.animal_name)
-        )
+        self.page_animal_info.table_animal.setItem(row, 1, QTableWidgetItem(animal.animal_name))
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        # self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
-        # self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
-        # self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
-        self.page_animal_info.table_animal.setItem(
-            row, 2, QTableWidgetItem(animal.species)
-        )
+        self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
+        self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
+        self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
+        self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(animal.species))
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-        self.page_animal_info.table_animal.setItem(
-            row, 3, QTableWidgetItem(animal.breed)
-        )
+        self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(animal.breed))
         header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-        self.page_animal_info.table_animal.setItem(
-            row, 4, QTableWidgetItem(animal.color)
-        )
+        self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.color))
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning))
         self.page_animal_info.table_animal.setItem(
@@ -230,7 +275,16 @@ class MainApp(QMainWindow):
         # self.page_animal_info.table_animal.setItem(row, 12, QTableWidgetItem(animal.address))
         # self.page_animal_info.table_animal.setItem(row, 13, QTableWidgetItem(str(animal.reg_date)))
         # self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
-
+    def add_records_to_table(self, row, record): 
+        table = self.page_animal_details.table_animal_record
+        header = table.horizontalHeader()
+        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        table.insertRow(row)
+        table.setItem(row, 0, QTableWidgetItem(str(record[1])))
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        table.setItem(row, 1, QTableWidgetItem(str(record[0])))
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        
     ################# Employee ###################
 
     def set_employee_table(self):
@@ -416,7 +470,7 @@ class MainApp(QMainWindow):
 #### UI density Scaling modifier ####
 extra = {
     # Density Scale
-    "density_scale": "-1",
+    "density_scale": "-3",
 }
 if __name__ == "__main__":
     app = QApplication([])

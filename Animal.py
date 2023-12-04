@@ -2,9 +2,9 @@ from datetime import date
 from MySQLHandler import MySQLHandler
 
 user = "root"
-password = "1234"
+password = "root"
 host = "localhost"
-port = 3307
+port = 3306
 
 
 class Animal:
@@ -25,7 +25,7 @@ class Animal:
         reg_date: str,
         med_condition: str = None,
     ):
-        self.animal_id: int = None
+        self.animal_id = None
         self.animal_name = animal_name
         self.birth_date = birth_date
         self.sterilized = sterilized
@@ -42,26 +42,24 @@ class Animal:
         self.med_condition = med_condition
         self.medical_records = []
 
-    def __str__(self):
-        return f"{self.animal.name}"
-
-    def add_record(self, record_id: int, record: str, report_date: str = None):
+    def add_record(self, record: str, report_date: str = None):
         if record.strip():
             if not report_date:
                 report_date = date.today()
-            data = [int(record_id), str(record), str(report_date)]
+            data = [str(record), str(report_date)]
             self.medical_records.append(data)
+            add_record_to_db(self.animal_id, data)
         else:
             raise ValueError("Record field can not be empty!")
 
     ########## getter, setter ###########
     @property
     def medical_records(self):
-        return self.medical_records
+        return self._medical_records
 
     @medical_records.setter
     def medical_records(self, medical_records):
-        if all(isinstance(item, list)):
+        if isinstance(medical_records, list):
             self._medical_records = medical_records
         else:
             raise ValueError(
@@ -133,14 +131,6 @@ class Animal:
         self._reg_date = reg_date
 
     @property
-    def sterilized(self):
-        return self._sterilized
-
-    @sterilized.setter
-    def sterilized(self, sterilized: bool):
-        self._sterilized = sterilized
-
-    @property
     def behavioral_warning(self):
         return self._behavioral_warning
 
@@ -192,21 +182,22 @@ class Animal:
 
 
 ########## Animal ##########
-Animals: Animal = []
 
-
+Animals = []
 def fetch_animals():
     try:
         mysql_handler = MySQLHandler(host, user, password, port)
         mysql_handler.connect()
         query = "select * from animals"
         data = mysql_handler.fetch_data(query)
-
         for row in data:
+            query = "select record, rdate from record where animal_id = %s"
+            value = row[0]
+            records_data = mysql_handler.fetch_data(query, (value,))
             animal = Animal(
                 animal_name=row[1],
-                birth_date=str(row[2]),
-                sterilized=str(row[3]),
+                birth_date=row[2],
+                sterilized=row[3],
                 gender=row[4],
                 species=row[5],
                 breed=row[6],
@@ -216,29 +207,33 @@ def fetch_animals():
                 email=row[10],
                 phone=row[11],
                 address=row[12],
-                reg_date=str(row[13]),
+                reg_date=row[13],
                 med_condition=row[14],
             )
             animal.animal_id = int(row[0])
-            query = "select * from record where animal_id = %s"
-            value = animal.animal_id
-            data = mysql_handler.fetch_data(query, (value,))
-            if data:
-                for rec in data:
-                    print(rec)               
-                    animal.add_record(record_id=rec[0], record=str(rec[2]), date=str(rec[3]))
-            
+            animal.medical_records = records_data
             Animals.append(animal)
+                        
         mysql_handler.disconnect()
-        print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
-
+def add_record_to_db(animal_id:int, data):
+    try:
+        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler.connect()
+        query = "insert into record values(%s, %s, %s)"
+        values = animal_id, data[0], data[1]
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+    except Exception as err:
+        print("Error inserting: {err}")
+    
+    
 
 def add_animal(
     animal_name: str,
     birth_date: str,
-    sterilized: bool,
+    sterilized: str,
     gender: str,
     species: str,
     breed: str,
@@ -270,7 +265,7 @@ def add_animal(
         )
         Animals.append(new_animal)
 
-        query = "insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "insert into animal (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date, med_condition,) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (
             animal_name,
             birth_date,
@@ -285,6 +280,7 @@ def add_animal(
             phone,
             address,
             reg_date,
+            med_condition
         )
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -313,5 +309,10 @@ def delete_animal(id: int):
     except Exception as err:
         print(f"Error: {err}")
 
-
+def main():
+    an = Animal("Warden", "june 26th 2000", "no", "alpha male", "wolf", "red wolf",
+                "gray and black", "calm and calculative", "Nemo", "nem@gmail", "190238", "mohammadpur", "june 21", "healthy")
+    print(an.animal_name)
+if __name__ =="__main__":
+    main()
 ##########Animal End ##########

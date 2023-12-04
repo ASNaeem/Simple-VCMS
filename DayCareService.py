@@ -2,9 +2,9 @@ from datetime import date
 from MySQLHandler import MySQLHandler
 
 user = "root"
-password = "1234"
+password = "root"
 host = "localhost"
-port = 3307
+port = 3306
 
 
 class DayCareService:

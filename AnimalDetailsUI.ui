@@ -277,6 +277,19 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="displayFormat">
+           <string>yyyy-MM-dd</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+          <property name="date">
+           <date>
+            <year>2020</year>
+            <month>12</month>
+            <day>16</day>
+           </date>
+          </property>
          </widget>
         </item>
         <item>
@@ -558,6 +571,12 @@
             <family>Courier New</family>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="displayFormat">
+           <string>yyyy-MM-dd</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
