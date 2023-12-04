@@ -456,6 +456,12 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="font">
+               <font>
+                <family>Courier</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
              </widget>
             </item>
            </layout>
@@ -687,6 +693,9 @@
             </item>
             <item>
              <widget class="QLineEdit" name="line_animal_id">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
@@ -786,7 +795,7 @@
            </spacer>
           </item>
           <item row="9" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="7,15">
+           <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="30,64">
             <item>
              <widget class="QLabel" name="label_7">
               <property name="sizePolicy">
@@ -795,18 +804,33 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="font">
+               <font>
+                <family>Courier</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
               <property name="text">
-               <string>ID</string>
+               <string>Handled By</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_3">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+             <widget class="QComboBox" name="comboBox">
+              <property name="font">
+               <font>
+                <family>Courier</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+              <property name="placeholderText">
+               <string>Start typing. . .</string>
               </property>
              </widget>
             </item>

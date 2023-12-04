@@ -227,6 +227,13 @@ class MainApp(QMainWindow):
     def show_expenses(self):
         self.stackedWidget.setCurrentWidget(self.page_expenses)
         self.setWindowTitle("VCMS || Dashboard || Expenses")
+        
+        employee_info = [f"{employee.name}({employee.employee_id})" for employee in Employees]
+        combo_box = self.page_expenses.comboBox 
+        print(employee_info)
+        combo_box.addItems(employee_info)
+        combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+        
 
     #####   Setting    #####
     def change_theme(self):
