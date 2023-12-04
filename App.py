@@ -178,12 +178,12 @@ class MainApp(QMainWindow):
             page.line_owner_email.setText(animal.email)
             page.line_owner_address.setText(animal.address)
             
-            if animal.gender == "male": 
+            if animal.gender.lower() == "male": 
                 page.rbutton_gender_male.setChecked(True)
             else:           
                 page.rbutton_gender_female.setChecked(True)
                 
-            if animal.sterilized == "yes": 
+            if animal.sterilized.lower() == "yes": 
                 page.rbutton_ster_yes.setChecked(True)
             else:           
                 page.rbutton_ster_no.setChecked(True)
