@@ -371,7 +371,7 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(11, QtWidgets.QHeaderView.ResizeToContents)
         ############## Need fixing #######################
 
-    ################# End of Employee ###################
+    ################### End of Employee ###################
 
     ################### Day Care Service ##################
     def set_day_care_table(self):

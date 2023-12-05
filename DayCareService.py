@@ -1,11 +1,6 @@
 from datetime import date
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
-
 
 class DayCareService:
     def __init__(
@@ -82,7 +77,7 @@ Day_Care_Service = []
 
 def fetch_day_care():
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from day_care;"
         data = mysql_handler.fetch_data(query)
@@ -118,11 +113,7 @@ def add_day_care(
         query = "insert into day_care (animal_id, dos, start_time, end_time, notes) values (%S, %s, %s, %s, %s);"
         data = values(animal_id, day_care_date, start_time, end_time, notes)
 
-        mysql_handler = MySQLHandler(
-            host,
-            user,
-            password,
-        )
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, data)
         mysql_handler.disconnect()
@@ -135,7 +126,7 @@ def delete_day_care(id: int):
     try:
         for day_care in Day_Care_Service:
             if id == day_care.id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from day_care where day_care_id = %s;"
                 data = day_care.id

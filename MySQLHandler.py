@@ -3,7 +3,7 @@ import mysql.connector
 
 class MySQLHandler:
     def __init__(
-        self, host="localhost", user="root", password="root", port=3306, database="vcms"
+        self, host="localhost", user="root", password="1234", port=3307, database="vcms"
     ):
         self.host = host
         self.user = user
@@ -23,7 +23,7 @@ class MySQLHandler:
                 password=self.password,
                 database=self.database,
                 port=self.port,
-                autocommit=True
+                autocommit=True,
             )
             print("Connected to MySQL database!")
         except mysql.connector.Error as err:
