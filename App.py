@@ -286,7 +286,7 @@ class MainApp(QMainWindow):
               print(f"Append failed!")
           delete_record_from_db(row_data)
         else:
-          print("Select an item to delete!)
+          print("Select an item to delete!")
           
     def set_records_table(self, animal):  
         self.page_animal_details.table_animal_record.clearContents()
