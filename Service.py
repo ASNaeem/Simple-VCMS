@@ -1,11 +1,5 @@
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
-
-
 class Service:
     def __init__(
         self, name: str, cost: float, service_details: str, service_availability: bool
@@ -69,7 +63,7 @@ Services = []
 
 def fetch_services():
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from services"
         data = mysql_handler.fetch_data(query)
@@ -111,7 +105,7 @@ def delete_service(id: int):
     try:
         for service in Services:
             if id == service.id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from services where id = %s;"
                 data = service.id

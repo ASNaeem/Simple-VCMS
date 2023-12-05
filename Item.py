@@ -1,9 +1,6 @@
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
+
 
 class Item:
     def __init__(
@@ -113,7 +110,7 @@ def delete_item(id: int):
     try:
         for item in Items:
             if id == item.id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from inventory where id = %s;"
                 data = item.id
