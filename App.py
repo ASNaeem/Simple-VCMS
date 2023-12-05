@@ -114,7 +114,7 @@ class MainApp(QMainWindow):
         
         ### functionalities ######
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
-        self.page_animal_details.button_record_delete.clicked.connrct(self.delete_record)
+        self.page_animal_details.button_record_delete.clicked.connect(self.delete_record)
         ##################### End Init #####################
     def add_record(self, animal_id:int):       
         page = self.page_animal_details
@@ -270,21 +270,18 @@ class MainApp(QMainWindow):
 
     ## Animal ##
     def delete_record(self):
-        page = page_animal_details
-        table = page.records_table
+        selected_animal_row = self.page_animal_info.table_animal.currentRow()
+        animal_id = int(self.page_animal_info.table_animal.item(selected_animal_row, 0).text())
+        
+        page = self.page_animal_details
+        table = page.table_animal_record
         selected_row = table.currentRow()
         if selected_row != -1:
-          row_data = []
-          #animal_id = int (animal_id_item.text())
-          table.removeRow(selected_row)
-          
-          for column in range(table.columnCount()):
-            item = table.item(selected_row, column)
-            if item:
-              row_data.append(row_data)
-            else:
-              print(f"Append failed!")
-          delete_record_from_db(row_data)
+            
+            row_data = [table.item(selected_row, col).text() for col in range(table.columnCount())]
+            print(row_data)
+            table.removeRow(selected_row)
+            delete_record_from_db(animal_id, row_data)
         else:
           print("Select an item to delete!")
           

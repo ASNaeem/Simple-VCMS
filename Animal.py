@@ -288,17 +288,18 @@ def add_animal(
     except Exception as err:
         return "Entry Failed!"
 
-def delete_record_from_db(data):
+def delete_record_from_db(animal_id, data):
   try:
     mysql_handler = MySQLHandler()
     mysql_handler.connect()
     query = "delete from record where animal_id=%s and record = %s and rdate = %s"
-    values = data[0], data[1], data[2]
-    mysql_handler(query, values)
+    values = animal_id, data[1], data[0]
+    mysql_handler.execute_query(query, values)
     mysql_handler.disconnect()
     print("Delete Success!")
   except Exception as err:
     print(f"Delete failed: {err}")
+    
 def delete_animal(id: int):
     try:
         for animal in Animals:
