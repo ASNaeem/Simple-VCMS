@@ -304,7 +304,7 @@ def delete_animal(id: int):
     try:
         for animal in Animals:
             if id == animal.id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from animal where id = %s;"
                 data = animal.id

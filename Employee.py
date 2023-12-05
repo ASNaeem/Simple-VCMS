@@ -1,9 +1,6 @@
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
+
 
 
 class Employee:
@@ -141,7 +138,7 @@ Employees = []
 
 def fetch_employees():
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from employees"
         data = mysql_handler.fetch_data(query)
@@ -236,7 +233,7 @@ def delete_employee(id: int):
     try:
         for employee in Employees:
             if id == employee.id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from employee where employee_id = %s;"
                 data = employee.id

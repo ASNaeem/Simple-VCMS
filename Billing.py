@@ -1,12 +1,6 @@
 from datetime import date
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
-
-
 class Bill:
     def __init__(
         self,
@@ -96,7 +90,7 @@ Billings = []
 
 def fetch_billings():
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from billings;"
         data = mysql_handler.fetch_data(query)
@@ -163,7 +157,7 @@ def delete_bill(id: int):
     try:
         for bill in Billings:
             if id == billing.billing_id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from Billings where id = %s;"
                 data = bill.id
