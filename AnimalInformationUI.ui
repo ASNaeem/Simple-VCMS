@@ -283,7 +283,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_15" columnstretch="0,0,0,0">
+       <layout class="QGridLayout" name="gridLayout_15" columnstretch="0,0,0,0,0">
         <property name="leftMargin">
          <number>10</number>
         </property>
@@ -331,7 +331,7 @@
           </property>
          </spacer>
         </item>
-        <item row="0" column="3">
+        <item row="0" column="4">
          <spacer name="horizontalSpacer_8">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -343,6 +343,19 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="button_delete_animal_info">
+          <property name="font">
+           <font>
+            <family>Courier New</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
