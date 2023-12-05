@@ -880,7 +880,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="button_animal_delete">
+           <widget class="QPushButton" name="button_record_delete">
             <property name="font">
              <font>
               <family>Courier New</family>

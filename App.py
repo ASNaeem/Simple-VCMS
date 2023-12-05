@@ -9,7 +9,7 @@ from datetime import date
 
 from Employee import Employees, fetch_employees, add_employee, delete_employee
 from Service import Services, fetch_services
-from Animal import Animals, fetch_animals
+from Animal import Animals, fetch_animals, delete_record_from_db
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
@@ -114,7 +114,7 @@ class MainApp(QMainWindow):
         
         ### functionalities ######
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
-        
+        self.page_animal_details.button_record_delete.clicked.connrct(self.delete_record)
         ##################### End Init #####################
     def add_record(self, animal_id:int):       
         page = self.page_animal_details
@@ -269,7 +269,7 @@ class MainApp(QMainWindow):
             f.write(self.page_setting.comboBox_themes.currentText())
 
     ## Animal ##
-    def delete_record(self, animal):
+    def delete_record(self):
         page = page_animal_details
         table = page.records_table
         selected_row = table.currentRow()
