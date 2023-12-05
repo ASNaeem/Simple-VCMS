@@ -136,7 +136,7 @@ class MainApp(QMainWindow):
         else:
             print("Input a diagnosis record to add!")
         
-    ##################### Page switching#####################
+    ##################### Page switching #####################
     def show_daycare(self):
         self.stackedWidget.setCurrentWidget(self.page_daycare)
 
@@ -518,7 +518,7 @@ class MainApp(QMainWindow):
 #### UI density Scaling modifier ####
 extra = {
     # Density Scale
-    "density_scale": "-4",
+    "density_scale": "-1",
 }
 if __name__ == "__main__":
     app = QApplication([])
