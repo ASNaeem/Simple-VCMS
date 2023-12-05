@@ -1,10 +1,5 @@
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
-
 
 class Employee:
     def __init__(
@@ -141,7 +136,7 @@ Employees = []
 
 def fetch_employees():
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from employees"
         data = mysql_handler.fetch_data(query)
@@ -161,10 +156,10 @@ def fetch_employees():
                 salary=row[8],
                 joining_date=row[9],
                 employee_status=row[10],
-                phone=phone_numbers
+                phone=phone_numbers,
             )
             print(employee.phone)
-            employee.employee_id = int(row[0])  
+            employee.employee_id = int(row[0])
             Employees.append(employee)
         mysql_handler.disconnect()
     except Exception as err:
@@ -182,7 +177,7 @@ def add_employee(
     salary: float,
     joining_date: str,
     employee_status: str,
-    phone  = [],
+    phone=[],
 ):
     try:
         new_employee = Employees(
@@ -214,7 +209,7 @@ def add_employee(
             employee_status,
         )
 
-        mysql_handler = MySQLHandler(host, user, password)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, data)
         query = "insert into phone (id, phone_number) values(%s, %s);"
@@ -236,7 +231,7 @@ def delete_employee(id: int):
     try:
         for employee in Employees:
             if id == employee.id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from employee where employee_id = %s;"
                 data = employee.id

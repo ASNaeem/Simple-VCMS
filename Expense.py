@@ -1,10 +1,5 @@
 from MySQLHandler import MySQLHandler
 
-user = "root"
-password = "root"
-host = "localhost"
-port = 3306
-
 
 class Expense:
     def __init__(
@@ -91,7 +86,7 @@ Expenses = []
 
 def fetch_expenses():
     try:
-        mysql_handler = MySQLHandler(host, user, password, port)
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from expenses;"
         data = mysql_handler.fetch_data(query)
@@ -133,11 +128,7 @@ def add_expense(
         query = "insert into expenses (handler_id, expense_date, handle_date, amount, justification) values (%S, %s, %s, %s, %s);"
         data = values(handler_id, expense_date, handle_date, amount, justification)
 
-        mysql_handler = MySQLHandler(
-            host,
-            user,
-            password,
-        )
+        mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, data)
         mysql_handler.disconnect()
@@ -150,7 +141,7 @@ def delete_expenses(id: int):
     try:
         for expense in Expenses:
             if id == expense.id:
-                mysql_handler = MySQLHandler(host, user, password, port)
+                mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from expenses where expense_id = %s;"
                 data = expense.id
