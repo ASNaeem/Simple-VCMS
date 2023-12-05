@@ -109,21 +109,18 @@ class MainApp(QMainWindow):
         self.set_employee_table()
         self.set_day_care_table()
         self.set_expense_table()
-
-        
-        
+      
         ### functionalities ######
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
         self.page_animal_details.button_record_delete.clicked.connect(self.delete_record)
         ##################### End Init #####################
-    def add_record(self, animal_id:int):       
+    def add_record(self):       
         page = self.page_animal_details
         table = page.table_animal_record
         diagnosis = page.line_new_record.text().strip()
         if diagnosis:             
             selected_item = self.page_animal_info.table_animal.selectedItems()
             animal_id = int(selected_item[0].text())
-            diagnosis = page.line_new_record.text().strip()
             animal_object = None   
             for animal in Animals:
                 if animal.animal_id == animal_id:            
