@@ -100,6 +100,15 @@
             </property>
             <item>
              <widget class="QPushButton" name="button_care_edit">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="text">
                <string>Enable Edit</string>
               </property>
@@ -107,6 +116,15 @@
             </item>
             <item>
              <widget class="QPushButton" name="button_care_update">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="text">
                <string>Update</string>
               </property>
@@ -121,6 +139,15 @@
             </property>
             <item>
              <widget class="QPushButton" name="button_care_delete">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="text">
                <string>Delete</string>
               </property>
@@ -128,6 +155,15 @@
             </item>
             <item>
              <widget class="QPushButton" name="button_care_cancel">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="text">
                <string>Cancel</string>
               </property>
@@ -137,6 +173,15 @@
           </item>
           <item>
            <widget class="QPushButton" name="button_care_details">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
             <property name="text">
              <string>View Animal Details</string>
             </property>
@@ -285,6 +330,9 @@
                   <pointsize>12</pointsize>
                  </font>
                 </property>
+                <property name="displayFormat">
+                 <string>yyyy-MM-dd</string>
+                </property>
                </widget>
               </item>
               <item>
@@ -382,6 +430,12 @@
             </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="button_care_image">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Add/Change Image</string>
               </property>

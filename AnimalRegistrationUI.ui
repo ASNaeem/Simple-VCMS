@@ -227,6 +227,9 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
+              <property name="displayFormat">
+               <string>yyyy-MM-dd</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -773,6 +776,9 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
+              <property name="displayFormat">
+               <string>yyyy-MM-dd</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -846,6 +852,9 @@
                   <pointsize>12</pointsize>
                  </font>
                 </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
                 <property name="text">
                  <string>Back/Cancel</string>
                 </property>
@@ -858,6 +867,9 @@
                   <family>Courier New</family>
                   <pointsize>12</pointsize>
                  </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
                 </property>
                 <property name="text">
                  <string>Register</string>
