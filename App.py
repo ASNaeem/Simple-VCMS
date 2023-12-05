@@ -269,6 +269,25 @@ class MainApp(QMainWindow):
             f.write(self.page_setting.comboBox_themes.currentText())
 
     ## Animal ##
+    def delete_record(self, animal):
+        page = page_animal_details
+        table = page.records_table
+        selected_row = table.currentRow()
+        if selected_row != -1:
+          row_data = []
+          #animal_id = int (animal_id_item.text())
+          table.removeRow(selected_row)
+          
+          for column in range(table.columnCount()):
+            item = table.item(selected_row, column)
+            if item:
+              row_data.append(row_data)
+            else:
+              print(f"Append failed!")
+          delete_record_from_db(row_data)
+        else:
+          print("Select an item to delete!)
+          
     def set_records_table(self, animal):  
         self.page_animal_details.table_animal_record.clearContents()
         self.page_animal_details.table_animal_record.setRowCount(0)
