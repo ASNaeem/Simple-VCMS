@@ -120,13 +120,21 @@ class MainApp(QMainWindow):
 
         ### functionalities ######
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
-        self.page_animal_details.button_record_delete.clicked.connect(self.delete_record)
+        self.page_animal_details.button_record_delete.clicked.connect(
+            self.delete_record
+        )
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
 
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
-        self.page_employee.button_edit_information_6.clicked.connect(self.update_employee)
-        self.page_employee.button_register_employee_6.clicked.connect(self.register_employee)
-        self.page_employee.button_delete_information_6.clicked.connect(self.delete_employee)
+        self.page_employee.button_edit_information_6.clicked.connect(
+            self.update_employee
+        )
+        self.page_employee.button_register_employee_6.clicked.connect(
+            self.register_employee
+        )
+        self.page_employee.button_delete_information_6.clicked.connect(
+            self.delete_employee
+        )
         ##################### End Init #####################
 
     def add_record(self):
@@ -286,6 +294,27 @@ class MainApp(QMainWindow):
             f.write(self.page_setting.comboBox_themes.currentText())
 
     ##################### Animal ########################
+    def clear_animal_fields(self):
+        page = self.page_animal_reg
+        page.line_reg_name.clear()
+        page.date_reg.clear()
+        page.line_reg_species.clear()
+        page.line_reg_breed.clear()
+        page.line_reg_color.clear()
+
+        # Radio button clear kaj kore na :)
+        page.rbutton_reg_male.setChecked(False)
+        page.rbutton_reg_female.setChecked(False)
+        page.rbutton_reg_ster_yes.setChecked(False)
+        page.rbutton_reg_ster_no.setChecked(False)
+
+        page.line_reg_condition.clear()
+        page.line_reg_oname.clear()
+        page.line_reg_phone.clear()
+        page.line_reg_email.clear()
+        page.line_reg_address.clear()
+        page.date_reg_birth.clear()
+        page.line_reg_warning.clear()
 
     def create_new_animal(self):
         page = self.page_animal_reg
@@ -359,30 +388,8 @@ class MainApp(QMainWindow):
             mysql_handler.execute_query(query, values)
             print("Entry Success!")
             mysql_handler.disconnect()
-
             self.set_animal_table()
-
-            page.line_reg_name.clear()
-            page.date_reg.clear()
-            page.line_reg_species.clear()
-            page.line_reg_breed.clear()
-            page.line_reg_color.clear()
-
-            # Radio button clear kaj kore na :)
-            # Data table e double kore show kore :)
-
-            page.rbutton_reg_male.setChecked(False)
-            page.rbutton_reg_female.setChecked(False)
-            page.rbutton_reg_ster_yes.setChecked(False)
-            page.rbutton_reg_ster_no.setChecked(False)
-
-            page.line_reg_condition.clear()
-            page.line_reg_oname.clear()
-            page.line_reg_phone.clear()
-            page.line_reg_email.clear()
-            page.line_reg_address.clear()
-            page.date_reg_birth.clear()
-            page.line_reg_warning.clear()
+            self.clear_animal_fields()
         except Exception as err:
             print("Entry Failed!", err)
 
@@ -413,6 +420,8 @@ class MainApp(QMainWindow):
             self.add_records_to_table(row, record)
 
     def set_animal_table(self):
+        self.page_animal_info.table_animal.clearContents()
+        self.page_animal_info.table_animal.setRowCount(0)
         fetch_animals()
         for row, animal in enumerate(Animals):
             self.add_animal_to_table(row, animal)
@@ -429,7 +438,6 @@ class MainApp(QMainWindow):
         self.page_animal_info.table_animal.setItem(
             row, 1, QTableWidgetItem(animal.animal_name)
         )
-        # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
         # self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
         # self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
@@ -733,8 +741,7 @@ class MainApp(QMainWindow):
         def populate_appointment(self):
             ...
 
-
-####
+    ####
 
     ############### Table Resize Methods ###########################
     def resize_columns_to_contents_alternate(self, table):
@@ -747,7 +754,8 @@ class MainApp(QMainWindow):
                 item = table.item(row, column)
                 if item is not None and item.text():
                     max_width = max(
-                        max_width, table.fontMetrics().width(item.text()) + 10)
+                        max_width, table.fontMetrics().width(item.text()) + 10
+                    )
 
             header.setSectionResizeMode(column, max_width)
 
@@ -758,11 +766,14 @@ class MainApp(QMainWindow):
             for row in range(table.rowCount()):
                 item = table.item(row, column)
                 if item is not None and item.text():
-                    max_width = max(max_width, table.fontMetrics().width(item.text()) + 10)
+                    max_width = max(
+                        max_width, table.fontMetrics().width(item.text()) + 10
+                    )
 
             header.resizeSection(column, max_width)
 
     ############### Table Resize Methods End ########################
+
 
 #### UI density Scaling modifier ####
 extra = {
