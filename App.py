@@ -322,6 +322,7 @@ class MainApp(QMainWindow):
 
     def create_new_animal(self):
         page = self.page_animal_reg
+        current_widget = self.stackedWidget.setCurrentWidget(page)
         animal_name = page.line_reg_name.text()
         reg_date = page.date_reg.text()
         species = page.line_reg_species.text()
@@ -333,7 +334,7 @@ class MainApp(QMainWindow):
             gender = "Male"
         elif page.rbutton_reg_female.isChecked():
             gender = "Female"
-            
+
         sterilized = ""
         if page.rbutton_reg_ster_yes.isChecked():
             sterilized = "Yes"
@@ -369,7 +370,7 @@ class MainApp(QMainWindow):
                 behavioral_warning,
             ]
         ):
-            QMessageBox.warning(self, "Warning", "Please fill in all fields.")
+            QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
             return
         try:
             mysql_handler = MySQLHandler()
@@ -396,6 +397,7 @@ class MainApp(QMainWindow):
             mysql_handler.disconnect()
             self.set_animal_table()
             self.clear_animal_fields()
+            self.show_animal_info()
         except Exception as err:
             print("Entry Failed!", err)
 
