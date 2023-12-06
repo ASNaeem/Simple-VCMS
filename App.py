@@ -303,11 +303,16 @@ class MainApp(QMainWindow):
         page.line_reg_color.clear()
 
         # Radio button clear kaj kore na :)
+        page.button_group_gender.setExclusive(False)
+        page.button_group_sterilized.setExclusive(False) 
         page.rbutton_reg_male.setChecked(False)
         page.rbutton_reg_female.setChecked(False)
         page.rbutton_reg_ster_yes.setChecked(False)
         page.rbutton_reg_ster_no.setChecked(False)
-
+        page.button_group_gender.setExclusive(True)
+        page.button_group_sterilized.setExclusive(True) 
+        
+        
         page.line_reg_condition.clear()
         page.line_reg_oname.clear()
         page.line_reg_phone.clear()
@@ -787,7 +792,7 @@ class MainApp(QMainWindow):
 #### UI density Scaling modifier ####
 extra = {
     # Density Scale
-    "density_scale": "-1",
+    "density_scale": "-4",
 }
 if __name__ == "__main__":
     app = QApplication([])
