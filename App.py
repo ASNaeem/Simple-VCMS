@@ -137,354 +137,429 @@ class MainApp(QMainWindow):
         )
         ##################### End Init #####################
 
-    def add_record(self):
-        page = self.page_animal_details
-        table = page.table_animal_record
-        diagnosis = page.line_new_record.text().strip()
-        if diagnosis:
-            selected_item = self.page_animal_info.table_animal.selectedItems()
-            animal_id = int(selected_item[0].text())
-            animal_object = None
-            for animal in Animals:
-                if animal.animal_id == animal_id:
-                    animal_object = animal
-                    break
+    try:
+        def add_record(self):
+            page = self.page_animal_details
+            table = page.table_animal_record
+            diagnosis = page.line_new_record.text().strip()
+            if diagnosis:
+                selected_item = self.page_animal_info.table_animal.selectedItems()
+                animal_id = int(selected_item[0].text())
+                animal_object = None
+                for animal in Animals:
+                    if animal.animal_id == animal_id:
+                        animal_object = animal
+                        break
 
-            animal.add_record(diagnosis)
-            self.set_records_table(animal)
-            # self.add_records_to_table(-1, animal.medical_records[-1])
+                animal.add_record(diagnosis)
+                self.set_records_table(animal)
+                # self.add_records_to_table(-1, animal.medical_records[-1])
 
-            page.line_new_record.clear()
+                page.line_new_record.clear()
 
-        else:
-            print("Input a diagnosis record to add!")
+            else:
+                print("Input a diagnosis record to add!")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
     ##################### Page switching #####################
-    def show_daycare(self):
-        self.stackedWidget.setCurrentWidget(self.page_daycare)
+    try:
+        def show_daycare(self):
+            self.stackedWidget.setCurrentWidget(self.page_daycare)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
+    try:
+        def show_appointment(self):
+            self.stackedWidget.setCurrentWidget(self.page_appointment)
+            self.setWindowTitle("VCMS || Dashboard || Appointment")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_appointment(self):
-        self.stackedWidget.setCurrentWidget(self.page_appointment)
-        self.setWindowTitle("VCMS || Dashboard || Appointment")
+    try:
+        def show_appointment_modify(self):
+            self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
+            self.setWindowTitle("VCMS || Dashboard || Appointment Details")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_appointment_modify(self):
-        self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
-        self.setWindowTitle("VCMS || Dashboard || Appointment Details")
+    try:
+        def show_appointment_create(self):
+            self.stackedWidget.setCurrentWidget(self.page_appointment_create)
+            self.setWindowTitle("VCMS || Dashboard || Create New Appointment")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_appointment_create(self):
-        self.stackedWidget.setCurrentWidget(self.page_appointment_create)
-        self.setWindowTitle("VCMS || Dashboard || Create New Appointment")
+    try:
+        def show_animal_info(self):
+            self.stackedWidget.setCurrentWidget(self.page_animal_info)
+            self.page_animal_info.table_animal.clearSelection()
+            self.setWindowTitle("VCMS || Dashboard || Animals")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_animal_info(self):
-        self.stackedWidget.setCurrentWidget(self.page_animal_info)
-        self.page_animal_info.table_animal.clearSelection()
-        self.setWindowTitle("VCMS || Dashboard || Animals")
+    try:
+        def show_animal_reg(self):
+            self.stackedWidget.setCurrentWidget(self.page_animal_reg)
+            # self.setWindowTitle("VCMS || Dashboard || Animals")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_animal_reg(self):
-        self.stackedWidget.setCurrentWidget(self.page_animal_reg)
-        # self.setWindowTitle("VCMS || Dashboard || Animals")
+    try:
+        def show_animal_details(self):
+            selected_item = self.page_animal_info.table_animal.selectedItems()
+            if selected_item:
+                animal_id = int(selected_item[0].text())
+                animal = None
+                for ob in Animals:
+                    if ob.animal_id == animal_id:
+                        animal = ob
+                        break
+                self.stackedWidget.setCurrentWidget(self.page_animal_details)
+                page = self.page_animal_details
 
-    def show_animal_details(self):
-        selected_item = self.page_animal_info.table_animal.selectedItems()
-        if selected_item:
-            animal_id = int(selected_item[0].text())
-            animal = None
-            for ob in Animals:
-                if ob.animal_id == animal_id:
-                    animal = ob
-                    break
-            self.stackedWidget.setCurrentWidget(self.page_animal_details)
-            page = self.page_animal_details
+                page.line_animal_id.setText(str(animal.animal_id))
+                page.line_animal_name.setText(animal.animal_name)
 
-            page.line_animal_id.setText(str(animal.animal_id))
-            page.line_animal_name.setText(animal.animal_name)
+                # date_object = datetime.strptime(str(animal.birth_date), "%Y-%m-%d").date()
+                qdate = QDate(
+                    animal.birth_date.year, animal.birth_date.month, animal.birth_date.day
+                )
+                page.date_animal_birth.setDate(qdate)
 
-            # date_object = datetime.strptime(str(animal.birth_date), "%Y-%m-%d").date()
-            qdate = QDate(
-                animal.birth_date.year, animal.birth_date.month, animal.birth_date.day
-            )
-            page.date_animal_birth.setDate(qdate)
+                # date = QDate.fromString(str(animal.birth_date), date_format)
+                qdate = QDate(
+                    animal.reg_date.year, animal.reg_date.month, animal.reg_date.day
+                )
+                page.date_animal_reg.setDate(qdate)
 
-            # date = QDate.fromString(str(animal.birth_date), date_format)
-            qdate = QDate(
-                animal.reg_date.year, animal.reg_date.month, animal.reg_date.day
-            )
-            page.date_animal_reg.setDate(qdate)
+                page.line_animal_species.setText(animal.species)
+                page.line_animal_breed.setText(animal.breed)
+                page.line_animal_color.setText(animal.color)
 
-            page.line_animal_species.setText(animal.species)
-            page.line_animal_breed.setText(animal.breed)
-            page.line_animal_color.setText(animal.color)
+                # date = QDate.fromString(str(animal.birth_date), date_format)
+                # page.date_animal_birth.setDate(date)
 
-            # date = QDate.fromString(str(animal.birth_date), date_format)
-            # page.date_animal_birth.setDate(date)
+                page.line_animal_warning.setText(animal.behavioral_warning)
+                page.line_animal_condition.setText(animal.med_condition)
+                page.line_owner_name.setText(animal.owner_name)
+                page.line_owner_phone.setText(animal.phone)
+                page.line_owner_email.setText(animal.email)
+                page.line_owner_address.setText(animal.address)
 
-            page.line_animal_warning.setText(animal.behavioral_warning)
-            page.line_animal_condition.setText(animal.med_condition)
-            page.line_owner_name.setText(animal.owner_name)
-            page.line_owner_phone.setText(animal.phone)
-            page.line_owner_email.setText(animal.email)
-            page.line_owner_address.setText(animal.address)
+                if animal.gender.lower() == "male":
+                    page.rbutton_gender_male.setChecked(True)
+                else:
+                    page.rbutton_gender_female.setChecked(True)
 
-            if animal.gender.lower() == "male":
-                page.rbutton_gender_male.setChecked(True)
+                if animal.sterilized.lower() == "yes":
+                    page.rbutton_ster_yes.setChecked(True)
+                else:
+                    page.rbutton_ster_no.setChecked(True)
+
+                # setting records table #
+                self.set_records_table(animal)
+
+                # self.setWindowTitle("VCMS || Dashboard || Animal")
             else:
-                page.rbutton_gender_female.setChecked(True)
+                print("Select a row to view more details")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-            if animal.sterilized.lower() == "yes":
-                page.rbutton_ster_yes.setChecked(True)
-            else:
-                page.rbutton_ster_no.setChecked(True)
+    try:
+        def show_inventory(self):
+            self.stackedWidget.setCurrentWidget(self.page_inventory)
+            self.setWindowTitle("VCMS || Dashboard || Inventory")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-            # setting records table #
-            self.set_records_table(animal)
+    try:
+        def show_setting(self):
+            self.stackedWidget.setCurrentWidget(self.page_setting)
+            self.setWindowTitle("VCMS || Dashboard || Setting")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-            # self.setWindowTitle("VCMS || Dashboard || Animal")
-        else:
-            print("Select a row to view more details")
+    try:
+        def show_support(self):
+            self.stackedWidget.setCurrentWidget(self.page_support)
+            self.setWindowTitle("VCMS || Dashboard || Support")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_inventory(self):
-        self.stackedWidget.setCurrentWidget(self.page_inventory)
-        self.setWindowTitle("VCMS || Dashboard || Inventory")
+    try:
+        def show_analytics_report(self):
+            self.stackedWidget.setCurrentWidget(self.page_analytics_report)
+            self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_setting(self):
-        self.stackedWidget.setCurrentWidget(self.page_setting)
-        self.setWindowTitle("VCMS || Dashboard || Setting")
+    try:
+        def show_employee(self):
+            self.stackedWidget.setCurrentWidget(self.page_employee)
+            self.setWindowTitle("VCMS || Dashboard || Employee")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_support(self):
-        self.stackedWidget.setCurrentWidget(self.page_support)
-        self.setWindowTitle("VCMS || Dashboard || Support")
+    try:
+        def show_service(self):
+            self.stackedWidget.setCurrentWidget(self.page_service)
+            self.setWindowTitle("VCMS || Dashboard || Service")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_analytics_report(self):
-        self.stackedWidget.setCurrentWidget(self.page_analytics_report)
-        self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
+    try:
+        def show_billing(self):
+            self.stackedWidget.setCurrentWidget(self.page_billing)
+            self.setWindowTitle("VCMS || Dashboard || Billing")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_employee(self):
-        self.stackedWidget.setCurrentWidget(self.page_employee)
-        self.setWindowTitle("VCMS || Dashboard || Employee")
+    try:
+        def show_expenses(self):
+            self.stackedWidget.setCurrentWidget(self.page_expenses)
+            self.setWindowTitle("VCMS || Dashboard || Expenses")
 
-    def show_service(self):
-        self.stackedWidget.setCurrentWidget(self.page_service)
-        self.setWindowTitle("VCMS || Dashboard || Service")
+            employee_info = [
+                f"{employee.name}({employee.employee_id})" for employee in Employees
+            ]
+            combo_box = self.page_expenses.comboBox
+            print(employee_info)
+            combo_box.addItems(employee_info)
+            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def show_billing(self):
-        self.stackedWidget.setCurrentWidget(self.page_billing)
-        self.setWindowTitle("VCMS || Dashboard || Billing")
-
-    def show_expenses(self):
-        self.stackedWidget.setCurrentWidget(self.page_expenses)
-        self.setWindowTitle("VCMS || Dashboard || Expenses")
-
-        employee_info = [
-            f"{employee.name}({employee.employee_id})" for employee in Employees
-        ]
-        combo_box = self.page_expenses.comboBox
-        print(employee_info)
-        combo_box.addItems(employee_info)
-        combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+    
 
     #####   Setting    #####
-    def change_theme(self):
-        apply_stylesheet(
-            app,
-            self.page_setting.comboBox_themes.currentText(),
-            invert_secondary=False,
-            extra=extra,
-        )
-        with open("config.txt", "w") as f:
-            f.write(self.page_setting.comboBox_themes.currentText())
+    try:
+        def change_theme(self):
+            apply_stylesheet(
+                app,
+                self.page_setting.comboBox_themes.currentText(),
+                invert_secondary=False,
+                extra=extra,
+            )
+            with open("config.txt", "w") as f:
+                f.write(self.page_setting.comboBox_themes.currentText())
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
 
     ##################### Animal ########################
-    def clear_animal_fields(self):
-        page = self.page_animal_reg
-        page.line_reg_name.clear()
-        page.date_reg.clear()
-        page.line_reg_species.clear()
-        page.line_reg_breed.clear()
-        page.line_reg_color.clear()
+    try:
+        def clear_animal_fields(self):
+            page = self.page_animal_reg
+            page.line_reg_name.clear()
+            page.date_reg.clear()
+            page.line_reg_species.clear()
+            page.line_reg_breed.clear()
+            page.line_reg_color.clear()
 
-        # Radio button clear kaj kore na :)
-        page.button_group_gender.setExclusive(False)
-        page.button_group_sterilized.setExclusive(False)
-        page.rbutton_reg_male.setChecked(False)
-        page.rbutton_reg_female.setChecked(False)
-        page.rbutton_reg_ster_yes.setChecked(False)
-        page.rbutton_reg_ster_no.setChecked(False)
-        page.button_group_gender.setExclusive(True)
-        page.button_group_sterilized.setExclusive(True)
+            # Radio button clear kaj kore na :)
+            page.button_group_gender.setExclusive(False)
+            page.button_group_sterilized.setExclusive(False)
+            page.rbutton_reg_male.setChecked(False)
+            page.rbutton_reg_female.setChecked(False)
+            page.rbutton_reg_ster_yes.setChecked(False)
+            page.rbutton_reg_ster_no.setChecked(False)
+            page.button_group_gender.setExclusive(True)
+            page.button_group_sterilized.setExclusive(True)
 
-        page.line_reg_condition.clear()
-        page.line_reg_oname.clear()
-        page.line_reg_phone.clear()
-        page.line_reg_email.clear()
-        page.line_reg_address.clear()
-        page.date_reg_birth.clear()
-        page.line_reg_warning.clear()
+            page.line_reg_condition.clear()
+            page.line_reg_oname.clear()
+            page.line_reg_phone.clear()
+            page.line_reg_email.clear()
+            page.line_reg_address.clear()
+            page.date_reg_birth.clear()
+            page.line_reg_warning.clear()
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
+    try:
+        def create_new_animal(self):
+            page = self.page_animal_reg
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            animal_name = page.line_reg_name.text()
+            reg_date = page.date_reg.text()
+            species = page.line_reg_species.text()
+            breed = page.line_reg_breed.text()
+            color = page.line_reg_color.text()
 
-    def create_new_animal(self):
-        page = self.page_animal_reg
-        current_widget = self.stackedWidget.setCurrentWidget(page)
-        animal_name = page.line_reg_name.text()
-        reg_date = page.date_reg.text()
-        species = page.line_reg_species.text()
-        breed = page.line_reg_breed.text()
-        color = page.line_reg_color.text()
+            gender = ""
+            if page.rbutton_reg_male.isChecked():
+                gender = "Male"
+            elif page.rbutton_reg_female.isChecked():
+                gender = "Female"
 
-        gender = ""
-        if page.rbutton_reg_male.isChecked():
-            gender = "Male"
-        elif page.rbutton_reg_female.isChecked():
-            gender = "Female"
+            sterilized = ""
+            if page.rbutton_reg_ster_yes.isChecked():
+                sterilized = "Yes"
+            elif page.rbutton_reg_ster_no.isChecked():
+                sterilized = "No"
 
-        sterilized = ""
-        if page.rbutton_reg_ster_yes.isChecked():
-            sterilized = "Yes"
-        elif page.rbutton_reg_ster_no.isChecked():
-            sterilized = "No"
+            med_condition = page.line_reg_condition.text()
+            owner_name = page.line_reg_oname.text()
+            phone = page.line_reg_phone.text()
+            email = page.line_reg_email.text()
+            address = page.line_reg_address.text()
+            birth_date = page.date_reg_birth.text()
+            behavioral_warning = page.line_reg_warning.text()
+            # Convert birth_date to "YYYY-MM-DD" format
+            reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
+            birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
 
-        med_condition = page.line_reg_condition.text()
-        owner_name = page.line_reg_oname.text()
-        phone = page.line_reg_phone.text()
-        email = page.line_reg_email.text()
-        address = page.line_reg_address.text()
-        birth_date = page.date_reg_birth.text()
-        behavioral_warning = page.line_reg_warning.text()
-        # Convert birth_date to "YYYY-MM-DD" format
-        reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
-        birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
+            if not all(
+                [
+                    animal_name,
+                    reg_date,
+                    species,
+                    breed,
+                    color,
+                    gender,
+                    sterilized,
+                    med_condition,
+                    owner_name,
+                    phone,
+                    email,
+                    address,
+                    birth_date,
+                    behavioral_warning,
+                ]
+            ):
+                QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
+                return
+            try:
+                mysql_handler = MySQLHandler()
+                mysql_handler.connect()
+                query = "insert into animals (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date, med_condition) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+                values = (
+                    animal_name,
+                    birth_date_obj,
+                    sterilized,
+                    gender,
+                    species,
+                    breed,
+                    color,
+                    behavioral_warning,
+                    owner_name,
+                    email,
+                    phone,
+                    address,
+                    reg_date_obj,
+                    med_condition,
+                )
+                mysql_handler.execute_query(query, values)
+                print("Entry Success!")
+                mysql_handler.disconnect()
+                self.set_animal_table()
+                self.clear_animal_fields()
+                self.show_animal_info()
+            except Exception as err:
+                print("Entry Failed!", err)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-        if not all(
-            [
-                animal_name,
-                reg_date,
-                species,
-                breed,
-                color,
-                gender,
-                sterilized,
-                med_condition,
-                owner_name,
-                phone,
-                email,
-                address,
-                birth_date,
-                behavioral_warning,
-            ]
-        ):
-            QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
-            return
-        try:
-            mysql_handler = MySQLHandler()
-            mysql_handler.connect()
-            query = "insert into animals (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date, med_condition) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-            values = (
-                animal_name,
-                birth_date_obj,
-                sterilized,
-                gender,
-                species,
-                breed,
-                color,
-                behavioral_warning,
-                owner_name,
-                email,
-                phone,
-                address,
-                reg_date_obj,
-                med_condition,
+    try:
+        def delete_record(self):
+            selected_animal_row = self.page_animal_info.table_animal.currentRow()
+            animal_id = int(
+                self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
             )
-            mysql_handler.execute_query(query, values)
-            print("Entry Success!")
-            mysql_handler.disconnect()
-            self.set_animal_table()
-            self.clear_animal_fields()
-            self.show_animal_info()
-        except Exception as err:
-            print("Entry Failed!", err)
 
-    def delete_record(self):
-        selected_animal_row = self.page_animal_info.table_animal.currentRow()
-        animal_id = int(
-            self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
-        )
+            page = self.page_animal_details
+            table = page.table_animal_record
+            selected_row = table.currentRow()
+            if selected_row != -1:
+                row_data = [
+                    table.item(selected_row, col).text()
+                    for col in range(table.columnCount())
+                ]
+                print(row_data)
+                table.removeRow(selected_row)
+                delete_record_from_db(animal_id, row_data)
+            else:
+                print("Select an item to delete!")
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-        page = self.page_animal_details
-        table = page.table_animal_record
-        selected_row = table.currentRow()
-        if selected_row != -1:
-            row_data = [
-                table.item(selected_row, col).text()
-                for col in range(table.columnCount())
-            ]
-            print(row_data)
-            table.removeRow(selected_row)
-            delete_record_from_db(animal_id, row_data)
-        else:
-            print("Select an item to delete!")
+    try:
+        def set_records_table(self, animal):
+            self.page_animal_details.table_animal_record.clearContents()
+            self.page_animal_details.table_animal_record.setRowCount(0)
+            for row, record in enumerate(animal.medical_records):
+                self.add_records_to_table(row, record)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def set_records_table(self, animal):
-        self.page_animal_details.table_animal_record.clearContents()
-        self.page_animal_details.table_animal_record.setRowCount(0)
-        for row, record in enumerate(animal.medical_records):
-            self.add_records_to_table(row, record)
+    try:
+        def set_animal_table(self):
+            self.page_animal_info.table_animal.clearContents()
+            self.page_animal_info.table_animal.setRowCount(0)
+            fetch_animals()
+            for row, animal in enumerate(Animals):
+                self.add_animal_to_table(row, animal)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def set_animal_table(self):
-        self.page_animal_info.table_animal.clearContents()
-        self.page_animal_info.table_animal.setRowCount(0)
-        fetch_animals()
-        for row, animal in enumerate(Animals):
-            self.add_animal_to_table(row, animal)
+    try:
+        def add_animal_to_table(self, row, animal):
+            header = self.page_animal_info.table_animal.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            table = self.page_animal_info.table_animal
+            self.page_animal_info.table_animal.insertRow(row)
+            self.page_animal_info.table_animal.setItem(
+                row, 0, QTableWidgetItem(str(animal.animal_id))
+            )
+            # header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+            self.page_animal_info.table_animal.setItem(
+                row, 1, QTableWidgetItem(animal.animal_name)
+            )
+            # self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
+            # self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
+            # self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
+            self.page_animal_info.table_animal.setItem(
+                row, 2, QTableWidgetItem(animal.species)
+            )
+            # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+            self.page_animal_info.table_animal.setItem(
+                row, 3, QTableWidgetItem(animal.breed)
+            )
+            # header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+            self.page_animal_info.table_animal.setItem(
+                row, 4, QTableWidgetItem(animal.color)
+            )
+            # header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+            # self.page_animal_info.table_animal.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning))
+            self.page_animal_info.table_animal.setItem(
+                row, 5, QTableWidgetItem(animal.owner_name)
+            )
+            # header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
+            # self.page_animal_info.table_animal.setItem(row, 10, QTableWidgetItem(animal.email))
+            self.page_animal_info.table_animal.setItem(
+                row, 6, QTableWidgetItem(animal.phone)
+            )
+            # header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
+            # self.page_animal_info.table_animal.setItem(row, 12, QTableWidgetItem(animal.address))
+            # self.page_animal_info.table_animal.setItem(row, 13, QTableWidgetItem(str(animal.reg_date)))
+            # self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
+            self.resize_columns_to_contents(table, header)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-    def add_animal_to_table(self, row, animal):
-        header = self.page_animal_info.table_animal.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        table = self.page_animal_info.table_animal
-        self.page_animal_info.table_animal.insertRow(row)
-        self.page_animal_info.table_animal.setItem(
-            row, 0, QTableWidgetItem(str(animal.animal_id))
-        )
-        # header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        self.page_animal_info.table_animal.setItem(
-            row, 1, QTableWidgetItem(animal.animal_name)
-        )
-        # self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
-        # self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
-        # self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
-        self.page_animal_info.table_animal.setItem(
-            row, 2, QTableWidgetItem(animal.species)
-        )
-        # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-        self.page_animal_info.table_animal.setItem(
-            row, 3, QTableWidgetItem(animal.breed)
-        )
-        # header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-        self.page_animal_info.table_animal.setItem(
-            row, 4, QTableWidgetItem(animal.color)
-        )
-        # header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
-        # self.page_animal_info.table_animal.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning))
-        self.page_animal_info.table_animal.setItem(
-            row, 5, QTableWidgetItem(animal.owner_name)
-        )
-        # header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
-        # self.page_animal_info.table_animal.setItem(row, 10, QTableWidgetItem(animal.email))
-        self.page_animal_info.table_animal.setItem(
-            row, 6, QTableWidgetItem(animal.phone)
-        )
-        # header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
-        # self.page_animal_info.table_animal.setItem(row, 12, QTableWidgetItem(animal.address))
-        # self.page_animal_info.table_animal.setItem(row, 13, QTableWidgetItem(str(animal.reg_date)))
-        # self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
-        self.resize_columns_to_contents(table, header)
-
-    def add_records_to_table(self, row, record):
-        table = self.page_animal_details.table_animal_record
-        header = table.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        table.insertRow(row)
-        table.setItem(row, 0, QTableWidgetItem(str(record[1])))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 1, QTableWidgetItem(str(record[0])))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+    try:
+        def add_records_to_table(self, row, record):
+            table = self.page_animal_details.table_animal_record
+            header = table.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            table.insertRow(row)
+            table.setItem(row, 0, QTableWidgetItem(str(record[1])))
+            header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 1, QTableWidgetItem(str(record[0])))
+            header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
     ################# Animal End #################
 
@@ -635,190 +710,226 @@ class MainApp(QMainWindow):
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
-    def set_day_care_table(self):
-        fetch_day_care()
-        for row, day_care in enumerate(Day_Care_Service):
-            self.add_day_care_to_table(row, day_care)
-
-    def add_day_care_to_table(self, row, day_care):
-        header = self.page_daycare.table_care.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        table = self.page_daycare.table_care
-        table.insertRow(row)
-        """table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)"""
-        table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
-        table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
-        table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
-        table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
-        table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
-        table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
-        self.resize_columns_to_contents(table, header)
+    try:
+        def set_day_care_table(self):
+            fetch_day_care()
+            for row, day_care in enumerate(Day_Care_Service):
+                self.add_day_care_to_table(row, day_care)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
+    try:
+        def add_day_care_to_table(self, row, day_care):
+            header = self.page_daycare.table_care.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            table = self.page_daycare.table_care
+            table.insertRow(row)
+            """table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
+            header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
+            header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
+            header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
+            header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
+            header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
+            header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)"""
+            table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
+            table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
+            table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
+            table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
+            table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
+            table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
+            self.resize_columns_to_contents(table, header)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
     ################### Day Care Service End ##################
 
     ################### Expenses ##################
-    def set_expense_table(self):
-        fetch_expenses()
-        for row, expense in enumerate(Expenses):
-            self.add_expense_to_table(row, expense)
+    try:
+        def set_expense_table(self):
+            fetch_expenses()
+            for row, expense in enumerate(Expenses):
+                self.add_expense_to_table(row, expense)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
 
-    def add_expense_to_table(self, row, expense):
-        header = self.page_expenses.table_expense.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        table = self.page_expenses.table_expense
-        table.insertRow(row)
+    try:
+        def add_expense_to_table(self, row, expense):
+            header = self.page_expenses.table_expense.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            table = self.page_expenses.table_expense
+            table.insertRow(row)
 
-        table.setItem(row, 0, QTableWidgetItem(str(expense.expense_id)))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 1, QTableWidgetItem(str(expense.issuer_id)))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 2, QTableWidgetItem(str(expense.expense_date)))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 3, QTableWidgetItem(str(expense.amount)))
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 4, QTableWidgetItem(str(expense.justification)))
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 0, QTableWidgetItem(str(expense.expense_id)))
+            header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 1, QTableWidgetItem(str(expense.issuer_id)))
+            header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 2, QTableWidgetItem(str(expense.expense_date)))
+            header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 3, QTableWidgetItem(str(expense.amount)))
+            header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 4, QTableWidgetItem(str(expense.justification)))
+            header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
         # self.resize_columns_to_contents_alternate(table)
         # No need to resize the expense table
 
     ################### Billing ##################
+    try:
+        def set_bill_table(self):
+            fetch_billings()
+            for row, billing in enumerate(Billings):
+                self.add_billing_to_table(row, billing)
 
-    def set_bill_table(self):
-        fetch_billings()
-        for row, billing in enumerate(Billings):
-            self.add_billing_to_table(row, billing)
+                service_details = self.get_service_details(billing.services, Services)
+                for rowService, service in enumerate(service_details):
+                    self.add_billing_service_to_service_table(rowService, service)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
+    try:
+        def get_service_details(self, service_ids, services):
+            return [service for service in services if service.service_id in service_ids]
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
+    try:
+        def add_billing_to_table(self, row, billing):
+            header = self.page_billing.table_bill.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            table = self.page_billing.table_bill
+            table.insertRow(row)
+            table.setItem(row, 0, QTableWidgetItem(str(billing.billing_id)))
+            header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 1, QTableWidgetItem(str(billing.day_care_id)))
+            header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 2, QTableWidgetItem(str(billing.appointment_id)))
+            header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 3, QTableWidgetItem(str(billing.payment_date)))
+            header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 4, QTableWidgetItem(str(billing.total_amount)))
+            header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 5, QTableWidgetItem(str(billing.adjustment)))
+            header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 6, QTableWidgetItem(str(billing.status)))
+            header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
+            """self.resize_columns_to_contents_alternate(table)
+            table.resizeColumnToContents(0)
+            table.resizeColumnToContents(1)
+            table.resizeColumnToContents(2) """
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
-            service_details = self.get_service_details(billing.services, Services)
-            for rowService, service in enumerate(service_details):
-                self.add_billing_service_to_service_table(rowService, service)
+    try:
+        def add_billing_service_to_service_table(self, rowService, service):
+            header = self.page_billing.table_show_service.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
-    def get_service_details(self, service_ids, services):
-        return [service for service in services if service.service_id in service_ids]
+            table = self.page_billing.table_show_service
 
-    def add_billing_to_table(self, row, billing):
-        header = self.page_billing.table_bill.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        table = self.page_billing.table_bill
-        table.insertRow(row)
-        table.setItem(row, 0, QTableWidgetItem(str(billing.billing_id)))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 1, QTableWidgetItem(str(billing.day_care_id)))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 2, QTableWidgetItem(str(billing.appointment_id)))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 3, QTableWidgetItem(str(billing.payment_date)))
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 4, QTableWidgetItem(str(billing.total_amount)))
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 5, QTableWidgetItem(str(billing.adjustment)))
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
-        table.setItem(row, 6, QTableWidgetItem(str(billing.status)))
-        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
-        """self.resize_columns_to_contents_alternate(table)
-        table.resizeColumnToContents(0)
-        table.resizeColumnToContents(1)
-        table.resizeColumnToContents(2) """
+            table.setItem(rowService, 0, QTableWidgetItem(service.service_id))
+            header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
 
-    def add_billing_service_to_service_table(self, rowService, service):
-        header = self.page_billing.table_show_service.horizontalHeader()
-        header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            table.setItem(rowService, 1, QTableWidgetItem(service.name))
+            header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
 
-        table = self.page_billing.table_show_service
-
-        table.setItem(rowService, 0, QTableWidgetItem(service.service_id))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-
-        table.setItem(rowService, 1, QTableWidgetItem(service.name))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-
-        table.setItem(rowService, 2, QTableWidgetItem(service.cost))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(rowService, 2, QTableWidgetItem(service.cost))
+            header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
     ################### End Billing ##################
 
     ################### Appointment ##################
-    def make_appointment(self):
-        apt = self.page_appointment_create
-        date = apt.date_apt.selectedDate()
-        time = apt.time_apt.selectedTime()
-        # appointment_service = self.page_appointment_create.cb_service.currentText()
-        reason = apt.line_reason.currentText()
-        first_name = apt.line_oname.currentText()
-        last_name = apt.line_lname.currentText()
-        phone = apt.line_phone.currentText()
-        email = apt.line_email.currentText()
-        address = apt.line_address.currentText()
-        # animal_id = apt.line_aid.currentText()
-        animal_name = apt.line_aname.currentText()
-        specicies = apt.line_species.currentText()
-        breed = apt.line_breed.currentText()
-        color = apt.line_colors.currentText()
-        behaviour = apt.line_behave.currentText()
-        birth = apt.date_appt_birth.selectedDate()
-        reg_date = apt.date_appt_reg.selectedDate()
-        name = first_name + " " + last_name
-        op.add_appointment(
-            date,
-            time,
-            reason,
-            name,
-            phone,
-            address,
-            animal_name,
-            species,
-            breed,
-            color,
-            behaviour,
-            birth,
-            reg_date,
-        )
+    try:
+        def make_appointment(self):
+            apt = self.page_appointment_create
+            date = apt.date_apt.selectedDate()
+            time = apt.time_apt.selectedTime()
+            # appointment_service = self.page_appointment_create.cb_service.currentText()
+            reason = apt.line_reason.currentText()
+            first_name = apt.line_oname.currentText()
+            last_name = apt.line_lname.currentText()
+            phone = apt.line_phone.currentText()
+            email = apt.line_email.currentText()
+            address = apt.line_address.currentText()
+            # animal_id = apt.line_aid.currentText()
+            animal_name = apt.line_aname.currentText()
+            specicies = apt.line_species.currentText()
+            breed = apt.line_breed.currentText()
+            color = apt.line_colors.currentText()
+            behaviour = apt.line_behave.currentText()
+            birth = apt.date_appt_birth.selectedDate()
+            reg_date = apt.date_appt_reg.selectedDate()
+            name = first_name + " " + last_name
+            op.add_appointment(
+                date,
+                time,
+                reason,
+                name,
+                phone,
+                address,
+                animal_name,
+                species,
+                breed,
+                color,
+                behaviour,
+                birth,
+                reg_date,
+            )
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
 
+    try:
         def populate_appointment(self):
             ...
+    except Exception as err:
+        print(f"Error Fetching: {err}")
 
     ####
 
     ############### Table Resize Methods ###########################
-    def resize_columns_to_contents_alternate(self, table):
-        header = table.horizontalHeader()
+    try:
+        def resize_columns_to_contents_alternate(self, table):
+            header = table.horizontalHeader()
 
-        for column in range(table.columnCount()):
-            max_width = header.sectionSizeHint(column)
+            for column in range(table.columnCount()):
+                max_width = header.sectionSizeHint(column)
 
-            for row in range(table.rowCount()):
-                item = table.item(row, column)
-                if item is not None and item.text():
-                    max_width = max(
-                        max_width, table.fontMetrics().width(item.text()) + 10
-                    )
+                for row in range(table.rowCount()):
+                    item = table.item(row, column)
+                    if item is not None and item.text():
+                        max_width = max(
+                            max_width, table.fontMetrics().width(item.text()) + 10
+                        )
 
-            header.setSectionResizeMode(column, max_width)
+                header.setSectionResizeMode(column, max_width)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
+    try:
+        def resize_columns_to_contents(self, table, header):
+            for column in range(table.columnCount()):
+                max_width = header.sectionSizeHint(column)
 
-    def resize_columns_to_contents(self, table, header):
-        for column in range(table.columnCount()):
-            max_width = header.sectionSizeHint(column)
+                for row in range(table.rowCount()):
+                    item = table.item(row, column)
+                    if item is not None and item.text():
+                        max_width = max(
+                            max_width, table.fontMetrics().width(item.text()) + 10
+                        )
 
-            for row in range(table.rowCount()):
-                item = table.item(row, column)
-                if item is not None and item.text():
-                    max_width = max(
-                        max_width, table.fontMetrics().width(item.text()) + 10
-                    )
-
-            header.resizeSection(column, max_width)
-
+                header.resizeSection(column, max_width)
+    except Exception as err:
+        print(f"Error Fetching: {err}")
     ############### Table Resize Methods End ########################
 
 
