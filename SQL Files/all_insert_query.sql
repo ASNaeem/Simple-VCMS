@@ -110,6 +110,31 @@ insert into employees (name, email, password, address, designation, access_level
 insert into employees (name, email, password, address, designation, access_level, salary, joining_date, employee_status) values ('Ayn Masseo', 'amasseo8@discuz.net', 'gG1&ia|_<', '738 Becker Court', 'Veterinarian', 3, 20005.48, '2022-09-05', 'Working');
 insert into employees (name, email, password, address, designation, access_level, salary, joining_date, employee_status) values ('Emlynn Leipoldt', 'eleipoldt9@flavors.me', 'uW6?9y3qG''''&6', '8202 Michigan Alley', 'Manager', 1, 23582.69, '2022-04-19', 'Working');
 
+/* phones */
+create table phones (employee_id int, phone varchar(50) primary key);
+
+insert into phones (employee_id, phone)values (1, '+880-155-240-7452');
+insert into phones (employee_id, phone)values (1, '+880-155-545-8888');
+insert into phones (employee_id, phone)values (2, '+880-155-550-7452');
+insert into phones (employee_id, phone)values (2, '+880-155-555-8888');
+insert into phones (employee_id, phone)values (3, '+880-115-553-3834');
+insert into phones (employee_id, phone)values (3, '+880-195-550-0422');
+insert into phones (employee_id, phone)values (4, '+880-115-552-7181');
+insert into phones (employee_id, phone)values (4, '+880-115-559-7397');
+insert into phones (employee_id, phone)values (5, '+880-185-558-5645');
+insert into phones (employee_id, phone)values (5, '+880-185-554-2563');
+insert into phones (employee_id, phone)values (6, '+880-115-553-3505');
+insert into phones (employee_id, phone)values (6, '+880-185-559-1210');
+insert into phones (employee_id, phone)values (7, '+880-155-551-2280');
+insert into phones (employee_id, phone)values (7, '+880-175-558-9049');
+insert into phones (employee_id, phone)values (8, '+880-185-554-1326');
+insert into phones (employee_id, phone)values (8, '+880-185-556-9427');
+insert into phones (employee_id, phone)values (9, '+880-115-553-3523');
+insert into phones (employee_id, phone)values (9, '+880-165-552-4421');
+insert into phones (employee_id, phone)values (10, '+880-115-558-9381');
+insert into phones (employee_id, phone)values (10, '+880-175-559-8778');
+
+
 /* expenses */
 Create table expenses (expense_id int  auto_increment primary key,
 		issuer_id int,
@@ -145,31 +170,6 @@ insert into inventory (name, manufacturer, item_type, price, amount) values ("Co
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Heartgard","Nitenpyram","Cream",2747.87,7);
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Panacur","Johnson & Johnson","Topical Cream",1632.83,7);
 insert into inventory (name, manufacturer, item_type, price, amount) values ("Revolution","Burt's Bees","lotion",2912.56,17);
-
-/* phones */
-create table phones (employee_id int, phone varchar(50) primary key);
-
-insert into phones (employee_id, phone)values (1, '+880-155-240-7452');
-insert into phones (employee_id, phone)values (1, '+880-155-545-8888');
-insert into phones (employee_id, phone)values (2, '+880-155-550-7452');
-insert into phones (employee_id, phone)values (2, '+880-155-555-8888');
-insert into phones (employee_id, phone)values (3, '+880-115-553-3834');
-insert into phones (employee_id, phone)values (3, '+880-195-550-0422');
-insert into phones (employee_id, phone)values (4, '+880-115-552-7181');
-insert into phones (employee_id, phone)values (4, '+880-115-559-7397');
-insert into phones (employee_id, phone)values (5, '+880-185-558-5645');
-insert into phones (employee_id, phone)values (5, '+880-185-554-2563');
-insert into phones (employee_id, phone)values (6, '+880-115-553-3505');
-insert into phones (employee_id, phone)values (6, '+880-185-559-1210');
-insert into phones (employee_id, phone)values (7, '+880-155-551-2280');
-insert into phones (employee_id, phone)values (7, '+880-175-558-9049');
-insert into phones (employee_id, phone)values (8, '+880-185-554-1326');
-insert into phones (employee_id, phone)values (8, '+880-185-556-9427');
-insert into phones (employee_id, phone)values (9, '+880-115-553-3523');
-insert into phones (employee_id, phone)values (9, '+880-165-552-4421');
-insert into phones (employee_id, phone)values (10, '+880-115-558-9381');
-insert into phones (employee_id, phone)values (10, '+880-175-559-8778');
-
 
 /* record */
 create table record (
