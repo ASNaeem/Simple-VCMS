@@ -312,15 +312,13 @@ def delete_animal_from_db(id: int):
             if id == animal.animal_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
-                query = "delete from animals where id = %s;"
+                query = "delete from animals where animals_id = %s;"
                 data = animal.animal_id
-                mysql_handler.execute_query(query, data)
+                mysql_handler.execute_query(query, (data,))
                 Animals.remove(animal)
                 mysql_handler.disconnect()
                 print("Delete Success!")
-                return "Delete Success!"
-        print("Delete Failed!")
-        return "Delete Failed!"
+                break
     except Exception as err:
         print(f"Error: {err}")
 
