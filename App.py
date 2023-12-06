@@ -327,7 +327,6 @@ class MainApp(QMainWindow):
                 f"{employee.name}({employee.employee_id})" for employee in Employees
             ]
             combo_box = self.page_expenses.comboBox
-            print(employee_info)
             combo_box.addItems(employee_info)
             combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
         except Exception as err:
