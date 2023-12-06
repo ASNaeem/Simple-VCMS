@@ -148,23 +148,6 @@ class MainApp(QMainWindow):
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(self.checkbox_state_changed)
         ##################### End Init #####################
 
-    def checkbox_state_changed(self, state):
-        combo_box = self.page_appointment_create.comboBox_animal_id
-        if state == 0:
-            combo_box.setEnabled(True)
-            animal_info = [
-                f"({animal.animal_id}) {animal.animal_name} {animal.owner_name}"
-                for animal in Animals
-            ]
-            combo_box = self.page_appointment_create.comboBox_animal_id
-            combo_box.addItems(animal_info)
-            combo_box.completer().setCompletionMode(
-                QtWidgets.QCompleter.PopupCompletion
-            )
-        else:
-            combo_box.clear()
-            combo_box.setEnabled(False)
-
     def add_record(self):
         try:
             page = self.page_animal_details
@@ -1080,6 +1063,23 @@ class MainApp(QMainWindow):
     ################### End Billing ##################
 
     ################### Appointment ##################
+    def checkbox_state_changed(self, state):
+        combo_box = self.page_appointment_create.comboBox_animal_id
+        if state == 0:
+            combo_box.setEnabled(True)
+            animal_info = [
+                f"({animal.animal_id}) {animal.animal_name} {animal.owner_name}"
+                for animal in Animals
+            ]
+            combo_box = self.page_appointment_create.comboBox_animal_id
+            combo_box.addItems(animal_info)
+            combo_box.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
+        else:
+            combo_box.clear()
+            combo_box.setEnabled(False)
+    
     def get_animal_by_id(self, animal_id):
         try:
             for animal in Animals: 
