@@ -12,7 +12,7 @@ from MySQLHandler import MySQLHandler
 
 from Employee import Employees, fetch_employees, add_employee, delete_employee
 from Service import Services, fetch_services
-from Animal import Animals, fetch_animals, delete_record_from_db
+from Animal import Animals, fetch_animals, delete_record_from_db, delete_animal_from_db
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
@@ -124,17 +124,14 @@ class MainApp(QMainWindow):
             self.delete_record
         )
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
+        self.page_animal_info.button_delete_animal_info.clicked.connect(
+            self.delete_animal
+        )
 
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
-        self.page_employee.button_save.clicked.connect(
-            self.update_employee
-        )
-        self.page_employee.button_register.clicked.connect(
-            self.register_employee
-        )
-        self.page_employee.button_delete.clicked.connect(
-            self.delete_employee
-        )
+        self.page_employee.button_save.clicked.connect(self.update_employee)
+        self.page_employee.button_register.clicked.connect(self.register_employee)
+        self.page_employee.button_delete.clicked.connect(self.delete_employee)
         ##################### End Init #####################
 
     def add_record(self):
@@ -400,14 +397,21 @@ class MainApp(QMainWindow):
             self.show_animal_info()
         except Exception as err:
             print("Entry Failed!", err)
-    def delete_aminal(self):
-        page = self.page_animal_reg
+
+    def delete_animal(self):
+        page = self.page_animal_info
         table = page.table_animal
         current_widget = self.stackedWidget.setCurrentWidget(page)
         selected_animal_row = table.currentRow()
         animal_id = int(table.item(selected_animal_row, 0).text())
 
-        #if sele
+        if selected_animal_row != -1:
+            #row_data = [table.item(selected_animal_row. col).text() for col in range(table.columnCount())]
+            table.removeRow(selected_animal_row)
+            delete_animal_from_db(animal_id)
+        else:
+            print("Select an item to delete!")
+
     def delete_record(self):
         selected_animal_row = self.page_animal_info.table_animal.currentRow()
         animal_id = int(
@@ -515,7 +519,7 @@ class MainApp(QMainWindow):
             self.page_employee.button_edit.setText("Cancel")
             self.page_employee.button_register.setEnabled(False)
             selected_item = self.page_employee.table_employee.selectedItems()
-            if selected_item:          
+            if selected_item:
                 employee_id = int(selected_item[0].text())
                 employee = None
                 for emp in Employees:
@@ -551,12 +555,13 @@ class MainApp(QMainWindow):
             self.page_employee.button_edit.setText("Edit")
             self.clear_employee_fields()
             self.page_employee.button_register.setEnabled(True)
+
     def update_employee(self):
         ...
 
     def register_employee(self):
         page = self.page_employee
-
+        current_widget = self.stackedWidget.setCurrentWidget(page)
         name = page.line_name_6.text()
         email = page.line_email_6.text()
         phone = page.line_personal_contact_6.text()
@@ -580,8 +585,10 @@ class MainApp(QMainWindow):
             status = "On Leave"
 
         if page.combobox_access_level_6.currentIndex != 0:
-            access_level = page.combobox_access_level_6.currentText(str(employee.access_level))
-        
+            access_level = page.combobox_access_level_6.currentText(
+                str(employee.access_level)
+            )
+
         if page.comboBox_designation_6.currentIndex != 0:
             designation = page.comboBox_designation_6.currentText(employee.designation)
 
@@ -598,13 +605,23 @@ class MainApp(QMainWindow):
                 designation,
             ]
         ):
-            QMessageBox.warning(self, "Warning", "Please fill in all fields.")
+            QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
             return
-        
-        add_employee(name, email, password, address, access_level, designation, salary, joining_date, employee_status, phone)
+
+        add_employee(
+            name,
+            email,
+            password,
+            address,
+            access_level,
+            designation,
+            salary,
+            joining_date,
+            employee_status,
+            phone,
+        )
         self.set_employee_table()
         #### Ongoing ####
-        
 
     def delete_employee(self):
         ...
@@ -627,7 +644,7 @@ class MainApp(QMainWindow):
         table.setItem(row, 5, QTableWidgetItem(str(employee.address)))
         table.setItem(row, 6, QTableWidgetItem(str(employee.designation)))
         table.setItem(row, 7, QTableWidgetItem(str(employee.access_level)))
-        #table.setItem(row, 8, QTableWidgetItem(str(employee.working_hours)))
+        # table.setItem(row, 8, QTableWidgetItem(str(employee.working_hours)))
         table.setItem(row, 8, QTableWidgetItem(str(employee.salary)))
         table.setItem(row, 9, QTableWidgetItem(str(employee.joining_date)))
         table.setItem(row, 10, QTableWidgetItem(str(employee.employee_status)))
@@ -637,7 +654,7 @@ class MainApp(QMainWindow):
         table.resizeColumnToContents(8)
         table.resizeColumnToContents(9)
         table.resizeColumnToContents(10)
-        #table.resizeColumnToContents(11)
+        # table.resizeColumnToContents(11)
 
     ################### End of Employee ###################
 

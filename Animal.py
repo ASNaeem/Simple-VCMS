@@ -306,14 +306,14 @@ def delete_record_from_db(animal_id, data):
         print(f"Delete failed: {err}")
 
 
-def delete_animal(id: int):
+def delete_animal_from_db(id: int):
     try:
         for animal in Animals:
-            if id == animal.id:
+            if id == animal.animal_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
-                query = "delete from animal where id = %s;"
-                data = animal.id
+                query = "delete from animals where id = %s;"
+                data = animal.animal_id
                 mysql_handler.execute_query(query, (data,))
                 Animals.remove(animal)
                 mysql_handler.disconnect()
