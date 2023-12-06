@@ -346,7 +346,6 @@ def delete_record_from_db(animal_id, data):
 
 
 def delete_animal_from_db(id: int):
-    Animals.copy = Animals
     try:
         for animal in Animals:
             if id == animal.animal_id:
