@@ -400,7 +400,14 @@ class MainApp(QMainWindow):
             self.show_animal_info()
         except Exception as err:
             print("Entry Failed!", err)
+    def delete_aminal(self):
+        page = self.page_animal_reg
+        table = page.table_animal
+        current_widget = self.stackedWidget.setCurrentWidget(page)
+        selected_animal_row = table.currentRow()
+        animal_id = int(table.item(selected_animal_row, 0).text())
 
+        #if sele
     def delete_record(self):
         selected_animal_row = self.page_animal_info.table_animal.currentRow()
         animal_id = int(
