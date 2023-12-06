@@ -81,6 +81,7 @@ def fetch_appointment():
         data = mysql_handler.fetch_data(query)
 
         for row in data:
+            print(row)
             appointment = Appointment(
                 animal_id=int(row[1]),
                 appointment_date=row[2],
@@ -91,7 +92,8 @@ def fetch_appointment():
             appointment.appointment_id = int(row[0])
             Appointments.append(appointment)
         mysql_handler.disconnect()
-        print(f"Er")
+        print(f"Appointments fetched!")
+        
     except Exception as err:
         print(f"Entry Failed!:{err}") 
 

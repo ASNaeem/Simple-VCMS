@@ -215,6 +215,7 @@ class MainApp(QMainWindow):
                 page.line_apt_phone.setText(animal.phone)
                 page.line_apt_status.setText(appointment.appointment_status)
                 print(type(appointment.appointment_date))
+                print(appointment.appointment_date)
                 qdate = QDate(appointment.appointment_date.year, appointment.appointment_date.month, appointment.appointment_date.day)
                 page.date_apt.setDate(qdate)
                
@@ -1060,9 +1061,10 @@ class MainApp(QMainWindow):
             
             table.setItem(row, 0, QTableWidgetItem(str(appointment.appointment_id)))
             table.setItem(row, 1, QTableWidgetItem(str(appointment.animal_id)))
-            table.setItem(row, 2, QTableWidgetItem(animal.owner_name))
-            table.setItem(row, 3, QTableWidgetItem(animal.phone))
-            table.setItem(row, 4, QTableWidgetItem(animal.species))
+            if animal:
+                table.setItem(row, 2, QTableWidgetItem(animal.owner_name))
+                table.setItem(row, 3, QTableWidgetItem(animal.phone))
+                table.setItem(row, 4, QTableWidgetItem(animal.species))
             table.setItem(row, 5, QTableWidgetItem(appointment.visit_reason))
             table.setItem(row, 6, QTableWidgetItem(appointment.appointment_date))
             table.setItem(row, 7, QTableWidgetItem(appointment.appointment_time))
