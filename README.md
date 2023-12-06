@@ -117,7 +117,7 @@ FUNCTIONALITIES:
           Expenses
 
      Edit
-          Animal
+          Animal - 1
           Medical Records
           Employee
           Billing

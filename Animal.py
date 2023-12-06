@@ -221,22 +221,50 @@ def add_record_to_db(animal_id: int, data):
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        print(data)
-        query = "insert into record(animals_id, record, rdate) values(%s, %s, %s)"
+        query = "insert into record(animal_id, record, rdate) values(%s, %s, %s)"
         values = animal_id, data[0], data[1]
-        print(values)
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
         print("New medical record added!")
     except Exception as err:
         print(f"Error inserting: {err}")
 
-def update_animal_from_db(animal:Animal):
+def update_animal_from_db(animal_name, birth_date,
+                  sterilized, gender,
+                  species, breed, color,
+                  behavioral_warning, owner_name,
+                  email, phone, address,
+                  reg_date, med_condition, animal_id):
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        query = "update animals set animal_name = %s, birth_date = %s, sterilized = %s, gender = %s, species = %s, breed = %s, color = %s, behavioral_warning = %s, owner_name = %s, email = %s, phone = %s, address = %s, reg_date = %s, med_condition = %s where animals_id = %s"
-        values = animal.animal_name, animal.birth_date, animal.sterilized, animal.gender, animal.species, animal.breed, animal.color, animal.behavioral_warning, animal.owner_name, animal.email, animal.phone, animal.address, animal.reg_date, animal.med_condition, animal.animal_id
+
+        query = '''
+        UPDATE animals
+        SET 
+        animal_name = %s,
+        birth_date = %s,
+        sterilized = %s,
+        gender = %s,
+        species = %s,
+        breed = %s,
+        color = %s,
+        behavioral_warning = %s,
+        owner_name = %s,
+        email = %s,
+        phone = %s,
+        address = %s,
+        reg_date = %s,
+        med_condition = %s
+        WHERE
+        animal_id = %s
+        '''
+        values = (animal_name, birth_date,
+                  sterilized, gender,
+                  species, breed, color,
+                  behavioral_warning, owner_name,
+                  email, phone, address,
+                  reg_date, med_condition, animal_id)
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
         print("Animal Record updated!")
