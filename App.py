@@ -12,7 +12,7 @@ from MySQLHandler import MySQLHandler
 
 from Employee import Employees, fetch_employees, add_employee, delete_employee
 from Service import Services, fetch_services
-from Animal import Animals, fetch_animals, delete_record_from_db, delete_animal_from_db
+from Animal import Animals, fetch_animals, delete_record_from_db, delete_animal_from_db, update_animal_from_db
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
@@ -127,7 +127,7 @@ class MainApp(QMainWindow):
         self.page_animal_info.button_delete_animal_info.clicked.connect(
             self.delete_animal
         )
-
+        self.page_animal_details.button_animal_save.clicked.connect(self.update_animal)
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
@@ -265,73 +265,66 @@ class MainApp(QMainWindow):
 
     def show_inventory(self):
         try:
-            
-                self.stackedWidget.setCurrentWidget(self.page_inventory)
-                self.setWindowTitle("VCMS || Dashboard || Inventory")
+            self.stackedWidget.setCurrentWidget(self.page_inventory)
+            self.setWindowTitle("VCMS || Dashboard || Inventory")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_setting(self):
-        try:
-            
-                self.stackedWidget.setCurrentWidget(self.page_setting)
-                self.setWindowTitle("VCMS || Dashboard || Setting")
+        try:          
+            self.stackedWidget.setCurrentWidget(self.page_setting)
+            self.setWindowTitle("VCMS || Dashboard || Setting")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_support(self):
-        try:
-            
-                self.stackedWidget.setCurrentWidget(self.page_support)
-                self.setWindowTitle("VCMS || Dashboard || Support")
+        try:    
+            self.stackedWidget.setCurrentWidget(self.page_support)
+            self.setWindowTitle("VCMS || Dashboard || Support")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_analytics_report(self):
         try:
-            
-                self.stackedWidget.setCurrentWidget(self.page_analytics_report)
-                self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
+            self.stackedWidget.setCurrentWidget(self.page_analytics_report)
+            self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_employee(self):
         try:
-            
-                self.stackedWidget.setCurrentWidget(self.page_employee)
-                self.setWindowTitle("VCMS || Dashboard || Employee")
+            self.stackedWidget.setCurrentWidget(self.page_employee)
+            self.setWindowTitle("VCMS || Dashboard || Employee")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_service(self):
-        try:
-            
-                self.stackedWidget.setCurrentWidget(self.page_service)
-                self.setWindowTitle("VCMS || Dashboard || Service")
+        try:     
+            self.stackedWidget.setCurrentWidget(self.page_service)
+            self.setWindowTitle("VCMS || Dashboard || Service")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_billing(self):
-        try:
-            
-                self.stackedWidget.setCurrentWidget(self.page_billing)
-                self.setWindowTitle("VCMS || Dashboard || Billing")
+        try:        
+            self.stackedWidget.setCurrentWidget(self.page_billing)
+            self.setWindowTitle("VCMS || Dashboard || Billing")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_expenses(self):
         try:
             
-                self.stackedWidget.setCurrentWidget(self.page_expenses)
-                self.setWindowTitle("VCMS || Dashboard || Expenses")
+            self.stackedWidget.setCurrentWidget(self.page_expenses)
+            self.setWindowTitle("VCMS || Dashboard || Expenses")
 
-                employee_info = [
-                    f"{employee.name}({employee.employee_id})" for employee in Employees
-                ]
-                combo_box = self.page_expenses.comboBox
-                print(employee_info)
-                combo_box.addItems(employee_info)
-                combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+            employee_info = [
+                f"{employee.name}({employee.employee_id})" for employee in Employees
+            ]
+            combo_box = self.page_expenses.comboBox
+            print(employee_info)
+            combo_box.addItems(employee_info)
+            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -341,14 +334,14 @@ class MainApp(QMainWindow):
     def change_theme(self):
         try:
             
-                apply_stylesheet(
-                    app,
-                    self.page_setting.comboBox_themes.currentText(),
-                    invert_secondary=False,
-                    extra=extra,
-                )
-                with open("config.txt", "w") as f:
-                    f.write(self.page_setting.comboBox_themes.currentText())
+            apply_stylesheet(
+                app,
+                self.page_setting.comboBox_themes.currentText(),
+                invert_secondary=False,
+                extra=extra,
+            )
+            with open("config.txt", "w") as f:
+                f.write(self.page_setting.comboBox_themes.currentText())
         except Exception as err:
             print(f"Error Fetching: {err}")
     
@@ -468,7 +461,45 @@ class MainApp(QMainWindow):
         
         except Exception as err:
                 print(f"Error Fetching: {err}") 
+    def update_animal(self):
+        try:
+            page = self.page_animal_details
 
+            animal_id = int(page.line_animal_id.text())
+            name = page.line_animal_name.text()
+
+            # date_object = datetime.strptime(str(animal.birth_date), "%Y-%m-%d").date()
+            bdate = page.date_animal_birth.date().toPyDate()
+
+            # date = QDate.fromString(str(animal.birth_date), date_format)
+            rdate = page.date_animal_reg.date().toPyDate()
+
+            species = page.line_animal_species.text()
+            breed = page.line_animal_breed.text()
+            color = page.line_animal_color.text()
+
+            warning = page.line_animal_warning.text()
+            condition = page.line_animal_condition.text()
+            oname = page.line_owner_name.text()
+            phone = page.line_owner_phone.text()
+            email = page.line_owner_email.text()
+            address = page.line_owner_address.text()
+
+            gender = page.button_group_gender.checkedButton().text()
+            sterilized = page.button_group_sterilized.checkedButton().text()
+            try:
+                for animal in Animals:
+                    if animal_id == animal.animal_id:
+                        update_animal_from_db(animal)
+                        break
+            except Exception as e:
+                print("Update failed: {e}")
+            self.show_animal_info()
+            # self.setWindowTitle("VCMS || Dashboard || Animal")
+    
+        except Exception as err:
+            print(f"update failed: {err}")
+                
     def delete_animal(self):
         try:
             page = self.page_animal_info

@@ -150,7 +150,7 @@
            <string>Male</string>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">buttonGroup</string>
+           <string notr="true">button_group_gender</string>
           </attribute>
          </widget>
         </item>
@@ -166,7 +166,7 @@
            <string>Female</string>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">buttonGroup</string>
+           <string notr="true">button_group_gender</string>
           </attribute>
          </widget>
         </item>
@@ -241,7 +241,7 @@
            <string>Yes</string>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">buttonGroup_2</string>
+           <string notr="true">button_group_sterilized</string>
           </attribute>
          </widget>
         </item>
@@ -257,7 +257,7 @@
            <string>No</string>
           </property>
           <attribute name="buttonGroup">
-           <string notr="true">buttonGroup_2</string>
+           <string notr="true">button_group_sterilized</string>
           </attribute>
          </widget>
         </item>
@@ -967,7 +967,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup"/>
+  <buttongroup name="button_group_gender"/>
+  <buttongroup name="button_group_sterilized"/>
  </buttongroups>
 </ui>
