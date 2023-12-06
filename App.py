@@ -428,43 +428,45 @@ class MainApp(QMainWindow):
     def add_animal_to_table(self, row, animal):
         header = self.page_animal_info.table_animal.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        table = self.page_animal_info.table_animal
         self.page_animal_info.table_animal.insertRow(row)
         self.page_animal_info.table_animal.setItem(
             row, 0, QTableWidgetItem(str(animal.animal_id))
         )
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        # header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         self.page_animal_info.table_animal.setItem(
             row, 1, QTableWidgetItem(animal.animal_name)
         )
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 2, QTableWidgetItem(str(animal.birth_date)))
         # self.page_animal_info.table_animal.setItem(row, 3, QTableWidgetItem(str(animal.sterilized)))
         # self.page_animal_info.table_animal.setItem(row, 4, QTableWidgetItem(animal.gender))
         self.page_animal_info.table_animal.setItem(
             row, 2, QTableWidgetItem(animal.species)
         )
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         self.page_animal_info.table_animal.setItem(
             row, 3, QTableWidgetItem(animal.breed)
         )
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+        # header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         self.page_animal_info.table_animal.setItem(
             row, 4, QTableWidgetItem(animal.color)
         )
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+        # header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 8, QTableWidgetItem(animal.behavioral_warning))
         self.page_animal_info.table_animal.setItem(
             row, 5, QTableWidgetItem(animal.owner_name)
         )
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
+        # header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 10, QTableWidgetItem(animal.email))
         self.page_animal_info.table_animal.setItem(
             row, 6, QTableWidgetItem(animal.phone)
         )
-        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
+        # header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
         # self.page_animal_info.table_animal.setItem(row, 12, QTableWidgetItem(animal.address))
         # self.page_animal_info.table_animal.setItem(row, 13, QTableWidgetItem(str(animal.reg_date)))
         # self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
+        self.resize_columns_to_contents(table, header)
 
     def add_records_to_table(self, row, record):
         table = self.page_animal_details.table_animal_record
@@ -560,29 +562,24 @@ class MainApp(QMainWindow):
         table = self.page_employee.table_employee
         table.insertRow(row)
         table.setItem(row, 0, QTableWidgetItem(str(employee.employee_id)))
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 1, QTableWidgetItem(str(employee.name)))
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 2, QTableWidgetItem(str(employee.email)))
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 3, QTableWidgetItem(str(employee.phone[0])))
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 4, QTableWidgetItem(str(employee.phone[1])))
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 5, QTableWidgetItem(str(employee.address)))
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 6, QTableWidgetItem(str(employee.designation)))
-        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 7, QTableWidgetItem(str(employee.access_level)))
-        header.setSectionResizeMode(7, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 8, QTableWidgetItem(str(employee.working_hours)))
-        header.setSectionResizeMode(8, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 9, QTableWidgetItem(str(employee.salary)))
-        header.setSectionResizeMode(9, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 10, QTableWidgetItem(str(employee.joining_date)))
-        header.setSectionResizeMode(10, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 11, QTableWidgetItem(str(employee.employee_status)))
-        header.setSectionResizeMode(11, QtWidgets.QHeaderView.ResizeToContents)
+        self.resize_columns_to_contents_alternate(table)
+        table.resizeColumnToContents(0)
+        table.resizeColumnToContents(7)
+        table.resizeColumnToContents(8)
+        table.resizeColumnToContents(9)
+        table.resizeColumnToContents(10)
+        table.resizeColumnToContents(11)
 
     ################### End of Employee ###################
 
@@ -597,7 +594,7 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         table = self.page_daycare.table_care
         table.insertRow(row)
-        table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
+        """table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
@@ -608,7 +605,15 @@ class MainApp(QMainWindow):
         table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)"""
+
+        table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
+        table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
+        table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
+        table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
+        table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
+        table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
+        self.resize_columns_to_contents(table, header)
 
     ################### Day Care Service End ##################
 
@@ -623,6 +628,7 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         table = self.page_expenses.table_expense
         table.insertRow(row)
+
         table.setItem(row, 0, QTableWidgetItem(str(expense.expense_id)))
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 1, QTableWidgetItem(str(expense.issuer_id)))
@@ -633,6 +639,8 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 4, QTableWidgetItem(str(expense.justification)))
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+
+        # self.resize_columns_to_contents_alternate(table)
 
     ################### Billing ##################
 
@@ -727,6 +735,34 @@ class MainApp(QMainWindow):
 
 
 ####
+
+    ############### Table Resize Methods ###########################
+    def resize_columns_to_contents_alternate(self, table):
+        header = table.horizontalHeader()
+
+        for column in range(table.columnCount()):
+            max_width = header.sectionSizeHint(column)
+
+            for row in range(table.rowCount()):
+                item = table.item(row, column)
+                if item is not None and item.text():
+                    max_width = max(
+                        max_width, table.fontMetrics().width(item.text()) + 10)
+
+            header.setSectionResizeMode(column, max_width)
+
+    def resize_columns_to_contents(self, table, header):
+        for column in range(table.columnCount()):
+            max_width = header.sectionSizeHint(column)
+
+            for row in range(table.rowCount()):
+                item = table.item(row, column)
+                if item is not None and item.text():
+                    max_width = max(max_width, table.fontMetrics().width(item.text()) + 10)
+
+            header.resizeSection(column, max_width)
+
+    ############### Table Resize Methods End ########################
 
 #### UI density Scaling modifier ####
 extra = {
