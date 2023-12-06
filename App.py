@@ -120,21 +120,13 @@ class MainApp(QMainWindow):
 
         ### functionalities ######
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
-        self.page_animal_details.button_record_delete.clicked.connect(
-            self.delete_record
-        )
+        self.page_animal_details.button_record_delete.clicked.connect(self.delete_record)
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
 
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
-        self.page_employee.button_edit_information_6.clicked.connect(
-            self.update_employee
-        )
-        self.page_employee.button_register_employee_6.clicked.connect(
-            self.register_employee
-        )
-        self.page_employee.button_delete_information_6.clicked.connect(
-            self.delete_employee
-        )
+        self.page_employee.button_edit_information_6.clicked.connect(self.update_employee)
+        self.page_employee.button_register_employee_6.clicked.connect(self.register_employee)
+        self.page_employee.button_delete_information_6.clicked.connect(self.delete_employee)
         ##################### End Init #####################
 
     def add_record(self):
@@ -478,8 +470,15 @@ class MainApp(QMainWindow):
 
     ################# Employee ###################
 
+    def clear_employee_fields():
+        page.line_name_6.clear()
+        page.line_email_6.clear()
+        page.line_personal_contact_6.clear()
+        page.line_home_6.clear()
+        page.line_address_6.clear()
+        page.line_salary_6.clear()
+
     def populate_employee(self):
-        # selected_employee_row = self.page_employee.table_employee.currentRow()
         selected_item = self.page_employee.table_employee.selectedItems()
         if selected_item:
             employee_id = int(selected_item[0].text())
@@ -496,7 +495,7 @@ class MainApp(QMainWindow):
             page.line_personal_contact_6.setText(employee.phone[0])
             page.line_home_6.setText(employee.phone[1])
             page.line_address_6.setText(employee.address)
-            page.line_salary_6.setText(employee.salary)
+            page.line_salary_6.setText(str(employee.salary))
 
             jdate = QDate(
                 employee.joining_date.year,
@@ -505,12 +504,13 @@ class MainApp(QMainWindow):
             )
             page.dateEdit_joining_date_6.setDate(jdate)
 
-            if employee.status.lower() == "working":
+            if employee.employee_status.lower() == "working":
                 page.rb_working.setChecked(True)
             else:
                 page.rb_on_leave.setChecked(True)
 
-            ##combo box baki parina T-T Chatgpt ko bhi pucha, kuch samajh me nahi aya :3
+            page.combobox_access_level_6.setCurrentText(str(employee.access_level))
+            page.comboBox_designation_6.setCurrentText(employee.designation)
 
     def update_employee(self):
         ...
