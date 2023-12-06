@@ -1,6 +1,7 @@
 from datetime import date
 from MySQLHandler import MySQLHandler
 
+
 class Animal:
     def __init__(
         self,
@@ -178,7 +179,10 @@ class Animal:
 ########## Animal ##########
 
 Animals = []
+
+
 def fetch_animals():
+    Animals.clear()
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -207,12 +211,13 @@ def fetch_animals():
             animal.animal_id = int(row[0])
             animal.medical_records = records_data
             Animals.append(animal)
-                        
+
         mysql_handler.disconnect()
     except Exception as err:
         print(f"Error Fetching: {err}")
-        
-def add_record_to_db(animal_id:int, data):
+
+
+def add_record_to_db(animal_id: int, data):
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -225,9 +230,8 @@ def add_record_to_db(animal_id:int, data):
         print("New medical record added!")
     except Exception as err:
         print(f"Error inserting: {err}")
-    
 
-    
+'''
 def add_animal(
     animal_name: str,
     birth_date: str,
@@ -278,7 +282,7 @@ def add_animal(
             phone,
             address,
             reg_date,
-            med_condition
+            med_condition,
         )
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -287,19 +291,21 @@ def add_animal(
         mysql_handler.disconnect()
     except Exception as err:
         return "Entry Failed!"
+'''
 
 def delete_record_from_db(animal_id, data):
-  try:
-    mysql_handler = MySQLHandler()
-    mysql_handler.connect()
-    query = "delete from record where animal_id=%s and record = %s and rdate = %s"
-    values = animal_id, data[1], data[0]
-    mysql_handler.execute_query(query, values)
-    mysql_handler.disconnect()
-    print("Delete Success!")
-  except Exception as err:
-    print(f"Delete failed: {err}")
-    
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        query = "delete from record where animal_id=%s and record = %s and rdate = %s"
+        values = animal_id, data[1], data[0]
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+        print("Delete Success!")
+    except Exception as err:
+        print(f"Delete failed: {err}")
+
+
 def delete_animal(id: int):
     try:
         for animal in Animals:
@@ -318,10 +324,27 @@ def delete_animal(id: int):
     except Exception as err:
         print(f"Error: {err}")
 
+
 def main():
-    an = Animal("Warden", "june 26th 2000", "no", "alpha male", "wolf", "red wolf",
-                "gray and black", "calm and calculative", "Nemo", "nem@gmail", "190238", "mohammadpur", "june 21", "healthy")
+    an = Animal(
+        "Warden",
+        "june 26th 2000",
+        "no",
+        "alpha male",
+        "wolf",
+        "red wolf",
+        "gray and black",
+        "calm and calculative",
+        "Nemo",
+        "nem@gmail",
+        "190238",
+        "mohammadpur",
+        "june 21",
+        "healthy",
+    )
     print(an.animal_name)
-if __name__ =="__main__":
+
+
+if __name__ == "__main__":
     main()
 ##########Animal End ##########

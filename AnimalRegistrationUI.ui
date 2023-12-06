@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1066</width>
-    <height>809</height>
+    <width>882</width>
+    <height>704</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,13 +24,13 @@
        <number>50</number>
       </property>
       <property name="topMargin">
-       <number>50</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
        <number>50</number>
       </property>
       <property name="bottomMargin">
-       <number>50</number>
+       <number>0</number>
       </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -424,7 +424,7 @@
                  <string>Male</string>
                 </property>
                 <attribute name="buttonGroup">
-                 <string notr="true">buttonGroup</string>
+                 <string notr="true">button_group_gender</string>
                 </attribute>
                </widget>
               </item>
@@ -446,7 +446,7 @@
                  <string>Female</string>
                 </property>
                 <attribute name="buttonGroup">
-                 <string notr="true">buttonGroup</string>
+                 <string notr="true">button_group_gender</string>
                 </attribute>
                </widget>
               </item>
@@ -497,6 +497,9 @@
                 <property name="text">
                  <string>Yes</string>
                 </property>
+                <attribute name="buttonGroup">
+                 <string notr="true">button_group_sterilized</string>
+                </attribute>
                </widget>
               </item>
               <item>
@@ -516,6 +519,9 @@
                 <property name="text">
                  <string>No</string>
                 </property>
+                <attribute name="buttonGroup">
+                 <string notr="true">button_group_sterilized</string>
+                </attribute>
                </widget>
               </item>
              </layout>
@@ -969,6 +975,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
+  <buttongroup name="button_group_gender"/>
+  <buttongroup name="button_group_sterilized"/>
  </buttongroups>
 </ui>
