@@ -5,6 +5,8 @@ class Appointment:
     def __init__(
         self,
         animal_id: int,
+        owner_name: str,
+        phone_number: str,
         appointment_date: str,
         appointment_time: str,
         visit_reason: str,
