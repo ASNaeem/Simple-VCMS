@@ -943,7 +943,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_99">
          <item>
-          <widget class="QPushButton" name="button_register_employee_6">
+          <widget class="QPushButton" name="button_register">
            <property name="font">
             <font>
              <family>Courier New</family>
@@ -954,7 +954,7 @@
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
-            <string>Register Employee</string>
+            <string>Register</string>
            </property>
           </widget>
          </item>
@@ -981,7 +981,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="button_edit_information_6">
+          <widget class="QPushButton" name="button_save">
            <property name="font">
             <font>
              <family>Courier New</family>
@@ -997,7 +997,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="button_delete_information_6">
+          <widget class="QPushButton" name="button_delete">
            <property name="font">
             <font>
              <family>Courier New</family>
@@ -1008,7 +1008,7 @@
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
-            <string>Delete Information</string>
+            <string>Delete</string>
            </property>
           </widget>
          </item>
