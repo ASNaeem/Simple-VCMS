@@ -120,6 +120,7 @@ FUNCTIONALITIES:
      Edit
           Appointment
           Animal
+          Animal - 1
           Medical Records
           Employee
           Billing
@@ -133,6 +134,7 @@ FUNCTIONALITIES:
           Appointment-
           Animal-1
           Medical Records-1
+          Employee-1
           Employee-1
           Billing
           Services

@@ -152,7 +152,6 @@ def fetch_employees():
                 address=row[4],
                 designation=row[5],
                 access_level=row[6],
-                # working_hours=row[7],
                 salary=row[7],
                 joining_date=row[8],
                 employee_status=row[9],
@@ -233,8 +232,8 @@ def delete_employee(id: int):
             if id == employee.employee_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
-                query = "delete from employee where employee_id = %s;"
-                data = employee.employee.id
+                query = "delete from employees where employee_id = %s;"
+                data = employee.employee_id
                 mysql_handler.execute_query(query, (data,))
                 Employees.remove(employee)
                 mysql_handler.disconnect()
