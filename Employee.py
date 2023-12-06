@@ -234,14 +234,12 @@ def delete_employee(id: int):
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from employee where employee_id = %s;"
-                data = employee.id
-                mysql_handler.execute_query(query, data)
+                data = employee.employee.id
+                mysql_handler.execute_query(query, (data,))
                 Employees.remove(employee)
                 mysql_handler.disconnect()
                 print("Delete Success!")
-                return "Delete Success!"
-        print("Delete Failed!")
-        return "Delete Failed!"
+                break
     except Exception as err:
         print(f"Error: {err}")
 
