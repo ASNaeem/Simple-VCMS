@@ -138,7 +138,27 @@ class MainApp(QMainWindow):
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
+        self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
+            self.checkbox_state_changed
+        )
         ##################### End Init #####################
+
+    def checkbox_state_changed(self, state):
+        combo_box = self.page_appointment_create.comboBox_animal_id
+        if state == 0:
+            combo_box.setEnabled(True)
+            animal_info = [
+                f"({animal.animal_id}) {animal.animal_name} {animal.owner_name}"
+                for animal in Animals
+            ]
+            combo_box = self.page_appointment_create.comboBox_animal_id
+            combo_box.addItems(animal_info)
+            combo_box.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
+        else:
+            combo_box.clear()
+            combo_box.setEnabled(False)
 
     def add_record(self):
         try:
@@ -190,7 +210,9 @@ class MainApp(QMainWindow):
             vet_info = [f"{vet[0]} ({vet[1]})" for vet in vet_name]
             combo_box = self.page_appointment_modify.comboBox_vet_name
             combo_box.addItems(vet_info)
-            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+            combo_box.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -844,6 +866,7 @@ class MainApp(QMainWindow):
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
+
     def set_day_care_table(self):
         try:
             fetch_day_care()
