@@ -355,32 +355,31 @@ class MainApp(QMainWindow):
 
     ##################### Animal ########################
     def clear_animal_fields(self):
-        try:
-            
-                page = self.page_animal_reg
-                page.line_reg_name.clear()
-                page.date_reg.clear()
-                page.line_reg_species.clear()
-                page.line_reg_breed.clear()
-                page.line_reg_color.clear()
+        try:       
+            page = self.page_animal_reg
+            page.line_reg_name.clear()
+            page.date_reg.clear()
+            page.line_reg_species.clear()
+            page.line_reg_breed.clear()
+            page.line_reg_color.clear()
 
-                # Radio button clear kaj kore na :)
-                page.button_group_gender.setExclusive(False)
-                page.button_group_sterilized.setExclusive(False)
-                page.rbutton_reg_male.setChecked(False)
-                page.rbutton_reg_female.setChecked(False)
-                page.rbutton_reg_ster_yes.setChecked(False)
-                page.rbutton_reg_ster_no.setChecked(False)
-                page.button_group_gender.setExclusive(True)
-                page.button_group_sterilized.setExclusive(True)
+            # Radio button clear kaj kore na :)
+            page.button_group_gender.setExclusive(False)
+            page.button_group_sterilized.setExclusive(False)
+            page.rbutton_reg_male.setChecked(False)
+            page.rbutton_reg_female.setChecked(False)
+            page.rbutton_reg_ster_yes.setChecked(False)
+            page.rbutton_reg_ster_no.setChecked(False)
+            page.button_group_gender.setExclusive(True)
+            page.button_group_sterilized.setExclusive(True)
 
-                page.line_reg_condition.clear()
-                page.line_reg_oname.clear()
-                page.line_reg_phone.clear()
-                page.line_reg_email.clear()
-                page.line_reg_address.clear()
-                page.date_reg_birth.clear()
-                page.line_reg_warning.clear()
+            page.line_reg_condition.clear()
+            page.line_reg_oname.clear()
+            page.line_reg_phone.clear()
+            page.line_reg_email.clear()
+            page.line_reg_address.clear()
+            page.date_reg_birth.clear()
+            page.line_reg_warning.clear()
         except Exception as err:
             print(f"Error Fetching: {err}")
     
