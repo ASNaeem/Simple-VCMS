@@ -325,7 +325,7 @@ class MainApp(QMainWindow):
             self.setWindowTitle("VCMS || Dashboard || Expenses")
 
             employee_info = [
-                f"{employee.name}({employee.employee_id})" for employee in Employees
+                f"{employee.name} ({employee.employee_id})" for employee in Employees
             ]
             combo_box = self.page_expenses.comboBox
             combo_box.addItems(employee_info)

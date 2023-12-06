@@ -83,7 +83,6 @@ class Expense:
 
 Expenses = []
 
-
 def fetch_expenses():
     try:
         mysql_handler = MySQLHandler()

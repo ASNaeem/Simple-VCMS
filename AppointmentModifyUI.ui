@@ -415,9 +415,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="cb_apt_visit_reason">
+           <widget class="QTextEdit" name="textEdit_visit_reason">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -425,44 +425,9 @@
             <property name="font">
              <font>
               <family>Courier New</family>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
              </font>
             </property>
-            <item>
-             <property name="text">
-              <string>Select</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Check-up</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Vaccination</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Surgery</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Neutering/spaying</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Grooming</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Day-care</string>
-             </property>
-            </item>
            </widget>
           </item>
           <item>
