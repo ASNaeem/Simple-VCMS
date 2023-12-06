@@ -555,17 +555,31 @@ class MainApp(QMainWindow):
         elif page.rb_on_leave.isChecked():
             status = "On Leave"
 
-        access_level = page.combobox_access_level_6.currentText(str(employee.access_level))
+        access_level = page.combobox_access_level_6.currentText(
+            str(employee.access_level)
+        )
         designation = page.comboBox_designation_6.currentText(employee.designation)
 
-        if not all([name, email, phone, alt_phone, address, salary, status, access_level, designation]):
+        if not all(
+            [
+                name,
+                email,
+                phone,
+                alt_phone,
+                address,
+                salary,
+                status,
+                access_level,
+                designation,
+            ]
+        ):
             QMessageBox.warning(self, "Warning", "Please fill in all fields.")
             return
-        
-        '''try:
+
+        """try:
            mysql_handler = MySQLHandler()
            mysql_handler.connect()
-           query = "insert" '''
+           query = "insert" """
 
     def delete_employee(self):
         ...
@@ -658,8 +672,8 @@ class MainApp(QMainWindow):
         table.setItem(row, 4, QTableWidgetItem(str(expense.justification)))
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
 
-        #self.resize_columns_to_contents_alternate(table)
-        #No need to resize the expense table
+        # self.resize_columns_to_contents_alternate(table)
+        # No need to resize the expense table
 
     ################### Billing ##################
 
@@ -694,12 +708,10 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 6, QTableWidgetItem(str(billing.status)))
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
-        '''self.resize_columns_to_contents_alternate(table)
+        """self.resize_columns_to_contents_alternate(table)
         table.resizeColumnToContents(0)
         table.resizeColumnToContents(1)
-        table.resizeColumnToContents(2) '''
-
-                   
+        table.resizeColumnToContents(2) """
 
     def add_billing_service_to_service_table(self, rowService, service):
         header = self.page_billing.table_show_service.horizontalHeader()
@@ -715,7 +727,6 @@ class MainApp(QMainWindow):
 
         table.setItem(rowService, 2, QTableWidgetItem(service.cost))
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-
 
     ################### End Billing ##################
 
