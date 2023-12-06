@@ -410,63 +410,67 @@ class MainApp(QMainWindow):
             reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
             birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
 
-            if not all(
-                [
-                    animal_name,
-                    reg_date,
-                    species,
-                    breed,
-                    color,
-                    gender,
-                    sterilized,
-                    med_condition,
-                    owner_name,
-                    phone,
-                    email,
-                    address,
-                    birth_date,
-                    behavioral_warning,
-                ]
-            ):
-                QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
-                return
-            try:
-                mysql_handler = MySQLHandler()
-                mysql_handler.connect()
-                query = "insert into animals (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date, med_condition) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-                values = (
-                    animal_name,
-                    birth_date_obj,
-                    sterilized,
-                    gender,
-                    species,
-                    breed,
-                    color,
-                    behavioral_warning,
-                    owner_name,
-                    email,
-                    phone,
-                    address,
-                    reg_date_obj,
-                    med_condition,
-                )
-                mysql_handler.execute_query(query, values)
-                print("Entry Success!")
-                mysql_handler.disconnect()
-                self.set_animal_table()
-                self.clear_animal_fields()
-                self.show_animal_info()
-            except Exception as err:
-                print("Entry Failed!", err)
-    except Exception as err:
-        print(f"Error Fetching: {err}")
-
-    try:
-        def delete_record(self):
-            selected_animal_row = self.page_animal_info.table_animal.currentRow()
-            animal_id = int(
-                self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
+        if not all(
+            [
+                animal_name,
+                reg_date,
+                species,
+                breed,
+                color,
+                gender,
+                sterilized,
+                med_condition,
+                owner_name,
+                phone,
+                email,
+                address,
+                birth_date,
+                behavioral_warning,
+            ]
+        ):
+            QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
+            return
+        try:
+            mysql_handler = MySQLHandler()
+            mysql_handler.connect()
+            query = "insert into animals (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date, med_condition) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            values = (
+                animal_name,
+                birth_date_obj,
+                sterilized,
+                gender,
+                species,
+                breed,
+                color,
+                behavioral_warning,
+                owner_name,
+                email,
+                phone,
+                address,
+                reg_date_obj,
+                med_condition,
             )
+            mysql_handler.execute_query(query, values)
+            print("Entry Success!")
+            mysql_handler.disconnect()
+            self.set_animal_table()
+            self.clear_animal_fields()
+            self.show_animal_info()
+        except Exception as err:
+            print("Entry Failed!", err)
+    def delete_aminal(self):
+        page = self.page_animal_reg
+        table = page.table_animal
+        current_widget = self.stackedWidget.setCurrentWidget(page)
+        selected_animal_row = table.currentRow()
+        animal_id = int(table.item(selected_animal_row, 0).text())
+
+        #if sele
+    def delete_record(self):
+        selected_animal_row = self.page_animal_info.table_animal.currentRow()
+        animal_id = int(
+            self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
+        )
 
             page = self.page_animal_details
             table = page.table_animal_record
