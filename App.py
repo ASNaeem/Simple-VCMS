@@ -801,7 +801,7 @@ class MainApp(QMainWindow):
 #### UI density Scaling modifier ####
 extra = {
     # Density Scale
-    "density_scale": "-4",
+    "density_scale": "-1",
 }
 if __name__ == "__main__":
     app = QApplication([])
