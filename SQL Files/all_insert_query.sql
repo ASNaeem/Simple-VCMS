@@ -2,7 +2,7 @@ create database if not exists VCMS;
 use VCMS;
 /* animal */
 create table animals (
-	animals_id int auto_increment primary key,
+	animal_id int auto_increment primary key,
 	animal_name varchar(50),
 	birth_date date,
 	sterilized varchar(5),

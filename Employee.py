@@ -152,7 +152,6 @@ def fetch_employees():
                 address=row[4],
                 designation=row[5],
                 access_level=row[6],
-                # working_hours=row[7],
                 salary=row[7],
                 joining_date=row[8],
                 employee_status=row[9],
