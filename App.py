@@ -523,29 +523,30 @@ class MainApp(QMainWindow):
                         employee = emp
                         break
 
-                page = self.page_employee
+            page = self.page_employee
 
-                page.line_name_6.setText(employee.name)
-                page.line_email_6.setText(employee.email)
-                page.line_personal_contact_6.setText(employee.phone[0])
-                page.line_home_6.setText(employee.phone[1])
-                page.line_address_6.setText(employee.address)
-                page.line_salary_6.setText(str(employee.salary))
+            page.line_name_6.setText(employee.name)
+            page.line_email_6.setText(employee.email)
+            page.line_personal_contact_6.setText(employee.phone[0])
+            page.line_home_6.setText(employee.phone[1])
+            page.line_address_6.setText(employee.address)
+            page.line_salary_6.setText(str(employee.salary))
+            page.line_employee_password.setText(employee.password)
 
-                jdate = QDate(
-                    employee.joining_date.year,
-                    employee.joining_date.month,
-                    employee.joining_date.day,
-                )
-                page.dateEdit_joining_date_6.setDate(jdate)
+            jdate = QDate(
+                employee.joining_date.year,
+                employee.joining_date.month,
+                employee.joining_date.day,
+            )
+            page.dateEdit_joining_date_6.setDate(jdate)
 
-                if employee.employee_status.lower() == "working":
-                    page.rb_working.setChecked(True)
-                else:
-                    page.rb_on_leave.setChecked(True)
+            if employee.employee_status.lower() == "working":
+                page.rb_working.setChecked(True)
+            else:
+                page.rb_on_leave.setChecked(True)
 
-                page.combobox_access_level_6.setCurrentText(str(employee.access_level))
-                page.comboBox_designation_6.setCurrentText(employee.designation)
+            page.combobox_access_level_6.setCurrentText(str(employee.access_level))
+            page.comboBox_designation_6.setCurrentText(employee.designation)
         else:
             self.page_employee.button_edit.setText("Edit")
             self.clear_employee_fields()
@@ -560,8 +561,10 @@ class MainApp(QMainWindow):
         email = page.line_email_6.text()
         phone = page.line_personal_contact_6.text()
         alt_phone = page.line_home_6.text()
+        phone = [phone, alt_phone]
         address = page.line_address_6.text()
         salary = page.line_salary_6.text()
+        password = page.line_employee_password.text()
 
         jdate = QDate(
             employee.joining_date.year,
@@ -576,10 +579,11 @@ class MainApp(QMainWindow):
         elif page.rb_on_leave.isChecked():
             status = "On Leave"
 
-        access_level = page.combobox_access_level_6.currentText(
-            str(employee.access_level)
-        )
-        designation = page.comboBox_designation_6.currentText(employee.designation)
+        if page.combobox_access_level_6.currentIndex != 0:
+            access_level = page.combobox_access_level_6.currentText(str(employee.access_level))
+        
+        if page.comboBox_designation_6.currentIndex != 0:
+            designation = page.comboBox_designation_6.currentText(employee.designation)
 
         if not all(
             [
@@ -596,11 +600,11 @@ class MainApp(QMainWindow):
         ):
             QMessageBox.warning(self, "Warning", "Please fill in all fields.")
             return
-
-        """try:
-           mysql_handler = MySQLHandler()
-           mysql_handler.connect()
-           query = "insert" """
+        
+        add_employee(name, email, password, address, access_level, designation, salary, joining_date, employee_status, phone)
+        self.set_employee_table()
+        #### Ongoing ####
+        
 
     def delete_employee(self):
         ...
@@ -623,17 +627,17 @@ class MainApp(QMainWindow):
         table.setItem(row, 5, QTableWidgetItem(str(employee.address)))
         table.setItem(row, 6, QTableWidgetItem(str(employee.designation)))
         table.setItem(row, 7, QTableWidgetItem(str(employee.access_level)))
-        table.setItem(row, 8, QTableWidgetItem(str(employee.working_hours)))
-        table.setItem(row, 9, QTableWidgetItem(str(employee.salary)))
-        table.setItem(row, 10, QTableWidgetItem(str(employee.joining_date)))
-        table.setItem(row, 11, QTableWidgetItem(str(employee.employee_status)))
+        #table.setItem(row, 8, QTableWidgetItem(str(employee.working_hours)))
+        table.setItem(row, 8, QTableWidgetItem(str(employee.salary)))
+        table.setItem(row, 9, QTableWidgetItem(str(employee.joining_date)))
+        table.setItem(row, 10, QTableWidgetItem(str(employee.employee_status)))
         self.resize_columns_to_contents_alternate(table)
         table.resizeColumnToContents(0)
         table.resizeColumnToContents(7)
         table.resizeColumnToContents(8)
         table.resizeColumnToContents(9)
         table.resizeColumnToContents(10)
-        table.resizeColumnToContents(11)
+        #table.resizeColumnToContents(11)
 
     ################### End of Employee ###################
 
@@ -836,6 +840,8 @@ if __name__ == "__main__":
     # window.show()
     with open("config.txt", "r") as f:
         read = f.read()
+        if not read:
+            read = "dark_medical.xml"
         apply_stylesheet(app, theme=read, extra=extra)
         window.page_setting.comboBox_themes.setCurrentText(read)
     # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')

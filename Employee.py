@@ -10,7 +10,7 @@ class Employee:
         address: str,
         designation: str,
         access_level: int,
-        working_hours: str,
+        #working_hours: str,
         salary: float,
         joining_date: str,
         employee_status: str,
@@ -23,7 +23,7 @@ class Employee:
         self.address = address
         self.designation = designation
         self.access_level = access_level
-        self.working_hours = working_hours
+        #self.working_hours = working_hours
         self.salary = salary
         self.joining_date = joining_date
         self.employee_status = employee_status
@@ -86,13 +86,13 @@ class Employee:
     def access_level(self, access_level: int):
         self._access_level = access_level
 
-    @property
+    '''@property
     def working_hours(self):
         return self._working_hours
 
     @working_hours.setter
     def working_hours(self, working_hours: str):
-        self._working_hours = working_hours
+        self._working_hours = working_hours'''
 
     @property
     def designation(self):
@@ -152,10 +152,10 @@ def fetch_employees():
                 address=row[4],
                 designation=row[5],
                 access_level=row[6],
-                working_hours=row[7],
-                salary=row[8],
-                joining_date=row[9],
-                employee_status=row[10],
+                #working_hours=row[7],
+                salary=row[7],
+                joining_date=row[8],
+                employee_status=row[9],
                 phone=phone_numbers,
             )
             print(employee.phone)
@@ -172,7 +172,7 @@ def add_employee(
     password: str,
     address: str,
     access_level: int,
-    working_hours: str,
+    #working_hours: str,
     designation: str,
     salary: float,
     joining_date: str,
@@ -186,7 +186,7 @@ def add_employee(
             password,
             address,
             access_level,
-            working_hours,
+            #working_hours,
             designation,
             salary,
             joining_date,
@@ -195,7 +195,7 @@ def add_employee(
         )
         Employee.append(new_employee)
 
-        query = "insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s, %s,%s);"
+        query = "insert into employees (name, email, password, address, designation, access_level, salary, joining_date) values(%s, %s, %s, %s, %s, %s, %s,%s);"
         data = values(
             name,
             email,
@@ -203,7 +203,7 @@ def add_employee(
             address,
             designation,
             access_level,
-            working_hours,
+            #working_hours,
             salary,
             joining_date,
             employee_status,
