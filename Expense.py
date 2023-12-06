@@ -83,17 +83,13 @@ class Expense:
 
 Expenses = []
 
-
 def fetch_expenses():
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from expenses;"
         data = mysql_handler.fetch_data(query)
-        print("tesing")
         for row in data:
-            print("immediate after for loop tesing")
-            print(row)
             expense = Expense(
                 issuer_id=row[1],
                 handler_id=row[2],

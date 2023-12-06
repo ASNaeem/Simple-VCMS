@@ -117,7 +117,7 @@ FUNCTIONALITIES:
           Expenses
 
      Edit
-          Animal
+          Animal - 1
           Medical Records
           Employee
           Billing
@@ -130,7 +130,7 @@ FUNCTIONALITIES:
      Delete
           Animal-1
           Medical Records-1
-          Employee
+          Employee-1
           Billing
           Services
           Item

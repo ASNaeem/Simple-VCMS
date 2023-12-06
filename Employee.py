@@ -229,11 +229,11 @@ def add_employee(
 def delete_employee(id: int):
     try:
         for employee in Employees:
-            if id == employee.id:
+            if id == employee.employee_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
-                query = "delete from employee where employee_id = %s;"
-                data = employee.employee.id
+                query = "delete from employees where employee_id = %s;"
+                data = employee.employee_id
                 mysql_handler.execute_query(query, (data,))
                 Employees.remove(employee)
                 mysql_handler.disconnect()
