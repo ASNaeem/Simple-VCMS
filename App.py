@@ -523,13 +523,12 @@ class MainApp(QMainWindow):
             print(f"Error Fetching: {err}")
 
     def set_animal_table(self):
-        try:
-            
-                self.page_animal_info.table_animal.clearContents()
-                self.page_animal_info.table_animal.setRowCount(0)
-                fetch_animals()
-                for row, animal in enumerate(Animals):
-                    self.add_animal_to_table(row, animal)
+        try:    
+            self.page_animal_info.table_animal.clearContents()
+            self.page_animal_info.table_animal.setRowCount(0)
+            fetch_animals()
+            for row, animal in enumerate(Animals):
+                self.add_animal_to_table(row, animal)
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -676,37 +675,32 @@ class MainApp(QMainWindow):
             address = page.line_address_6.text()
             salary = page.line_salary_6.text()
             password = page.line_employee_password.text()
+            joining_date = page.dateEdit_joining_date_6.text()
 
-            jdate = QDate(
-                employee.joining_date.year,
-                employee.joining_date.month,
-                employee.joining_date.day,
-            )
-
-            joining_date = page.dateEdit_joining_date_6.setDate(jdate)
+            joining_date_obj = datetime.strptime(str(joining_date), "%Y-%m-%d").date()
 
             if page.rb_working.isChecked():
-                status = "Working"
+                employee_status = "Working"
             elif page.rb_on_leave.isChecked():
-                status = "On Leave"
+                employee_status = "On Leave"
 
             if page.combobox_access_level_6.currentIndex != 0:
-                access_level = page.combobox_access_level_6.currentText(
-                    str(employee.access_level)
-                )
+                access_level = page.combobox_access_level_6.currentText()
 
             if page.comboBox_designation_6.currentIndex != 0:
-                designation = page.comboBox_designation_6.currentText(employee.designation)
+                designation = page.comboBox_designation_6.currentText()
 
             if not all(
                 [
                     name,
                     email,
+                    password,
                     phone,
                     alt_phone,
                     address,
                     salary,
-                    status,
+                    joining_date_obj,
+                    employee_status,
                     access_level,
                     designation,
                 ]
@@ -714,22 +708,22 @@ class MainApp(QMainWindow):
                 QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
                 return
 
-            add_employee(
-                name,
-                email,
-                password,
-                address,
-                access_level,
-                designation,
-                salary,
-                joining_date,
-                employee_status,
-                phone,
-            )
+            mysql_handler = MySQLHandler()
+            mysql_handler.connect()
+            query = "insert into employees (name, email, password, address, designation, access_level, salary, joining_date, employee_status) values (%s, %s, %s, %s, %s, %s, %s,%s,%s);"
+            data = (name, email, password, address, designation, access_level, salary, joining_date_obj, employee_status)
+            mysql_handler.execute_query(query, data)
+            query = "insert into phones (id, phone_number) values (%s, %s);"
+            value1 = phone[0]
+            value2 = phone[1]
+            mysql_handler.execute_query(query, (value1),)
+            mysql_handler.execute_query(query, (value2),)
+            mysql_handler.disconnect()
+            print("Entry Success!")
+            self.clear_employee_fields()
             self.set_employee_table()
-            #### Ongoing ####
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Entry Failed: {err}")
 
     def delete_employee(self):
         try:
@@ -739,6 +733,8 @@ class MainApp(QMainWindow):
 
     def set_employee_table(self):
         try:
+            self.page_employee.table_employee.clearContents()
+            self.page_employee.table_employee.setRowCount(0)
             fetch_employees()
             for row, employee in enumerate(Employees):
                 self.add_employee_to_table(row, employee)
