@@ -314,7 +314,7 @@ def delete_animal_from_db(id: int):
                 mysql_handler.connect()
                 query = "delete from animals where id = %s;"
                 data = animal.animal_id
-                mysql_handler.execute_query(query, (data,))
+                mysql_handler.execute_query(query, data)
                 Animals.remove(animal)
                 mysql_handler.disconnect()
                 print("Delete Success!")
