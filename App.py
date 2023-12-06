@@ -833,6 +833,8 @@ if __name__ == "__main__":
     # window.show()
     with open("config.txt", "r") as f:
         read = f.read()
+        if not read:
+            read = "dark_medical.xml"
         apply_stylesheet(app, theme=read, extra=extra)
         window.page_setting.comboBox_themes.setCurrentText(read)
     # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
