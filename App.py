@@ -144,6 +144,8 @@ class MainApp(QMainWindow):
         self.page_appointment.button_delete_appointment.clicked.connect(self.delete_appointment)
         #self.page_appointment_create.button_create.clicked.connect(self.create_appointment)
         #self.page_appointment
+
+        self.page_appointment_create.chk_box_new_animal.stateChanged.connect(self.checkbox_state_changed)
         ##################### End Init #####################
 
     def checkbox_state_changed(self, state):
@@ -950,6 +952,34 @@ class MainApp(QMainWindow):
     ################### Day Care Service End ##################
 
     ################### Expenses ##################
+    def clear_expense_fields(self):
+        ...
+    def populate_expense(self):
+        try:
+            if self.page_expenses.button_expense_edit.text() == "Enable Edit":
+                self.page_expenses.button_expense_edit.setText("Cancel")
+                self.page_expenses.button_expense_add.setEnabled(False)
+                selected_item = self.page_expenses.table_expense.selectedItems()
+                if selected_item:
+                    expense_id = int(selected_item[0].text())
+                    expense = None
+                    for ex in Expenses:
+                        if ex.expense_id == expense_id:
+                            expense = ex
+                            break
+            page = self.page_expenses
+
+            jdate = QDate(expense.expense_date.year, expense.expense_date.month, expense.expense_date.day)
+            page.date_issue.setDate(jdate)
+            
+        except Exception as err:
+            pass
+    def create_new_expense(self):
+        ...
+    def delete_expense(self):
+        ...
+    def update_expense(self):
+        ...
     def set_expense_table(self):
         try:
             fetch_expenses()
