@@ -764,13 +764,11 @@ class MainApp(QMainWindow):
             table = page.table_employee
             selected_employee_row = table.currentRow()
             employee_id = int(table.item(selected_employee_row, 0).text())
-
             if selected_employee_row != -1:
                 table.removeRow(selected_employee_row)
                 delete_employee(employee_id)
             else:
                 print("No row selected! Select an employee to delete!")
-
         except Exception as err:
             print(f"Error Fetching: {err}")
 
