@@ -86,13 +86,13 @@ class Employee:
     def access_level(self, access_level: int):
         self._access_level = access_level
 
-    @property
+    '''@property
     def working_hours(self):
         return self._working_hours
 
     @working_hours.setter
     def working_hours(self, working_hours: str):
-        self._working_hours = working_hours
+        self._working_hours = working_hours'''
 
     @property
     def designation(self):
