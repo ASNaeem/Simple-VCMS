@@ -221,10 +221,8 @@ def add_record_to_db(animal_id: int, data):
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        print(data)
         query = "insert into record(animal_id, record, rdate) values(%s, %s, %s)"
         values = animal_id, data[0], data[1]
-        print(values)
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
         print("New medical record added!")
@@ -267,8 +265,6 @@ def update_animal_from_db(animal_name, birth_date,
                   behavioral_warning, owner_name,
                   email, phone, address,
                   reg_date, med_condition, animal_id)
-
-        print(values)
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
         print("Animal Record updated!")
