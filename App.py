@@ -471,12 +471,17 @@ class MainApp(QMainWindow):
     ################# Employee ###################
 
     def clear_employee_fields():
-        page.line_name_6.clear()
-        page.line_email_6.clear()
-        page.line_personal_contact_6.clear()
-        page.line_home_6.clear()
-        page.line_address_6.clear()
-        page.line_salary_6.clear()
+        self.page_employee.line_name_6.clear()
+        self.page_employee.line_email_6.clear()
+        self.page_employee.line_personal_contact_6.clear()
+        self.page_employee.line_home_6.clear()
+        self.page_employee.line_address_6.clear()
+        self.page_employee.line_salary_6.clear()
+        self.page_employee.dateEdit_joining_date_6.clear()
+        self.page_employee.rb_working.setChecked(False)
+        self.page_employee.rb_on_leave.setChecked(False)
+        self.page_employee.comboBox_designation_6.clearSelection()
+        self.page_employee.combobox_access_level_6.clearSelection()
 
     def populate_employee(self):
         selected_item = self.page_employee.table_employee.selectedItems()
@@ -538,13 +543,17 @@ class MainApp(QMainWindow):
         elif page.rb_on_leave.isChecked():
             status = "On Leave"
 
-        access_level = ""
-        designation = ""
+        access_level = page.combobox_access_level_6.currentText(str(employee.access_level))
+        designation = page.comboBox_designation_6.currentText(employee.designation)
 
-        ##combo box baki parina T-T Chatgpt ko bhi pucha, kuch samajh me nahi aya :3
-
-        if not all([name, email, phone, alt_phone, address, salary, status]):
-            ...
+        if not all([name, email, phone, alt_phone, address, salary, status, access_level, designation]):
+            QMessageBox.warning(self, "Warning", "Please fill in all fields.")
+            return
+        
+        '''try:
+           mysql_handler = MySQLHandler()
+           mysql_handler.connect()
+           query = "insert" '''
 
     def delete_employee(self):
         ...
