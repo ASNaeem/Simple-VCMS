@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1007</width>
+    <width>955</width>
     <height>712</height>
    </rect>
   </property>
@@ -538,6 +538,12 @@
               <family>Courier New</family>
               <pointsize>12</pointsize>
              </font>
+            </property>
+            <property name="currentSection">
+             <enum>QDateTimeEdit::HourSection</enum>
+            </property>
+            <property name="displayFormat">
+             <string>HH:mm:ss</string>
             </property>
            </widget>
           </item>

@@ -106,6 +106,7 @@ MySQL
 
 FUNCTIONALITIES:
      Create
+          Appointment
           Animal-1
           Medical Records - 1
           Employee-1
@@ -117,6 +118,7 @@ FUNCTIONALITIES:
           Expenses
 
      Edit
+          Appointment
           Animal
           Medical Records
           Employee
@@ -128,9 +130,10 @@ FUNCTIONALITIES:
           Expenses
 
      Delete
+          Appointment-
           Animal-1
           Medical Records-1
-          Employee
+          Employee-1
           Billing
           Services
           Item
@@ -139,6 +142,7 @@ FUNCTIONALITIES:
           Expenses
 
      Populate in Fields
+          Appointment-1
           Animal-1
           Employee-1
           Billing
@@ -149,6 +153,7 @@ FUNCTIONALITIES:
           Expenses
 
      Populate in Table
+          Appointment
           Animal-1
           Medical Records-1
           Employee-1
@@ -160,6 +165,7 @@ FUNCTIONALITIES:
           Expenses-1
 
      Search
+          Appointment
           Animal-0
           Employee-0
           Billing-0
