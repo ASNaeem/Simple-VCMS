@@ -12,7 +12,13 @@ from MySQLHandler import MySQLHandler
 
 from Employee import Employees, fetch_employees, add_employee, delete_employee
 from Service import Services, fetch_services
-from Animal import Animals, fetch_animals, delete_record_from_db, delete_animal_from_db, update_animal_from_db
+from Animal import (
+    Animals,
+    fetch_animals,
+    delete_record_from_db,
+    delete_animal_from_db,
+    update_animal_from_db,
+)
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
@@ -177,6 +183,14 @@ class MainApp(QMainWindow):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
             self.setWindowTitle("VCMS || Dashboard || Appointment Details")
+            vet_name = []
+            for employee in Employees:
+                if "vet" in employee.designation.lower():
+                    vet_name.append((employee.name, employee.employee_id))
+            vet_info = [f"{vet[0]} ({vet[1]})" for vet in vet_name]
+            combo_box = self.page_appointment_modify.comboBox_vet_name
+            combo_box.addItems(vet_info)
+            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -306,21 +320,21 @@ class MainApp(QMainWindow):
             print(f"Error Fetching: {err}")
 
     def show_service(self):
-        try:     
+        try:
             self.stackedWidget.setCurrentWidget(self.page_service)
             self.setWindowTitle("VCMS || Dashboard || Service")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_billing(self):
-        try:        
+        try:
             self.stackedWidget.setCurrentWidget(self.page_billing)
             self.setWindowTitle("VCMS || Dashboard || Billing")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_expenses(self):
-        try:          
+        try:
             self.stackedWidget.setCurrentWidget(self.page_expenses)
             self.setWindowTitle("VCMS || Dashboard || Expenses")
 
@@ -329,14 +343,15 @@ class MainApp(QMainWindow):
             ]
             combo_box = self.page_expenses.comboBox
             combo_box.addItems(employee_info)
-            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+            combo_box.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     #####   Setting    #####
     def change_theme(self):
         try:
-            
             apply_stylesheet(
                 app,
                 self.page_setting.comboBox_themes.currentText(),
@@ -463,7 +478,8 @@ class MainApp(QMainWindow):
                 print("Entry Failed!", err)
 
         except Exception as err:
-                print(f"Error Fetching: {err}") 
+            print(f"Error Fetching: {err}")
+
     def update_animal(self):
         try:
             page = self.page_animal_details
@@ -490,11 +506,27 @@ class MainApp(QMainWindow):
 
             gender = page.button_group_gender.checkedButton().text()
             sterilized = page.button_group_sterilized.checkedButton().text()
-            update_animal_from_db(name, bdate,sterilized, gender,species, breed, color,warning, oname,email, phone, address,rdate, condition, animal_id)                      
+            update_animal_from_db(
+                name,
+                bdate,
+                sterilized,
+                gender,
+                species,
+                breed,
+                color,
+                warning,
+                oname,
+                email,
+                phone,
+                address,
+                rdate,
+                condition,
+                animal_id,
+            )
             self.show_animal_info()
         except Exception as err:
             print(f"update failed: {err}")
-                
+
     def delete_animal(self):
         try:
             page = self.page_animal_info

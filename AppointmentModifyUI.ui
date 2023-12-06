@@ -234,18 +234,12 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="line_apt_vet_name">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QComboBox" name="comboBox_vet_name">
+            <property name="editable">
+             <bool>true</bool>
             </property>
-            <property name="font">
-             <font>
-              <family>Courier New</family>
-              <pointsize>12</pointsize>
-             </font>
+            <property name="insertPolicy">
+             <enum>QComboBox::NoInsert</enum>
             </property>
            </widget>
           </item>
