@@ -483,6 +483,8 @@ class MainApp(QMainWindow):
         table.setItem(row, 1, QTableWidgetItem(str(record[0])))
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 
+    ################# Animal End #################
+
     ################# Employee ###################
 
     def clear_employee_fields():
@@ -628,7 +630,6 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)"""
-
         table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
         table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
         table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
@@ -662,7 +663,8 @@ class MainApp(QMainWindow):
         table.setItem(row, 4, QTableWidgetItem(str(expense.justification)))
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
 
-        # self.resize_columns_to_contents_alternate(table)
+        #self.resize_columns_to_contents_alternate(table)
+        #No need to resize the expense table
 
     ################### Billing ##################
 
@@ -697,6 +699,12 @@ class MainApp(QMainWindow):
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
         table.setItem(row, 6, QTableWidgetItem(str(billing.status)))
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
+        '''self.resize_columns_to_contents_alternate(table)
+        table.resizeColumnToContents(0)
+        table.resizeColumnToContents(1)
+        table.resizeColumnToContents(2) '''
+
+                   
 
     def add_billing_service_to_service_table(self, rowService, service):
         header = self.page_billing.table_show_service.horizontalHeader()
@@ -712,6 +720,7 @@ class MainApp(QMainWindow):
 
         table.setItem(rowService, 2, QTableWidgetItem(service.cost))
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+
 
     ################### End Billing ##################
 
