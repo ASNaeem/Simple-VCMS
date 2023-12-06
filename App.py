@@ -459,6 +459,9 @@ class MainApp(QMainWindow):
         except Exception as err:
             print("Entry Failed!", err)
     
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+
     try:
         def delete_aminal(self):
             page = self.page_animal_reg
@@ -478,19 +481,19 @@ class MainApp(QMainWindow):
                 self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
             )
 
-                page = self.page_animal_details
-                table = page.table_animal_record
-                selected_row = table.currentRow()
-                if selected_row != -1:
-                    row_data = [
-                        table.item(selected_row, col).text()
-                        for col in range(table.columnCount())
-                    ]
-                    print(row_data)
-                    table.removeRow(selected_row)
-                    delete_record_from_db(animal_id, row_data)
-                else:
-                    print("Select an item to delete!")
+            page = self.page_animal_details
+            table = page.table_animal_record
+            selected_row = table.currentRow()
+            if selected_row != -1:
+                row_data = [
+                    table.item(selected_row, col).text()
+                    for col in range(table.columnCount())
+                ]
+                print(row_data)
+                table.removeRow(selected_row)
+                delete_record_from_db(animal_id, row_data)
+            else:
+                print("Select an item to delete!")
     except Exception as err:
         print(f"Error Fetching: {err}")
 
