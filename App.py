@@ -11,7 +11,12 @@ from PyQt5.QtWidgets import QMessageBox
 from MySQLHandler import MySQLHandler
 
 from Employee import Employees, fetch_employees, add_employee, delete_employee
-from Appointment import Appointments, fetch_appointment, add_appointment, delete_appointment
+from Appointment import (
+    Appointments,
+    fetch_appointment,
+    add_appointment,
+    delete_appointment,
+)
 from Service import Services, fetch_services
 from Animal import (
     Animals,
@@ -141,11 +146,15 @@ class MainApp(QMainWindow):
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
-        self.page_appointment.button_delete_appointment.clicked.connect(self.delete_appointment)
-        #self.page_appointment_create.button_create.clicked.connect(self.create_appointment)
-        #self.page_appointment
+        self.page_appointment.button_delete_appointment.clicked.connect(
+            self.delete_appointment
+        )
+        # self.page_appointment_create.button_create.clicked.connect(self.create_appointment)
+        # self.page_appointment
 
-        self.page_appointment_create.chk_box_new_animal.stateChanged.connect(self.checkbox_state_changed)
+        self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
+            self.checkbox_state_changed
+        )
         ##################### End Init #####################
 
     def add_record(self):
@@ -190,19 +199,21 @@ class MainApp(QMainWindow):
     def show_appointment_modify(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
-            #self.setWindowTitle("VCMS || Dashboard || Appointment Details")
+            # self.setWindowTitle("VCMS || Dashboard || Appointment Details")
 
-            selected_item = self.page_appointment.appointment_table_widget_2.selectedItems()
+            selected_item = (
+                self.page_appointment.appointment_table_widget_2.selectedItems()
+            )
             if selected_item:
                 appointment_id = int(selected_item[0].text())
-                #animal_id = int(selected_item[1].text())
+                # animal_id = int(selected_item[1].text())
                 appointment = None
                 animal = None
                 for ap in Appointments:
                     if ap.appointment_id == appointment_id:
                         appointment = ap
                         break
-                    
+
                 page = self.page_appointment_modify
 
                 for an in Animals:
@@ -218,13 +229,20 @@ class MainApp(QMainWindow):
                 page.line_apt_status.setText(appointment.appointment_status)
                 print(type(appointment.appointment_date))
                 print(appointment.appointment_date)
-                qdate = QDate(appointment.appointment_date.year, appointment.appointment_date.month, appointment.appointment_date.day)
+                qdate = QDate(
+                    appointment.appointment_date.year,
+                    appointment.appointment_date.month,
+                    appointment.appointment_date.day,
+                )
                 page.date_apt.setDate(qdate)
-               
 
-                qtime = QTime(appointment.appointment_time.hour, appointment.appointment_time.minute, appointment.appointment_time.second)
+                qtime = QTime(
+                    appointment.appointment_time.hour,
+                    appointment.appointment_time.minute,
+                    appointment.appointment_time.second,
+                )
                 page.time_apt.setTime(qtime)
-                
+
                 page.cb_apt_visit_reason.setCurrentText(appointment.visit_reason)
 
             else:
@@ -937,6 +955,7 @@ class MainApp(QMainWindow):
     ################### Expenses ##################
     def clear_expense_fields(self):
         ...
+
     def populate_expense(self):
         try:
             if self.page_expenses.button_expense_edit.text() == "Enable Edit":
@@ -950,19 +969,42 @@ class MainApp(QMainWindow):
                         if ex.expense_id == expense_id:
                             expense = ex
                             break
-            page = self.page_expenses
+                page = self.page_expenses
 
-            jdate = QDate(expense.expense_date.year, expense.expense_date.month, expense.expense_date.day)
-            page.date_issue.setDate(jdate)
-            
+                jdate = QDate(
+                    expense.expense_date.year,
+                    expense.expense_date.month,
+                    expense.expense_date.day,
+                )
+                page.date_issue.setDate(jdate)
+                employee_info = [f"{employee.name} ({employee.employee_id})"]
+                page.comboBox.setCurrentText(employee_info)
+
+                jdate2 = QDate(
+                    expense.date_handle.year,
+                    expense.date_handle.month,
+                    expense.date_handle.day,
+                )
+                page.date_handle.setDate(jdate2)
+                page.line_amount.setText(expense.amount)
+                page.text_justification.setPlainText(expense.justification)
+            else:
+                self.page_expenses.button_expense_edit.setText("Enable Edit")
+                self.clear_expense_fields()
+                self.page_expenses.button_expense_add.setEnabled(True)
+            #### need fixing ####
         except Exception as err:
             pass
+
     def create_new_expense(self):
         ...
+
     def delete_expense(self):
         ...
+
     def update_expense(self):
         ...
+
     def set_expense_table(self):
         try:
             fetch_expenses()
@@ -1079,26 +1121,26 @@ class MainApp(QMainWindow):
         else:
             combo_box.clear()
             combo_box.setEnabled(False)
-    
+
     def get_animal_by_id(self, animal_id):
         try:
-            for animal in Animals: 
+            for animal in Animals:
                 if animal.animal_id == animal_id:
                     return animal
             return None
 
         except Exception as err:
-            print(f"Error Fetching: {err}") 
-    
+            print(f"Error Fetching: {err}")
+
     def set_appointment_table(self):
-        try: 
+        try:
             self.page_appointment.appointment_table_widget_2.clearContents()
             self.page_appointment.appointment_table_widget_2.setRowCount(0)
             fetch_appointment()
             for row, appointment in enumerate(Appointments):
                 animal = self.get_animal_by_id(appointment.animal_id)
                 self.add_appointment_to_Table(row, appointment, animal)
-        
+
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -1108,7 +1150,7 @@ class MainApp(QMainWindow):
             header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
             table = self.page_appointment.appointment_table_widget_2
             table.insertRow(row)
-            
+
             table.setItem(row, 0, QTableWidgetItem(str(appointment.appointment_id)))
             table.setItem(row, 1, QTableWidgetItem(str(appointment.animal_id)))
             if animal:
@@ -1162,7 +1204,7 @@ class MainApp(QMainWindow):
             )
         except Exception as err:
             print(f"Error Fetching: {err}")
-    
+
     def create_appointment(self):
         ...
 
@@ -1178,7 +1220,6 @@ class MainApp(QMainWindow):
             ...
         except Exception as err:
             print(f"Error Fetching: {err}")
-
 
     ############### Table Resize Methods ###########################
     def resize_columns_to_contents_alternate(self, table):
