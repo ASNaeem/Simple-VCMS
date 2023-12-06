@@ -102,3 +102,72 @@ MySQL
                
           Ahona:
                Expenses
+
+
+FUNCTIONALITIES:
+     Create
+          Animal-1
+          Medical Records
+          Employee-1
+          Billing
+          Services
+          Item
+          Veterinarian 
+          Day Care
+          Expenses
+
+     Edit
+          Animal
+          Medical Records
+          Employee
+          Billing
+          Services
+          Item
+          Veterinarian 
+          Day Care
+          Expenses
+
+     Delete
+          Animal-1
+          Medical Records-1
+          Employee
+          Billing
+          Services
+          Item
+          Veterinarian 
+          Day Care
+          Expenses
+
+     Populate in Fields
+          Animal-1
+          Employee-1
+          Billing
+          Services
+          Item
+          Veterinarian 
+          Day Care
+          Expenses
+
+     Populate in Table
+          Animal-1
+          Medical Records-1
+          Employee-1
+          Billing-1
+          Services-0
+          Item-0
+          Veterinarian-0 
+          Day Care-1
+          Expenses-1
+
+     Search
+          Animal-0
+          Employee-0
+          Billing-0
+          Services-0
+          Item-0
+          Veterinarian-0
+          Day Care-0
+          Expenses-0
+
+     Login-0
+     Homepage-0
