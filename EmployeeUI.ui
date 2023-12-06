@@ -927,11 +927,6 @@
            </column>
            <column>
             <property name="text">
-             <string>Working Hours</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
              <string>Salary</string>
             </property>
            </column>
