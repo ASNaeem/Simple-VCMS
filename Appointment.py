@@ -15,9 +15,9 @@ class Appointment:
     ):
         self.appointment_id = None
         self.animal_id = animal_id
-        self.owner_name = None
-        self.phone_number = None
-        self.species = None
+        self.owner_name = owner_name
+        self.phone_number = phone_number
+        self.species = species
         self.appointment_date = appointment_date
         self.appointment_time = appointment_time
         self.visit_reason = visit_reason

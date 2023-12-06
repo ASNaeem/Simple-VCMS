@@ -1,6 +1,7 @@
 import sys
 import warnings
 import os
+from datetime import datetime, timedelta
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
@@ -199,8 +200,6 @@ class MainApp(QMainWindow):
     def show_appointment_modify(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
-            # self.setWindowTitle("VCMS || Dashboard || Appointment Details")
-
             selected_item = (
                 self.page_appointment.appointment_table_widget_2.selectedItems()
             )
@@ -208,7 +207,7 @@ class MainApp(QMainWindow):
                 appointment_id = int(selected_item[0].text())
                 # animal_id = int(selected_item[1].text())
                 appointment = None
-                animal = None
+
                 for ap in Appointments:
                     if ap.appointment_id == appointment_id:
                         appointment = ap
@@ -216,17 +215,13 @@ class MainApp(QMainWindow):
 
                 page = self.page_appointment_modify
 
-                for an in Animals:
-                    if an.animal_id == appointment.animal_id:
-                        animal = an
-                        break
-
                 page.line_apt_id.setText(str(appointment.appointment_id))
                 page.line_apt_animal_id.setText(str(appointment.animal_id))
-                page.line_apt_owner_address.setText(animal.owner_name)
-                page.line_apt_species.setText(animal.species)
-                page.line_apt_phone.setText(animal.phone)
+                page.line_apt_owner_address.setText(appointment.owner_name)
+                page.line_apt_species.setText(appointment.species)
+                page.line_apt_phone.setText(appointment.phone_number)
                 page.line_apt_status.setText(appointment.appointment_status)
+                page.text_visit_reason.setText(appointment.visit_reason)
                 print(type(appointment.appointment_date))
                 print(appointment.appointment_date)
                 qdate = QDate(
@@ -236,19 +231,22 @@ class MainApp(QMainWindow):
                 )
                 page.date_apt.setDate(qdate)
 
-                qtime = QTime(
+                '''qtime = QTime(
                     appointment.appointment_time.hour,
                     appointment.appointment_time.minute,
-                    appointment.appointment_time.second,
-                )
-                page.time_apt.setTime(qtime)
+                    appointment.appointment_time.second
+                )'''
 
-                page.cb_apt_visit_reason.setCurrentText(appointment.visit_reason)
+                time = str(appointment.appointment_time)
+                qtime = QTime.fromString(time, "hh:mm:ss")
+
+                page.time_apt.setTime(qtime)
 
             else:
                 print("No row selected! Select a row to view more details.")
 
             self.setWindowTitle("VCMS || Dashboard || Appointment Details")
+            
             vet_name = []
             for employee in Employees:
                 if "vet" in employee.designation.lower():
@@ -1122,7 +1120,7 @@ class MainApp(QMainWindow):
             combo_box.clear()
             combo_box.setEnabled(False)
 
-    def get_animal_by_id(self, animal_id):
+    '''def get_animal_by_id(self, animal_id):
         try:
             for animal in Animals:
                 if animal.animal_id == animal_id:
@@ -1130,7 +1128,7 @@ class MainApp(QMainWindow):
             return None
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching: {err}")'''
 
     def set_appointment_table(self):
         try:
@@ -1138,13 +1136,14 @@ class MainApp(QMainWindow):
             self.page_appointment.appointment_table_widget_2.setRowCount(0)
             fetch_appointment()
             for row, appointment in enumerate(Appointments):
-                animal = self.get_animal_by_id(appointment.animal_id)
-                self.add_appointment_to_Table(row, appointment, animal)
+                #animal = self.get_animal_by_id(appointment.animal_id)
+                #self.add_appointment_to_Table(row, appointment, animal)
+                self.add_appointment_to_Table(row, appointment)
 
         except Exception as err:
             print(f"Error Fetching: {err}")
 
-    def add_appointment_to_Table(self, row, appointment, animal):
+    def add_appointment_to_Table(self, row, appointment):
         try:
             header = self.page_appointment.appointment_table_widget_2.horizontalHeader()
             header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -1153,14 +1152,14 @@ class MainApp(QMainWindow):
 
             table.setItem(row, 0, QTableWidgetItem(str(appointment.appointment_id)))
             table.setItem(row, 1, QTableWidgetItem(str(appointment.animal_id)))
-            if animal:
-                table.setItem(row, 2, QTableWidgetItem(animal.owner_name))
-                table.setItem(row, 3, QTableWidgetItem(animal.phone))
-                table.setItem(row, 4, QTableWidgetItem(animal.species))
+            table.setItem(row, 2, QTableWidgetItem(appointment.owner_name))
+            table.setItem(row, 3, QTableWidgetItem(appointment.phone_number))
+            table.setItem(row, 4, QTableWidgetItem(appointment.species))
             table.setItem(row, 5, QTableWidgetItem(appointment.visit_reason))
-            table.setItem(row, 6, QTableWidgetItem(appointment.appointment_date))
-            table.setItem(row, 7, QTableWidgetItem(appointment.appointment_time))
+            table.setItem(row, 6, QTableWidgetItem(str(appointment.appointment_date)))
+            table.setItem(row, 7, QTableWidgetItem(str(appointment.appointment_time)))
             table.setItem(row, 8, QTableWidgetItem(appointment.appointment_status))
+            
             self.resize_columns_to_contents(table, header)
 
         except Exception as err:
