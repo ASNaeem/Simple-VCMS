@@ -3,7 +3,7 @@ import warnings
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
-from PyQt5.QtCore import QDate, Qt
+from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 from qt_material import apply_stylesheet, list_themes
 from datetime import date
 from datetime import datetime
@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import QMessageBox
 from MySQLHandler import MySQLHandler
 
 from Employee import Employees, fetch_employees, add_employee, delete_employee
+from Appointment import Appointments, fetch_appointment, add_appointment, delete_appointment
 from Service import Services, fetch_services
 from Animal import (
     Animals,
@@ -123,6 +124,7 @@ class MainApp(QMainWindow):
         self.set_employee_table()
         self.set_day_care_table()
         self.set_expense_table()
+        self.set_appointment_table()
 
         ### functionalities ######
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
@@ -138,9 +140,10 @@ class MainApp(QMainWindow):
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
-        self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
-            self.checkbox_state_changed
-        )
+
+        self.page_appointment.button_delete_appointment.clicked.connect(self.delete_appointment)
+        #self.page_appointment_create.button_create.clicked.connect(self.create_appointment)
+        #self.page_appointment
         ##################### End Init #####################
 
     def checkbox_state_changed(self, state):
@@ -202,6 +205,46 @@ class MainApp(QMainWindow):
     def show_appointment_modify(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
+            #self.setWindowTitle("VCMS || Dashboard || Appointment Details")
+
+            selected_item = self.page_appointment.appointment_table_widget_2.selectedItems()
+            if selected_item:
+                appointment_id = int(selected_item[0].text())
+                #animal_id = int(selected_item[1].text())
+                appointment = None
+                animal = None
+                for ap in Appointments:
+                    if ap.appointment_id == appointment_id:
+                        appointment = ap
+                        break
+                    
+                page = self.page_appointment_modify
+
+                for an in Animals:
+                    if an.animal_id == appointment.animal_id:
+                        animal = an
+                        break
+
+                page.line_apt_id.setText(str(appointment.appointment_id))
+                page.line_apt_animal_id.setText(str(appointment.animal_id))
+                page.line_apt_owner_address.setText(animal.owner_name)
+                page.line_apt_species.setText(animal.species)
+                page.line_apt_phone.setText(animal.phone)
+                page.line_apt_status.setText(appointment.appointment_status)
+                print(type(appointment.appointment_date))
+                print(appointment.appointment_date)
+                qdate = QDate(appointment.appointment_date.year, appointment.appointment_date.month, appointment.appointment_date.day)
+                page.date_apt.setDate(qdate)
+               
+
+                qtime = QTime(appointment.appointment_time.hour, appointment.appointment_time.minute, appointment.appointment_time.second)
+                page.time_apt.setTime(qtime)
+                
+                page.cb_apt_visit_reason.setCurrentText(appointment.visit_reason)
+
+            else:
+                print("No row selected! Select a row to view more details.")
+
             self.setWindowTitle("VCMS || Dashboard || Appointment Details")
             vet_name = []
             for employee in Employees:
@@ -1007,6 +1050,50 @@ class MainApp(QMainWindow):
     ################### End Billing ##################
 
     ################### Appointment ##################
+    def get_animal_by_id(self, animal_id):
+        try:
+            for animal in Animals: 
+                if animal.animal_id == animal_id:
+                    return animal
+            return None
+
+        except Exception as err:
+            print(f"Error Fetching: {err}") 
+    
+    def set_appointment_table(self):
+        try: 
+            self.page_appointment.appointment_table_widget_2.clearContents()
+            self.page_appointment.appointment_table_widget_2.setRowCount(0)
+            fetch_appointment()
+            for row, appointment in enumerate(Appointments):
+                animal = self.get_animal_by_id(appointment.animal_id)
+                self.add_appointment_to_Table(row, appointment, animal)
+        
+        except Exception as err:
+            print(f"Error Fetching: {err}")
+
+    def add_appointment_to_Table(self, row, appointment, animal):
+        try:
+            header = self.page_appointment.appointment_table_widget_2.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            table = self.page_appointment.appointment_table_widget_2
+            table.insertRow(row)
+            
+            table.setItem(row, 0, QTableWidgetItem(str(appointment.appointment_id)))
+            table.setItem(row, 1, QTableWidgetItem(str(appointment.animal_id)))
+            if animal:
+                table.setItem(row, 2, QTableWidgetItem(animal.owner_name))
+                table.setItem(row, 3, QTableWidgetItem(animal.phone))
+                table.setItem(row, 4, QTableWidgetItem(animal.species))
+            table.setItem(row, 5, QTableWidgetItem(appointment.visit_reason))
+            table.setItem(row, 6, QTableWidgetItem(appointment.appointment_date))
+            table.setItem(row, 7, QTableWidgetItem(appointment.appointment_time))
+            table.setItem(row, 8, QTableWidgetItem(appointment.appointment_status))
+            self.resize_columns_to_contents(table, header)
+
+        except Exception as err:
+            print(f"Error Fetching: {err}")
+
     def make_appointment(self):
         try:
             apt = self.page_appointment_create
@@ -1045,6 +1132,9 @@ class MainApp(QMainWindow):
             )
         except Exception as err:
             print(f"Error Fetching: {err}")
+    
+    def create_appointment(self):
+        ...
 
     def populate_appointment(self):
         try:
@@ -1052,7 +1142,13 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching: {err}")
 
-    ####
+    def delete_appointment(self):
+        try:
+            page = self.page_appointment
+            ...
+        except Exception as err:
+            print(f"Error Fetching: {err}")
+
 
     ############### Table Resize Methods ###########################
     def resize_columns_to_contents_alternate(self, table):

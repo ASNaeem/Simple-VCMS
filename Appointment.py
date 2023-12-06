@@ -31,7 +31,7 @@ class Appointment:
 
     @property
     def animal_id(self):
-        return self.animal_id
+        return self._animal_id
 
     @animal_id.setter
     def animal_id(self, animal_id: int):
@@ -77,21 +77,23 @@ def fetch_appointment():
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        query = "select * from appointment;"
+        query = "select * from appointments;"
         data = mysql_handler.fetch_data(query)
 
         for row in data:
+            print(row)
             appointment = Appointment(
                 animal_id=int(row[1]),
-                appointment_date=str(row[2]),
-                appointment_time=str(row[3]),
+                appointment_date=row[2],
+                appointment_time=row[3],
                 visit_reason=row[4],
                 appointment_status=row[5]
             )
             appointment.appointment_id = int(row[0])
             Appointments.append(appointment)
         mysql_handler.disconnect()
-        print(f"Er")
+        print(f"Appointments fetched!")
+        
     except Exception as err:
         print(f"Entry Failed!:{err}") 
 
@@ -131,15 +133,15 @@ def add_appointment(
 def delete_appointment(id:int):
     try:
         for appointment in Appointments: 
-            if id == appointment_id:
+            if id == appointment.appointment_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from appointments where id = %s;"
-                data = appointment.id
-                mysql_handler.execute_query(query, data)
+                data = appointment.appointment.id
+                mysql_handler.execute_query(query, (data,))
                 Appointments.remove(appointment)
-        mysql_handler.disconnect()
-        print("Delete Success!")
-        print("Delete Failed!")
+                mysql_handler.disconnect()
+                print("Delete Success!")
+                break
     except Exception as err:
         print(f"Error: {err}")
