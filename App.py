@@ -237,8 +237,7 @@ class MainApp(QMainWindow):
                     appointment.appointment_time.second
                 )'''
 
-                time = str(appointment.appointment_time)
-                qtime = QTime.fromString(time, "hh:mm:ss")
+                qtime = QTime.fromString(str(appointment.appointment_time), "hh:mm:ss")
 
                 page.time_apt.setTime(qtime)
 
