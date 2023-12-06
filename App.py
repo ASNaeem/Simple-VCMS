@@ -126,13 +126,13 @@ class MainApp(QMainWindow):
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
 
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
-        self.page_employee.button_edit_information_6.clicked.connect(
+        self.page_employee.button_save.clicked.connect(
             self.update_employee
         )
-        self.page_employee.button_register_employee_6.clicked.connect(
+        self.page_employee.button_register.clicked.connect(
             self.register_employee
         )
-        self.page_employee.button_delete_information_6.clicked.connect(
+        self.page_employee.button_delete.clicked.connect(
             self.delete_employee
         )
         ##################### End Init #####################
@@ -487,53 +487,59 @@ class MainApp(QMainWindow):
 
     ################# Employee ###################
 
-    def clear_employee_fields():
+    def clear_employee_fields(self):
         self.page_employee.line_name_6.clear()
         self.page_employee.line_email_6.clear()
         self.page_employee.line_personal_contact_6.clear()
         self.page_employee.line_home_6.clear()
         self.page_employee.line_address_6.clear()
         self.page_employee.line_salary_6.clear()
-        self.page_employee.dateEdit_joining_date_6.clear()
+        self.page_employee.dateEdit_joining_date_6.setDate(QDate(2000, 1, 1))
         self.page_employee.rb_working.setChecked(False)
         self.page_employee.rb_on_leave.setChecked(False)
-        self.page_employee.comboBox_designation_6.clearSelection()
-        self.page_employee.combobox_access_level_6.clearSelection()
+        self.page_employee.comboBox_designation_6.setCurrentIndex(0)
+        self.page_employee.combobox_access_level_6.setCurrentIndex(0)
 
     def populate_employee(self):
-        selected_item = self.page_employee.table_employee.selectedItems()
-        if selected_item:
-            employee_id = int(selected_item[0].text())
-            employee = None
-            for emp in Employees:
-                if emp.employee_id == employee_id:
-                    employee = emp
-                    break
+        if self.page_employee.button_edit.text() == "Edit":
+            self.page_employee.button_edit.setText("Cancel")
+            self.page_employee.button_register.setEnabled(False)
+            selected_item = self.page_employee.table_employee.selectedItems()
+            if selected_item:          
+                employee_id = int(selected_item[0].text())
+                employee = None
+                for emp in Employees:
+                    if emp.employee_id == employee_id:
+                        employee = emp
+                        break
 
-            page = self.page_employee
+                page = self.page_employee
 
-            page.line_name_6.setText(employee.name)
-            page.line_email_6.setText(employee.email)
-            page.line_personal_contact_6.setText(employee.phone[0])
-            page.line_home_6.setText(employee.phone[1])
-            page.line_address_6.setText(employee.address)
-            page.line_salary_6.setText(str(employee.salary))
+                page.line_name_6.setText(employee.name)
+                page.line_email_6.setText(employee.email)
+                page.line_personal_contact_6.setText(employee.phone[0])
+                page.line_home_6.setText(employee.phone[1])
+                page.line_address_6.setText(employee.address)
+                page.line_salary_6.setText(str(employee.salary))
 
-            jdate = QDate(
-                employee.joining_date.year,
-                employee.joining_date.month,
-                employee.joining_date.day,
-            )
-            page.dateEdit_joining_date_6.setDate(jdate)
+                jdate = QDate(
+                    employee.joining_date.year,
+                    employee.joining_date.month,
+                    employee.joining_date.day,
+                )
+                page.dateEdit_joining_date_6.setDate(jdate)
 
-            if employee.employee_status.lower() == "working":
-                page.rb_working.setChecked(True)
-            else:
-                page.rb_on_leave.setChecked(True)
+                if employee.employee_status.lower() == "working":
+                    page.rb_working.setChecked(True)
+                else:
+                    page.rb_on_leave.setChecked(True)
 
-            page.combobox_access_level_6.setCurrentText(str(employee.access_level))
-            page.comboBox_designation_6.setCurrentText(employee.designation)
-
+                page.combobox_access_level_6.setCurrentText(str(employee.access_level))
+                page.comboBox_designation_6.setCurrentText(employee.designation)
+        else:
+            self.page_employee.button_edit.setText("Edit")
+            self.clear_employee_fields()
+            self.page_employee.button_register.setEnabled(True)
     def update_employee(self):
         ...
 
