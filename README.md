@@ -107,7 +107,7 @@ MySQL
 FUNCTIONALITIES:
      Create
           Animal-1
-          Medical Records
+          Medical Records - 1
           Employee-1
           Billing
           Services
