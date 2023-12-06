@@ -146,6 +146,23 @@ class MainApp(QMainWindow):
         #self.page_appointment
         ##################### End Init #####################
 
+    def checkbox_state_changed(self, state):
+        combo_box = self.page_appointment_create.comboBox_animal_id
+        if state == 0:
+            combo_box.setEnabled(True)
+            animal_info = [
+                f"({animal.animal_id}) {animal.animal_name} {animal.owner_name}"
+                for animal in Animals
+            ]
+            combo_box = self.page_appointment_create.comboBox_animal_id
+            combo_box.addItems(animal_info)
+            combo_box.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
+        else:
+            combo_box.clear()
+            combo_box.setEnabled(False)
+
     def add_record(self):
         try:
             page = self.page_animal_details
@@ -215,6 +232,7 @@ class MainApp(QMainWindow):
                 page.line_apt_phone.setText(animal.phone)
                 page.line_apt_status.setText(appointment.appointment_status)
                 print(type(appointment.appointment_date))
+                print(appointment.appointment_date)
                 qdate = QDate(appointment.appointment_date.year, appointment.appointment_date.month, appointment.appointment_date.day)
                 page.date_apt.setDate(qdate)
                
@@ -235,7 +253,9 @@ class MainApp(QMainWindow):
             vet_info = [f"{vet[0]} ({vet[1]})" for vet in vet_name]
             combo_box = self.page_appointment_modify.comboBox_vet_name
             combo_box.addItems(vet_info)
-            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+            combo_box.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -889,6 +909,7 @@ class MainApp(QMainWindow):
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
+
     def set_day_care_table(self):
         try:
             fetch_day_care()
@@ -1060,9 +1081,10 @@ class MainApp(QMainWindow):
             
             table.setItem(row, 0, QTableWidgetItem(str(appointment.appointment_id)))
             table.setItem(row, 1, QTableWidgetItem(str(appointment.animal_id)))
-            table.setItem(row, 2, QTableWidgetItem(animal.owner_name))
-            table.setItem(row, 3, QTableWidgetItem(animal.phone))
-            table.setItem(row, 4, QTableWidgetItem(animal.species))
+            if animal:
+                table.setItem(row, 2, QTableWidgetItem(animal.owner_name))
+                table.setItem(row, 3, QTableWidgetItem(animal.phone))
+                table.setItem(row, 4, QTableWidgetItem(animal.species))
             table.setItem(row, 5, QTableWidgetItem(appointment.visit_reason))
             table.setItem(row, 6, QTableWidgetItem(appointment.appointment_date))
             table.setItem(row, 7, QTableWidgetItem(appointment.appointment_time))
