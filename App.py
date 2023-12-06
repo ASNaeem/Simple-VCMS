@@ -192,6 +192,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_animal_info)
             self.page_animal_info.table_animal.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Animals")
+            self.set_animal_table()
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -490,6 +491,7 @@ class MainApp(QMainWindow):
             try:
                 for animal in Animals:
                     if animal_id == animal.animal_id:
+                        print(animal)
                         update_animal_from_db(animal)
                         break
             except Exception as e:

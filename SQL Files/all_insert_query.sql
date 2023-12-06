@@ -151,8 +151,8 @@ create table phones (employee_id int, phone varchar(50) primary key);
 
 insert into phones (employee_id, phone)values (1, '+880-155-240-7452');
 insert into phones (employee_id, phone)values (1, '+880-155-545-8888');
-insert into phones (employee_id, phone)values (2, '+880-155-550-7452');
-insert into phones (employee_id, phone)values (2, '+880-155-555-8888');
+insert into phones (employee_id, phone)values (2, '+880-155-550-7451');
+insert into phones (employee_id, phone)values (2, '+880-155-555-8887');
 insert into phones (employee_id, phone)values (3, '+880-115-553-3834');
 insert into phones (employee_id, phone)values (3, '+880-195-550-0422');
 insert into phones (employee_id, phone)values (4, '+880-115-552-7181');
