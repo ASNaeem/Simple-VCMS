@@ -374,6 +374,28 @@
           </layout>
          </item>
          <item>
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Password</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="line_employee_password">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
           <layout class="QHBoxLayout" name="horizontalLayout_32" stretch="40,0,40">
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_94">

@@ -503,6 +503,7 @@ class MainApp(QMainWindow):
             page.line_home_6.setText(employee.phone[1])
             page.line_address_6.setText(employee.address)
             page.line_salary_6.setText(str(employee.salary))
+            page.line_employee_password.setText(employee.password)
 
             jdate = QDate(
                 employee.joining_date.year,
@@ -529,8 +530,10 @@ class MainApp(QMainWindow):
         email = page.line_email_6.text()
         phone = page.line_personal_contact_6.text()
         alt_phone = page.line_home_6.text()
+        phone = [phone, alt_phone]
         address = page.line_address_6.text()
         salary = page.line_salary_6.text()
+        password = page.line_employee_password.text()
 
         jdate = QDate(
             employee.joining_date.year,
@@ -545,17 +548,20 @@ class MainApp(QMainWindow):
         elif page.rb_on_leave.isChecked():
             status = "On Leave"
 
-        access_level = page.combobox_access_level_6.currentText(str(employee.access_level))
-        designation = page.comboBox_designation_6.currentText(employee.designation)
+        if page.combobox_access_level_6.currentIndex != 0:
+            access_level = page.combobox_access_level_6.currentText(str(employee.access_level))
+        
+        if page.comboBox_designation_6.currentIndex != 0:
+            designation = page.comboBox_designation_6.currentText(employee.designation)
 
         if not all([name, email, phone, alt_phone, address, salary, status, access_level, designation]):
             QMessageBox.warning(self, "Warning", "Please fill in all fields.")
             return
         
-        '''try:
-           mysql_handler = MySQLHandler()
-           mysql_handler.connect()
-           query = "insert" '''
+        add_employee(name, email, password, address, access_level, designation, salary, joining_date, employee_status, phone)
+        self.set_employee_table()
+        #### Ongoing ####
+        
 
     def delete_employee(self):
         ...
