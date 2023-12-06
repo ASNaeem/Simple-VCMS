@@ -458,33 +458,39 @@ class MainApp(QMainWindow):
             self.show_animal_info()
         except Exception as err:
             print("Entry Failed!", err)
-    def delete_aminal(self):
-        page = self.page_animal_reg
-        table = page.table_animal
-        current_widget = self.stackedWidget.setCurrentWidget(page)
-        selected_animal_row = table.currentRow()
-        animal_id = int(table.item(selected_animal_row, 0).text())
+    
+    try:
+        def delete_aminal(self):
+            page = self.page_animal_reg
+            table = page.table_animal
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            selected_animal_row = table.currentRow()
+            animal_id = int(table.item(selected_animal_row, 0).text())
 
-        #if sele
-    def delete_record(self):
-        selected_animal_row = self.page_animal_info.table_animal.currentRow()
-        animal_id = int(
-            self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
-        )
+            #if sele
+    except Exception as err:
+        print(f"Error Fetching: {err}")
+    
+    try:
+        def delete_record(self):
+            selected_animal_row = self.page_animal_info.table_animal.currentRow()
+            animal_id = int(
+                self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
+            )
 
-            page = self.page_animal_details
-            table = page.table_animal_record
-            selected_row = table.currentRow()
-            if selected_row != -1:
-                row_data = [
-                    table.item(selected_row, col).text()
-                    for col in range(table.columnCount())
-                ]
-                print(row_data)
-                table.removeRow(selected_row)
-                delete_record_from_db(animal_id, row_data)
-            else:
-                print("Select an item to delete!")
+                page = self.page_animal_details
+                table = page.table_animal_record
+                selected_row = table.currentRow()
+                if selected_row != -1:
+                    row_data = [
+                        table.item(selected_row, col).text()
+                        for col in range(table.columnCount())
+                    ]
+                    print(row_data)
+                    table.removeRow(selected_row)
+                    delete_record_from_db(animal_id, row_data)
+                else:
+                    print("Select an item to delete!")
     except Exception as err:
         print(f"Error Fetching: {err}")
 
