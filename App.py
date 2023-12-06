@@ -304,15 +304,14 @@ class MainApp(QMainWindow):
 
         # Radio button clear kaj kore na :)
         page.button_group_gender.setExclusive(False)
-        page.button_group_sterilized.setExclusive(False) 
+        page.button_group_sterilized.setExclusive(False)
         page.rbutton_reg_male.setChecked(False)
         page.rbutton_reg_female.setChecked(False)
         page.rbutton_reg_ster_yes.setChecked(False)
         page.rbutton_reg_ster_no.setChecked(False)
         page.button_group_gender.setExclusive(True)
-        page.button_group_sterilized.setExclusive(True) 
-        
-        
+        page.button_group_sterilized.setExclusive(True)
+
         page.line_reg_condition.clear()
         page.line_reg_oname.clear()
         page.line_reg_phone.clear()
@@ -329,11 +328,13 @@ class MainApp(QMainWindow):
         breed = page.line_reg_breed.text()
         color = page.line_reg_color.text()
 
+        gender = ""
         if page.rbutton_reg_male.isChecked():
             gender = "Male"
         elif page.rbutton_reg_female.isChecked():
             gender = "Female"
-
+            
+        sterilized = ""
         if page.rbutton_reg_ster_yes.isChecked():
             sterilized = "Yes"
         elif page.rbutton_reg_ster_no.isChecked():
