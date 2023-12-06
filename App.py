@@ -276,9 +276,6 @@ class MainApp(QMainWindow):
             print(f"Error Fetching: {err}")
 
     def show_setting(self):
-        try:          
-            self.stackedWidget.setCurrentWidget(self.page_setting)
-            self.setWindowTitle("VCMS || Dashboard || Setting")
         try:
             self.stackedWidget.setCurrentWidget(self.page_setting)
             self.setWindowTitle("VCMS || Dashboard || Setting")
@@ -286,9 +283,6 @@ class MainApp(QMainWindow):
             print(f"Error Fetching: {err}")
 
     def show_support(self):
-        try:    
-            self.stackedWidget.setCurrentWidget(self.page_support)
-            self.setWindowTitle("VCMS || Dashboard || Support")
         try:
             self.stackedWidget.setCurrentWidget(self.page_support)
             self.setWindowTitle("VCMS || Dashboard || Support")
@@ -326,8 +320,7 @@ class MainApp(QMainWindow):
             print(f"Error Fetching: {err}")
 
     def show_expenses(self):
-        try:
-            
+        try:          
             self.stackedWidget.setCurrentWidget(self.page_expenses)
             self.setWindowTitle("VCMS || Dashboard || Expenses")
 
@@ -713,20 +706,15 @@ class MainApp(QMainWindow):
             salary = page.line_salary_6.text()
             password = page.line_employee_password.text()
             joining_date = page.dateEdit_joining_date_6.text()
-
             joining_date_obj = datetime.strptime(str(joining_date), "%Y-%m-%d").date()
-
             if page.rb_working.isChecked():
                 employee_status = "Working"
             elif page.rb_on_leave.isChecked():
                 employee_status = "On Leave"
-
             if page.combobox_access_level_6.currentIndex != 0:
                 access_level = page.combobox_access_level_6.currentText()
-
             if page.comboBox_designation_6.currentIndex != 0:
                 designation = page.comboBox_designation_6.currentText()
-
             if not all(
                 [
                     name,
