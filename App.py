@@ -491,17 +491,8 @@ class MainApp(QMainWindow):
 
             gender = page.button_group_gender.checkedButton().text()
             sterilized = page.button_group_sterilized.checkedButton().text()
-            try:
-                for animal in Animals:
-                    if animal_id == animal.animal_id:
-                        print(animal)
-                        update_animal_from_db(animal)
-                        break
-            except Exception as e:
-                print("Update failed: {e}")
+            update_animal_from_db(name, bdate,sterilized, gender,species, breed, color,warning, oname,email, phone, address,rdate, condition, animal_id)                      
             self.show_animal_info()
-            # self.setWindowTitle("VCMS || Dashboard || Animal")
-    
         except Exception as err:
             print(f"update failed: {err}")
                 

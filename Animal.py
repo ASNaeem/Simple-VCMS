@@ -231,14 +231,21 @@ def add_record_to_db(animal_id: int, data):
     except Exception as err:
         print(f"Error inserting: {err}")
 
-def update_animal_from_db(animal:Animal):
+def update_animal_from_db(animal_name, birth_date,
+                  sterilized, gender,
+                  species, breed, color,
+                  behavioral_warning, owner_name,
+                  email, phone, address,
+                  reg_date, med_condition, animal_id):
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
+
         query = '''
         UPDATE animals
         SET 
         animal_name = %s,
+        birth_date = %s,
         sterilized = %s,
         gender = %s,
         species = %s,
@@ -249,16 +256,18 @@ def update_animal_from_db(animal:Animal):
         email = %s,
         phone = %s,
         address = %s,
+        reg_date = %s,
         med_condition = %s
         WHERE
         animal_id = %s
         '''
-        values = (animal.animal_name,
-                  animal.sterilized, animal.gender,
-                  animal.species, animal.breed, animal.color,
-                  animal.behavioral_warning, animal.owner_name,
-                  animal.email, animal.phone, animal.address
-                  , animal.med_condition, animal.animal_id)
+        values = (animal_name, birth_date,
+                  sterilized, gender,
+                  species, breed, color,
+                  behavioral_warning, owner_name,
+                  email, phone, address,
+                  reg_date, med_condition, animal_id)
+
         print(values)
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
