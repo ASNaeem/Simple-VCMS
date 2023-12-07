@@ -192,28 +192,6 @@
             </column>
             <column>
              <property name="text">
-              <string>Handled By</string>
-             </property>
-             <property name="font">
-              <font>
-               <family>Courier New</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Handle Date</string>
-             </property>
-             <property name="font">
-              <font>
-               <family>Courier New</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-            </column>
-            <column>
-             <property name="text">
               <string>Amount</string>
              </property>
              <property name="font">
