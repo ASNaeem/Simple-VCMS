@@ -11,7 +11,7 @@ from datetime import datetime
 from PyQt5.QtWidgets import QMessageBox
 from MySQLHandler import MySQLHandler
 
-from Employee import Employees, fetch_employees, add_employee, delete_employee
+from Employee import Employees, fetch_employees, add_employee, delete_employee, update_employee_phone_to_db, update_employee_to_db
 from Appointment import (
     Appointments,
     fetch_appointment,
@@ -137,12 +137,14 @@ class MainApp(QMainWindow):
         self.page_animal_details.button_record_delete.clicked.connect(
             self.delete_record
         )
-        self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
         self.page_animal_info.button_delete_animal_info.clicked.connect(
             self.delete_animal
         )
         self.page_animal_details.button_animal_save.clicked.connect(self.update_animal)
+
+        self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
+
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
@@ -153,7 +155,6 @@ class MainApp(QMainWindow):
         )
         # self.page_appointment_create.button_create.clicked.connect(self.create_appointment)
         # self.page_appointment
-
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
             self.checkbox_state_changed
         )
@@ -778,7 +779,38 @@ class MainApp(QMainWindow):
 
     def update_employee(self):
         try:
-            ...
+            selected_item = self.page_employee.table_employee.selectedItems()
+            if selected_item:
+                employee_id1 = int(selected_item[0].text())
+                phone_prev = selected_item[3].text()
+                alt_phone_prev = selected_item[4].text()
+
+                page = self.page_employee
+                employee_id = employee_id1
+                name = page.line_name_6.text()
+                email = page.line_email_6.text()
+                phone = page.line_personal_contact_6.text()
+                alt_phone = page.line_home_6.text()
+                address = page.line_address_6.text()
+                salary = page.line_salary_6.text()
+                password = page.line_employee_password.text()
+                joining_date = page.dateEdit_joining_date_6.text()
+                joining_date_obj = datetime.strptime(str(joining_date), "%Y-%m-%d").date()
+                if page.rb_working.isChecked():
+                    employee_status = "Working"
+                elif page.rb_on_leave.isChecked():
+                    employee_status = "On Leave"
+                if page.combobox_access_level_6.currentIndex != 0:
+                    access_level = page.combobox_access_level_6.currentText()
+                if page.comboBox_designation_6.currentIndex != 0:
+                    designation = page.comboBox_designation_6.currentText()
+
+                update_employee_to_db(employee_id, name, email, password, address, designation, access_level, salary, joining_date, employee_status)
+                update_employee_phone_to_db(employee_id, phone, phone_prev, alt_phone, alt_phone_prev)
+
+                self.set_employee_table()
+            else:
+                print("Select a Row!") 
         except Exception as err:
             print(f"Error Fetching: {err}")
 
