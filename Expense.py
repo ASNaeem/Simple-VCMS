@@ -100,7 +100,7 @@ def fetch_expenses():
             )
             expense.expense_id = int(row[0])
             Expenses.append(expense)
-        print("after for loop tesing")
+        #print("after for loop tesing")
         mysql_handler.disconnect()
 
     except Exception as err:

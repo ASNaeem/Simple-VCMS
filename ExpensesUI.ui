@@ -181,7 +181,29 @@
             </column>
             <column>
              <property name="text">
+              <string>Handler ID</string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Courier New</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </column>
+            <column>
+             <property name="text">
               <string>Issue Date</string>
+             </property>
+             <property name="font">
+              <font>
+               <family>Courier New</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Handle Date</string>
              </property>
              <property name="font">
               <font>
@@ -351,7 +373,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Invoice ID</string>
+               <string>Expense ID</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -359,7 +381,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="line_bill_id">
+             <widget class="QLineEdit" name="line_expense_id">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -398,7 +420,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="line_animal_id">
+             <widget class="QLineEdit" name="line_issuer_id">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -668,6 +690,9 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
+              <property name="displayFormat">
+               <string>yyyy/MM/dd</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -700,6 +725,9 @@
                 <family>Courier New</family>
                 <pointsize>12</pointsize>
                </font>
+              </property>
+              <property name="displayFormat">
+               <string>yyyy/MM/dd</string>
               </property>
              </widget>
             </item>
