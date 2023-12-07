@@ -29,7 +29,7 @@ from Animal import (
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
-from Expense import Expenses, fetch_expenses
+from Expense import Expenses, fetch_expenses, delete_expenses
 
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
@@ -138,6 +138,7 @@ class MainApp(QMainWindow):
             self.delete_record
         )
         self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
+        self.page_expenses.button_expense_delete.clicked.connect(self.delete_expense)
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
         self.page_animal_info.button_delete_animal_info.clicked.connect(
             self.delete_animal
@@ -151,6 +152,7 @@ class MainApp(QMainWindow):
         self.page_appointment.button_delete_appointment.clicked.connect(
             self.delete_appointment
         )
+
         # self.page_appointment_create.button_create.clicked.connect(self.create_appointment)
         # self.page_appointment
 
@@ -188,12 +190,14 @@ class MainApp(QMainWindow):
     def show_daycare(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_daycare)
+            self.page_daycare.table_care.clearSelection()
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_appointment(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment)
+            self.page_appointment.appointment_table_widget_2.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Appointment")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -278,7 +282,7 @@ class MainApp(QMainWindow):
 
     def show_animal_reg(self):
         try:
-            self.stackedWidget.setCurrentWidget(self.page_animal_reg)
+            self.stackedWidget.setCurrentWidget(self.page_animal_reg)           
             # self.setWindowTitle("VCMS || Dashboard || Animals")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -349,9 +353,10 @@ class MainApp(QMainWindow):
     def show_inventory(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_inventory)
+            self.page_inventory.table_inventory.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Inventory")
-            self.stackedWidget.setCurrentWidget(self.page_inventory)
-            self.setWindowTitle("VCMS || Dashboard || Inventory")
+            #self.stackedWidget.setCurrentWidget(self.page_inventory)
+            #self.setWindowTitle("VCMS || Dashboard || Inventory")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -365,6 +370,7 @@ class MainApp(QMainWindow):
     def show_support(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_support)
+            #self.page_service.table_service.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Support")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -381,6 +387,7 @@ class MainApp(QMainWindow):
     def show_employee(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_employee)
+            self.page_employee.table_employee.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Employee")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -388,6 +395,7 @@ class MainApp(QMainWindow):
     def show_service(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_service)
+            self.page_service.table_service.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Service")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -395,6 +403,7 @@ class MainApp(QMainWindow):
     def show_billing(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_billing)
+            self.page_billing.table_bill.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Billing")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -402,11 +411,13 @@ class MainApp(QMainWindow):
     def show_expenses(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_expenses)
+            self.page_expenses.table_expense.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Expenses")
 
             employee_info = [
                 f"{employee.name} ({employee.employee_id})" for employee in Employees
             ]
+            employee_info.insert(0, "Select")
             combo_box = self.page_expenses.comboBox
             combo_box.addItems(employee_info)
             combo_box.completer().setCompletionMode(
@@ -711,9 +722,9 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching: {err}")
 
-    ################# Animal End #################
+    #################### Animal End #####################
 
-    ################# Employee ###################
+    ##################### Employee ######################
 
     def clear_employee_fields(self):
         try:
@@ -949,9 +960,9 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching: {err}")
 
-    ################### Day Care Service End ##################
+    ################# Day Care Service End ################
 
-    ################### Expenses ##################
+    ###################### Expenses #######################
     def clear_expense_fields(self):
         try:
             page = page = self.page_expenses
@@ -1012,7 +1023,25 @@ class MainApp(QMainWindow):
         ...
 
     def delete_expense(self):
-        ...
+        try:
+            page = self.page_expenses
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            table = page.table_expense
+            selelcted_expense_new = table.currentRow()
+            expense_id = int(table.item(selelcted_expense_new, 0).text())
+            if selelcted_expense_new != None:
+                table.removeRow(selelcted_expense_new)
+                delete_expenses(expense_id)
+                QMessageBox.information(
+                    current_widget, "Information", "Record deleted successfully!"
+                )
+            else:
+                print("Select a record to delete!")
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to delete!"
+                )
+        except Exception as err:
+            print(f"Deletion Failed: {err}")
 
     def update_expense(self):
         ...
@@ -1043,7 +1072,9 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching: {err}")
 
-    ################### Billing ##################
+    ################### Expense End #####################
+
+    ##################### Billing #######################
     def set_bill_table(self):
         try:
             fetch_billings()
@@ -1109,18 +1140,18 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching: {err}")
 
-    ################### End Billing ##################
+    #################### End Billing ####################
 
-    ################### Appointment ##################
+    #################### Appointment ####################
     def checkbox_state_changed(self, state):
         combo_box = self.page_appointment_create.comboBox_animal_id
         if state == 0:
             combo_box.setEnabled(True)
-            search_text = combo_box.currentText()
             animal_info = [
                 f"{animal.species}, {animal.owner_name} ({animal.animal_id})"
                 for animal in Animals
             ]
+            animal_info.insert(0, "Select")
             combo_box.addItems(animal_info)
             combo_box.completer().setCompletionMode(
                 QtWidgets.QCompleter.PopupCompletion
@@ -1229,7 +1260,7 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching: {err}")
 
-    ############### Table Resize Methods ###########################
+    ############### Table Resize Methods ##################
     def resize_columns_to_contents_alternate(self, table):
         try:
             header = table.horizontalHeader()
@@ -1283,7 +1314,7 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Stretching: {err}")
 
-    ############### Table Resize Methods End ########################
+    ############### Table Resize Methods End ################
 
 
 #### UI density Scaling modifier ####
