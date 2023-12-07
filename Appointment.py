@@ -95,7 +95,7 @@ def fetch_appointment():
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        query = "select ap.appointment_id, ap.animal_id, an.owner_name, an.phone, an.species, ap.a_date, ap.a_time, ap.visit_reason, ap.a_status from animals an join appointments ap on an.animals_id = ap.animal_id;"
+        query = "select ap.appointment_id, ap.animal_id, an.owner_name, an.phone, an.species, ap.a_date, ap.a_time, ap.visit_reason, ap.a_status from animals an join appointments ap on an.animal_id = ap.animal_id;"
         data = mysql_handler.fetch_data(query)
 
         for row in data:
