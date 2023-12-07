@@ -243,4 +243,57 @@ def delete_employee(id: int):
         print(f"Error: {err}")
 
 
+def update_employee_to_db(employee_id, name, email, password, 
+                    address, designation, access_level, 
+                    salary, joining_date, employee_status):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+
+        query = '''
+                UPDATE employees
+                SET
+                name = %s,
+                email = %s,
+                password = %s,
+                address = %s,
+                designation = %s,
+                access_level = %s,
+                salary = %s,
+                joining_date = %s,
+                employee_status = %s
+                WHERE
+                employee_id = %s
+                '''
+        values = (name, email, password, 
+                address, designation, access_level, 
+                salary, joining_date, employee_status, employee_id)
+
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+        print("Employee Information Updated!")
+
+    except Exception as err:
+        print(f"Employee Update Failed!: {err}")
+
+def update_employee_phone_to_db(employee_id:int, phone1, phone1prev, phone2, phone2prev):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+
+        query1 = "UPDATE phones SET phone = %s WHERE employee_id = %s and phone = %s"
+        values1 = (phone1, employee_id, phone1prev)
+        mysql_handler.execute_query(query1, values1)
+
+        query2 = "UPDATE phones SET phone = %s WHERE employee_id = %s and phone = %s"
+        values2 = (phone2, employee_id, phone2prev)
+        mysql_handler.execute_query(query2, values2)
+
+        mysql_handler.disconnect()
+        print("Employee Phone Numbers Updated!")
+
+    except Exception as err:
+        print(f"Employee Phone Number Update Failed!: {err}")
+
+
 ##################### End of Employee #########################
