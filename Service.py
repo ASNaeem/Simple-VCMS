@@ -118,4 +118,23 @@ def delete_service(id: int):
         print(f"Error: {err}")
 
 
+def update_service(service_id, naame, cost, service_details, service_availability):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+
+        query = """
+                update services set
+                name = %s, cost = %s, service_details = %s,
+                service_availibility = %s where service_id = %s
+                """
+        values = (name, cost, service_details, service_availability, service_id)
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+        print("Service Updated!")
+        ...
+    except Exception as err:
+        print(f"Sevice Update Failed!: {err}")
+
+
 ### End Services List For Billing###
