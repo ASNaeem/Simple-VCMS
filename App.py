@@ -11,7 +11,14 @@ from datetime import datetime
 from PyQt5.QtWidgets import QMessageBox
 from MySQLHandler import MySQLHandler
 
-from Employee import Employees, fetch_employees, add_employee, delete_employee, update_employee_phone_to_db, update_employee_to_db
+from Employee import (
+    Employees,
+    fetch_employees,
+    add_employee,
+    delete_employee,
+    update_employee_phone_to_db,
+    update_employee_to_db,
+)
 from Appointment import (
     Appointments,
     fetch_appointment,
@@ -122,6 +129,8 @@ class MainApp(QMainWindow):
         )
         self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
         self.page_expenses.button_expense_delete.clicked.connect(self.delete_expense)
+        self.page_expenses.button_expense_add.clicked.connect(self.create_new_expense)
+
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
         self.page_animal_info.button_delete_animal_info.clicked.connect(
             self.delete_animal
@@ -191,14 +200,14 @@ class MainApp(QMainWindow):
     def show_daycare(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_daycare)
-            self.page_daycare.table_care.clearSelection()
+            self.page_daycare.table_care.setCurrentCell(-1, 0)
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_appointment(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment)
-            self.page_appointment.appointment_table_widget_2.clearSelection()
+            self.page_appointment.appointment_table_widget_2.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Appointment")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -275,7 +284,7 @@ class MainApp(QMainWindow):
     def show_animal_info(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_animal_info)
-            self.page_animal_info.table_animal.clearSelection()
+            self.page_animal_info.table_animal.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Animals")
             self.set_animal_table()
         except Exception as err:
@@ -283,7 +292,7 @@ class MainApp(QMainWindow):
 
     def show_animal_reg(self):
         try:
-            self.stackedWidget.setCurrentWidget(self.page_animal_reg)           
+            self.stackedWidget.setCurrentWidget(self.page_animal_reg)
             # self.setWindowTitle("VCMS || Dashboard || Animals")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -354,10 +363,10 @@ class MainApp(QMainWindow):
     def show_inventory(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_inventory)
-            self.page_inventory.table_inventory.clearSelection()
+            self.page_inventory.table_inventory.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Inventory")
-            #self.stackedWidget.setCurrentWidget(self.page_inventory)
-            #self.setWindowTitle("VCMS || Dashboard || Inventory")
+            # self.stackedWidget.setCurrentWidget(self.page_inventory)
+            # self.setWindowTitle("VCMS || Dashboard || Inventory")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -371,7 +380,6 @@ class MainApp(QMainWindow):
     def show_support(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_support)
-            #self.page_service.table_service.clearSelection()
             self.setWindowTitle("VCMS || Dashboard || Support")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -388,15 +396,17 @@ class MainApp(QMainWindow):
     def show_employee(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_employee)
-            self.page_employee.table_employee.clearSelection()
+            self.page_employee.table_employee.setCurrentCell(-1, 0)
+            # print(self.page_employee.table_employee.currentRow())
             self.setWindowTitle("VCMS || Dashboard || Employee")
+
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def show_service(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_service)
-            self.page_service.table_service.clearSelection()
+            self.page_service.table_service.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Service")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -404,7 +414,7 @@ class MainApp(QMainWindow):
     def show_billing(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_billing)
-            self.page_billing.table_bill.clearSelection()
+            self.page_billing.table_bill.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Billing")
         except Exception as err:
             print(f"Error Fetching: {err}")
@@ -412,7 +422,7 @@ class MainApp(QMainWindow):
     def show_expenses(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_expenses)
-            self.page_expenses.table_expense.clearSelection()
+            self.page_expenses.table_expense.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Expenses")
 
             employee_info = [
@@ -611,38 +621,42 @@ class MainApp(QMainWindow):
             table = page.table_animal
             current_widget = self.stackedWidget.setCurrentWidget(page)
             selected_animal_row = table.currentRow()
-            animal_id = int(table.item(selected_animal_row, 0).text())
-
             if selected_animal_row != -1:
-                # row_data = [table.item(selected_animal_row. col).text() for col in range(table.columnCount())]
+                animal_id = int(table.item(selected_animal_row, 0).text())
                 table.removeRow(selected_animal_row)
                 delete_animal_from_db(animal_id)
             else:
-                print("Select an item to delete!")
-
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to delete!"
+                )
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def delete_record(self):
         try:
+            page = self.page_animal_details
             selected_animal_row = self.page_animal_info.table_animal.currentRow()
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            print(f"this is delete record 1: {selected_animal_row}")
             animal_id = int(
                 self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
             )
-
             page = self.page_animal_details
             table = page.table_animal_record
             selected_row = table.currentRow()
             if selected_row != -1:
+                print(f"this is delete record 1: {selected_row}")
                 row_data = [
                     table.item(selected_row, col).text()
                     for col in range(table.columnCount())
                 ]
-                print(row_data)
+                # print(row_data)
                 table.removeRow(selected_row)
                 delete_record_from_db(animal_id, row_data)
             else:
-                print("Select an item to delete!")
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to delete!"
+                )
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -741,7 +755,7 @@ class MainApp(QMainWindow):
             self.page_employee.comboBox_designation_6.setCurrentIndex(0)
             self.page_employee.combobox_access_level_6.setCurrentIndex(0)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Clearing: {err}")
 
     def populate_employee(self):
         try:
@@ -806,7 +820,9 @@ class MainApp(QMainWindow):
                 salary = page.line_salary_6.text()
                 password = page.line_employee_password.text()
                 joining_date = page.dateEdit_joining_date_6.text()
-                joining_date_obj = datetime.strptime(str(joining_date), "%Y-%m-%d").date()
+                joining_date_obj = datetime.strptime(
+                    str(joining_date), "%Y-%m-%d"
+                ).date()
                 if page.rb_working.isChecked():
                     employee_status = "Working"
                 elif page.rb_on_leave.isChecked():
@@ -816,12 +832,25 @@ class MainApp(QMainWindow):
                 if page.comboBox_designation_6.currentIndex != 0:
                     designation = page.comboBox_designation_6.currentText()
 
-                update_employee_to_db(employee_id, name, email, password, address, designation, access_level, salary, joining_date, employee_status)
-                update_employee_phone_to_db(employee_id, phone, phone_prev, alt_phone, alt_phone_prev)
+                update_employee_to_db(
+                    employee_id,
+                    name,
+                    email,
+                    password,
+                    address,
+                    designation,
+                    access_level,
+                    salary,
+                    joining_date,
+                    employee_status,
+                )
+                update_employee_phone_to_db(
+                    employee_id, phone, phone_prev, alt_phone, alt_phone_prev
+                )
 
                 self.set_employee_table()
             else:
-                print("Select a Row!") 
+                print("Select a Row!")
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -865,7 +894,6 @@ class MainApp(QMainWindow):
                     current_widget, "Warning", "Please fill in all fields."
                 )
                 return
-
             mysql_handler = MySQLHandler()
             mysql_handler.connect()
             query_employee = "insert into employees (name, email, password, address, designation, access_level, salary, joining_date, employee_status) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
@@ -881,12 +909,9 @@ class MainApp(QMainWindow):
                 employee_status,
             )
             mysql_handler.execute_query(query_employee, data_employee)
-
             query_fetch_id = "select employee_id, name from employees order by employee_id desc limit 1;"
             row = mysql_handler.fetch_data(query_fetch_id)
             employee_id = row[0][0]
-
-            # Insert into phones table
             query_phone = "insert into phones (employee_id, phone) values (%s, %s);"
             data_phone1 = (employee_id, phone)
             data_phone2 = (employee_id, alt_phone)
@@ -904,12 +929,14 @@ class MainApp(QMainWindow):
             page = self.page_employee
             table = page.table_employee
             selected_employee_row = table.currentRow()
-            employee_id = int(table.item(selected_employee_row, 0).text())
             if selected_employee_row != -1:
+                employee_id = int(table.item(selected_employee_row, 0).text())
                 table.removeRow(selected_employee_row)
                 delete_employee(employee_id)
             else:
-                print("No row selected! Select an employee to delete!")
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to delete!"
+                )
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -1052,7 +1079,45 @@ class MainApp(QMainWindow):
             print(f"Error Populating data: {err}")
 
     def create_new_expense(self):
-        ...
+        try:
+            page = self.page_expenses
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            issuer_id = page.line_issuer_id.text()
+            expense_date = page.date_issue.text()
+            expense_date_obj = datetime.strptime(str(expense_date), "%Y-%m-%d").date()
+            handler_info = page.comboBox.currentText()
+            print(handler_info)
+            start_index = handler_info.find("(")
+            end_index = handler_info.find(")")
+            handler_id = int(handler_info[start_index + 1 : end_index])
+            handle_date = page.date_handle.text()
+            handle_date_obj = datetime.strptime(str(handle_date), "%Y-%m-%d").date()
+            amount = page.line_amount.text()
+            justification = page.text_justification.toPlainText()
+            if not all(
+                [expense_date_obj, handler_id, handle_date, amount, justification]
+            ):
+                QMessageBox.warning(
+                    current_widget, "Warning", "Please fill in all fields."
+                )
+            mysql_handler = MySQLHandler()
+            mysql_handler.connect()
+            query = "insert into expenses (handler_id, issuer_id, expense_date, handle_date, amount, justification) values (%s, %s, %s, %s, %s, %s);"
+            data = (
+                handler_id,
+                issuer_id,
+                expense_date_obj,
+                handle_date,
+                amount,
+                justification,
+            )
+            mysql_handler.execute_query(query, data)
+            mysql_handler.disconnect()
+            #QMessageBox.information(current_widget, "Information", "Entry Success!")
+            self.clear_expense_fields()
+            self.set_expense_table()
+        except Exception as err:
+            print(f"Insertion failed: {err}")
 
     def delete_expense(self):
         try:
@@ -1060,15 +1125,14 @@ class MainApp(QMainWindow):
             current_widget = self.stackedWidget.setCurrentWidget(page)
             table = page.table_expense
             selelcted_expense_new = table.currentRow()
-            expense_id = int(table.item(selelcted_expense_new, 0).text())
-            if selelcted_expense_new != None:
+            if selelcted_expense_new != -1:
+                expense_id = int(table.item(selelcted_expense_new, 0).text())
                 table.removeRow(selelcted_expense_new)
                 delete_expenses(expense_id)
                 QMessageBox.information(
                     current_widget, "Information", "Record deleted successfully!"
                 )
             else:
-                print("Select a record to delete!")
                 QMessageBox.warning(
                     current_widget, "Warning", "Select a record to delete!"
                 )
@@ -1080,6 +1144,8 @@ class MainApp(QMainWindow):
 
     def set_expense_table(self):
         try:
+            self.page_expenses.table_expense.clearContents()
+            self.page_expenses.table_expense.setRowCount(0)
             fetch_expenses()
             for row, expense in enumerate(Expenses):
                 self.add_expense_to_table(row, expense)
