@@ -139,7 +139,7 @@ FUNCTIONALITIES:
           Item
           Veterinarian 
           Day Care
-          Expenses
+          Expenses-1
 
      Populate in Fields
           Appointment-1
