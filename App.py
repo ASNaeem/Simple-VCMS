@@ -2,7 +2,7 @@ import sys
 import warnings
 import os
 from datetime import datetime, timedelta
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QWidget, QCheckBox
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 from qt_material import apply_stylesheet, list_themes
@@ -89,23 +89,6 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_setting)
         self.stackedWidget.addWidget(self.page_support)
 
-        self.button_appointments.clicked.connect(self.show_appointment)
-        self.page_appointment.button_app_create.clicked.connect(
-            self.show_appointment_create
-        )
-        self.page_appointment.button_app_details.clicked.connect(
-            self.show_appointment_modify
-        )
-        self.page_appointment_modify.button_apt_back.clicked.connect(
-            self.show_appointment
-        )
-        self.page_appointment_create.button_back_cancel.clicked.connect(
-            self.show_appointment
-        )
-        self.page_appointment_create.button_create.clicked.connect(
-            self.show_appointment
-        )
-
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
         self.page_animal_info.button_animal_reg.clicked.connect(self.show_animal_reg)
@@ -161,14 +144,30 @@ class MainApp(QMainWindow):
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
+
+        #self.button_appointments.clicked.connect(self.show_appointment)
+        self.page_appointment.button_app_create.clicked.connect(
+            self.show_appointment_create
+        )
+        self.page_appointment.button_app_details.clicked.connect(
+            self.show_appointment_modify #populate selected row's information to modify page's fields
+        )
         self.page_appointment.button_delete_appointment.clicked.connect(
             self.delete_appointment
         )
-
-        # self.page_appointment_create.button_create.clicked.connect(self.create_appointment)
-        # self.page_appointment
+        self.page_appointment_create.button_create.clicked.connect(
+            self.create_appointment
+        )
+        self.page_appointment_create.button_back_cancel.clicked.connect(
+            self.show_appointment
+        )
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
             self.checkbox_state_changed
+        )
+        
+        
+        self.page_appointment_modify.button_apt_back.clicked.connect(
+            self.show_appointment
         )
         ##################### End Init #####################
 
@@ -1342,20 +1341,102 @@ class MainApp(QMainWindow):
             )
         except Exception as err:
             print(f"Error Fetching: {err}")
-
+    
     def create_appointment(self):
-        ...
-
-    def populate_appointment(self):
         try:
-            ...
+            new_animal: bool = False
+            day_care: bool = False
+
+            page = self.page_appointment_create
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+
+            if chk_box_new_animal.isChecked():
+                new_animal = True
+
+                animal_name = page.comboBox_animal_id.currentItem()
+                birth_date =  page.date_appt_birth.Text()
+                
+                gender = ""
+                if page.rb_male.isChecked():
+                    gender = "Male"
+                elif page.rb_female.isChecked():
+                    gender = "Female"
+
+                sterilized = ""
+                if page.rb_ster_yes.isChecked():
+                    sterilized = "Yes"
+                elif page.rb_ster_yes.isChecked():
+                    sterilized = "No"
+
+                species = page.line_species.Text()
+                breed = page.line_breed.Text()
+                color = page.line_colors.Text()
+                behavioral_warning = page.line_behave.Text()
+                owner_name = page.line_o_fname.Text()+" "+page.line_o_lname.Text()
+                email =  page.line_email.Text() 
+                phone = page.line_phone.Text()
+                address = page.line_address.Text()
+                reg_date = page.date_appt_reg.Text()
+                med_condition =  page.line_reason.Text()
+
+                reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
+                birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
+
+                if not all(
+                [
+                    animal_name,
+                    reg_date,
+                    species,
+                    breed,
+                    color,
+                    gender,
+                    sterilized,
+                    med_condition,
+                    owner_name,
+                    phone,
+                    email,
+                    address,
+                    birth_date,
+                    behavioral_warning,
+                ]
+                ):
+                    QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
+                return
+                add_animal(animal_name, birth_date_obj, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, med_condition)
+            
+                #How do i get animal id for appointment table? I just inserted the new animal in database
+                #Even if I fetch animal list, how will I get our desired animal id?
+                ...
+            
+            else:
+                ...
+
+            if chk_box_day_care.isChecked():
+                day_care = True
+                ...
+            
+            else:
+                ...
+
+            self.show_appointment
+        except Exception as err:
+            print(f"Error Fetching: {err}")
+
+    def update_appointment(self):
+        try:
+            page = self.page_appointment_modify
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+
+            self.show_appointment
+
         except Exception as err:
             print(f"Error Fetching: {err}")
 
     def delete_appointment(self):
         try:
             page = self.page_appointment
-            ...
+
+            
         except Exception as err:
             print(f"Error Fetching: {err}")
 

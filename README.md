@@ -106,8 +106,8 @@ MySQL
 
 FUNCTIONALITIES:
      Create
-          Appointment
-          Animal - 1
+          Appointment-ongoing (there's an issue)
+          Animal-1
           Medical Records - 1
           Employee-1
           Billing
@@ -121,7 +121,7 @@ FUNCTIONALITIES:
           Appointment
           Animal - 1
           Medical Records
-          Employee
+          Employee-1
           Billing
           Services
           Item
@@ -153,13 +153,13 @@ FUNCTIONALITIES:
           Expenses - 1
 
      Populate in Table
-          Appointment
+          Appointment-1
           Animal-1
           Medical Records-1
           Employee-1
           Billing-1
           Services-0
-          Item-0
+          Item-0(If there's time)
           Veterinarian-0 
           Day Care-1
           Expenses-1
