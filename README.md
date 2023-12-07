@@ -107,7 +107,7 @@ MySQL
 FUNCTIONALITIES:
      Create
           Appointment
-          Animal-1
+          Animal - 1
           Medical Records - 1
           Employee-1
           Billing
@@ -115,7 +115,7 @@ FUNCTIONALITIES:
           Item
           Veterinarian 
           Day Care
-          Expenses
+          Expenses - 0.5
 
      Edit
           Appointment
@@ -131,26 +131,26 @@ FUNCTIONALITIES:
 
      Delete
           Appointment-
-          Animal-1
-          Medical Records-1
-          Employee-1
+          Animal - 1
+          Medical Records - 1
+          Employee - 1
           Billing
           Services
           Item
           Veterinarian 
           Day Care
-          Expenses-1
+          Expenses - 1
 
      Populate in Fields
-          Appointment-1
-          Animal-1
-          Employee-1
+          Appointment - 1
+          Animal - 1
+          Employee - 1
           Billing
           Services
           Item
           Veterinarian 
           Day Care
-          Expenses-0.5
+          Expenses - 1
 
      Populate in Table
           Appointment

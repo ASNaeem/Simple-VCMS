@@ -422,7 +422,7 @@
             <item>
              <widget class="QLineEdit" name="line_issuer_id">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -691,7 +691,7 @@
                </font>
               </property>
               <property name="displayFormat">
-               <string>yyyy/MM/dd</string>
+               <string>yyyy-MM-dd</string>
               </property>
              </widget>
             </item>
@@ -727,7 +727,7 @@
                </font>
               </property>
               <property name="displayFormat">
-               <string>yyyy/MM/dd</string>
+               <string>yyyy-MM-dd</string>
               </property>
              </widget>
             </item>
