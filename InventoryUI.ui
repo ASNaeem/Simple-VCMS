@@ -162,7 +162,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTableWidget" name="tableWidget">
+           <widget class="QTableWidget" name="table_inventory">
             <property name="font">
              <font>
               <family>Courier New</family>

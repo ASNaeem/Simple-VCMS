@@ -132,19 +132,18 @@ def add_expense(
     except Exception as err:
         print(f"Entry Failed: {err}")
 
-
 def delete_expenses(id: int):
     try:
         for expense in Expenses:
-            if id == expense.id:
+            if id == expense.expense_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from expenses where expense_id = %s;"
-                data = expense.id
-                mysql_handler.execute_query(query, data)
+                data = id
+                mysql_handler.execute_query(query, (data,))
                 Expenses.remove(expense)
                 mysql_handler.disconnect()
                 print("Delete Success!")
-        print("Delete Failed!")
+                break
     except Exception as err:
         print(f"Error: {err}")
