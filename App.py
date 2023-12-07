@@ -233,11 +233,11 @@ class MainApp(QMainWindow):
                 )
                 page.date_apt.setDate(qdate)
 
-                '''qtime = QTime(
+                """qtime = QTime(
                     appointment.appointment_time.hour,
                     appointment.appointment_time.minute,
                     appointment.appointment_time.second
-                )'''
+                )"""
 
                 qtime = QTime.fromString(str(appointment.appointment_time), "hh:mm:ss")
 
@@ -247,7 +247,7 @@ class MainApp(QMainWindow):
                 print("No row selected! Select a row to view more details.")
 
             self.setWindowTitle("VCMS || Dashboard || Appointment Details")
-            
+
             vet_name = []
             for employee in Employees:
                 if "vet" in employee.designation.lower():
@@ -929,13 +929,14 @@ class MainApp(QMainWindow):
             table.setItem(row, 8, QTableWidgetItem(str(employee.salary)))
             table.setItem(row, 9, QTableWidgetItem(str(employee.joining_date)))
             table.setItem(row, 10, QTableWidgetItem(str(employee.employee_status)))
-            self.resize_columns_to_contents_alternate(table)
+            """self.resize_columns_to_contents_alternate(table)
             table.resizeColumnToContents(0)
             table.resizeColumnToContents(6)
             table.resizeColumnToContents(7)
             table.resizeColumnToContents(8)
             table.resizeColumnToContents(9)
-            table.resizeColumnToContents(10)
+            table.resizeColumnToContents(10)"""
+            self.resize_columns_to_contents_alternate2(table)
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -984,7 +985,23 @@ class MainApp(QMainWindow):
 
     ################### Expenses ##################
     def clear_expense_fields(self):
-        ...
+        try:
+            page = page = self.page_expenses
+            page.line_expense_id.clear()
+            page.line_issuer_id.clear()
+            page.date_issue.setDate(QDate(2000, 1, 1))
+            page.comboBox.setCurrentIndex(0)
+            page.date_handle.setDate(QDate(2000, 1, 1))
+            page.line_amount.clear()
+            page.text_justification.clear()
+        except Exception as err:
+            print(f"Error clearing expense fields: {err}")
+
+    def get_employee_name_by_id(self, employee_id):
+        for employee in Employees:
+            if employee.employee_id == employee_id:
+                return employee.name
+        return None
 
     def populate_expense(self):
         try:
@@ -1000,23 +1017,20 @@ class MainApp(QMainWindow):
                             expense = ex
                             break
                 page = self.page_expenses
-
-                jdate = QDate(
-                    expense.expense_date.year,
-                    expense.expense_date.month,
-                    expense.expense_date.day,
-                )
+                page.line_expense_id.setText(str(expense.expense_id))
+                page.line_issuer_id.setText(str(expense.issuer_id))
+                jdate = QDate.fromString(expense.expense_date, "yyyy-MM-dd")
                 page.date_issue.setDate(jdate)
-                employee_info = [f"{employee.name} ({employee.employee_id})"]
-                page.comboBox.setCurrentText(employee_info)
 
-                jdate2 = QDate(
-                    expense.date_handle.year,
-                    expense.date_handle.month,
-                    expense.date_handle.day,
-                )
+                employee_name = self.get_employee_name_by_id(expense.handler_id)
+                if employee_name is not None:
+                    employee_info = f"{employee_name} ({expense.handler_id})"
+                    page.comboBox.setCurrentText(employee_info)
+
+                jdate2 = QDate.fromString(expense.handle_date, "yyyy-MM-dd")
                 page.date_handle.setDate(jdate2)
-                page.line_amount.setText(expense.amount)
+
+                page.line_amount.setText(str(expense.amount))
                 page.text_justification.setPlainText(expense.justification)
             else:
                 self.page_expenses.button_expense_edit.setText("Enable Edit")
@@ -1024,7 +1038,7 @@ class MainApp(QMainWindow):
                 self.page_expenses.button_expense_add.setEnabled(True)
             #### need fixing ####
         except Exception as err:
-            pass
+            print(f"Error Populating data: {err}")
 
     def create_new_expense(self):
         ...
@@ -1045,26 +1059,21 @@ class MainApp(QMainWindow):
 
     def add_expense_to_table(self, row, expense):
         try:
-            header = self.page_expenses.table_expense.horizontalHeader()
-            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            # print("Testing add_expense to table")
             table = self.page_expenses.table_expense
             table.insertRow(row)
 
             table.setItem(row, 0, QTableWidgetItem(str(expense.expense_id)))
-            header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 1, QTableWidgetItem(str(expense.issuer_id)))
-            header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-            table.setItem(row, 2, QTableWidgetItem(str(expense.expense_date)))
-            header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-            table.setItem(row, 3, QTableWidgetItem(str(expense.amount)))
-            header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-            table.setItem(row, 4, QTableWidgetItem(str(expense.justification)))
-            header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+            table.setItem(row, 2, QTableWidgetItem(str(expense.handler_id)))
+            table.setItem(row, 3, QTableWidgetItem(str(expense.expense_date)))
+            table.setItem(row, 4, QTableWidgetItem(str(expense.handle_date)))
+            table.setItem(row, 5, QTableWidgetItem(str(expense.amount)))
+            table.setItem(row, 6, QTableWidgetItem(str(expense.justification)))
+
+            self.resize_columns_to_contents_alternate2(table)
         except Exception as err:
             print(f"Error Fetching: {err}")
-
-        # self.resize_columns_to_contents_alternate(table)
-        # No need to resize the expense table
 
     ################### Billing ##################
     def set_bill_table(self):
@@ -1139,11 +1148,11 @@ class MainApp(QMainWindow):
         combo_box = self.page_appointment_create.comboBox_animal_id
         if state == 0:
             combo_box.setEnabled(True)
+            search_text = combo_box.currentText()
             animal_info = [
-                f"({animal.animal_id}) {animal.animal_name} {animal.owner_name}"
+                f"{animal.species}, {animal.owner_name} ({animal.animal_id})"
                 for animal in Animals
             ]
-            combo_box = self.page_appointment_create.comboBox_animal_id
             combo_box.addItems(animal_info)
             combo_box.completer().setCompletionMode(
                 QtWidgets.QCompleter.PopupCompletion
@@ -1152,7 +1161,7 @@ class MainApp(QMainWindow):
             combo_box.clear()
             combo_box.setEnabled(False)
 
-    '''def get_animal_by_id(self, animal_id):
+    """def get_animal_by_id(self, animal_id):
         try:
             for animal in Animals:
                 if animal.animal_id == animal_id:
@@ -1160,7 +1169,7 @@ class MainApp(QMainWindow):
             return None
 
         except Exception as err:
-            print(f"Error Fetching: {err}")'''
+            print(f"Error Fetching: {err}")"""
 
     def set_appointment_table(self):
         try:
@@ -1168,8 +1177,8 @@ class MainApp(QMainWindow):
             self.page_appointment.appointment_table_widget_2.setRowCount(0)
             fetch_appointment()
             for row, appointment in enumerate(Appointments):
-                #animal = self.get_animal_by_id(appointment.animal_id)
-                #self.add_appointment_to_Table(row, appointment, animal)
+                # animal = self.get_animal_by_id(appointment.animal_id)
+                # self.add_appointment_to_Table(row, appointment, animal)
                 self.add_appointment_to_Table(row, appointment)
 
         except Exception as err:
@@ -1191,7 +1200,7 @@ class MainApp(QMainWindow):
             table.setItem(row, 6, QTableWidgetItem(str(appointment.appointment_date)))
             table.setItem(row, 7, QTableWidgetItem(str(appointment.appointment_time)))
             table.setItem(row, 8, QTableWidgetItem(appointment.appointment_status))
-            
+
             self.resize_columns_to_contents(table, header)
 
         except Exception as err:
@@ -1269,7 +1278,7 @@ class MainApp(QMainWindow):
 
                 header.setSectionResizeMode(column, max_width)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Stretching: {err}")
 
     def resize_columns_to_contents(self, table, header):
         try:
@@ -1286,6 +1295,25 @@ class MainApp(QMainWindow):
                 header.resizeSection(column, max_width)
         except Exception as err:
             print(f"Error Fetching: {err}")
+
+    def resize_columns_to_contents_alternate2(self, table):
+        try:
+            header = table.horizontalHeader()
+
+            for column in range(table.columnCount()):
+                max_width = header.sectionSizeHint(column)
+
+                for row in range(table.rowCount()):
+                    item = table.item(row, column)
+                    if item is not None and item.text():
+                        max_width = max(
+                            max_width, table.fontMetrics().width(item.text()) + 10
+                        )
+
+                header.setSectionResizeMode(column, QtWidgets.QHeaderView.Interactive)
+                header.resizeSection(column, max_width)
+        except Exception as err:
+            print(f"Error Stretching: {err}")
 
     ############### Table Resize Methods End ########################
 

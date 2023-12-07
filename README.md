@@ -150,7 +150,7 @@ FUNCTIONALITIES:
           Item
           Veterinarian 
           Day Care
-          Expenses
+          Expenses-0.5
 
      Populate in Table
           Appointment
