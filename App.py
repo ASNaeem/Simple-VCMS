@@ -137,6 +137,7 @@ class MainApp(QMainWindow):
         self.page_animal_details.button_record_delete.clicked.connect(
             self.delete_record
         )
+        self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
         self.page_animal_info.button_delete_animal_info.clicked.connect(
             self.delete_animal
