@@ -2,7 +2,13 @@ import sys
 import warnings
 import os
 from datetime import datetime, timedelta
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QWidget, QCheckBox
+from PyQt5.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QTableWidgetItem,
+    QWidget,
+    QCheckBox,
+)
 
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
@@ -185,7 +191,40 @@ class MainApp(QMainWindow):
             self.show_appointment
         )
         self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
+        self.page_expenses.line_expense_search.textChanged.connect(self.search_expense)
+        self.page_employee.line_search_6.textChanged.connect(self.search_employee)
+        self.page_daycare.line_care_search.textChanged.connect(self.search_daycare)
+        self.page_appointment.line_appointment_search.textChanged.connect(
+            self.search_appointment
+        )
+        self.page_billing.line_bill_search.textChanged.connect(self.search_bill)
+        self.page_service.line_service_search.textChanged.connect(self.search_service)
+        self.page_inventory.line_inventory_search.textChanged.connect(self.search_Item)
         ##################### End Init #####################
+
+    def search_Item(self, text):
+        try:
+            table = self.page_inventory.table_inventory
+            for row in range(table.rowCount()):
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_Item): {err}")
+
+    def search_service(self, text):
+        try:
+            table = self.page_service.table_service
+            for row in range(table.rowCount()):
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_service): {err}")
 
     def search_animal(self, text):
         try:
@@ -785,6 +824,18 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Clearing Employee Fields: {err}")
 
+    def search_employee(self, text):
+        try:
+            table = self.page_employee.table_employee
+            for row in range(table.rowCount()):
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_employee): {err}")
+
     def populate_employee(self):
         try:
             if self.page_employee.button_edit.text() == "Edit":
@@ -1009,6 +1060,17 @@ class MainApp(QMainWindow):
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
+    def search_daycare(self, text):
+        try:
+            table = self.page_daycare.table_care
+            for row in range(table.rowCount()):
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_daycare): {err}")
 
     def set_day_care_table(self):
         try:
@@ -1069,6 +1131,18 @@ class MainApp(QMainWindow):
                 return employee.name
         return None
 
+    def search_expense(self, text):
+        try:
+            table = self.page_expenses.table_expense
+            for row in range(table.rowCount()):
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_expense): {err}")
+
     def populate_expense(self):
         try:
             page = self.page_expenses
@@ -1085,7 +1159,6 @@ class MainApp(QMainWindow):
                             # print("populate expense 0")
                             break
 
-                
                 page.line_expense_id.setText(str(expense.expense_id))
                 page.line_issuer_id.setText(str(expense.issuer_id))
                 jdate = QDate.fromString(expense.expense_date, "yyyy-MM-dd")
@@ -1242,6 +1315,18 @@ class MainApp(QMainWindow):
     ################### Expense End #####################
 
     ##################### Billing #######################
+    def search_bill(self, text):
+        try:
+            table = self.page_billing.table_bill
+            for row in range(table.rowCount()):
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_bill): {err}")
+
     def set_bill_table(self):
         try:
             fetch_billings()
@@ -1310,6 +1395,18 @@ class MainApp(QMainWindow):
     #################### End Billing ####################
 
     #################### Appointment ####################
+    def search_appointment(self, text):
+        try:
+            table = self.page_appointment.appointment_table_widget_2
+            for row in range(table.rowCount()):
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_appointment): {err}")
+
     def checkbox_state_changed(self, state):
         try:
             combo_box = self.page_appointment_create.comboBox_animal_id

@@ -165,15 +165,15 @@ FUNCTIONALITIES:
           Expenses-1
 
      Search
-          Appointment
-          Animal-0
-          Employee-0
-          Billing-0
-          Services-0
-          Item-0
+          Appointment-1
+          Animal-1
+          Employee-1
+          Billing-1
+          Services-1
+          Item-1
           Veterinarian-0
-          Day Care-0
-          Expenses-0
+          Day Care-1
+          Expenses-1
 
      Login-0
      Homepage-0

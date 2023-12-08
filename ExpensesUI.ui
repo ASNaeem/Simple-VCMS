@@ -78,7 +78,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout" stretch="30,10,10">
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="50,50">
             <property name="topMargin">
              <number>20</number>
             </property>
@@ -89,45 +89,29 @@
              <number>10</number>
             </property>
             <item>
-             <widget class="QLineEdit" name="line_bill_search">
+             <widget class="QLineEdit" name="line_expense_search">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
                </font>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="line_bill_view_all">
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string>Search</string>
+              <property name="placeholderText">
+               <string>Search...</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="button_bill_view_all">
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
               </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
               </property>
-              <property name="text">
-               <string>View All</string>
-              </property>
-             </widget>
+             </spacer>
             </item>
            </layout>
           </item>

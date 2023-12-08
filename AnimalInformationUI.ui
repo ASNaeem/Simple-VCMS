@@ -88,7 +88,7 @@
         <property name="spacing">
          <number>10</number>
         </property>
-        <item row="1" column="5">
+        <item row="1" column="3">
          <widget class="QPushButton" name="button_animal_reg">
           <property name="font">
            <font>
@@ -114,38 +114,6 @@
          </widget>
         </item>
         <item row="1" column="2">
-         <widget class="QPushButton" name="button_animal_search">
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>12</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-            <kerning>true</kerning>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="line_animal_search">
-          <property name="font">
-           <font>
-            <family>Courier New</family>
-            <pointsize>12</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-            <kerning>true</kerning>
-           </font>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4">
          <spacer name="horizontalSpacer_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -158,8 +126,8 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="button_animal_view_all">
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="line_animal_search">
           <property name="font">
            <font>
             <family>Courier New</family>
@@ -169,11 +137,8 @@
             <kerning>true</kerning>
            </font>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>View All</string>
+          <property name="placeholderText">
+           <string>Search...</string>
           </property>
          </widget>
         </item>
