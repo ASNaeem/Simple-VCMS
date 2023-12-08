@@ -1722,10 +1722,23 @@ class MainApp(QMainWindow):
 
     def delete_existing_service(self):
         try:
-            ...
+            page = self.page_service
+            table = page.table_service
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            selected_service_row = table.currentRow
+            
+            if selected_service_row != -1:
+                service_id = int(table.item(selected_service_row, 0).text())
+                table.removeRow(selected_service_row)
+                delete_service(service_id)
+
+            else:
+                QMessageBox.warning(
+                    current_widget, "Warning! Select a row to delete."
+                )
 
         except Exception as err:
-            print(f"Error Fetching(delete_existing_service): {err}")
+            print(f"Service Delete Failed!: {err}")
 
     ################## Service End ##################
 
