@@ -2,13 +2,8 @@ import sys
 import warnings
 import os
 from datetime import datetime, timedelta
-from PyQt5.QtWidgets import (
-    QApplication,
-    QMainWindow,
-    QTableWidgetItem,
-    QWidget,
-    QCheckBox,
-)
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QWidget, QCheckBox
+
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 from qt_material import apply_stylesheet, list_themes
@@ -31,7 +26,13 @@ from Appointment import (
     add_appointment,
     delete_appointment,
 )
-from Service import Services, add_service, delete_service, update_service, fetch_services
+from Service import (
+    Services,
+    add_service,
+    delete_service,
+    update_service,
+    fetch_services,
+)
 from Animal import (
     Animals,
     fetch_animals,
@@ -153,8 +154,12 @@ class MainApp(QMainWindow):
 
         self.page_service.button_service_cancel.clicked.connect(self.populate_service)
         self.page_service.button_service_add.clicked.connect(self.add_new_service)
-        self.page_service.button_service_save.clicked.connect(self.update_existing_service_service)
-        self.page_service.button_service_delete.clicked.connect(self.delete_existing_service)
+        self.page_service.button_service_save.clicked.connect(
+            self.update_existing_service
+        )
+        self.page_service.button_service_delete.clicked.connect(
+            self.delete_existing_service
+        )
 
         self.button_appointments.clicked.connect(self.show_appointment)
         self.page_appointment.button_app_create.clicked.connect(
@@ -164,7 +169,7 @@ class MainApp(QMainWindow):
             self.show_appointment_modify  # populate selected row's information to modify page's fields
         )
         self.page_appointment.button_delete_appointment.clicked.connect(
-            self.delete_appointment
+            self.delete_existing_appointment
         )
         self.page_appointment_create.button_create.clicked.connect(
             self.create_appointment
@@ -182,16 +187,18 @@ class MainApp(QMainWindow):
         self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
         ##################### End Init #####################
 
-
     def search_animal(self, text):
         try:
             table = self.page_animal_info.table_animal
             for row in range(table.rowCount()):
-                match = any(text.lower() in table.item(row, col).text().lower() for col in range(table.columnCount()))
+                match = any(
+                    text.lower() in table.item(row, col).text().lower()
+                    for col in range(table.columnCount())
+                )
                 table.setRowHidden(row, not match)
         except Exception as err:
             print(f"Error Fetching(search_animal): {err}")
-    
+
     def add_record(self):
         try:
             page = self.page_animal_details
@@ -428,7 +435,7 @@ class MainApp(QMainWindow):
         try:
             self.stackedWidget.setCurrentWidget(self.page_service)
             self.page_service.table_service.setCurrentCell(-1, 0)
-            self.setWindowTitle("VCMS || Dashboard || Service") 
+            self.setWindowTitle("VCMS || Dashboard || Service")
         except Exception as err:
             print(f"Error Fetching(show_service): {err}")
 
@@ -449,7 +456,7 @@ class MainApp(QMainWindow):
             employee_info = [
                 f"{employee.name} ({employee.employee_id})" for employee in Employees
             ]
-            #employee_info.insert(0, "Select")
+            # employee_info.insert(0, "Select")
             combo_box = self.page_expenses.comboBox
             combo_box.addItems(employee_info)
             combo_box.completer().setCompletionMode(
@@ -1064,24 +1071,26 @@ class MainApp(QMainWindow):
 
     def populate_expense(self):
         try:
-            if self.page_expenses.button_expense_edit.text() == "Enable Edit":
-                self.page_expenses.button_expense_edit.setText("Cancel")
-                self.page_expenses.button_expense_add.setEnabled(False)
-                selected_item = self.page_expenses.table_expense.selectedItems()
+            page = self.page_expenses
+            if page.button_expense_edit.text() == "Enable Edit":
+                page.button_expense_edit.setText("Cancel")
+                page.button_expense_add.setEnabled(False)
+                selected_item = page.table_expense.selectedItems()
                 if selected_item:
                     expense_id = int(selected_item[0].text())
                     expense = None
                     for ex in Expenses:
                         if ex.expense_id == expense_id:
                             expense = ex
-                            #print("populate expense 0")
+                            # print("populate expense 0")
                             break
-                page = self.page_expenses
+
+                
                 page.line_expense_id.setText(str(expense.expense_id))
                 page.line_issuer_id.setText(str(expense.issuer_id))
                 jdate = QDate.fromString(expense.expense_date, "yyyy-MM-dd")
                 page.date_issue.setDate(jdate)
-                #print("populate expense")
+                # print("populate expense")
                 employee_name = self.get_employee_name_by_id(expense.handler_id)
                 if employee_name is not None:
                     employee_info = f"{employee_name} ({expense.handler_id})"
@@ -1092,12 +1101,12 @@ class MainApp(QMainWindow):
 
                 page.line_amount.setText(str(expense.amount))
                 page.text_justification.setPlainText(expense.justification)
-                #print("populate expense 2")
+                # print("populate expense 2")
             else:
-                self.page_expenses.button_expense_edit.setText("Enable Edit")
+                page.button_expense_edit.setText("Enable Edit")
                 self.clear_expense_fields()
-                self.page_expenses.button_expense_add.setEnabled(True)
-                #print("populate expense 4")
+                page.button_expense_add.setEnabled(True)
+                # print("populate expense 4")
             #### need fixing ####
         except Exception as err:
             print(f"Error Populating data: {err}")
@@ -1322,7 +1331,6 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(checkbox_state_changed): {err}")
 
-
     """def get_animal_by_id(self, animal_id):
         try:
             for animal in Animals:
@@ -1346,7 +1354,6 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(set_appointment_table): {err}")
 
-
     def add_appointment_to_Table(self, row, appointment):
         try:
             header = self.page_appointment.appointment_table_widget_2.horizontalHeader()
@@ -1369,7 +1376,6 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(add_appointment_to_Table): {err}")
 
-    
     def create_appointment(self):
         try:
             new_animal: bool = False
@@ -1432,10 +1438,24 @@ class MainApp(QMainWindow):
                         current_widget, "Warning", "Please fill in all fields."
                     )
                 return
-                animal_id = add_animal(animal_name, birth_date_obj, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, med_condition)
-                #there's your id, continue the work ;-;
-                #How do i get animal id for appointment table? I just inserted the new animal in database
-                #Even if I fetch animal list, how will I get our desired animal id?
+                animal_id = add_animal(
+                    animal_name,
+                    birth_date_obj,
+                    sterilized,
+                    gender,
+                    species,
+                    breed,
+                    color,
+                    behavioral_warning,
+                    owner_name,
+                    email,
+                    phone,
+                    address,
+                    med_condition,
+                )
+                # there's your id, continue the work ;-;
+                # How do i get animal id for appointment table? I just inserted the new animal in database
+                # Even if I fetch animal list, how will I get our desired animal id?
                 ...
 
             else:
@@ -1468,6 +1488,7 @@ class MainApp(QMainWindow):
 
         except Exception as err:
             print(f"Error Fetching(delete_existing_appointment): {err}")
+
     ################## Appointment End ####################
 
     ################## Service Start ##################
@@ -1494,13 +1515,13 @@ class MainApp(QMainWindow):
 
         except Exception as err:
             print(f"Error Fetching(set_service_table): {err}")
-    
+
     def add_services_to_table(self, row, service):
         try:
             table = self.page_service.table_service
             header = table.horizontalHeader()
             header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-            
+
             table.insertRow(row)
 
             table.setItem(row, 0, QTableWidgetItem(str(service.service_id)))
@@ -1516,12 +1537,12 @@ class MainApp(QMainWindow):
 
     def populate_service(self):
         try:
-            #service = None
+            # service = None
             if self.page_service.button_service_cancel.text() == "Enable Edit":
                 self.page_service.button_service_cancel.setText("Cancel Edit")
                 self.page_service.button_service_add.setEnabled(False)
                 selected_item = self.page_service.table_service.selectedItems()
-                #service = None
+                # service = None
                 if selected_item:
                     service_id = int(selected_item[0].text())
                     service = None
@@ -1535,11 +1556,11 @@ class MainApp(QMainWindow):
                     page.line_service_id.setText(str(service.service_id))
                     page.line_service_name.setText(service.name)
                     page.line_service_cost.setText(str(service.cost))
-                    
-                    #if service.service_availability == True:
+
+                    # if service.service_availability == True:
                     if service.service_availability:
                         page.rb_service_available.setChecked(True)
-                    else: 
+                    else:
                         page.rb_service_unavailable.setChecked(True)
 
                     page.pte_service_details.setPlainText(service.service_details)
@@ -1574,8 +1595,6 @@ class MainApp(QMainWindow):
             print(f"Error Fetching(delete_existing_service): {err}")
 
     ################## Service End ##################
-
-
 
     ############### Table Resize Methods ##################
     def resize_columns_to_contents_alternate(self, table):
