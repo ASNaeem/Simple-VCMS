@@ -159,7 +159,7 @@
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="text">
-               <string>Delete</string>
+               <string>Delete Selected</string>
               </property>
              </widget>
             </item>
@@ -233,7 +233,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="line_care_hour">
+             <widget class="QLineEdit" name="line_care_id">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -263,7 +263,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="line_care_id">
+             <widget class="QLineEdit" name="line_animal_id">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -374,10 +374,13 @@
               <property name="text">
                <string>Notes</string>
               </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+              </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEdit">
+             <widget class="QTextEdit" name="text_care_notes">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>

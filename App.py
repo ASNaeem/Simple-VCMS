@@ -1098,7 +1098,29 @@ class MainApp(QMainWindow):
             print(f"Error Fetching (delete_from_daycare): {err}")
     def populate_daycare(self):
         try:
-            ...
+            page = self.page_daycare
+            if page.button_care_edit.text() == "Enable Edit":
+                page.button_care_edit.setText("Cancel")
+                page.button_care_details.setEnabled(False)
+                selected_item = page.table_care.selectedItems()
+                if selected_item:
+                    day_care_id = int(selected_item[0].text())
+                    daycare = None
+                    for care in Day_Care_Service:
+                        if care.day_Care_id == day_care_id:
+                            daycare = care
+                            break
+                page.line_care_id.setText(daycare.day_care_date)
+                page.line_animal_id.setText(daycare.animal_id)
+
+                jdate = QDate.fromString(daycare.day_care_date, "yyyy-MM-dd")
+                page.date_care.setDate(jdate)
+
+                page.time_care_start
+                page.time_care_end
+                page.text_care_notes.setPlainText(daycare.notes)
+
+
         except Exception as err:
             print(f"Error Fetching (populate_daycare): {err}")
     def update_daycare(self):
@@ -1373,7 +1395,6 @@ class MainApp(QMainWindow):
                     self.add_billing_service_to_service_table(rowService, service)
         except Exception as err:
             print(f"Error Fetching(set_bill_table): {err}")
-
     def get_service_details(self, service_ids, services):
         try:
             return [

@@ -77,6 +77,7 @@ Day_Care_Service = []
 
 def fetch_day_care():
     try:
+        Day_Care_Service.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from day_care;"
