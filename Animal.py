@@ -304,7 +304,7 @@ def add_animal(
             reg_date,
             med_condition,
         )
-        Animals.append(new_animal)
+        
 
         query = "insert into animals (animal_name, birth_date, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, reg_date, med_condition) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (
@@ -327,9 +327,10 @@ def add_animal(
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
         print("Entry Success!")
-        last_id = mysql_handler.fetch_data("Select LAST_INSERT_ID()")[0][0]
+        new_animal.animal_id = mysql_handler.fetch_data("Select LAST_INSERT_ID()")[0][0]
+        Animals.append(new_animal)
         mysql_handler.disconnect()
-        return last_id
+        return new_animal.animal_id
     except Exception as err:
         return "Entry Failed!"
 
