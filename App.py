@@ -1697,6 +1697,7 @@ class MainApp(QMainWindow):
 
     def update_existing_service(self):
         try:
+            
             ...
 
         except Exception as err:

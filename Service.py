@@ -76,9 +76,9 @@ def fetch_services():
             services.service_id = int(row[0])
             Services.append(services)
         mysql_handler.disconnect()
-        print(f"Er")
+        print(f"Service Fetched!")
     except Exception as err:
-        print(f"Error Fethcing: {err}")
+        print(f"Error Fethcing Service: {err}")
 
 
 def add_service(
@@ -110,10 +110,9 @@ def delete_service(id: int):
                 mysql_handler.execute_query(query, data)
                 Appointments.remove(service)
         mysql_handler.disconnect()
-        print("Delete Success!")
-        print("Delete Failed!")
+        print("Service Delete Success!")
     except Exception as err:
-        print(f"Error: {err}")
+        print(f"Error(delete_service): {err}")
 
 
 def update_service(service_id, naame, cost, service_details, service_availability):
