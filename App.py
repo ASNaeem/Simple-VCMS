@@ -1748,7 +1748,8 @@ class MainApp(QMainWindow):
                 update_service(service_id, name, cost, details, availability)
                 self.clear_service_fields()
                 self.show_service()        
-                self.page_service.button_service_add.setEnabled(False)
+                self.page_service.button_service_add.setEnabled(True)
+                self.page_service.button_service_cancel.setText("Enable Edit")
             else:
                 print("Select a Row!")
         except Exception as err:
