@@ -475,6 +475,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_service)
             self.page_service.table_service.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Service")
+            self.set_service_table()
         except Exception as err:
             print(f"Error Fetching(show_service): {err}")
 
@@ -1600,18 +1601,18 @@ class MainApp(QMainWindow):
             page.pte_service_details.clear()
 
         except Exception as err:
-            print(f"Error Fetching(clear_service_fields): {err}")
+            print(f"Error(clear_service_fields): {err}")
 
     def set_service_table(self):
         try:
-            self.page_appointment.appointment_table_widget_2.clearContents()
-            self.page_appointment.appointment_table_widget_2.setRowCount(0)
+            self.page_service.table_service.clearContents()
+            self.page_service.table_service.setRowCount(0)
             fetch_services()
             for row, service in enumerate(Services):
                 self.add_services_to_table(row, service)
 
         except Exception as err:
-            print(f"Error Fetching(set_service_table): {err}")
+            print(f"Error (set_service_table): {err}")
 
     def add_services_to_table(self, row, service):
         try:
@@ -1630,7 +1631,7 @@ class MainApp(QMainWindow):
             self.resize_columns_to_contents(table, header)
 
         except Exception as err:
-            print(f"Error Fetching(set_service_table): {err}")
+            print(f"Error (add_service_to_table): {err}")
 
     def populate_service(self):
         try:
@@ -1689,8 +1690,8 @@ class MainApp(QMainWindow):
                 return
             
             add_service(name, cost, details, availability)
-            self.clear_service_fields
-            self.set_service_table
+            self.clear_service_fields()
+            self.show_service()
 
         except Exception as err:
             print(f"Error Fetching(add_new_service): {err}")

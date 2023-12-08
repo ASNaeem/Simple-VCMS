@@ -85,14 +85,13 @@ def add_service(
     name: str, cost: float, service_details: str, service_availability: str
 ):
     try:
-        new_service = Service(name, cost, service_details, service_availability)
-        Services.append(new_service)
-
+        new_service = Service(name, cost, service_details, service_availability) 
         query = "insert into services (name, cost, service_details, service_availability) values(%s,%s,%s,%s)"
         values = (name, cost, service_details, service_availability)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
+        Services.append(new_service)
         mysql_handler.disconnect()
         print("Service Entry Success!")
     except Exception as err:
