@@ -133,7 +133,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLineEdit" name="line_animal_search_2">
+         <widget class="QLineEdit" name="line_animal_search">
           <property name="font">
            <font>
             <family>Courier New</family>

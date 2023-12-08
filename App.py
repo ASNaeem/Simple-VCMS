@@ -169,8 +169,14 @@ class MainApp(QMainWindow):
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
+        self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
         ##################### End Init #####################
-
+    def search_animal(self, text):
+        table = self.page_animal_info.table_animal
+        for row in range(table.rowCount()):
+            match = any(text.lower() in table.item(row, col).text().lower() for col in range(table.columnCount()))
+            table.setRowHidden(row, not match)
+    
     def add_record(self):
         try:
             page = self.page_animal_details
