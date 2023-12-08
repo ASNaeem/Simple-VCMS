@@ -128,7 +128,7 @@ class MainApp(QMainWindow):
         self.set_appointment_table()
         self.set_service_table()
 
-        ### functionalities ######
+        ##################### functionalities ###################################
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
         self.page_animal_details.button_record_delete.clicked.connect(
             self.delete_record
@@ -152,6 +152,9 @@ class MainApp(QMainWindow):
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
         self.page_service.button_service_cancel.clicked.connect(self.populate_service)
+        self.page_service.button_service_add.clicked.connect(self.add_new_service)
+        self.page_service.button_service_save.clicked.connect(self.update_existing_service_service)
+        self.page_service.button_service_delete.clicked.connect(self.delete_existing_service)
 
         self.button_appointments.clicked.connect(self.show_appointment)
         self.page_appointment.button_app_create.clicked.connect(
@@ -178,11 +181,16 @@ class MainApp(QMainWindow):
         )
         self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
         ##################### End Init #####################
+
+
     def search_animal(self, text):
-        table = self.page_animal_info.table_animal
-        for row in range(table.rowCount()):
-            match = any(text.lower() in table.item(row, col).text().lower() for col in range(table.columnCount()))
-            table.setRowHidden(row, not match)
+        try:
+            table = self.page_animal_info.table_animal
+            for row in range(table.rowCount()):
+                match = any(text.lower() in table.item(row, col).text().lower() for col in range(table.columnCount()))
+                table.setRowHidden(row, not match)
+        except Exception as err:
+            print(f"Error Fetching(search_animal): {err}")
     
     def add_record(self):
         try:
@@ -207,7 +215,7 @@ class MainApp(QMainWindow):
             else:
                 print("Input a diagnosis record to add!")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_record): {err}")
 
     ##################### Page switching #####################
     def show_daycare(self):
@@ -215,7 +223,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_daycare)
             self.page_daycare.table_care.setCurrentCell(-1, 0)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_daycare): {err}")
 
     def show_appointment(self):
         try:
@@ -223,7 +231,7 @@ class MainApp(QMainWindow):
             self.page_appointment.appointment_table_widget_2.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Appointment")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_appointment): {err}")
 
     def show_appointment_modify(self):
         try:
@@ -285,14 +293,14 @@ class MainApp(QMainWindow):
                 QtWidgets.QCompleter.PopupCompletion
             )
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_appointment_modify): {err}")
 
     def show_appointment_create(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_create)
             self.setWindowTitle("VCMS || Dashboard || Create New Appointment")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_appointment_create): {err}")
 
     def show_animal_info(self):
         try:
@@ -301,14 +309,14 @@ class MainApp(QMainWindow):
             self.setWindowTitle("VCMS || Dashboard || Animals")
             self.set_animal_table()
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_animal_info): {err}")
 
     def show_animal_reg(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_animal_reg)
             # self.setWindowTitle("VCMS || Dashboard || Animals")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_animal_reg): {err}")
 
     def show_animal_details(self):
         try:
@@ -371,7 +379,7 @@ class MainApp(QMainWindow):
             else:
                 print("Select a row to view more details")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_animal_details): {err}")
 
     def show_inventory(self):
         try:
@@ -381,21 +389,21 @@ class MainApp(QMainWindow):
             # self.stackedWidget.setCurrentWidget(self.page_inventory)
             # self.setWindowTitle("VCMS || Dashboard || Inventory")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_inventory): {err}")
 
     def show_setting(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_setting)
             self.setWindowTitle("VCMS || Dashboard || Setting")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_setting): {err}")
 
     def show_support(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_support)
             self.setWindowTitle("VCMS || Dashboard || Support")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_support): {err}")
 
     def show_analytics_report(self):
         try:
@@ -404,7 +412,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_analytics_report)
             self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_analytics_report): {err}")
 
     def show_employee(self):
         try:
@@ -414,7 +422,7 @@ class MainApp(QMainWindow):
             self.setWindowTitle("VCMS || Dashboard || Employee")
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_employee): {err}")
 
     def show_service(self):
         try:
@@ -422,7 +430,7 @@ class MainApp(QMainWindow):
             self.page_service.table_service.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Service") 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_service): {err}")
 
     def show_billing(self):
         try:
@@ -430,7 +438,7 @@ class MainApp(QMainWindow):
             self.page_billing.table_bill.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Billing")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_billing): {err}")
 
     def show_expenses(self):
         try:
@@ -448,7 +456,7 @@ class MainApp(QMainWindow):
                 QtWidgets.QCompleter.PopupCompletion
             )
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(show_expenses): {err}")
 
     #####   Setting    #####
     def change_theme(self):
@@ -462,7 +470,7 @@ class MainApp(QMainWindow):
             with open("config.txt", "w") as f:
                 f.write(self.page_setting.comboBox_themes.currentText())
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(change_theme): {err}")
 
     ##################### Animal ########################
     def clear_animal_fields(self):
@@ -492,7 +500,7 @@ class MainApp(QMainWindow):
             page.date_reg_birth.clear()
             page.line_reg_warning.clear()
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(clear_animal_fields): {err}")
 
     def create_new_animal(self):
         try:
@@ -570,16 +578,16 @@ class MainApp(QMainWindow):
                     med_condition,
                 )
                 mysql_handler.execute_query(query, values)
-                print("Entry Success!")
+                print("Animal Entry Success!")
                 mysql_handler.disconnect()
                 self.set_animal_table()
                 self.clear_animal_fields()
                 self.show_animal_info()
             except Exception as err:
-                print("Entry Failed!", err)
+                print("Animal Entry Failed!", err)
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(create_new_animal): {err}")
 
     def update_animal(self):
         try:
@@ -626,7 +634,7 @@ class MainApp(QMainWindow):
             )
             self.show_animal_info()
         except Exception as err:
-            print(f"update failed: {err}")
+            print(f"Animal update failed: {err}")
 
     def delete_animal(self):
         try:
@@ -643,7 +651,7 @@ class MainApp(QMainWindow):
                     current_widget, "Warning", "Select a record to delete!"
                 )
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(delete_animal): {err}")
 
     def delete_record(self):
         try:
@@ -671,7 +679,7 @@ class MainApp(QMainWindow):
                     current_widget, "Warning", "Select a record to delete!"
                 )
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(delete_record): {err}")
 
     def set_records_table(self, animal):
         try:
@@ -680,7 +688,7 @@ class MainApp(QMainWindow):
             for row, record in enumerate(animal.medical_records):
                 self.add_records_to_table(row, record)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_records_table): {err}")
 
     def set_animal_table(self):
         try:
@@ -690,7 +698,7 @@ class MainApp(QMainWindow):
             for row, animal in enumerate(Animals):
                 self.add_animal_to_table(row, animal)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_animal_table): {err}")
 
     def add_animal_to_table(self, row, animal):
         try:
@@ -735,7 +743,7 @@ class MainApp(QMainWindow):
             # self.page_animal_info.table_animal.setItem(row, 14, QTableWidgetItem(animal.med_condition))
             self.resize_columns_to_contents(table, header)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_animal_to_table): {err}")
 
     def add_records_to_table(self, row, record):
         try:
@@ -748,7 +756,7 @@ class MainApp(QMainWindow):
             table.setItem(row, 1, QTableWidgetItem(str(record[0])))
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_records_to_table): {err}")
 
     #################### Animal End #####################
 
@@ -768,7 +776,7 @@ class MainApp(QMainWindow):
             self.page_employee.comboBox_designation_6.setCurrentIndex(0)
             self.page_employee.combobox_access_level_6.setCurrentIndex(0)
         except Exception as err:
-            print(f"Error Clearing: {err}")
+            print(f"Error Clearing Employee Fields: {err}")
 
     def populate_employee(self):
         try:
@@ -813,7 +821,7 @@ class MainApp(QMainWindow):
                 self.clear_employee_fields()
                 self.page_employee.button_register.setEnabled(True)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching Employee: {err}")
 
     def update_employee(self):
         try:
@@ -865,7 +873,7 @@ class MainApp(QMainWindow):
             else:
                 print("Select a Row!")
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(update_employee): {err}")
 
     def register_employee(self):
         try:
@@ -935,7 +943,7 @@ class MainApp(QMainWindow):
             self.clear_employee_fields()
             self.set_employee_table()
         except Exception as err:
-            print(f"Entry Failed: {err}")
+            print(f"Employee Entry Failed: {err}")
 
     def delete_employee(self):
         try:
@@ -951,7 +959,7 @@ class MainApp(QMainWindow):
                     current_widget, "Warning", "Select a record to delete!"
                 )
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(delete_employee): {err}")
 
     def set_employee_table(self):
         try:
@@ -961,7 +969,7 @@ class MainApp(QMainWindow):
             for row, employee in enumerate(Employees):
                 self.add_employee_to_table(row, employee)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_employee_table): {err}")
 
     def add_employee_to_table(self, row, employee):
         try:
@@ -989,7 +997,7 @@ class MainApp(QMainWindow):
             table.resizeColumnToContents(10)"""
             self.resize_columns_to_contents_alternate2(table)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_employee_to_table): {err}")
 
     ################### End of Employee ###################
 
@@ -1001,7 +1009,7 @@ class MainApp(QMainWindow):
             for row, day_care in enumerate(Day_Care_Service):
                 self.add_day_care_to_table(row, day_care)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_day_care_table): {err}")
 
     def add_day_care_to_table(self, row, day_care):
         try:
@@ -1030,7 +1038,7 @@ class MainApp(QMainWindow):
             self.resize_columns_to_contents(table, header)
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_day_care_to_table): {err}")
 
     ################# Day Care Service End ################
 
@@ -1202,7 +1210,7 @@ class MainApp(QMainWindow):
             for row, expense in enumerate(Expenses):
                 self.add_expense_to_table(row, expense)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_expense_table): {err}")
 
     def add_expense_to_table(self, row, expense):
         try:
@@ -1220,7 +1228,7 @@ class MainApp(QMainWindow):
 
             self.resize_columns_to_contents_alternate2(table)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_expense_to_table): {err}")
 
     ################### Expense End #####################
 
@@ -1235,7 +1243,7 @@ class MainApp(QMainWindow):
                 for rowService, service in enumerate(service_details):
                     self.add_billing_service_to_service_table(rowService, service)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_bill_table): {err}")
 
     def get_service_details(self, service_ids, services):
         try:
@@ -1243,7 +1251,7 @@ class MainApp(QMainWindow):
                 service for service in services if service.service_id in service_ids
             ]
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(get_service_details): {err}")
 
     def add_billing_to_table(self, row, billing):
         try:
@@ -1270,7 +1278,7 @@ class MainApp(QMainWindow):
                 table.resizeColumnToContents(1)
                 table.resizeColumnToContents(2) """
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_billing_to_table): {err}")
 
     def add_billing_service_to_service_table(self, rowService, service):
         try:
@@ -1288,27 +1296,32 @@ class MainApp(QMainWindow):
             table.setItem(rowService, 2, QTableWidgetItem(service.cost))
             header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_billing_service_to_service_table): {err}")
 
     #################### End Billing ####################
 
     #################### Appointment ####################
     def checkbox_state_changed(self, state):
-        combo_box = self.page_appointment_create.comboBox_animal_id
-        if state == 0:
-            combo_box.setEnabled(True)
-            animal_info = [
-                f"{animal.species}, {animal.owner_name} ({animal.animal_id})"
-                for animal in Animals
-            ]
-            animal_info.insert(0, "Select")
-            combo_box.addItems(animal_info)
-            combo_box.completer().setCompletionMode(
-                QtWidgets.QCompleter.PopupCompletion
-            )
-        else:
-            combo_box.clear()
-            combo_box.setEnabled(False)
+        try:
+            combo_box = self.page_appointment_create.comboBox_animal_id
+            if state == 0:
+                combo_box.setEnabled(True)
+                animal_info = [
+                    f"{animal.species}, {animal.owner_name} ({animal.animal_id})"
+                    for animal in Animals
+                ]
+                animal_info.insert(0, "Select")
+                combo_box.addItems(animal_info)
+                combo_box.completer().setCompletionMode(
+                    QtWidgets.QCompleter.PopupCompletion
+                )
+            else:
+                combo_box.clear()
+                combo_box.setEnabled(False)
+
+        except Exception as err:
+            print(f"Error Fetching(checkbox_state_changed): {err}")
+
 
     """def get_animal_by_id(self, animal_id):
         try:
@@ -1318,7 +1331,7 @@ class MainApp(QMainWindow):
             return None
 
         except Exception as err:
-            print(f"Error Fetching: {err}")"""
+            print(f"Error Fetching(get_animal_by_id): {err}")"""
 
     def set_appointment_table(self):
         try:
@@ -1331,7 +1344,8 @@ class MainApp(QMainWindow):
                 self.add_appointment_to_Table(row, appointment)
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_appointment_table): {err}")
+
 
     def add_appointment_to_Table(self, row, appointment):
         try:
@@ -1353,47 +1367,9 @@ class MainApp(QMainWindow):
             self.resize_columns_to_contents(table, header)
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_appointment_to_Table): {err}")
 
-    def make_appointment(self):
-        try:
-            apt = self.page_appointment_create
-            date = apt.date_apt.selectedDate()
-            time = apt.time_apt.selectedTime()
-            # appointment_service = self.page_appointment_create.cb_service.currentText()
-            reason = apt.line_reason.currentText()
-            first_name = apt.line_oname.currentText()
-            last_name = apt.line_lname.currentText()
-            phone = apt.line_phone.currentText()
-            email = apt.line_email.currentText()
-            address = apt.line_address.currentText()
-            # animal_id = apt.line_aid.currentText()
-            animal_name = apt.line_aname.currentText()
-            specicies = apt.line_species.currentText()
-            breed = apt.line_breed.currentText()
-            color = apt.line_colors.currentText()
-            behaviour = apt.line_behave.currentText()
-            birth = apt.date_appt_birth.selectedDate()
-            reg_date = apt.date_appt_reg.selectedDate()
-            name = first_name + " " + last_name
-            op.add_appointment(
-                date,
-                time,
-                reason,
-                name,
-                phone,
-                address,
-                animal_name,
-                species,
-                breed,
-                color,
-                behaviour,
-                birth,
-                reg_date,
-            )
-        except Exception as err:
-            print(f"Error Fetching: {err}")
-
+    
     def create_appointment(self):
         try:
             new_animal: bool = False
@@ -1474,9 +1450,9 @@ class MainApp(QMainWindow):
 
             self.show_appointment
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(create_appointment): {err}")
 
-    def update_appointment(self):
+    def update_existing_appointment(self):
         try:
             page = self.page_appointment_modify
             current_widget = self.stackedWidget.setCurrentWidget(page)
@@ -1484,17 +1460,29 @@ class MainApp(QMainWindow):
             self.show_appointment
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(update_existing_appointment): {err}")
 
-    def delete_appointment(self):
+    def delete_existing_appointment(self):
         try:
             page = self.page_appointment
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(delete_existing_appointment): {err}")
     ################## Appointment End ####################
 
     ################## Service Start ##################
+    def clear_service_fields(self):
+        try:
+            page = self.page_service
+            page.line_service_id.clear()
+            page.line_service_name.clear()
+            page.line_service_cost.clear()
+            page.rb_service_available.setChecked(False)
+            page.rb_service_unavailable.setChecked(False)
+            page.pte_service_details.clear()
+
+        except Exception as err:
+            print(f"Error Fetching(clear_service_fields): {err}")
 
     def set_service_table(self):
         try:
@@ -1505,7 +1493,7 @@ class MainApp(QMainWindow):
                 self.add_services_to_table(row, service)
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_service_table): {err}")
     
     def add_services_to_table(self, row, service):
         try:
@@ -1524,7 +1512,7 @@ class MainApp(QMainWindow):
             self.resize_columns_to_contents(table, header)
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(set_service_table): {err}")
 
     def populate_service(self):
         try:
@@ -1548,7 +1536,8 @@ class MainApp(QMainWindow):
                     page.line_service_name.setText(service.name)
                     page.line_service_cost.setText(str(service.cost))
                     
-                    if service.service_availability == False:
+                    #if service.service_availability == True:
+                    if service.service_availability:
                         page.rb_service_available.setChecked(True)
                     else: 
                         page.rb_service_unavailable.setChecked(True)
@@ -1563,18 +1552,26 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(populate_service): {err}")
 
-    def clear_service_fields(self):
+    def add_new_service(self):
         try:
-            page = self.page_service
-            page.line_service_id.clear()
-            page.line_service_name.clear()
-            page.line_service_cost.clear()
-            page.rb_service_available.setChecked(False)
-            page.rb_service_unavailable.setChecked(False)
-            page.pte_service_details.clear()
+            ...
 
         except Exception as err:
-            print(f"Error Fetching: {err}")
+            print(f"Error Fetching(add_new_service): {err}")
+
+    def update_existing_service(self):
+        try:
+            ...
+
+        except Exception as err:
+            print(f"Error Fetching(update_existing_service): {err}")
+
+    def delete_existing_service(self):
+        try:
+            ...
+
+        except Exception as err:
+            print(f"Error Fetching(delete_existing_service): {err}")
 
     ################## Service End ##################
 
