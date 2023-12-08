@@ -114,7 +114,7 @@ FUNCTIONALITIES:
           Services-1
           Item
           Veterinarian 
-          Day Care
+          Day Care - no create for this
           Expenses - 1
 
      Edit
@@ -126,7 +126,7 @@ FUNCTIONALITIES:
           Services-1
           Item
           Veterinarian 
-          Day Care - 0
+          Day Care - 1
           Expenses - 1
 
      Delete

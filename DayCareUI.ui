@@ -125,7 +125,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="button_care_update">
+             <widget class="QPushButton" name="button_care_save">
               <property name="font">
                <font>
                 <family>Courier New</family>
@@ -136,7 +136,7 @@
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="text">
-               <string>Update</string>
+               <string>Save</string>
               </property>
              </widget>
             </item>
@@ -537,17 +537,11 @@
           <property name="sizeAdjustPolicy">
            <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
           </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>225</number>
