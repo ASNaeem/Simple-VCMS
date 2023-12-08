@@ -123,13 +123,13 @@ def update_service(service_id, name, cost, service_details, service_availability
         query = """
                 update services set
                 name = %s, cost = %s, service_details = %s,
-                service_availibility = %s where service_id = %s
+                service_availability = %s where service_id = %s
                 """
         values = (name, cost, service_details, service_availability, service_id)
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
         print("Service Updated!")
-        ...
+        
     except Exception as err:
         print(f"Sevice Update Failed!: {err}")
 

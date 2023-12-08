@@ -125,18 +125,19 @@ def add_day_care(
 def delete_day_care(id: int):
     try:
         for day_care in Day_Care_Service:
-            if id == day_care.id:
+            if id == day_care.day_Care_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from day_care where day_care_id = %s;"
-                data = day_care.id
-                mysql_handler.execute_query(query, data)
+                data = id
+                mysql_handler.execute_query(query, (data,))
                 Day_Care_Service.remove(day_care)
                 mysql_handler.disconnect()
                 print("Delete Success!")
-        print("Delete Failed!")
+            else:
+                print("Delete Failed!")
     except Exception as err:
-        print(f"Error: {err}")
+        print(f"Error Delete: {err}")
 
 
 ##################### Day Care Operations End #########################
