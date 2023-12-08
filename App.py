@@ -48,7 +48,7 @@ from Animal import (
 )
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
-from DayCareService import Day_Care_Service, fetch_day_care
+from DayCareService import Day_Care_Service, fetch_day_care, delete_day_care, add_day_care
 from Expense import Expenses, fetch_expenses, delete_expenses, update_expense_to_db
 
 
@@ -157,6 +157,8 @@ class MainApp(QMainWindow):
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
+
+        self.page_daycare.button_care_delete.clicked.connect(self.delete_from_daycare)
 
         self.page_service.button_service_cancel.clicked.connect(self.populate_service)
         self.page_service.button_service_add.clicked.connect(self.add_new_service)
@@ -1006,6 +1008,7 @@ class MainApp(QMainWindow):
     def delete_employee(self):
         try:
             page = self.page_employee
+            current_widget = self.stackedWidget.setCurrentWidget(page)
             table = page.table_employee
             selected_employee_row = table.currentRow()
             if selected_employee_row != -1:
@@ -1060,17 +1063,49 @@ class MainApp(QMainWindow):
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
+    '''def add_to_daycare(self):
+        try:
+            ...
+        except Exception as err:
+            print(f"Error Fetching (add_to_daycare): {err}")'''
+
     def search_daycare(self, text):
         try:
             table = self.page_daycare.table_care
             for row in range(table.rowCount()):
                 match = any(
-                    text.lower() in table.item(row, col).text().lower()
+                    text.lower() in (table.item(row, col).text() if table.item(row, col) else '')
                     for col in range(table.columnCount())
                 )
                 table.setRowHidden(row, not match)
         except Exception as err:
             print(f"Error Fetching(search_daycare): {err}")
+    def delete_from_daycare(self):
+        try:
+            page = self.page_daycare
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            table = page.table_care
+            selected_daycare_row = table.currentRow()
+            if selected_daycare_row != -1:
+                daycare_id = int(table.item(selected_daycare_row, 0).text())
+                table.removeRow(selected_daycare_row)
+                delete_day_care(daycare_id)
+            else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to delete!"
+                )
+        except Exception as err:
+            print(f"Error Fetching (delete_from_daycare): {err}")
+    def populate_daycare(self):
+        try:
+            ...
+        except Exception as err:
+            print(f"Error Fetching (populate_daycare): {err}")
+    def update_daycare(self):
+        try:
+            ...
+        except Exception as err:
+            print(f"Error Fetching (update_daycare): {err}")
 
     def set_day_care_table(self):
         try:
@@ -1739,7 +1774,7 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Service Delete Failed!: {err}")
 
-    ################## Service End ##################
+    ################## Service End ####################
 
     ############### Table Resize Methods ##################
     def resize_columns_to_contents_alternate(self, table):
