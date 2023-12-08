@@ -25,7 +25,7 @@ from Appointment import (
     add_appointment,
     delete_appointment,
 )
-from Service import Services, fetch_services
+from Service import Services, add_service, delete_service, update_service, fetch_services
 from Animal import (
     Animals,
     fetch_animals,
@@ -120,6 +120,7 @@ class MainApp(QMainWindow):
         self.set_day_care_table()
         self.set_expense_table()
         self.set_appointment_table()
+        self.set_service_table()
 
         ### functionalities ######
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
@@ -143,6 +144,7 @@ class MainApp(QMainWindow):
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
+        self.page_service.button_service_cancel.clicked.connect(self.populate_service)
 
         self.button_appointments.clicked.connect(self.show_appointment)
         self.page_appointment.button_app_create.clicked.connect(
@@ -406,7 +408,7 @@ class MainApp(QMainWindow):
         try:
             self.stackedWidget.setCurrentWidget(self.page_service)
             self.page_service.table_service.setCurrentCell(-1, 0)
-            self.setWindowTitle("VCMS || Dashboard || Service")
+            self.setWindowTitle("VCMS || Dashboard || Service") 
         except Exception as err:
             print(f"Error Fetching: {err}")
 
@@ -1438,6 +1440,93 @@ class MainApp(QMainWindow):
             
         except Exception as err:
             print(f"Error Fetching: {err}")
+    ################## Appointment End ####################
+
+    ################## Service Start ##################
+
+    def set_service_table(self):
+        try:
+            self.page_appointment.appointment_table_widget_2.clearContents()
+            self.page_appointment.appointment_table_widget_2.setRowCount(0)
+            fetch_services()
+            for row, service in enumerate(Services):
+                self.add_services_to_table(row, service)
+
+        except Exception as err:
+            print(f"Error Fetching: {err}")
+    
+    def add_services_to_table(self, row, service):
+        try:
+            table = self.page_service.table_service
+            header = table.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            
+            table.insertRow(row)
+
+            table.setItem(row, 0, QTableWidgetItem(str(service.service_id)))
+            table.setItem(row, 1, QTableWidgetItem(service.name))
+            table.setItem(row, 2, QTableWidgetItem(str(service.cost)))
+            table.setItem(row, 3, QTableWidgetItem(str(service.service_availability)))
+            table.setItem(row, 4, QTableWidgetItem(service.service_details))
+
+            self.resize_columns_to_contents(table, header)
+
+        except Exception as err:
+            print(f"Error Fetching: {err}")
+
+    def populate_service(self):
+        try:
+            #service = None
+            if self.page_service.button_service_cancel.text() == "Enable Edit":
+                self.page_service.button_service_cancel.setText("Cancel Edit")
+                self.page_service.button_service_add.setEnabled(False)
+                selected_item = self.page_service.table_service.selectedItems()
+                #service = None
+                if selected_item:
+                    service_id = int(selected_item[0].text())
+                    service = None
+                    for srv in Services:
+                        if srv.service_id == service_id:
+                            service = srv
+                            break
+
+                    page = self.page_service
+
+                    page.line_service_id.setText(str(service.service_id))
+                    page.line_service_name.setText(service.name)
+                    page.line_service_cost.setText(str(service.cost))
+                    
+                    if service.service_availability == False:
+                        page.rb_service_available.setChecked(True)
+                    else: 
+                        page.rb_service_unavailable.setChecked(True)
+
+                    page.pte_service_details.setPlainText(service.service_details)
+
+            else:
+                self.page_service.button_service_cancel.setText("Enable Edit")
+                self.clear_service_fields()
+                self.page_service.button_service_add.setEnabled(True)
+
+        except Exception as err:
+            print(f"Error Fetching(populate_service): {err}")
+
+    def clear_service_fields(self):
+        try:
+            page = self.page_service
+            page.line_service_id.clear()
+            page.line_service_name.clear()
+            page.line_service_cost.clear()
+            page.rb_service_available.setChecked(False)
+            page.rb_service_unavailable.setChecked(False)
+            page.pte_service_details.clear()
+
+        except Exception as err:
+            print(f"Error Fetching: {err}")
+
+    ################## Service End ##################
+
+
 
     ############### Table Resize Methods ##################
     def resize_columns_to_contents_alternate(self, table):
