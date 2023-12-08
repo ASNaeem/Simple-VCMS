@@ -1690,39 +1690,38 @@ class MainApp(QMainWindow):
 
     def populate_service(self):
         try:
-            # service = None
-            if self.page_service.button_service_cancel.text() == "Enable Edit":
+            # service = None           
+            selected_item = self.page_service.table_service.selectedItems()
+              # service = None
+            if selected_item and self.page_service.button_service_cancel.text() == "Enable Edit":    
                 self.page_service.button_service_cancel.setText("Cancel Edit")
                 self.page_service.button_service_add.setEnabled(False)
-                selected_item = self.page_service.table_service.selectedItems()
-                # service = None
-                if selected_item:
-                    service_id = int(selected_item[0].text())
-                    service = None
-                    for srv in Services:
-                        if srv.service_id == service_id:
-                            service = srv
-                            break
+                service_id = int(selected_item[0].text())
+                service = None
+                for srv in Services:
+                    if srv.service_id == service_id:
+                        service = srv
+                        break
 
-                    page = self.page_service
+                page = self.page_service
 
-                    page.line_service_id.setText(str(service.service_id))
-                    page.line_service_name.setText(service.name)
-                    page.line_service_cost.setText(str(service.cost))
+                page.line_service_id.setText(str(service.service_id))
+                page.line_service_name.setText(service.name)
+                page.line_service_cost.setText(str(service.cost))
 
-                    # if service.service_availability == True:
-                    if service.service_availability:
-                        page.rb_service_available.setChecked(True)
-                    else:
-                        page.rb_service_unavailable.setChecked(True)
+                # if service.service_availability == True:
+                if service.service_availability:
+                    page.rb_service_available.setChecked(True)
+                else:
+                    page.rb_service_unavailable.setChecked(True)
 
-                    page.pte_service_details.setPlainText(service.service_details)
+                page.pte_service_details.setPlainText(service.service_details)
 
             else:
                 self.page_service.button_service_cancel.setText("Enable Edit")
                 self.clear_service_fields()
                 self.page_service.button_service_add.setEnabled(True)
-
+                self.show_service()
         except Exception as err:
             print(f"Error Fetching(populate_service): {err}")
 
@@ -1755,7 +1754,7 @@ class MainApp(QMainWindow):
         try:
             selected_item = self.page_service.table_service.selectedItems()
             if selected_item:
-                id = int(selected_item[0].text())
+                service_id = int(selected_item[0].text())
 
                 page = self.page_service
 
@@ -1767,13 +1766,13 @@ class MainApp(QMainWindow):
                 elif page.rb_service_unavailable.isChecked():
                     availability = "No"
 
-                update_service(id, name, cost, details, availability)
+                update_service(service_id, name, cost, details, availability)
                 self.clear_service_fields()
-                self.set_service_table()
-            
+                self.show_service()        
+                self.page_service.button_service_add.setEnabled(True)
+                self.page_service.button_service_cancel.setText("Enable Edit")
             else:
                 print("Select a Row!")
-
         except Exception as err:
             print(f"Error Fetching(update_existing_service): {err}")
 
@@ -1782,7 +1781,7 @@ class MainApp(QMainWindow):
             page = self.page_service
             table = page.table_service
             current_widget = self.stackedWidget.setCurrentWidget(page)
-            selected_service_row = table.currentRow
+            selected_service_row = table.currentRow()
             
             if selected_service_row != -1:
                 service_id = int(table.item(selected_service_row, 0).text())
