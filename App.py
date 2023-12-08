@@ -48,7 +48,12 @@ from Animal import (
 )
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
-from DayCareService import Day_Care_Service, fetch_day_care, delete_day_care, add_day_care
+from DayCareService import (
+    Day_Care_Service,
+    fetch_day_care,
+    delete_day_care,
+    add_day_care,
+)
 from Expense import Expenses, fetch_expenses, delete_expenses, update_expense_to_db
 
 
@@ -64,15 +69,13 @@ class MainApp(QMainWindow):
         self.setWindowIcon(QtGui.QIcon("resources/windowIcon.png"))
         uic.loadUi("MainUI.ui", self)
 
+        # self.page_animal = uic.loadUi("AnimalUI.ui")
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
         self.page_appointment_create = uic.loadUi("AppointmentCreateUI.ui")
         self.page_appointment_modify = uic.loadUi("AppointmentModifyUI.ui")
-
-        # self.page_animal = uic.loadUi("AnimalUI.ui")
         self.page_animal_info = uic.loadUi("AnimalInformationUI.ui")
         self.page_animal_reg = uic.loadUi("AnimalRegistrationUI.ui")
         self.page_animal_details = uic.loadUi("AnimalDetailsUI.ui")
-
         self.page_inventory = uic.loadUi("InventoryUI.ui")
         self.page_setting = uic.loadUi("SettingUI.ui")
         self.page_support = uic.loadUi("SupportUI.ui")
@@ -83,15 +86,13 @@ class MainApp(QMainWindow):
         self.page_billing = uic.loadUi("BillingUI.ui")
         self.page_expenses = uic.loadUi("ExpensesUI.ui")
 
+        # self.stackedWidget.addWidget(self.page_animal)
         self.stackedWidget.addWidget(self.page_appointment)
         self.stackedWidget.addWidget(self.page_appointment_create)
         self.stackedWidget.addWidget(self.page_appointment_modify)
-
-        # self.stackedWidget.addWidget(self.page_animal)
         self.stackedWidget.addWidget(self.page_animal_info)
         self.stackedWidget.addWidget(self.page_animal_reg)
         self.stackedWidget.addWidget(self.page_animal_details)
-
         self.stackedWidget.addWidget(self.page_inventory)
         self.stackedWidget.addWidget(self.page_daycare)
         self.stackedWidget.addWidget(self.page_billing)
@@ -104,15 +105,6 @@ class MainApp(QMainWindow):
 
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
-        self.page_animal_info.button_animal_reg.clicked.connect(self.show_animal_reg)
-        self.page_animal_reg.button_reg_back.clicked.connect(self.show_animal_info)
-        self.page_animal_info.button_animal_details.clicked.connect(
-            self.show_animal_details
-        )
-        self.page_animal_details.button_animal_back.clicked.connect(
-            self.show_animal_info
-        )
-        self.page_animal_reg.button_reg.clicked.connect(self.show_animal_info)
         self.button_daycare.clicked.connect(self.show_daycare)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_analytics.clicked.connect(self.show_analytics_report)
@@ -122,11 +114,12 @@ class MainApp(QMainWindow):
         self.button_setting.clicked.connect(self.show_setting)
         self.button_support.clicked.connect(self.show_support)
         self.button_billing.clicked.connect(self.show_billing)
-        # self.page_animal.button_animal_register_new.clicked.connect(self.show_animal_reg)
-        # self.page_animal.button_reg_back.clicked.connect(self.show_animal_)
+        self.button_appointments.clicked.connect(self.show_appointment)
+
         self.page_setting.comboBox_themes.addItems(list_themes())
         self.page_setting.comboBox_themes.activated[str].connect(self.change_theme)
         # self.change_theme()
+
         self.set_animal_table()
         self.set_bill_table()
         self.set_employee_table()
@@ -136,10 +129,22 @@ class MainApp(QMainWindow):
         self.set_service_table()
 
         ##################### functionalities ###################################
+        # self.page_animal.button_animal_register_new.clicked.connect(self.show_animal_reg)
+        # self.page_animal.button_reg_back.clicked.connect(self.show_animal_)
+        self.page_animal_info.button_animal_reg.clicked.connect(self.show_animal_reg)
+        self.page_animal_reg.button_reg_back.clicked.connect(self.show_animal_info)
+        self.page_animal_info.button_animal_details.clicked.connect(
+            self.show_animal_details
+        )
+        self.page_animal_details.button_animal_back.clicked.connect(
+            self.show_animal_info
+        )
+        self.page_animal_reg.button_reg.clicked.connect(self.show_animal_info)
         self.page_animal_details.button_add_record.clicked.connect(self.add_record)
         self.page_animal_details.button_record_delete.clicked.connect(
             self.delete_record
         )
+
         self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
         self.page_expenses.button_expense_delete.clicked.connect(self.delete_expense)
         self.page_expenses.button_expense_add.clicked.connect(self.create_new_expense)
@@ -158,10 +163,12 @@ class MainApp(QMainWindow):
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
-        self.page_daycare.button_care_delete.clicked.connect(self.delete_from_daycare)
-
-        self.page_service.button_service_cancel.clicked.connect(self.populate_service)
-        self.page_service.button_service_add.clicked.connect(self.add_new_service)
+        self.page_service.button_service_cancel.clicked.connect(
+            self.populate_service
+        )
+        self.page_service.button_service_add.clicked.connect(
+            self.add_new_service
+        )
         self.page_service.button_service_save.clicked.connect(
             self.update_existing_service
         )
@@ -169,7 +176,6 @@ class MainApp(QMainWindow):
             self.delete_existing_service
         )
 
-        self.button_appointments.clicked.connect(self.show_appointment)
         self.page_appointment.button_app_create.clicked.connect(
             self.show_appointment_create
         )
@@ -188,23 +194,37 @@ class MainApp(QMainWindow):
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
             self.checkbox_state_changed
         )
-
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
-        self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
-        self.page_expenses.line_expense_search.textChanged.connect(self.search_expense)
-        self.page_employee.line_search_6.textChanged.connect(self.search_employee)
-        self.page_daycare.line_care_search.textChanged.connect(self.search_daycare)
+
+        self.page_daycare.button_care_delete.clicked.connect(self.delete_from_daycare)
+        self.page_daycare.button_care_edit.clicked.connect(self.populate_daycare)
+
+        self.page_animal_info.line_animal_search.textChanged.connect(
+            self.search_animal
+        )
+        self.page_expenses.line_expense_search.textChanged.connect(
+            self.search_expense
+        )
+        self.page_employee.line_search_6.textChanged.connect(
+            self.search_employee
+        )
+        self.page_daycare.line_care_search.textChanged.connect(
+            self.search_daycare
+        )
         self.page_appointment.line_appointment_search.textChanged.connect(
             self.search_appointment
         )
-
-        self.page_daycare.button_care_edit.clicked.connect(self.populate_daycare)
-
-        self.page_billing.line_bill_search.textChanged.connect(self.search_bill)
-        self.page_service.line_service_search.textChanged.connect(self.search_service)
-        self.page_inventory.line_inventory_search.textChanged.connect(self.search_Item)
+        self.page_billing.line_bill_search.textChanged.connect(
+            self.search_bill
+        )
+        self.page_service.line_service_search.textChanged.connect(
+            self.search_service
+        )
+        self.page_inventory.line_inventory_search.textChanged.connect(
+            self.search_Item
+        )
         ##################### End Init #####################
 
     def search_Item(self, text):
@@ -1009,6 +1029,7 @@ class MainApp(QMainWindow):
             mysql_handler.disconnect()
             print("Entry Success!")
             self.clear_employee_fields()
+
             self.set_employee_table()
         except Exception as err:
             print(f"Employee Entry Failed: {err}")
@@ -1059,14 +1080,14 @@ class MainApp(QMainWindow):
             table.setItem(row, 8, QTableWidgetItem(str(employee.salary)))
             table.setItem(row, 9, QTableWidgetItem(str(employee.joining_date)))
             table.setItem(row, 10, QTableWidgetItem(str(employee.employee_status)))
-            """self.resize_columns_to_contents_alternate(table)
+            self.resize_columns_to_contents_alternate(table)
             table.resizeColumnToContents(0)
             table.resizeColumnToContents(6)
             table.resizeColumnToContents(7)
             table.resizeColumnToContents(8)
             table.resizeColumnToContents(9)
-            table.resizeColumnToContents(10)"""
-            self.resize_columns_to_contents_alternate2(table)
+            table.resizeColumnToContents(10)
+            # self.resize_columns_to_contents_alternate2(table)
         except Exception as err:
             print(f"Error Fetching(add_employee_to_table): {err}")
 
@@ -1104,6 +1125,7 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(search_daycare): {err}")
 
+
     def delete_from_daycare(self):
         try:
             page = self.page_daycare
@@ -1120,6 +1142,7 @@ class MainApp(QMainWindow):
                 )
         except Exception as err:
             print(f"Error Fetching (delete_from_daycare): {err}")
+
 
     def populate_daycare(self):
         try:
@@ -1151,6 +1174,7 @@ class MainApp(QMainWindow):
                 self.show_daycare()
         except Exception as err:
             print(f"Error Fetching (populate_daycare): {err}")
+
 
     def update_daycare(self):
         try:
@@ -1192,7 +1216,7 @@ class MainApp(QMainWindow):
             table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
             table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
             table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
-            self.resize_columns_to_contents(table, header)
+            self.resize_columns_to_contents_alternate2(table)
 
         except Exception as err:
             print(f"Error Fetching(add_day_care_to_table): {err}")
@@ -1244,14 +1268,12 @@ class MainApp(QMainWindow):
                     for ex in Expenses:
                         if ex.expense_id == expense_id:
                             expense = ex
-                            # print("populate expense 0")
                             break
 
                 page.line_expense_id.setText(str(expense.expense_id))
                 page.line_issuer_id.setText(str(expense.issuer_id))
                 jdate = QDate.fromString(expense.expense_date, "yyyy-MM-dd")
                 page.date_issue.setDate(jdate)
-                # print("populate expense")
                 employee_name = self.get_employee_name_by_id(expense.handler_id)
                 if employee_name is not None:
                     employee_info = f"{employee_name} ({expense.handler_id})"
@@ -1262,7 +1284,6 @@ class MainApp(QMainWindow):
 
                 page.line_amount.setText(str(expense.amount))
                 page.text_justification.setPlainText(expense.justification)
-                # print("populate expense 2")
             else:
                 page.button_expense_edit.setText("Enable Edit")
                 self.clear_expense_fields()
@@ -1432,6 +1453,7 @@ class MainApp(QMainWindow):
             self.page_billing.table_bill.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_bill_table): {err}")
+
     def get_service_details(self, service_ids, services):
         try:
             return [
@@ -1722,12 +1744,17 @@ class MainApp(QMainWindow):
             table.insertRow(row)
 
             table.setItem(row, 0, QTableWidgetItem(str(service.service_id)))
+            # header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 1, QTableWidgetItem(service.name))
+            # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 2, QTableWidgetItem(str(service.cost)))
+            # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 3, QTableWidgetItem(str(service.service_availability)))
+            # header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 4, QTableWidgetItem(service.service_details))
+            # header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
 
-            self.resize_columns_to_contents(table, header)
+            self.resize_columns_to_contents_alternate2(table)
 
         except Exception as err:
             print(f"Error (add_service_to_table): {err}")
@@ -1787,7 +1814,7 @@ class MainApp(QMainWindow):
                     current_widget, "Warning! Please fill in all fields."
                 )
                 return
-            
+
             add_service(name, cost, details, availability)
             self.clear_service_fields()
             self.show_service()
@@ -1813,7 +1840,7 @@ class MainApp(QMainWindow):
 
                 update_service(service_id, name, cost, details, availability)
                 self.clear_service_fields()
-                self.show_service()        
+                self.show_service()
                 self.page_service.button_service_add.setEnabled(True)
                 self.page_service.button_service_cancel.setText("Enable Edit")
             else:
@@ -1827,16 +1854,14 @@ class MainApp(QMainWindow):
             table = page.table_service
             current_widget = self.stackedWidget.setCurrentWidget(page)
             selected_service_row = table.currentRow()
-            
+
             if selected_service_row != -1:
                 service_id = int(table.item(selected_service_row, 0).text())
                 table.removeRow(selected_service_row)
                 delete_service(service_id)
 
             else:
-                QMessageBox.warning(
-                    current_widget, "Warning! Select a row to delete."
-                )
+                QMessageBox.warning(current_widget, "Warning! Select a row to delete.")
 
         except Exception as err:
             print(f"Service Delete Failed!: {err}")
