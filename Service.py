@@ -15,12 +15,9 @@ class Service:
     def service_id(self):
         return self._service_id
 
-    """
     @service_id.setter
     def service_id(self, service_id:int):
-        self._service_id = service_id      
-    
-    """
+        self._service_id = service_id
 
     @property
     def name(self):
@@ -69,7 +66,7 @@ def fetch_services():
         data = mysql_handler.fetch_data(query)
 
         for row in data:
-            services = Services(
+            services = Service(
                 name=row[1],
                 cost=float(row[2]),
                 service_details=row[3],
