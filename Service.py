@@ -2,7 +2,7 @@ from MySQLHandler import MySQLHandler
 
 class Service:
     def __init__(
-        self, name: str, cost: float, service_details: str, service_availability: bool
+        self, name: str, cost: float, service_details: str, service_availability: str
     ):
         self.service_id = None
         self.name = name
@@ -40,7 +40,7 @@ class Service:
         return self._service_availability
 
     @service_availability.setter
-    def service_availability(self, service_availability: bool):
+    def service_availability(self, service_availability: str):
         self._service_availability = service_availability
 
     @property
@@ -71,7 +71,7 @@ def fetch_services():
                 name=row[1],
                 cost=float(row[2]),
                 service_details=row[3],
-                service_availability=bool(row[4]),
+                service_availability=row[4],
             )
             services.service_id = int(row[0])
             Services.append(services)

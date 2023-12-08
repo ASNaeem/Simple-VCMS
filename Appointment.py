@@ -93,6 +93,7 @@ Appointments = []
 
 def fetch_appointment():
     try:
+        Appointments.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select ap.appointment_id, ap.animal_id, an.owner_name, an.phone, an.species, ap.a_date, ap.a_time, ap.visit_reason, ap.a_status from animals an join appointments ap on an.animal_id = ap.animal_id;"

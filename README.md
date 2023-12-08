@@ -136,7 +136,6 @@ FUNCTIONALITIES:
           Employee - 1
           Billing
           Services-1
-          Item
           Veterinarian 
           Day Care - 1
           Expenses - 1
@@ -147,7 +146,6 @@ FUNCTIONALITIES:
           Employee - 1
           Billing
           Services-1
-          Item
           Veterinarian 
           Day Care - 1
           Expenses - 1
@@ -159,7 +157,6 @@ FUNCTIONALITIES:
           Employee-1
           Billing-1
           Services-1
-          Item-0(If there's time)
           Veterinarian-0 
           Day Care-1
           Expenses-1
