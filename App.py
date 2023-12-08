@@ -156,8 +156,6 @@ class MainApp(QMainWindow):
         )
         self.page_animal_details.button_animal_save.clicked.connect(self.update_animal)
 
-        self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
-
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
@@ -509,6 +507,7 @@ class MainApp(QMainWindow):
             combo_box.completer().setCompletionMode(
                 QtWidgets.QCompleter.PopupCompletion
             )
+            self.set_expense_table()
         except Exception as err:
             print(f"Error Fetching(show_expenses): {err}")
 
@@ -1224,18 +1223,16 @@ class MainApp(QMainWindow):
     def populate_expense(self):
         try:
             page = self.page_expenses
-            if page.button_expense_edit.text() == "Enable Edit":
+            selected_item = page.table_expense.selectedItems()
+            if selected_item and page.button_expense_edit.text() == "Enable Edit":
                 page.button_expense_edit.setText("Cancel")
                 page.button_expense_add.setEnabled(False)
-                selected_item = page.table_expense.selectedItems()
-                if selected_item:
-                    expense_id = int(selected_item[0].text())
-                    expense = None
-                    for ex in Expenses:
-                        if ex.expense_id == expense_id:
-                            expense = ex
-                            break
-
+                expense_id = int(selected_item[0].text())
+                expense = None
+                for ex in Expenses:
+                    if ex.expense_id == expense_id:
+                        expense = ex
+                        break
                 page.line_expense_id.setText(str(expense.expense_id))
                 page.line_issuer_id.setText(str(expense.issuer_id))
                 jdate = QDate.fromString(expense.expense_date, "yyyy-MM-dd")
@@ -1254,8 +1251,7 @@ class MainApp(QMainWindow):
                 page.button_expense_edit.setText("Enable Edit")
                 self.clear_expense_fields()
                 page.button_expense_add.setEnabled(True)
-                # print("populate expense 4")
-            #### need fixing ####
+                self.show_expenses()
         except Exception as err:
             print(f"Error Populating data: {err}")
 
@@ -1331,7 +1327,7 @@ class MainApp(QMainWindow):
                 expense_date_obj = datetime.strptime(
                     str(expense_date), "%Y-%m-%d"
                 ).date()
-
+                print("testing the update expense!")
                 handler_info = page.comboBox.currentText()
                 start_index = handler_info.find("(")
                 end_index = handler_info.find(")")
@@ -1351,7 +1347,10 @@ class MainApp(QMainWindow):
                     amount,
                     justification,
                 )
-                self.set_expense_table()
+                self.clear_expense_fields()
+                self.show_expenses()
+                page.button_expense_edit.setText("Enable Edit")
+                page.button_expense_add.setEnabled(True)
             else:
                 QMessageBox.warning(
                     current_widget, "Warning", "Select a record to edit!"

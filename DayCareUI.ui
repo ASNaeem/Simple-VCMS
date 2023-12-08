@@ -564,16 +564,6 @@
           </column>
           <column>
            <property name="text">
-            <string>Species</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Owner Name</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
             <string>Date</string>
            </property>
           </column>

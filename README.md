@@ -127,7 +127,7 @@ FUNCTIONALITIES:
           Item
           Veterinarian 
           Day Care - 0
-          Expenses - 0.5
+          Expenses - 1
 
      Delete
           Appointment-
@@ -149,8 +149,8 @@ FUNCTIONALITIES:
           Services-1
           Item
           Veterinarian 
-          Day Care - 0.5
-          Expenses - 0.5
+          Day Care - 1
+          Expenses - 1
 
      Populate in Table
           Appointment-1
