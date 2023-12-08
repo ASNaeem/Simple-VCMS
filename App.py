@@ -48,7 +48,12 @@ from Animal import (
 )
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
-from DayCareService import Day_Care_Service, fetch_day_care, delete_day_care, add_day_care
+from DayCareService import (
+    Day_Care_Service,
+    fetch_day_care,
+    delete_day_care,
+    add_day_care,
+)
 from Expense import Expenses, fetch_expenses, delete_expenses, update_expense_to_db
 
 
@@ -1001,6 +1006,7 @@ class MainApp(QMainWindow):
             mysql_handler.disconnect()
             print("Entry Success!")
             self.clear_employee_fields()
+
             self.set_employee_table()
         except Exception as err:
             print(f"Employee Entry Failed: {err}")
@@ -1049,37 +1055,48 @@ class MainApp(QMainWindow):
             table.setItem(row, 8, QTableWidgetItem(str(employee.salary)))
             table.setItem(row, 9, QTableWidgetItem(str(employee.joining_date)))
             table.setItem(row, 10, QTableWidgetItem(str(employee.employee_status)))
-            """self.resize_columns_to_contents_alternate(table)
+            self.resize_columns_to_contents_alternate(table)
             table.resizeColumnToContents(0)
             table.resizeColumnToContents(6)
             table.resizeColumnToContents(7)
             table.resizeColumnToContents(8)
             table.resizeColumnToContents(9)
-            table.resizeColumnToContents(10)"""
-            self.resize_columns_to_contents_alternate2(table)
+            table.resizeColumnToContents(10)
+            # self.resize_columns_to_contents_alternate2(table)
         except Exception as err:
             print(f"Error Fetching(add_employee_to_table): {err}")
 
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
-    '''def add_to_daycare(self):
+    """def add_to_daycare(self):
         try:
             ...
         except Exception as err:
-            print(f"Error Fetching (add_to_daycare): {err}")'''
+            print(f"Error Fetching (add_to_daycare): {err}")"""
+
+    def clear_daycare_fields(self):
+        page = self.page_daycare
+        page.line_care_id.clear()
+        page.line_animal_id.clear()
+        page.date_care.setDate(QDate(2000, 1, 1))
+        page.time_care_start.setTime(QTime())
+        page.time_care_end.setTime(QTime())
+        page.text_care_notes.clear()
 
     def search_daycare(self, text):
         try:
             table = self.page_daycare.table_care
             for row in range(table.rowCount()):
                 match = any(
-                    text.lower() in (table.item(row, col).text() if table.item(row, col) else '')
+                    text.lower()
+                    in (table.item(row, col).text() if table.item(row, col) else "")
                     for col in range(table.columnCount())
                 )
                 table.setRowHidden(row, not match)
         except Exception as err:
             print(f"Error Fetching(search_daycare): {err}")
+
     def delete_from_daycare(self):
         try:
             page = self.page_daycare
@@ -1096,33 +1113,37 @@ class MainApp(QMainWindow):
                 )
         except Exception as err:
             print(f"Error Fetching (delete_from_daycare): {err}")
+
     def populate_daycare(self):
         try:
             page = self.page_daycare
-            if page.button_care_edit.text() == "Enable Edit":
+            selected_item = page.table_care.selectedItems()
+            if selected_item and page.button_care_edit.text() == "Enable Edit":
                 page.button_care_edit.setText("Cancel")
                 page.button_care_details.setEnabled(False)
-                selected_item = page.table_care.selectedItems()
-                if selected_item:
-                    day_care_id = int(selected_item[0].text())
-                    daycare = None
-                    for care in Day_Care_Service:
-                        if care.day_Care_id == day_care_id:
-                            daycare = care
-                            break
+                day_care_id = int(selected_item[0].text())
+                daycare = None
+                for care in Day_Care_Service:
+                    if care.day_Care_id == day_care_id:
+                        daycare = care
+                        break
                 page.line_care_id.setText(daycare.day_care_date)
                 page.line_animal_id.setText(daycare.animal_id)
-
-                jdate = QDate.fromString(daycare.day_care_date, "yyyy-MM-dd")
+                jdate = QDate.fromString(str(daycare.day_care_date), "yyyy-MM-dd")
                 page.date_care.setDate(jdate)
-
-                page.time_care_start
-                page.time_care_end
+                qtime_start = QTime.fromString(str(daycare.start_time), "hh:mm:ss")
+                page.time_care_start.setTime(qtime_start)
+                qtime_end = QTime.fromString(str(daycare.end_time), "hh:mm:ss")
+                page.time_care_end.setTime(qtime_end)
                 page.text_care_notes.setPlainText(daycare.notes)
-
-
+            else:
+                page.button_care_edit.setText("Enable Edit")
+                self.clear_daycare_fields()
+                page.button_care_details.setEnabled(True)
+                self.show_daycare()
         except Exception as err:
             print(f"Error Fetching (populate_daycare): {err}")
+
     def update_daycare(self):
         try:
             ...
@@ -1161,7 +1182,7 @@ class MainApp(QMainWindow):
             table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
             table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
             table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
-            self.resize_columns_to_contents(table, header)
+            self.resize_columns_to_contents_alternate2(table)
 
         except Exception as err:
             print(f"Error Fetching(add_day_care_to_table): {err}")
@@ -1395,6 +1416,7 @@ class MainApp(QMainWindow):
                     self.add_billing_service_to_service_table(rowService, service)
         except Exception as err:
             print(f"Error Fetching(set_bill_table): {err}")
+
     def get_service_details(self, service_ids, services):
         try:
             return [
@@ -1673,27 +1695,35 @@ class MainApp(QMainWindow):
         try:
             table = self.page_service.table_service
             header = table.horizontalHeader()
-            header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
             table.insertRow(row)
 
             table.setItem(row, 0, QTableWidgetItem(str(service.service_id)))
+            # header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 1, QTableWidgetItem(service.name))
+            # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 2, QTableWidgetItem(str(service.cost)))
+            # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 3, QTableWidgetItem(str(service.service_availability)))
+            # header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 4, QTableWidgetItem(service.service_details))
+            # header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
 
-            self.resize_columns_to_contents(table, header)
+            self.resize_columns_to_contents_alternate2(table)
 
         except Exception as err:
             print(f"Error (add_service_to_table): {err}")
 
     def populate_service(self):
         try:
-            # service = None           
+            # service = None
             selected_item = self.page_service.table_service.selectedItems()
-              # service = None
-            if selected_item and self.page_service.button_service_cancel.text() == "Enable Edit":    
+            # service = None
+            if (
+                selected_item
+                and self.page_service.button_service_cancel.text() == "Enable Edit"
+            ):
                 self.page_service.button_service_cancel.setText("Cancel Edit")
                 self.page_service.button_service_add.setEnabled(False)
                 service_id = int(selected_item[0].text())
@@ -1742,7 +1772,7 @@ class MainApp(QMainWindow):
                     current_widget, "Warning! Please fill in all fields."
                 )
                 return
-            
+
             add_service(name, cost, details, availability)
             self.clear_service_fields()
             self.show_service()
@@ -1768,7 +1798,7 @@ class MainApp(QMainWindow):
 
                 update_service(service_id, name, cost, details, availability)
                 self.clear_service_fields()
-                self.show_service()        
+                self.show_service()
                 self.page_service.button_service_add.setEnabled(True)
                 self.page_service.button_service_cancel.setText("Enable Edit")
             else:
@@ -1782,16 +1812,14 @@ class MainApp(QMainWindow):
             table = page.table_service
             current_widget = self.stackedWidget.setCurrentWidget(page)
             selected_service_row = table.currentRow()
-            
+
             if selected_service_row != -1:
                 service_id = int(table.item(selected_service_row, 0).text())
                 table.removeRow(selected_service_row)
                 delete_service(service_id)
 
             else:
-                QMessageBox.warning(
-                    current_widget, "Warning! Select a row to delete."
-                )
+                QMessageBox.warning(current_widget, "Warning! Select a row to delete.")
 
         except Exception as err:
             print(f"Service Delete Failed!: {err}")
