@@ -138,7 +138,7 @@ FUNCTIONALITIES:
           Services
           Item
           Veterinarian 
-          Day Care
+          Day Care - 1
           Expenses - 1
 
      Populate in Fields
