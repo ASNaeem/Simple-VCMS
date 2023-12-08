@@ -85,6 +85,7 @@ Expenses = []
 
 def fetch_expenses():
     try:
+        Expenses.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from expenses;"

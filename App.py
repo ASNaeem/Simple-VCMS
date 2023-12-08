@@ -170,8 +170,14 @@ class MainApp(QMainWindow):
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
+        self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
         ##################### End Init #####################
-
+    def search_animal(self, text):
+        table = self.page_animal_info.table_animal
+        for row in range(table.rowCount()):
+            match = any(text.lower() in table.item(row, col).text().lower() for col in range(table.columnCount()))
+            table.setRowHidden(row, not match)
+    
     def add_record(self):
         try:
             page = self.page_animal_details
@@ -1351,7 +1357,7 @@ class MainApp(QMainWindow):
             page = self.page_appointment_create
             current_widget = self.stackedWidget.setCurrentWidget(page)
 
-            if chk_box_new_animal.isChecked():
+            if page.chk_box_new_animal.isChecked():
                 new_animal = True
 
                 animal_name = page.comboBox_animal_id.currentItem()
@@ -1403,8 +1409,8 @@ class MainApp(QMainWindow):
                 ):
                     QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
                 return
-                add_animal(animal_name, birth_date_obj, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, med_condition)
-            
+                animal_id = add_animal(animal_name, birth_date_obj, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, med_condition)
+                #there's your id, continue the work ;-;
                 #How do i get animal id for appointment table? I just inserted the new animal in database
                 #Even if I fetch animal list, how will I get our desired animal id?
                 ...
@@ -1412,7 +1418,7 @@ class MainApp(QMainWindow):
             else:
                 ...
 
-            if chk_box_day_care.isChecked():
+            if page.chk_box_day_care.isChecked():
                 day_care = True
                 ...
             
