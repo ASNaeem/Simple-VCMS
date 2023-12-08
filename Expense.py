@@ -83,6 +83,7 @@ class Expense:
 
 Expenses = []
 
+
 def fetch_expenses():
     try:
         Expenses.clear()
@@ -101,7 +102,7 @@ def fetch_expenses():
             )
             expense.expense_id = int(row[0])
             Expenses.append(expense)
-        #print("after for loop tesing")
+        # print("after for loop tesing")
         mysql_handler.disconnect()
 
     except Exception as err:
@@ -133,6 +134,7 @@ def add_expense(
     except Exception as err:
         print(f"Entry Failed: {err}")
 
+
 def delete_expenses(id: int):
     try:
         for expense in Expenses:
@@ -148,3 +150,34 @@ def delete_expenses(id: int):
                 break
     except Exception as err:
         print(f"Error: {err}")
+
+
+def update_expense_to_db(
+    self,
+    expense_id: int,
+    issuer_id: int,
+    handler_id: int,
+    expense_date_obj: str,
+    handle_date_obj: str,
+    amount: float,
+    justification: str,
+):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+
+        query = "UPDATE expenses SET  handler_id = %s, issuer_id = %s, expense_date = %s, handler_date = %s, amount = %s, justification = %s where expense_id = %s;"
+        values = (
+            handler_id,
+            issuer_id,
+            expense_date_obj,
+            handle_date_obj,
+            amount,
+            justification,
+        )
+        mysql_handler.execute_query(querry, values)
+        mysql_handler.disconnect()
+        print("Expense Information Updated!")
+
+    except Exception as err:
+        print(f"Expense Update Failed: {err}")

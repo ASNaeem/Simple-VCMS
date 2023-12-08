@@ -596,7 +596,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="button_bill_save">
+                 <widget class="QPushButton" name="button_expense_save">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
