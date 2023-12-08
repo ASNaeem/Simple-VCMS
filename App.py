@@ -1711,8 +1711,8 @@ class MainApp(QMainWindow):
                     availability = "No"
 
                 update_service(id, name, cost, details, availability)
-                self.clear_service_fields
-                self.set_service_table
+                self.clear_service_fields()
+                self.set_service_table()
             
             else:
                 print("Select a Row!")
