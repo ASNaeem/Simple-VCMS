@@ -1575,7 +1575,25 @@ class MainApp(QMainWindow):
 
     def add_new_service(self):
         try:
-            ...
+            page = self.page_service
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            name = page.line_service_name.text()
+            cost = float(page.line_service_cost.text())
+            details = page.pte_service_details.toPlainText()
+            if page.rb_service_available.isChecked():
+                availability = "Yes"
+            elif page.rb_service_unavailable.isChecked():
+                availability = "No"
+
+            if not all([name, cost, availability, details]):
+                QMessageBox.warning(
+                    current_widget, "Warning! Please fill in all fields."
+                )
+                return
+            
+            add_service(name, cost, details, availability)
+            self.clear_service_fields
+            self.set_service_table
 
         except Exception as err:
             print(f"Error Fetching(add_new_service): {err}")

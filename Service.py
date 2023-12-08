@@ -60,6 +60,7 @@ Services = []
 
 def fetch_services():
     try:
+        Services.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from services"
@@ -81,21 +82,21 @@ def fetch_services():
 
 
 def add_service(
-    name: str, cost: float, service_details: str, service_availability: bool
+    name: str, cost: float, service_details: str, service_availability: str
 ):
     try:
         new_service = Service(name, cost, service_details, service_availability)
         Services.append(new_service)
 
-        query = "insert into services (name, cost, service_details, service_availibility) values(%s,%s,%s,%s)"
+        query = "insert into services (name, cost, service_details, service_availability) values(%s,%s,%s,%s)"
         values = (name, cost, service_details, service_availability)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
-        print("Entry Success!")
+        print("Service Entry Success!")
     except Exception as err:
-        print(f"Error: {err}")
+        print(f"Error(add_service): {err}")
 
 
 def delete_service(id: int):
