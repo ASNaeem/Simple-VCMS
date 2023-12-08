@@ -326,8 +326,10 @@ def add_animal(
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
-        return "Entry Success!"
+        print("Entry Success!")
+        last_id = mysql_handler.fetch_data("Select LAST_INSERT_ID()")[0][0]
         mysql_handler.disconnect()
+        return last_id
     except Exception as err:
         return "Entry Failed!"
 
