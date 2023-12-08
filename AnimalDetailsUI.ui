@@ -799,11 +799,17 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::SingleSelection</enum>
               </property>
               <property name="selectionBehavior">
                <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
               </property>
               <attribute name="horizontalHeaderDefaultSectionSize">
                <number>290</number>
@@ -967,7 +973,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="button_group_gender"/>
   <buttongroup name="button_group_sterilized"/>
+  <buttongroup name="button_group_gender"/>
  </buttongroups>
 </ui>

@@ -199,6 +199,9 @@ class MainApp(QMainWindow):
         self.page_appointment.line_appointment_search.textChanged.connect(
             self.search_appointment
         )
+
+        self.page_daycare.button_care_edit.clicked.connect(self.populate_daycare)
+
         self.page_billing.line_bill_search.textChanged.connect(self.search_bill)
         self.page_service.line_service_search.textChanged.connect(self.search_service)
         self.page_inventory.line_inventory_search.textChanged.connect(self.search_Item)
@@ -734,8 +737,10 @@ class MainApp(QMainWindow):
         try:
             self.page_animal_details.table_animal_record.clearContents()
             self.page_animal_details.table_animal_record.setRowCount(0)
+            self.page_animal_details.table_animal_record.setSortingEnabled(False)
             for row, record in enumerate(animal.medical_records):
                 self.add_records_to_table(row, record)
+            self.page_animal_details.table_animal_record.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_records_table): {err}")
 
@@ -744,8 +749,10 @@ class MainApp(QMainWindow):
             self.page_animal_info.table_animal.clearContents()
             self.page_animal_info.table_animal.setRowCount(0)
             fetch_animals()
+            self.page_animal_info.table_animal.setSortingEnabled(False)
             for row, animal in enumerate(Animals):
                 self.add_animal_to_table(row, animal)
+            self.page_animal_info.table_animal.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_animal_table): {err}")
 
@@ -841,17 +848,17 @@ class MainApp(QMainWindow):
 
     def populate_employee(self):
         try:
-            if self.page_employee.button_edit.text() == "Edit":
+            selected_item = self.page_employee.table_employee.selectedItems()
+            if selected_item and self.page_employee.button_edit.text() == "Edit":
                 self.page_employee.button_edit.setText("Cancel")
                 self.page_employee.button_register.setEnabled(False)
-                selected_item = self.page_employee.table_employee.selectedItems()
-                if selected_item:
-                    employee_id = int(selected_item[0].text())
-                    employee = None
-                    for emp in Employees:
-                        if emp.employee_id == employee_id:
-                            employee = emp
-                            break
+                #selected_item = self.page_employee.table_employee.selectedItems()
+                employee_id = int(selected_item[0].text())
+                employee = None
+                for emp in Employees:
+                    if emp.employee_id == employee_id:
+                        employee = emp
+                        break
 
                 page = self.page_employee
 
@@ -881,6 +888,7 @@ class MainApp(QMainWindow):
                 self.page_employee.button_edit.setText("Edit")
                 self.clear_employee_fields()
                 self.page_employee.button_register.setEnabled(True)
+                self.show_employee()
         except Exception as err:
             print(f"Error Fetching Employee: {err}")
 
@@ -1027,8 +1035,10 @@ class MainApp(QMainWindow):
             self.page_employee.table_employee.clearContents()
             self.page_employee.table_employee.setRowCount(0)
             fetch_employees()
+            self.page_employee.table_employee.setSortingEnabled(False)
             for row, employee in enumerate(Employees):
                 self.add_employee_to_table(row, employee)
+            self.page_employee.table_employee.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_employee_table): {err}")
 
@@ -1069,6 +1079,19 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching (add_to_daycare): {err}")'''
 
+    def clear_daycare_fields(self):
+        try:
+            page = self.page_daycare
+            page.line_care_id.clear()
+            page.line_animal_id.clear()
+            page.date_care.setDate(QDate(2000, 1, 1))
+            page.time_care_start.setTime(QTime())
+            page.time_care_end.setTime(QTime())
+            page.text_care_notes.clear()
+
+        except Exception as err:
+            print(f"Clear DayCare Fields Failed!: {err}")
+
     def search_daycare(self, text):
         try:
             table = self.page_daycare.table_care
@@ -1080,6 +1103,7 @@ class MainApp(QMainWindow):
                 table.setRowHidden(row, not match)
         except Exception as err:
             print(f"Error Fetching(search_daycare): {err}")
+
     def delete_from_daycare(self):
         try:
             page = self.page_daycare
@@ -1096,33 +1120,38 @@ class MainApp(QMainWindow):
                 )
         except Exception as err:
             print(f"Error Fetching (delete_from_daycare): {err}")
+
     def populate_daycare(self):
         try:
             page = self.page_daycare
-            if page.button_care_edit.text() == "Enable Edit":
+            selected_item = page.table_care.selectedItems()
+            if selected_item and page.button_care_edit.text() == "Enable Edit":
                 page.button_care_edit.setText("Cancel")
                 page.button_care_details.setEnabled(False)
-                selected_item = page.table_care.selectedItems()
-                if selected_item:
-                    day_care_id = int(selected_item[0].text())
-                    daycare = None
-                    for care in Day_Care_Service:
-                        if care.day_Care_id == day_care_id:
-                            daycare = care
-                            break
+                day_care_id = int(selected_item[0].text())
+                daycare = None
+                for care in Day_Care_Service:
+                    if care.day_Care_id == day_care_id:
+                        daycare = care
+                        break
                 page.line_care_id.setText(daycare.day_care_date)
                 page.line_animal_id.setText(daycare.animal_id)
-
-                jdate = QDate.fromString(daycare.day_care_date, "yyyy-MM-dd")
+                jdate = QDate.fromString(str(daycare.day_care_date), "yyyy-MM-dd")
                 page.date_care.setDate(jdate)
-
-                page.time_care_start
-                page.time_care_end
+                qtime_start = QTime.fromString(str(daycare.start_time), "hh:mm:ss")
+                page.time_care_start.setTime(qtime_start)
+                qtime_end = QTime.fromString(str(daycare.end_time), "hh:mm:ss")
+                page.time_care_end.setTime(qtime_end)
                 page.text_care_notes.setPlainText(daycare.notes)
 
-
+            else:
+                page.button_care_edit.setText("Enable Edit")
+                self.clear_daycare_fields()
+                page.button_care_details.setEnabled(True)
+                self.show_daycare()
         except Exception as err:
             print(f"Error Fetching (populate_daycare): {err}")
+
     def update_daycare(self):
         try:
             ...
@@ -1132,8 +1161,10 @@ class MainApp(QMainWindow):
     def set_day_care_table(self):
         try:
             fetch_day_care()
+            self.page_daycare.table_care.setSortingEnabled(False)
             for row, day_care in enumerate(Day_Care_Service):
                 self.add_day_care_to_table(row, day_care)
+            self.page_daycare.table_care.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_day_care_table): {err}")
 
@@ -1346,8 +1377,10 @@ class MainApp(QMainWindow):
             self.page_expenses.table_expense.clearContents()
             self.page_expenses.table_expense.setRowCount(0)
             fetch_expenses()
+            self.page_expenses.table_expense.setSortingEnabled(False)
             for row, expense in enumerate(Expenses):
                 self.add_expense_to_table(row, expense)
+            self.page_expenses.table_expense.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_expense_table): {err}")
 
@@ -1387,12 +1420,16 @@ class MainApp(QMainWindow):
     def set_bill_table(self):
         try:
             fetch_billings()
+            self.page_billing.table_bill.setSortingEnabled(False)
             for row, billing in enumerate(Billings):
                 self.add_billing_to_table(row, billing)
 
                 service_details = self.get_service_details(billing.services, Services)
+                self.page_billing.table_show_service.setSortingEnabled(False)
                 for rowService, service in enumerate(service_details):
                     self.add_billing_service_to_service_table(rowService, service)
+                self.page_billing.table_show_service.setSortingEnabled(True)
+            self.page_billing.table_bill.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_bill_table): {err}")
     def get_service_details(self, service_ids, services):
@@ -1499,10 +1536,12 @@ class MainApp(QMainWindow):
             self.page_appointment.appointment_table_widget_2.clearContents()
             self.page_appointment.appointment_table_widget_2.setRowCount(0)
             fetch_appointment()
+            self.page_appointment.appointment_table_widget_2.setSortingEnabled(False)
             for row, appointment in enumerate(Appointments):
                 # animal = self.get_animal_by_id(appointment.animal_id)
                 # self.add_appointment_to_Table(row, appointment, animal)
                 self.add_appointment_to_Table(row, appointment)
+            self.page_appointment.appointment_table_widget_2.setSortingEnabled(True)
 
         except Exception as err:
             print(f"Error Fetching(set_appointment_table): {err}")
@@ -1651,9 +1690,12 @@ class MainApp(QMainWindow):
             page.line_service_id.clear()
             page.line_service_name.clear()
             page.line_service_cost.clear()
-            page.rb_service_available.setChecked(False)
-            page.rb_service_unavailable.setChecked(False)
             page.pte_service_details.clear()
+            #page.buttoGroup.setExclusive(False)
+            page.rb_service_available.setChecked(True)
+            page.rb_service_unavailable.setChecked(False)
+            #page.buttoGroup.setExclusive(True)
+            
 
         except Exception as err:
             print(f"Error(clear_service_fields): {err}")
@@ -1663,8 +1705,10 @@ class MainApp(QMainWindow):
             self.page_service.table_service.clearContents()
             self.page_service.table_service.setRowCount(0)
             fetch_services()
+            self.page_service.table_service.setSortingEnabled(False)
             for row, service in enumerate(Services):
                 self.add_services_to_table(row, service)
+            self.page_service.table_service.setSortingEnabled(True)
 
         except Exception as err:
             print(f"Error (set_service_table): {err}")
@@ -1709,10 +1753,11 @@ class MainApp(QMainWindow):
                 page.line_service_name.setText(service.name)
                 page.line_service_cost.setText(str(service.cost))
 
-                # if service.service_availability == True:
-                if service.service_availability:
+                if service.service_availability.lower() == "true" or service.service_availability.lower() == "yes":
                     page.rb_service_available.setChecked(True)
-                else:
+                    page.rb_service_unavailable.setChecked(False)
+                elif service.service_availability.lower() == "false" or service.service_availability.lower() == "no": 
+                    page.rb_service_available.setChecked(False)
                     page.rb_service_unavailable.setChecked(True)
 
                 page.pte_service_details.setPlainText(service.service_details)

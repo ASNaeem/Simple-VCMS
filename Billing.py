@@ -90,6 +90,7 @@ Billings = []
 
 def fetch_billings():
     try:
+        Billings.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from billings;"
