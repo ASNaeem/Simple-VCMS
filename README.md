@@ -126,7 +126,7 @@ FUNCTIONALITIES:
           Services-1
           Item
           Veterinarian 
-          Day Care
+          Day Care - 0
           Expenses - 0.5
 
      Delete
@@ -147,7 +147,7 @@ FUNCTIONALITIES:
           Billing
           Services-1
           Veterinarian 
-          Day Care
+          Day Care - 0.5
           Expenses - 0.5
 
      Populate in Table

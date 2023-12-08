@@ -308,7 +308,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="7,15">
             <item>
              <widget class="QLabel" name="label_5">
               <property name="font">
@@ -330,12 +330,15 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
+              <property name="displayFormat">
+               <string>hh:mm:ss</string>
+              </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="7,15">
             <item>
              <widget class="QLabel" name="label_6">
               <property name="font">
@@ -357,12 +360,15 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
+              <property name="displayFormat">
+               <string>hh:mm:ss</string>
+              </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="7,15">
             <item>
              <widget class="QLabel" name="label_9">
               <property name="font">
@@ -545,6 +551,9 @@
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>225</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
