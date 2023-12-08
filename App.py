@@ -1726,7 +1726,7 @@ class MainApp(QMainWindow):
             page = self.page_service
             table = page.table_service
             current_widget = self.stackedWidget.setCurrentWidget(page)
-            selected_service_row = table.currentRow
+            selected_service_row = table.currentRow()
             
             if selected_service_row != -1:
                 service_id = int(table.item(selected_service_row, 0).text())

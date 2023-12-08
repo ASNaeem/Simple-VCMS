@@ -101,15 +101,16 @@ def add_service(
 def delete_service(id: int):
     try:
         for service in Services:
-            if id == service.id:
+            if id == service.service_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
-                query = "delete from services where id = %s;"
-                data = service.id
-                mysql_handler.execute_query(query, data)
-                Appointments.remove(service)
-        mysql_handler.disconnect()
-        print("Service Delete Success!")
+                query = "delete from services where service_id = %s;"
+                data = service.service_id
+                mysql_handler.execute_query(query, (data,))
+                Services.remove(service)
+                mysql_handler.disconnect()
+                print("Service Delete Success!")
+                break
     except Exception as err:
         print(f"Error(delete_service): {err}")
 
