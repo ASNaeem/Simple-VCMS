@@ -886,12 +886,11 @@ class MainApp(QMainWindow):
         try:
             selected_item = self.page_employee.table_employee.selectedItems()
             if selected_item:
-                employee_id1 = int(selected_item[0].text())
+                employee_id = int(selected_item[0].text())
                 phone_prev = selected_item[3].text()
                 alt_phone_prev = selected_item[4].text()
 
                 page = self.page_employee
-                employee_id = employee_id1
                 name = page.line_name_6.text()
                 email = page.line_email_6.text()
                 phone = page.line_personal_contact_6.text()
@@ -1698,7 +1697,26 @@ class MainApp(QMainWindow):
 
     def update_existing_service(self):
         try:
-            ...
+            selected_item = self.page_service.table_service.selectedItems()
+            if selected_item:
+                id = int(selected_item[0].text())
+
+                page = self.page_service
+
+                name = page.line_service_name.text()
+                cost = float(page.line_service_cost.text())
+                details = page.pte_service_details.toPlainText()
+                if page.rb_service_available.isChecked():
+                    availability = "Yes"
+                elif page.rb_service_unavailable.isChecked():
+                    availability = "No"
+
+                update_service(id, name, cost, details, availability)
+                self.clear_service_fields()
+                self.set_service_table()
+            
+            else:
+                print("Select a Row!")
 
         except Exception as err:
             print(f"Error Fetching(update_existing_service): {err}")
