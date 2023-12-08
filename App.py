@@ -477,6 +477,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_service)
             self.page_service.table_service.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Service")
+            self.set_service_table()
         except Exception as err:
             print(f"Error Fetching(show_service): {err}")
 
@@ -887,12 +888,11 @@ class MainApp(QMainWindow):
         try:
             selected_item = self.page_employee.table_employee.selectedItems()
             if selected_item:
-                employee_id1 = int(selected_item[0].text())
+                employee_id = int(selected_item[0].text())
                 phone_prev = selected_item[3].text()
                 alt_phone_prev = selected_item[4].text()
 
                 page = self.page_employee
-                employee_id = employee_id1
                 name = page.line_name_6.text()
                 email = page.line_email_6.text()
                 phone = page.line_personal_contact_6.text()
@@ -1635,18 +1635,18 @@ class MainApp(QMainWindow):
             page.pte_service_details.clear()
 
         except Exception as err:
-            print(f"Error Fetching(clear_service_fields): {err}")
+            print(f"Error(clear_service_fields): {err}")
 
     def set_service_table(self):
         try:
-            self.page_appointment.appointment_table_widget_2.clearContents()
-            self.page_appointment.appointment_table_widget_2.setRowCount(0)
+            self.page_service.table_service.clearContents()
+            self.page_service.table_service.setRowCount(0)
             fetch_services()
             for row, service in enumerate(Services):
                 self.add_services_to_table(row, service)
 
         except Exception as err:
-            print(f"Error Fetching(set_service_table): {err}")
+            print(f"Error (set_service_table): {err}")
 
     def add_services_to_table(self, row, service):
         try:
@@ -1665,7 +1665,7 @@ class MainApp(QMainWindow):
             self.resize_columns_to_contents(table, header)
 
         except Exception as err:
-            print(f"Error Fetching(set_service_table): {err}")
+            print(f"Error (add_service_to_table): {err}")
 
     def populate_service(self):
         try:
@@ -1707,24 +1707,74 @@ class MainApp(QMainWindow):
 
     def add_new_service(self):
         try:
-            ...
+            page = self.page_service
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            name = page.line_service_name.text()
+            cost = float(page.line_service_cost.text())
+            details = page.pte_service_details.toPlainText()
+            if page.rb_service_available.isChecked():
+                availability = "Yes"
+            elif page.rb_service_unavailable.isChecked():
+                availability = "No"
+
+            if not all([name, cost, availability, details]):
+                QMessageBox.warning(
+                    current_widget, "Warning! Please fill in all fields."
+                )
+                return
+            
+            add_service(name, cost, details, availability)
+            self.clear_service_fields()
+            self.show_service()
 
         except Exception as err:
             print(f"Error Fetching(add_new_service): {err}")
 
     def update_existing_service(self):
         try:
-            ...
+            selected_item = self.page_service.table_service.selectedItems()
+            if selected_item:
+                id = int(selected_item[0].text())
+
+                page = self.page_service
+
+                name = page.line_service_name.text()
+                cost = float(page.line_service_cost.text())
+                details = page.pte_service_details.toPlainText()
+                if page.rb_service_available.isChecked():
+                    availability = "Yes"
+                elif page.rb_service_unavailable.isChecked():
+                    availability = "No"
+
+                update_service(id, name, cost, details, availability)
+                self.clear_service_fields()
+                self.set_service_table()
+            
+            else:
+                print("Select a Row!")
 
         except Exception as err:
             print(f"Error Fetching(update_existing_service): {err}")
 
     def delete_existing_service(self):
         try:
-            ...
+            page = self.page_service
+            table = page.table_service
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            selected_service_row = table.currentRow
+            
+            if selected_service_row != -1:
+                service_id = int(table.item(selected_service_row, 0).text())
+                table.removeRow(selected_service_row)
+                delete_service(service_id)
+
+            else:
+                QMessageBox.warning(
+                    current_widget, "Warning! Select a row to delete."
+                )
 
         except Exception as err:
-            print(f"Error Fetching(delete_existing_service): {err}")
+            print(f"Service Delete Failed!: {err}")
 
     ################## Service End ####################
 

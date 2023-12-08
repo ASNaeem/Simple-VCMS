@@ -60,6 +60,7 @@ Services = []
 
 def fetch_services():
     try:
+        Services.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         query = "select * from services"
@@ -75,27 +76,26 @@ def fetch_services():
             services.service_id = int(row[0])
             Services.append(services)
         mysql_handler.disconnect()
-        print(f"Er")
+        print(f"Service Fetched!")
     except Exception as err:
-        print(f"Error Fethcing: {err}")
+        print(f"Error Fethcing Service: {err}")
 
 
 def add_service(
-    name: str, cost: float, service_details: str, service_availability: bool
+    name: str, cost: float, service_details: str, service_availability: str
 ):
     try:
-        new_service = Service(name, cost, service_details, service_availability)
-        Services.append(new_service)
-
-        query = "insert into services (name, cost, service_details, service_availibility) values(%s,%s,%s,%s)"
+        new_service = Service(name, cost, service_details, service_availability) 
+        query = "insert into services (name, cost, service_details, service_availability) values(%s,%s,%s,%s)"
         values = (name, cost, service_details, service_availability)
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
+        Services.append(new_service)
         mysql_handler.disconnect()
-        print("Entry Success!")
+        print("Service Entry Success!")
     except Exception as err:
-        print(f"Error: {err}")
+        print(f"Error(add_service): {err}")
 
 
 def delete_service(id: int):
@@ -109,13 +109,12 @@ def delete_service(id: int):
                 mysql_handler.execute_query(query, data)
                 Appointments.remove(service)
         mysql_handler.disconnect()
-        print("Delete Success!")
-        print("Delete Failed!")
+        print("Service Delete Success!")
     except Exception as err:
-        print(f"Error: {err}")
+        print(f"Error(delete_service): {err}")
 
 
-def update_service(service_id, naame, cost, service_details, service_availability):
+def update_service(service_id, name, cost, service_details, service_availability):
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
