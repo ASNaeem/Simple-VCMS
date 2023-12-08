@@ -111,7 +111,7 @@ FUNCTIONALITIES:
           Medical Records - 1
           Employee-1
           Billing
-          Services
+          Services-1
           Item
           Veterinarian 
           Day Care
@@ -123,7 +123,7 @@ FUNCTIONALITIES:
           Medical Records
           Employee-1
           Billing
-          Services
+          Services-1
           Item
           Veterinarian 
           Day Care - 0
@@ -135,7 +135,7 @@ FUNCTIONALITIES:
           Medical Records - 1
           Employee - 1
           Billing
-          Services
+          Services-1
           Item
           Veterinarian 
           Day Care - 1
@@ -146,7 +146,7 @@ FUNCTIONALITIES:
           Animal - 1
           Employee - 1
           Billing
-          Services
+          Services-1
           Item
           Veterinarian 
           Day Care - 0.5
@@ -158,7 +158,7 @@ FUNCTIONALITIES:
           Medical Records-1
           Employee-1
           Billing-1
-          Services-0
+          Services-1
           Item-0(If there's time)
           Veterinarian-0 
           Day Care-1
