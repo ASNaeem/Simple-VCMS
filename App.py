@@ -2,7 +2,13 @@ import sys
 import warnings
 import os
 from datetime import datetime, timedelta
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QWidget, QCheckBox
+from PyQt5.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QTableWidgetItem,
+    QWidget,
+    QCheckBox,
+)
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 from qt_material import apply_stylesheet, list_themes
@@ -36,7 +42,7 @@ from Animal import (
 from Billing import Billings, fetch_billings
 from Item import Items, fetch_items
 from DayCareService import Day_Care_Service, fetch_day_care
-from Expense import Expenses, fetch_expenses, delete_expenses
+from Expense import Expenses, fetch_expenses, delete_expenses, update_expense_to_db
 
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
@@ -130,6 +136,7 @@ class MainApp(QMainWindow):
         self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
         self.page_expenses.button_expense_delete.clicked.connect(self.delete_expense)
         self.page_expenses.button_expense_add.clicked.connect(self.create_new_expense)
+        self.page_expenses.button_expense_save.clicked.connect(self.update_expense)
 
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
         self.page_animal_info.button_delete_animal_info.clicked.connect(
@@ -144,13 +151,12 @@ class MainApp(QMainWindow):
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
-
-        #self.button_appointments.clicked.connect(self.show_appointment)
+        # self.button_appointments.clicked.connect(self.show_appointment)
         self.page_appointment.button_app_create.clicked.connect(
             self.show_appointment_create
         )
         self.page_appointment.button_app_details.clicked.connect(
-            self.show_appointment_modify #populate selected row's information to modify page's fields
+            self.show_appointment_modify  # populate selected row's information to modify page's fields
         )
         self.page_appointment.button_delete_appointment.clicked.connect(
             self.delete_appointment
@@ -164,8 +170,7 @@ class MainApp(QMainWindow):
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
             self.checkbox_state_changed
         )
-        
-        
+
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
@@ -428,7 +433,7 @@ class MainApp(QMainWindow):
             employee_info = [
                 f"{employee.name} ({employee.employee_id})" for employee in Employees
             ]
-            employee_info.insert(0, "Select")
+            #employee_info.insert(0, "Select")
             combo_box = self.page_expenses.comboBox
             combo_box.addItems(employee_info)
             combo_box.completer().setCompletionMode(
@@ -1053,13 +1058,14 @@ class MainApp(QMainWindow):
                     for ex in Expenses:
                         if ex.expense_id == expense_id:
                             expense = ex
+                            #print("populate expense 0")
                             break
                 page = self.page_expenses
                 page.line_expense_id.setText(str(expense.expense_id))
                 page.line_issuer_id.setText(str(expense.issuer_id))
                 jdate = QDate.fromString(expense.expense_date, "yyyy-MM-dd")
                 page.date_issue.setDate(jdate)
-
+                #print("populate expense")
                 employee_name = self.get_employee_name_by_id(expense.handler_id)
                 if employee_name is not None:
                     employee_info = f"{employee_name} ({expense.handler_id})"
@@ -1070,10 +1076,12 @@ class MainApp(QMainWindow):
 
                 page.line_amount.setText(str(expense.amount))
                 page.text_justification.setPlainText(expense.justification)
+                #print("populate expense 2")
             else:
                 self.page_expenses.button_expense_edit.setText("Enable Edit")
                 self.clear_expense_fields()
                 self.page_expenses.button_expense_add.setEnabled(True)
+                #print("populate expense 4")
             #### need fixing ####
         except Exception as err:
             print(f"Error Populating data: {err}")
@@ -1086,7 +1094,6 @@ class MainApp(QMainWindow):
             expense_date = page.date_issue.text()
             expense_date_obj = datetime.strptime(str(expense_date), "%Y-%m-%d").date()
             handler_info = page.comboBox.currentText()
-            print(handler_info)
             start_index = handler_info.find("(")
             end_index = handler_info.find(")")
             handler_id = int(handler_info[start_index + 1 : end_index])
@@ -1113,7 +1120,7 @@ class MainApp(QMainWindow):
             )
             mysql_handler.execute_query(query, data)
             mysql_handler.disconnect()
-            #QMessageBox.information(current_widget, "Information", "Entry Success!")
+            QMessageBox.information(current_widget, "Information", "Entry Success!")
             self.clear_expense_fields()
             self.set_expense_table()
         except Exception as err:
@@ -1140,7 +1147,44 @@ class MainApp(QMainWindow):
             print(f"Deletion Failed: {err}")
 
     def update_expense(self):
-        ...
+        try:
+            page = self.page_expenses
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            selected_item = page.table_expense.selectedItems()
+            if selected_item:
+                expense_id = int(selected_item[0].text())
+                issuer_id = page.line_issuer_id.text()
+                expense_date = page.date_issue.text()
+                expense_date_obj = datetime.strptime(
+                    str(expense_date), "%Y-%m-%d"
+                ).date()
+
+                handler_info = page.comboBox.currentText()
+                start_index = handler_info.find("(")
+                end_index = handler_info.find(")")
+                handler_id = int(handler_info[start_index + 1 : end_index])
+
+                handle_date = page.date_handle.text()
+                handle_date_obj = datetime.strptime(str(handle_date), "%Y-%m-%d").date()
+                amount = page.line_amount.text()
+                justification = page.text_justification.toPlainText()
+
+                update_expense_to_db(
+                    expense_id,
+                    issuer_id,
+                    handler_id,
+                    expense_date_obj,
+                    handle_date_obj,
+                    amount,
+                    justification,
+                )
+                self.set_expense_table()
+            else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to edit!"
+                )
+        except Exception as err:
+            print(f"Update Failed: {err}")
 
     def set_expense_table(self):
         try:
@@ -1341,7 +1385,7 @@ class MainApp(QMainWindow):
             )
         except Exception as err:
             print(f"Error Fetching: {err}")
-    
+
     def create_appointment(self):
         try:
             new_animal: bool = False
@@ -1354,8 +1398,8 @@ class MainApp(QMainWindow):
                 new_animal = True
 
                 animal_name = page.comboBox_animal_id.currentItem()
-                birth_date =  page.date_appt_birth.Text()
-                
+                birth_date = page.date_appt_birth.Text()
+
                 gender = ""
                 if page.rb_male.isChecked():
                     gender = "Male"
@@ -1372,49 +1416,65 @@ class MainApp(QMainWindow):
                 breed = page.line_breed.Text()
                 color = page.line_colors.Text()
                 behavioral_warning = page.line_behave.Text()
-                owner_name = page.line_o_fname.Text()+" "+page.line_o_lname.Text()
-                email =  page.line_email.Text() 
+                owner_name = page.line_o_fname.Text() + " " + page.line_o_lname.Text()
+                email = page.line_email.Text()
                 phone = page.line_phone.Text()
                 address = page.line_address.Text()
                 reg_date = page.date_appt_reg.Text()
-                med_condition =  page.line_reason.Text()
+                med_condition = page.line_reason.Text()
 
                 reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
                 birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
 
                 if not all(
-                [
+                    [
+                        animal_name,
+                        reg_date,
+                        species,
+                        breed,
+                        color,
+                        gender,
+                        sterilized,
+                        med_condition,
+                        owner_name,
+                        phone,
+                        email,
+                        address,
+                        birth_date,
+                        behavioral_warning,
+                    ]
+                ):
+                    QMessageBox.warning(
+                        current_widget, "Warning", "Please fill in all fields."
+                    )
+                return
+                add_animal(
                     animal_name,
-                    reg_date,
+                    birth_date_obj,
+                    sterilized,
+                    gender,
                     species,
                     breed,
                     color,
-                    gender,
-                    sterilized,
-                    med_condition,
-                    owner_name,
-                    phone,
-                    email,
-                    address,
-                    birth_date,
                     behavioral_warning,
-                ]
-                ):
-                    QMessageBox.warning(current_widget, "Warning", "Please fill in all fields.")
-                return
-                add_animal(animal_name, birth_date_obj, sterilized, gender, species, breed, color, behavioral_warning, owner_name, email, phone, address, med_condition)
-            
-                #How do i get animal id for appointment table? I just inserted the new animal in database
-                #Even if I fetch animal list, how will I get our desired animal id?
+                    owner_name,
+                    email,
+                    phone,
+                    address,
+                    med_condition,
+                )
+
+                # How do i get animal id for appointment table? I just inserted the new animal in database
+                # Even if I fetch animal list, how will I get our desired animal id?
                 ...
-            
+
             else:
                 ...
 
             if chk_box_day_care.isChecked():
                 day_care = True
                 ...
-            
+
             else:
                 ...
 
@@ -1436,7 +1496,6 @@ class MainApp(QMainWindow):
         try:
             page = self.page_appointment
 
-            
         except Exception as err:
             print(f"Error Fetching: {err}")
 

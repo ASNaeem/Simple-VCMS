@@ -137,7 +137,7 @@ insert into phones (employee_id, phone)values (10, '+880-175-559-8778');
 
 /* expenses */
 Create table expenses (expense_id int  auto_increment primary key,
-		issuer_id int,
+				issuer_id int,
                 handler_id int,               
                 expense_date date,
                 handle_date date,
