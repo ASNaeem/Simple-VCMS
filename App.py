@@ -100,7 +100,6 @@ class MainApp(QMainWindow):
             self.show_animal_info
         )
         self.page_animal_reg.button_reg.clicked.connect(self.show_animal_info)
-
         self.button_daycare.clicked.connect(self.show_daycare)
         self.button_inventory.clicked.connect(self.show_inventory)
         self.button_analytics.clicked.connect(self.show_analytics_report)
@@ -145,7 +144,7 @@ class MainApp(QMainWindow):
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
 
-        #self.button_appointments.clicked.connect(self.show_appointment)
+        self.button_appointments.clicked.connect(self.show_appointment)
         self.page_appointment.button_app_create.clicked.connect(
             self.show_appointment_create
         )
