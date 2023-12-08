@@ -1234,14 +1234,12 @@ class MainApp(QMainWindow):
                     for ex in Expenses:
                         if ex.expense_id == expense_id:
                             expense = ex
-                            # print("populate expense 0")
                             break
 
                 page.line_expense_id.setText(str(expense.expense_id))
                 page.line_issuer_id.setText(str(expense.issuer_id))
                 jdate = QDate.fromString(expense.expense_date, "yyyy-MM-dd")
                 page.date_issue.setDate(jdate)
-                # print("populate expense")
                 employee_name = self.get_employee_name_by_id(expense.handler_id)
                 if employee_name is not None:
                     employee_info = f"{employee_name} ({expense.handler_id})"
@@ -1252,7 +1250,6 @@ class MainApp(QMainWindow):
 
                 page.line_amount.setText(str(expense.amount))
                 page.text_justification.setPlainText(expense.justification)
-                # print("populate expense 2")
             else:
                 page.button_expense_edit.setText("Enable Edit")
                 self.clear_expense_fields()
@@ -1727,6 +1724,7 @@ class MainApp(QMainWindow):
                 self.page_service.button_service_cancel.setText("Cancel Edit")
                 self.page_service.button_service_add.setEnabled(False)
                 service_id = int(selected_item[0].text())
+                print("populate service 0")
                 service = None
                 for srv in Services:
                     if srv.service_id == service_id:
@@ -1751,6 +1749,7 @@ class MainApp(QMainWindow):
                 self.page_service.button_service_cancel.setText("Enable Edit")
                 self.clear_service_fields()
                 self.page_service.button_service_add.setEnabled(True)
+                print("populate service 1")
                 self.show_service()
         except Exception as err:
             print(f"Error Fetching(populate_service): {err}")
