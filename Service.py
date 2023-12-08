@@ -115,7 +115,7 @@ def delete_service(id: int):
         print(f"Error(delete_service): {err}")
 
 
-def update_service(service_id, naame, cost, service_details, service_availability):
+def update_service(service_id, name, cost, service_details, service_availability):
     try:
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -123,7 +123,8 @@ def update_service(service_id, naame, cost, service_details, service_availabilit
         query = """
                 update services set
                 name = %s, cost = %s, service_details = %s,
-                service_availibility = %s where service_id = %s
+                service_availibility = %s where service_id = %s where 
+                service_id = %s 
                 """
         values = (name, cost, service_details, service_availability, service_id)
         mysql_handler.execute_query(query, values)
