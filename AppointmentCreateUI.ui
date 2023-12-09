@@ -97,6 +97,54 @@
             <property name="verticalSpacing">
              <number>20</number>
             </property>
+            <item row="6" column="0">
+             <widget class="QTimeEdit" name="time_appt">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QDateEdit" name="date_appt">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="displayFormat">
+               <string>yyyy-MM-dd</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Veterinarian</string>
+              </property>
+             </widget>
+            </item>
             <item row="7" column="0">
              <widget class="QLabel" name="label_11">
               <property name="font">
@@ -126,6 +174,25 @@
               </property>
               <property name="text">
                <string>Time of Appointment</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Date of Appointment</string>
               </property>
              </widget>
             </item>
@@ -201,51 +268,6 @@
               </item>
              </layout>
             </item>
-            <item row="10" column="0">
-             <widget class="QLineEdit" name="line_vet">
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Date of Appointment</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QTimeEdit" name="time_appt">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
             <item row="8" column="0">
              <widget class="QLineEdit" name="line_reason">
               <property name="font">
@@ -253,25 +275,6 @@
                 <family>Courier New</family>
                 <pointsize>12</pointsize>
                </font>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QDateEdit" name="date_appt">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="displayFormat">
-               <string>yyyy-MM-dd</string>
               </property>
              </widget>
             </item>
@@ -288,16 +291,19 @@
               </property>
              </spacer>
             </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="label_10">
+            <item row="10" column="0">
+             <widget class="QComboBox" name="cb_vet_name">
               <property name="font">
                <font>
                 <family>Courier New</family>
                 <pointsize>12</pointsize>
                </font>
               </property>
-              <property name="text">
-               <string>Veterinarian</string>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -1111,7 +1117,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
