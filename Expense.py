@@ -153,7 +153,6 @@ def delete_expenses(id: int):
 
 
 def update_expense_to_db(
-    self,
     expense_id: int,
     issuer_id: int,
     handler_id: int,
@@ -166,7 +165,7 @@ def update_expense_to_db(
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
 
-        query = "UPDATE expenses SET  handler_id = %s, issuer_id = %s, expense_date = %s, handler_date = %s, amount = %s, justification = %s where expense_id = %s;"
+        query = "UPDATE expenses SET  handler_id = %s, issuer_id = %s, expense_date = %s, handle_date = %s, amount = %s, justification = %s where expense_id = %s;"
         values = (
             handler_id,
             issuer_id,
@@ -174,8 +173,9 @@ def update_expense_to_db(
             handle_date_obj,
             amount,
             justification,
+            expense_id
         )
-        mysql_handler.execute_query(querry, values)
+        mysql_handler.execute_query(query, values)
         mysql_handler.disconnect()
         print("Expense Information Updated!")
 

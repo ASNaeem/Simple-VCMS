@@ -141,4 +141,17 @@ def delete_day_care(id: int):
         print(f"Error Delete: {err}")
 
 
-##################### Day Care Operations End #########################
+def update_daycare_to_db(
+    daycare_id: int, day_care_date_obj: str, start_time: str, end_time: str, notes: str
+):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        query = "UPDATE day_care set dos = %s, start_time = %s, end_time = %s, notes = %s where day_care_id = %s;"
+        values = (day_care_date_obj, start_time, end_time, notes, daycare_id)
+
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+        print("Daycare Information Updated!")
+    except Exception as err:
+        print(f"Daycare Update Failed: {err}")

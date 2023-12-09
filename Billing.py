@@ -1,6 +1,7 @@
 from datetime import date
 from MySQLHandler import MySQLHandler
 
+
 class Bill:
     def __init__(
         self,
@@ -87,7 +88,6 @@ class Bill:
 ### Billing ####
 Billings = []
 
-
 def fetch_billings():
     try:
         Billings.clear()
@@ -118,7 +118,6 @@ def fetch_billings():
         print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
-
 
 def add_bill(
     day_care_id: int,
@@ -153,7 +152,6 @@ def add_bill(
     except Exception as err:
         print(f"Error: {err}")
 
-
 def delete_bill(id: int):
     try:
         for bill in Billings:
@@ -161,12 +159,13 @@ def delete_bill(id: int):
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from Billings where id = %s;"
-                data = bill.id
-                mysql_handler.execute_query(query, data)
+                data = id
+                mysql_handler.execute_query(query, (data,))
                 Appointments.remove(bill)
-        mysql_handler.disconnect()
-        print("Delete Success!")
-        print("Delete Failed!")
+                mysql_handler.disconnect()
+                print("Delete Success!")
+            else:
+                print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")
 

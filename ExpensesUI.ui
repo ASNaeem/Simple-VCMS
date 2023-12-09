@@ -129,17 +129,11 @@
               <pointsize>12</pointsize>
              </font>
             </property>
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
             <property name="selectionMode">
              <enum>QAbstractItemView::SingleSelection</enum>
             </property>
             <property name="selectionBehavior">
              <enum>QAbstractItemView::SelectRows</enum>
-            </property>
-            <property name="sortingEnabled">
-             <bool>true</bool>
             </property>
             <attribute name="horizontalHeaderDefaultSectionSize">
              <number>230</number>
@@ -288,7 +282,7 @@
                <enum>QComboBox::NoInsert</enum>
               </property>
               <property name="placeholderText">
-               <string>Start typing. . .</string>
+               <string>Select</string>
               </property>
              </widget>
             </item>

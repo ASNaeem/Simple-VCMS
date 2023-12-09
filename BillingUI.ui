@@ -585,7 +585,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="button_bill_cancel">
+         <widget class="QPushButton" name="button_bill_edit">
           <property name="font">
            <font>
             <family>Courier New</family>
