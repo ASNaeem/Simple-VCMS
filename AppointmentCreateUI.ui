@@ -97,86 +97,6 @@
             <property name="verticalSpacing">
              <number>20</number>
             </property>
-            <item row="6" column="0">
-             <widget class="QTimeEdit" name="time_appt">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QDateEdit" name="date_appt">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="displayFormat">
-               <string>yyyy-MM-dd</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="label_10">
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Veterinarian</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="label_11">
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Visit Reason</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Courier New</family>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Time of Appointment</string>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_6">
               <property name="sizePolicy">
@@ -192,9 +112,22 @@
                </font>
               </property>
               <property name="text">
-               <string>Date of Appointment</string>
+               <string>Date of Appointment*</string>
               </property>
              </widget>
+            </item>
+            <item row="5" column="1">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item row="1" column="0">
              <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,1">
@@ -268,28 +201,24 @@
               </item>
              </layout>
             </item>
-            <item row="8" column="0">
-             <widget class="QLineEdit" name="line_reason">
+            <item row="4" column="0">
+             <widget class="QDateEdit" name="date_appt">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <family>Courier New</family>
                 <pointsize>12</pointsize>
                </font>
               </property>
+              <property name="displayFormat">
+               <string>yyyy-MM-dd</string>
+              </property>
              </widget>
-            </item>
-            <item row="5" column="1">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="10" column="0">
              <widget class="QComboBox" name="cb_vet_name">
@@ -304,6 +233,80 @@
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Veterinarian*</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Time of Appointment*</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Visit Reason*</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLineEdit" name="line_reason">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QTimeEdit" name="time_appt">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="displayFormat">
+               <string>HH:mm:ss</string>
               </property>
              </widget>
             </item>
@@ -325,7 +328,7 @@
          </spacer>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_Day_care" rowstretch="0,0,0,0,0" columnstretch="4,0">
+         <layout class="QGridLayout" name="gridLayout_Day_care" rowstretch="0,0,0,0,0,0" columnstretch="4,0">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -338,32 +341,6 @@
           <property name="verticalSpacing">
            <number>20</number>
           </property>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_20">
-            <property name="font">
-             <font>
-              <family>Courier New</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Note</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0,1">
             <property name="spacing">
@@ -437,12 +414,73 @@
            </layout>
           </item>
           <item row="4" column="0">
-           <widget class="QTextEdit" name="text_note">
+           <widget class="QLabel" name="label_20">
             <property name="font">
              <font>
               <family>Courier New</family>
               <pointsize>12</pointsize>
              </font>
+            </property>
+            <property name="text">
+             <string>Note</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="5" column="0">
+           <widget class="QTextEdit" name="text_note">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QTimeEdit" name="stime_appt">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="displayFormat">
+             <string>HH:mm:ss</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLineEdit" name="line_stime">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Start Time</string>
             </property>
            </widget>
           </item>
@@ -569,7 +607,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Phone Number</string>
+             <string>Phone Number*</string>
             </property>
            </widget>
           </item>
@@ -582,7 +620,7 @@
              </font>
             </property>
             <property name="text">
-             <string>First Name</string>
+             <string>First Name*</string>
             </property>
            </widget>
           </item>
@@ -641,7 +679,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Address</string>
+             <string>Address*</string>
             </property>
            </widget>
           </item>
@@ -761,7 +799,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Registration Date</string>
+             <string>Registration Date*</string>
             </property>
            </widget>
           </item>
@@ -774,7 +812,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Color(s)</string>
+             <string>Color(s)*</string>
             </property>
            </widget>
           </item>
@@ -787,7 +825,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Gender</string>
+             <string>Gender*</string>
             </property>
            </widget>
           </item>
@@ -872,7 +910,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Date of Birth</string>
+             <string>Date of Birth*</string>
             </property>
            </widget>
           </item>
@@ -959,7 +997,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Sterialization status</string>
+             <string>Sterialization status*</string>
             </property>
            </widget>
           </item>
@@ -982,7 +1020,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Species</string>
+             <string>Species*</string>
             </property>
            </widget>
           </item>
