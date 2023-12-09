@@ -1,6 +1,7 @@
 from datetime import date
 from MySQLHandler import MySQLHandler
 
+
 class Bill:
     def __init__(
         self,
@@ -161,12 +162,13 @@ def delete_bill(id: int):
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
                 query = "delete from Billings where id = %s;"
-                data = bill.id
-                mysql_handler.execute_query(query, data)
+                data = id
+                mysql_handler.execute_query(query, (data,))
                 Appointments.remove(bill)
-        mysql_handler.disconnect()
-        print("Delete Success!")
-        print("Delete Failed!")
+                mysql_handler.disconnect()
+                print("Delete Success!")
+            else:
+                print("Delete Failed!")
     except Exception as err:
         print(f"Error: {err}")
 

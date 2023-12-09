@@ -46,7 +46,7 @@ from Animal import (
     delete_animal_from_db,
     update_animal_from_db,
 )
-from Billing import Billings, fetch_billings
+from Billing import Billings, fetch_billings, delete_bill
 from Item import Items, fetch_items
 from DayCareService import (
     Day_Care_Service,
@@ -152,9 +152,7 @@ class MainApp(QMainWindow):
         self.page_expenses.button_expense_save.clicked.connect(self.update_expense)
 
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
-        self.page_animal_info.button_delete_animal_info.clicked.connect(
-            self.delete_animal
-        )
+        self.page_animal_info.button_delete_animal_info.clicked.connect(self.delete_animal)
         self.page_animal_details.button_animal_save.clicked.connect(self.update_animal)
 
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
@@ -162,14 +160,15 @@ class MainApp(QMainWindow):
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
+        self.page_billing.button_bill_add.clicked.connect(self.add_new_bill)
+        self.page_billing.button_bill_edit.clicked.connect(self.populate_bill)
+        self.page_billing.button_bill_save.clicked.connect(self.update_bill)
+        self.page_billing.button_bill_delete.clicked.connect(self.delete_bill)
+
         self.page_service.button_service_cancel.clicked.connect(self.populate_service)
         self.page_service.button_service_add.clicked.connect(self.add_new_service)
-        self.page_service.button_service_save.clicked.connect(
-            self.update_existing_service
-        )
-        self.page_service.button_service_delete.clicked.connect(
-            self.delete_existing_service
-        )
+        self.page_service.button_service_save.clicked.connect(self.update_existing_service)
+        self.page_service.button_service_delete.clicked.connect(self.delete_existing_service)
 
         self.page_appointment.button_app_create.clicked.connect(
             self.show_appointment_create
@@ -500,7 +499,6 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_expenses)
             self.page_expenses.table_expense.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Expenses")
-
             employee_info = [
                 f"{employee.name} ({employee.employee_id})" for employee in Employees
             ]
@@ -1446,6 +1444,30 @@ class MainApp(QMainWindow):
                 table.setRowHidden(row, not match)
         except Exception as err:
             print(f"Error Fetching(search_bill): {err}")
+    
+    def add_new_bill(self):
+        try:
+            ...
+        except Exception as err:
+            print(f"Error Fetching(add_new_bill): {err}")
+
+    def populate_bill(self):
+        try:
+            ...
+        except Exception as err:
+            print(f"Error Fetching(populate_bill): {err}")
+
+    def delete_bill(self):
+        try:
+            ...
+        except Exception as err:
+            print(f"Error Fetching(delete_bill): {err}")
+
+    def update_bill(self):
+        try:
+            ...
+        except Exception as err:
+            print(f"Error Fetching(update_bill): {err}")
 
     def set_bill_table(self):
         try:
