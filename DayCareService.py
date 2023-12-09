@@ -103,6 +103,7 @@ def add_day_care(
     day_care_date: str,
     start_time: str,
     notes: str,
+    end_time = None
 ):
     try:
         new_day_care = DayCareService(
