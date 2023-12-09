@@ -480,7 +480,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Start Time</string>
+             <string>Start Time*</string>
             </property>
            </widget>
           </item>
