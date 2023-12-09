@@ -124,8 +124,9 @@ BEGIN
     
     INSERT INTO billings
     VALUES (1, NEW.appointment_id, bill_date, 0, 0, 'Due'); 
+	end;
 //
-
+DELIMITER ;
 /* day_care*/
 Create table day_care (day_care_id int auto_increment  primary key,
                 animal_id int,
@@ -278,12 +279,15 @@ insert into record (animal_id, record, rdate) values (19, 'a history of seizures
 insert into record (animal_id, record, rdate) values (1, 'a history of chronic urinary tract infections for the past 3 years.', '2022-12-23');
 
 /* Trigger delete_trigger */
+DELIMITER //
 create trigger delete_record
 after delete on animals
 for each row
 begin
 delete from record where animal_id = old.animal_id;
 end;
+//
+DELIMITER ;
 
 
 /* services */
