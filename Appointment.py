@@ -5,16 +5,18 @@ class Appointment:
     def __init__(
         self,
         animal_id: int,
+        vet_id: int,
         owner_name: str,
         phone_number: str,
         species: str,
         appointment_date: str,
         appointment_time: str,
         visit_reason: str,
-        appointment_status: str,
+        appointment_status: str = "Scheduled",
     ):
         self.appointment_id = None
         self.animal_id = animal_id
+        self.vet_id = vet_id
         self.owner_name = owner_name
         self.phone_number = phone_number
         self.species = species
@@ -37,6 +39,13 @@ class Appointment:
     @animal_id.setter
     def animal_id(self, animal_id: int):
         self._animal_id = animal_id
+
+    @property
+    def vet_id(self):
+        return self._vet_id
+    @vet_id.setter
+    def vet_id(self, vet_id: int):
+        self._vet_id = vet_id
 
     @property
     def owner_name(self):
@@ -96,20 +105,21 @@ def fetch_appointment():
         Appointments.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        query = "select ap.appointment_id, ap.animal_id, an.owner_name, an.phone, an.species, ap.a_date, ap.a_time, ap.visit_reason, ap.a_status from animals an join appointments ap on an.animal_id = ap.animal_id;"
+        query = "select ap.appointment_id, ap.animal_id, ap.employee_id, an.owner_name, an.phone, an.species, ap.a_date, ap.a_time, ap.visit_reason, ap.a_status from animals an join appointments ap on an.animal_id = ap.animal_id;"
         data = mysql_handler.fetch_data(query)
 
         for row in data:
             print(row)
             appointment = Appointment(
                 animal_id=int(row[1]),
-                owner_name=row[2],
-                phone_number=row[3],
-                species=row[4],
-                appointment_date=row[5],
-                appointment_time=row[6],
-                visit_reason=row[7],
-                appointment_status=row[8]
+                vet_id=int(row[2]),
+                owner_name=row[3],
+                phone_number=row[4],
+                species=row[5],
+                appointment_date=row[6],
+                appointment_time=row[7],
+                visit_reason=row[8],
+                appointment_status=row[9]
             )
             appointment.appointment_id = int(row[0])
             Appointments.append(appointment)
@@ -121,6 +131,7 @@ def fetch_appointment():
 
 def add_appointment(
     animal_id: int,
+    vet_id: int,
     appointment_date: str,
     appointment_time: str,
     visit_reason: str,
@@ -129,6 +140,7 @@ def add_appointment(
     try:
         new_appointment = Appointment(
             animal_id,
+            vet_id,
             appointment_date,
             appointment_time,
             visit_reason,
@@ -136,8 +148,9 @@ def add_appointment(
         )
         Appointments.append(new_appointment)
 
-        query = "insert into appointments(animal_id, appointment_date, appointment_time, visit_reason, appointment_status) values(%s, %s, %s, %s, %s)"
+        query = "insert into appointments(animal_id, employee_id, appointment_date, appointment_time, visit_reason, appointment_status) values(%s, %s, %s, %s, %s)"
         values = (animal_id, 
+                    vet_id,
                     appointment_date, 
                     appointment_time, 
                     visit_reason, 

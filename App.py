@@ -157,6 +157,8 @@ class MainApp(QMainWindow):
         )
         self.page_animal_details.button_animal_save.clicked.connect(self.update_animal)
 
+        self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
+
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
@@ -202,16 +204,30 @@ class MainApp(QMainWindow):
         self.page_daycare.button_care_edit.clicked.connect(self.populate_daycare)
         self.page_daycare.button_care_save.clicked.connect(self.update_daycare)
 
-        self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
-        self.page_expenses.line_expense_search.textChanged.connect(self.search_expense)
-        self.page_employee.line_search_6.textChanged.connect(self.search_employee)
-        self.page_daycare.line_care_search.textChanged.connect(self.search_daycare)
+        self.page_animal_info.line_animal_search.textChanged.connect(
+            self.search_animal
+        )
+        self.page_expenses.line_expense_search.textChanged.connect(
+            self.search_expense
+        )
+        self.page_employee.line_search_6.textChanged.connect(
+            self.search_employee
+        )
+        self.page_daycare.line_care_search.textChanged.connect(
+            self.search_daycare
+        )
         self.page_appointment.line_appointment_search.textChanged.connect(
             self.search_appointment
         )
-        self.page_billing.line_bill_search.textChanged.connect(self.search_bill)
-        self.page_service.line_service_search.textChanged.connect(self.search_service)
-        self.page_inventory.line_inventory_search.textChanged.connect(self.search_Item)
+        self.page_billing.line_bill_search.textChanged.connect(
+            self.search_bill
+        )
+        self.page_service.line_service_search.textChanged.connect(
+            self.search_service
+        )
+        self.page_inventory.line_inventory_search.textChanged.connect(
+            self.search_Item
+        )
         ##################### End Init #####################
 
     def search_Item(self, text):
@@ -518,6 +534,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_expenses)
             self.page_expenses.table_expense.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Expenses")
+
             employee_info = [
                 f"{employee.name} ({employee.employee_id})" for employee in Employees
             ]
@@ -1095,11 +1112,11 @@ class MainApp(QMainWindow):
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
-    """def add_to_daycare(self):
+    '''def add_to_daycare(self):
         try:
             ...
         except Exception as err:
-            print(f"Error Fetching (add_to_daycare): {err}")"""
+            print(f"Error Fetching (add_to_daycare): {err}")'''
 
     def clear_daycare_fields(self):
         try:
@@ -1143,6 +1160,7 @@ class MainApp(QMainWindow):
                 )
         except Exception as err:
             print(f"Error Fetching (delete_from_daycare): {err}")
+
 
     def populate_daycare(self):
         try:
@@ -1566,6 +1584,15 @@ class MainApp(QMainWindow):
     #################### End Billing ####################
 
     #################### Appointment ####################
+    def clear_appointment_fields(self):
+        try:
+            
+            ...
+
+        except Exception as err:
+            print(f"Error clearing appointment fields: {err}")
+
+
     def search_appointment(self, text):
         try:
             table = self.page_appointment.appointment_table_widget_2
