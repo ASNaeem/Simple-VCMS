@@ -497,6 +497,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_billing)
             self.page_billing.table_bill.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Billing")
+            self.set_bill_table()
         except Exception as err:
             print(f"Error Fetching(show_billing): {err}")
 
