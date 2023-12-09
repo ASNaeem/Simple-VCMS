@@ -116,6 +116,13 @@ def add_day_care(
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, data)
+
+        new_day_care_id = mysql_handler.fetch_data("Select LAST_INSERT_ID()")[0][0]
+
+        query2 = "UPDATE day_care SET end_time=TIME_ADD(start_time=%s, INTERVAL 1 HOUR) WHERE day_care_id=%s"
+        data2 = values(start_time, new_day_care_id)
+        mysql_handler.execute_query(query2, data2)
+
         mysql_handler.disconnect()
         print("Entry Success!")
     except Exception as err:
