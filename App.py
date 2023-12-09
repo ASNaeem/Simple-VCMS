@@ -1524,29 +1524,24 @@ class MainApp(QMainWindow):
                 billing_id = int(selected_item[0].text())
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
-                query = "select service_id, from bill_services where bid = %s;"
+                query = "select service_id from bill_services where bid = %s;"
                 data = billing_id
                 service_ids = mysql_handler.fetch_data(query, (data,))
+                service_ids_list = [row[0] for row in service_ids]
                 mysql_handler.disconnect()
                 service_details = None
-                service_details = self.get_service_details(service_ids, Services)
-                print(service_ids[0][0][0])
+                service_details = self.get_service_details(service_ids_list, Services)               
                 page.table_show_service.clearContents()
                 page.table_show_service.setRowCount(0)
                 page.table_show_service.setSortingEnabled(False)
-
-                try:
+                if service_details :
                     for rowService, service in enumerate(service_details):
                         self.add_billing_service_to_service_table(rowService, service)
                     page.table_show_service.setSortingEnabled(True)
                     service_details.clear()
-                except Exception as err:
-                     print(f"Inner Try catch: {err}")
-
                 page.button_remove_service.setEnabled(False)
                 page.button_add_service.setEnabled(False)
                 page.cb_services.setEnabled(False)
-                ##Tooo much error
         except Exception as err:
             print(f"Error in showing services: {err}")
 
