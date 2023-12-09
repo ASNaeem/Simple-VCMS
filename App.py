@@ -1775,19 +1775,32 @@ class MainApp(QMainWindow):
                     med_condition,
                 )
                 add_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status)
-                
+                if page.chk_box_day_care.isChecked():
+                    day_care = True
+                    page.line_stime.setEnabled(True)
+                    page.stime_appt.setEnabled(True)
+                    page.text_note.setEnabled(True)
+
+                    stime = page.stime_appt.text().time()
+                    stime_obj = time(stime.hour(), stime.minute(), stime.second())
+                    note = page.text_note.toPlainText()
+
+                    add_day_care(animal_id, date_appt_obj, stime_obj, note)
 
             else:
                 animal_id = int(page.comboBox_animal_id.currentText())
                 add_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status)
+                if page.chk_box_day_care.isChecked():
+                    day_care = True
+                    page.line_stime.setEnabled(True)
+                    page.stime_appt.setEnabled(True)
+                    page.text_note.setEnabled(True)
 
-            if page.chk_box_day_care.isChecked():
-                day_care = True
-                #ongoing
-                ...
+                    stime = page.stime_appt.text().time()
+                    stime_obj = time(stime.hour(), stime.minute(), stime.second())
+                    note = page.text_note.toPlainText()
 
-            else:
-                ...
+                    add_day_care(animal_id, date_appt_obj, stime_obj, note)
 
             self.show_appointment
         except Exception as err:

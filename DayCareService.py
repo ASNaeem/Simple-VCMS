@@ -102,7 +102,6 @@ def add_day_care(
     animal_id: int,
     day_care_date: str,
     start_time: str,
-    end_time: str,
     notes: str,
 ):
     try:
@@ -111,8 +110,8 @@ def add_day_care(
         )
         Day_Care_Service.append(new_day_care)
 
-        query = "insert into day_care (animal_id, dos, start_time, end_time, notes) values (%S, %s, %s, %s, %s);"
-        data = values(animal_id, day_care_date, start_time, end_time, notes)
+        query = "insert into day_care (animal_id, dos, start_time, notes) values (%s, %s, %s, %s);"
+        data = values(animal_id, day_care_date, start_time, notes)
 
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
