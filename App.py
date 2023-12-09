@@ -1471,6 +1471,8 @@ class MainApp(QMainWindow):
 
     def set_bill_table(self):
         try:
+            self.page_billing.table_bill.clearContents()
+            self.page_billing.table_bill.setRowCount(0)
             fetch_billings()
             self.page_billing.table_bill.setSortingEnabled(False)
             for row, billing in enumerate(Billings):

@@ -88,7 +88,6 @@ class Bill:
 ### Billing ####
 Billings = []
 
-
 def fetch_billings():
     try:
         Billings.clear()
@@ -119,7 +118,6 @@ def fetch_billings():
         print(f"Er")
     except Exception as err:
         print(f"Error Fetching: {err}")
-
 
 def add_bill(
     day_care_id: int,
@@ -153,7 +151,6 @@ def add_bill(
         print("Entry Success!")
     except Exception as err:
         print(f"Error: {err}")
-
 
 def delete_bill(id: int):
     try:
