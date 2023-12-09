@@ -106,7 +106,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Visit Reason</string>
+               <string>Visit Reason*</string>
               </property>
              </widget>
             </item>
@@ -125,7 +125,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Time of Appointment</string>
+               <string>Time of Appointment*</string>
               </property>
              </widget>
             </item>
@@ -226,7 +226,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Date of Appointment</string>
+               <string>Date of Appointment*</string>
               </property>
              </widget>
             </item>
@@ -297,7 +297,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Veterinarian</string>
+               <string>Veterinarian*</string>
               </property>
              </widget>
             </item>
@@ -563,7 +563,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Phone Number</string>
+             <string>Phone Number*</string>
             </property>
            </widget>
           </item>
@@ -576,7 +576,7 @@
              </font>
             </property>
             <property name="text">
-             <string>First Name</string>
+             <string>First Name*</string>
             </property>
            </widget>
           </item>
@@ -635,7 +635,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Address</string>
+             <string>Address*</string>
             </property>
            </widget>
           </item>
@@ -755,7 +755,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Registration Date</string>
+             <string>Registration Date*</string>
             </property>
            </widget>
           </item>
@@ -768,7 +768,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Color(s)</string>
+             <string>Color(s)*</string>
             </property>
            </widget>
           </item>
@@ -781,7 +781,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Gender</string>
+             <string>Gender*</string>
             </property>
            </widget>
           </item>
@@ -866,7 +866,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Date of Birth</string>
+             <string>Date of Birth*</string>
             </property>
            </widget>
           </item>
@@ -953,7 +953,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Sterialization status</string>
+             <string>Sterialization status*</string>
             </property>
            </widget>
           </item>
@@ -976,7 +976,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Species</string>
+             <string>Species*</string>
             </property>
            </widget>
           </item>

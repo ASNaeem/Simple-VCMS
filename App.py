@@ -1703,7 +1703,6 @@ class MainApp(QMainWindow):
 
                 if not all(
                     [
-                        animal_name,
                         reg_date,
                         species,
                         breed,
@@ -1716,7 +1715,6 @@ class MainApp(QMainWindow):
                         email,
                         address,
                         birth_date,
-                        behavioral_warning,
                     ]
                 ):
                     QMessageBox.warning(
