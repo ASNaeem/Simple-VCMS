@@ -1681,10 +1681,28 @@ class MainApp(QMainWindow):
             page = self.page_appointment_create
             current_widget = self.stackedWidget.setCurrentWidget(page)
 
+            date_appt = page.date_appt.text()
+            date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
+            time_appt = page.time_appt.text().time()
+            time_appt_obj = time(time_appt.hour(), time_Appt.minute(), time_appt.second())
+            visit_reason = page.line_reason.text()
+            vet_name = page.cb_vet_name.currentText()
+            for emp in Employees:
+                if emp.name == vet_name and "vet" in emp.designation.lower():
+                    vet_id = emp.employee_id
+                    break
+                else:
+                    print("Veterinarian Does Not Exists!")
+                    return
+
+            appt_status = "Scheduled"
+
             if page.chk_box_new_animal.isChecked():
                 new_animal = True
 
                 animal_name = page.comboBox_animal_id.currentItem()
+                if not animal_name:
+                    animal_name = "None"
                 birth_date = page.date_appt_birth.Text()
 
                 gender = ""
@@ -1701,10 +1719,20 @@ class MainApp(QMainWindow):
 
                 species = page.line_species.Text()
                 breed = page.line_breed.Text()
+                if not breed:
+                    breed = "Unidentified"
                 color = page.line_colors.Text()
                 behavioral_warning = page.line_behave.Text()
-                owner_name = page.line_o_fname.Text() + " " + page.line_o_lname.Text()
+                if not behavioral_warning:
+                    behavioral_warning = "None"
+                fname = page.line_o_fname.Text()
+                lname = page.line_o_lname.Text()
+                if not lname:
+                    lname = ""
+                owner_name = fname + " " + lname
                 email = page.line_email.Text()
+                if not email:
+                    email = "None"
                 phone = page.line_phone.Text()
                 address = page.line_address.Text()
                 reg_date = page.date_appt_reg.Text()
@@ -1717,14 +1745,12 @@ class MainApp(QMainWindow):
                     [
                         reg_date,
                         species,
-                        breed,
                         color,
                         gender,
                         sterilized,
                         med_condition,
                         owner_name,
                         phone,
-                        email,
                         address,
                         birth_date,
                     ]
@@ -1748,16 +1774,16 @@ class MainApp(QMainWindow):
                     address,
                     med_condition,
                 )
-                # there's your id, continue the work ;-;
-                # How do i get animal id for appointment table? I just inserted the new animal in database
-                # Even if I fetch animal list, how will I get our desired animal id?
-                ...
+                add_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status)
+                
 
             else:
-                ...
+                animal_id = int(page.comboBox_animal_id.currentText())
+                add_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status)
 
             if page.chk_box_day_care.isChecked():
                 day_care = True
+                #ongoing
                 ...
 
             else:

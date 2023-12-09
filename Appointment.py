@@ -148,7 +148,7 @@ def add_appointment(
         )
         Appointments.append(new_appointment)
 
-        query = "insert into appointments(animal_id, employee_id, appointment_date, appointment_time, visit_reason, appointment_status) values(%s, %s, %s, %s, %s)"
+        query = "insert into appointments(animal_id, employee_id, appointment_date, appointment_time, visit_reason, appointment_status) values(%s, %s, %s, %s, %s, %s)"
         values = (animal_id, 
                     vet_id,
                     appointment_date, 
@@ -180,3 +180,25 @@ def delete_appointment(id:int):
                 break
     except Exception as err:
         print(f"Error: {err}")
+
+def update_appointment(animal_id: int,
+    vet_id: int,
+    a_date: str,
+    a_time: str,
+    visit_reason: str,
+    a_status: str,
+    a_id):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+
+        query = '''
+                update appointments set animal_id=%s, employee_id=%s, a_date=%s, a_time=%s, visit_reason=%s, a_status=%s
+                where appointment_id = %s;
+                '''
+        values = (animal_id, vet_id, a_date, a_time, visit_reason, a_status, a_id)
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+        print("Appointment Updated!")
+    except Exception as err:
+        print(f"Error Updating Appointment: {err}")
