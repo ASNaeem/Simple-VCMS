@@ -374,6 +374,18 @@ class MainApp(QMainWindow):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_create)
             self.setWindowTitle("VCMS || Dashboard || Create New Appointment")
+            vet_info = []
+            vet_info.clear()
+            vet_info = [
+                f"{employee.name} ({employee.employee_id})"
+                for employee in Employees
+                if "vet" in employee.designation.lower()
+            ]
+            vet_info.insert(0, "Select")
+            combo_box = self.page_appointment_create.cb_vet_name
+            combo_box.clear()
+            combo_box.addItems(vet_info)
+            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
         except Exception as err:
             print(f"Error Fetching(show_appointment_create): {err}")
 
