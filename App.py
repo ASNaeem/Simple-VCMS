@@ -162,7 +162,7 @@ class MainApp(QMainWindow):
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
 
-        self.page_billing.button_bill_add.clicked.connect(self.add_new_bill)
+        # self.page_billing.button_bill_add.clicked.connect(self.add_new_bill)
         self.page_billing.button_bill_edit.clicked.connect(self.populate_bill)
         self.page_billing.button_bill_save.clicked.connect(self.update_bill)
         self.page_billing.button_bill_delete.clicked.connect(self.delete_bill)
@@ -497,6 +497,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_billing)
             self.page_billing.table_bill.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Billing")
+            self.set_bill_table()
         except Exception as err:
             print(f"Error Fetching(show_billing): {err}")
 
@@ -1094,8 +1095,8 @@ class MainApp(QMainWindow):
             page.line_care_id.clear()
             page.line_animal_id.clear()
             page.date_care.setDate(QDate(2000, 1, 1))
-            page.time_care_start.setTime(QTime())
-            page.time_care_end.setTime(QTime())
+            page.time_care_start.setTime(QTime(00, 00, 00))
+            page.time_care_end.setTime(QTime(00, 00, 00))
             page.text_care_notes.clear()
 
         except Exception as err:
@@ -1451,7 +1452,7 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(search_bill): {err}")
 
-    def add_new_bill(self):
+    '''def add_new_bill(self):
         try:
             page = self.page_billing
             current_widget = self.stackedWidget.setCurrentWidget(page)
@@ -1459,7 +1460,7 @@ class MainApp(QMainWindow):
             # other_expenses = page.line_other_expenses.
 
         except Exception as err:
-            print(f"Error Fetching(add_new_bill): {err}")
+            print(f"Error Fetching(add_new_bill): {err}")'''
 
     def populate_bill(self):
         try:
