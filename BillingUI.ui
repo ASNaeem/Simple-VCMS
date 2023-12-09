@@ -74,7 +74,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="45,10,45">
+       <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="60,10,30">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -229,7 +229,7 @@
          </spacer>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="5,5,5,5,40,5,5,5,5,5,0">
+         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="5,5,5,0,0,40,5,5,5,5,5,0">
           <property name="spacing">
            <number>15</number>
           </property>
@@ -250,7 +250,7 @@
                </font>
               </property>
               <property name="text">
-               <string>NEW BILL</string>
+               <string>MODIFY</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -347,7 +347,7 @@
              <number>5</number>
             </property>
             <property name="bottomMargin">
-             <number>10</number>
+             <number>0</number>
             </property>
             <item>
              <widget class="QLabel" name="AvailabilityLebel">
@@ -371,10 +371,46 @@
             <item>
              <widget class="QComboBox" name="cb_services">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_add_service">
+              <property name="font">
+               <font>
+                <family>Courier New</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>ADD Service</string>
               </property>
              </widget>
             </item>
@@ -470,7 +506,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="button_remove_service">
               <property name="font">
                <font>
                 <family>Courier New</family>
@@ -478,7 +514,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Remove from list</string>
+               <string>Remove Service</string>
               </property>
              </widget>
             </item>
@@ -503,7 +539,13 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="line_other_expenses">
+             <widget class="QLineEdit" name="line_adjustments">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <family>Courier New</family>

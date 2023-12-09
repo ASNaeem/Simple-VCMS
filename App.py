@@ -204,29 +204,18 @@ class MainApp(QMainWindow):
         self.page_daycare.button_care_edit.clicked.connect(self.populate_daycare)
         self.page_daycare.button_care_save.clicked.connect(self.update_daycare)
 
-        self.page_animal_info.line_animal_search.textChanged.connect(
-            self.search_animal
-        )
-        self.page_expenses.line_expense_search.textChanged.connect(
-            self.search_expense
-        )
-        self.page_employee.line_search_6.textChanged.connect(
-            self.search_employee
-        )
-        self.page_daycare.line_care_search.textChanged.connect(
-            self.search_daycare
-        )
+        self.page_animal_info.line_animal_search.textChanged.connect(self.search_animal)
+        self.page_expenses.line_expense_search.textChanged.connect(self.search_expense)
+        self.page_employee.line_search_6.textChanged.connect(self.search_employee)
+        self.page_daycare.line_care_search.textChanged.connect(self.search_daycare)
         self.page_appointment.line_appointment_search.textChanged.connect(
             self.search_appointment
         )
-        self.page_billing.line_bill_search.textChanged.connect(
-            self.search_bill
-        )
-        self.page_service.line_service_search.textChanged.connect(
-            self.search_service
-        )
-        self.page_inventory.line_inventory_search.textChanged.connect(
-            self.search_Item
+        self.page_billing.line_bill_search.textChanged.connect(self.search_bill)
+        self.page_service.line_service_search.textChanged.connect(self.search_service)
+        self.page_inventory.line_inventory_search.textChanged.connect(self.search_Item)
+        self.page_billing.table_bill.itemSelectionChanged.connect(
+            self.handle_selection_change
         )
         ##################### End Init #####################
 
@@ -385,7 +374,9 @@ class MainApp(QMainWindow):
             combo_box = self.page_appointment_create.cb_vet_name
             combo_box.clear()
             combo_box.addItems(vet_info)
-            combo_box.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+            combo_box.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
         except Exception as err:
             print(f"Error Fetching(show_appointment_create): {err}")
 
@@ -1112,11 +1103,11 @@ class MainApp(QMainWindow):
     ################### End of Employee ###################
 
     ################### Day Care Service ##################
-    '''def add_to_daycare(self):
+    """def add_to_daycare(self):
         try:
             ...
         except Exception as err:
-            print(f"Error Fetching (add_to_daycare): {err}")'''
+            print(f"Error Fetching (add_to_daycare): {err}")"""
 
     def clear_daycare_fields(self):
         try:
@@ -1160,7 +1151,6 @@ class MainApp(QMainWindow):
                 )
         except Exception as err:
             print(f"Error Fetching (delete_from_daycare): {err}")
-
 
     def populate_daycare(self):
         try:
@@ -1482,7 +1472,7 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(search_bill): {err}")
 
-    '''def add_new_bill(self):
+    """def add_new_bill(self):
         try:
             page = self.page_billing
             current_widget = self.stackedWidget.setCurrentWidget(page)
@@ -1490,11 +1480,27 @@ class MainApp(QMainWindow):
             # other_expenses = page.line_other_expenses.
 
         except Exception as err:
-            print(f"Error Fetching(add_new_bill): {err}")'''
+            print(f"Error Fetching(add_new_bill): {err}")"""
 
     def populate_bill(self):
         try:
-            ...
+            page = self.page_billing
+            selected_item = page.table_bill.selectedItems()
+            if selected_item and page.button_bill_edit.text() == "Enable Edit":
+                page.button_bill_edit, setText("Cancel Edit")
+                billing_id = int(selected_item[0].text())
+                billing = None
+                for bill in Billings:
+                    if bill.billing_id == billing_id:
+                        billing = bill
+                        break
+                page.line_bill_id.setText(str(billing.billing_id))
+                page.line_animal_id.setText(str(billing.animal_id))
+                page.cb_services.set
+                page.line_adjustments
+                page.line_bill_cost
+                page.rb_paid
+                page.rb_pending
         except Exception as err:
             print(f"Error Fetching(populate_bill): {err}")
 
@@ -1510,6 +1516,42 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(update_bill): {err}")
 
+    def handle_selection_change(self):
+        try:
+            page = self.page_billing
+            selected_item = page.table_bill.selectedItems()
+            if selected_item:
+                billing_id = int(selected_item[0].text())
+                mysql_handler = MySQLHandler()
+                mysql_handler.connect()
+                query = "select * from bill_services where bid = %s;"
+                data = billing_id
+                service_ids = mysql_handler.fetch_data(query, (data,))
+                service_details = self.get_service_details(service_ids[1], Services)
+
+                page.table_show_service.clearContents()
+                page.table_show_service.setRowCount(0)
+                page.table_show_service.setSortingEnabled(False)
+
+                if service_details:
+                    for rowService, service in enumerate(service_details):
+                        self.add_billing_service_to_service_table(rowService, service)
+                    page.table_show_service.setSortingEnabled(True)
+
+                page.button_remove_service.setEnabled(False)
+                page.button_add_service.setEnabled(False)
+                page.cb_services.setEnabled(False)
+        except Exception as err:
+            print(f"Error in showing services: {err}")
+
+    def get_service_details(self, service_ids, services):
+        try:
+            return [
+                service for service in services if service.service_id in service_ids
+            ]
+        except Exception as err:
+            print(f"Error Fetching(get_service_details): {err}")
+
     def set_bill_table(self):
         try:
             self.page_billing.table_bill.clearContents()
@@ -1519,22 +1561,9 @@ class MainApp(QMainWindow):
             for row, billing in enumerate(Billings):
                 self.add_billing_to_table(row, billing)
 
-                service_details = self.get_service_details(billing.services, Services)
-                self.page_billing.table_show_service.setSortingEnabled(False)
-                for rowService, service in enumerate(service_details):
-                    self.add_billing_service_to_service_table(rowService, service)
-                self.page_billing.table_show_service.setSortingEnabled(True)
             self.page_billing.table_bill.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_bill_table): {err}")
-
-    def get_service_details(self, service_ids, services):
-        try:
-            return [
-                service for service in services if service.service_id in service_ids
-            ]
-        except Exception as err:
-            print(f"Error Fetching(get_service_details): {err}")
 
     def add_billing_to_table(self, row, billing):
         try:
@@ -1569,15 +1598,18 @@ class MainApp(QMainWindow):
             header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
             table = self.page_billing.table_show_service
-
-            table.setItem(rowService, 0, QTableWidgetItem(service.service_id))
+            table.insertRow(rowService)
+            table.setItem(rowService, 0, QTableWidgetItem(str(service.service_id)))
             header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
 
-            table.setItem(rowService, 1, QTableWidgetItem(service.name))
+            table.setItem(rowService, 1, QTableWidgetItem(str(service.name)))
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
 
-            table.setItem(rowService, 2, QTableWidgetItem(service.cost))
+            table.setItem(rowService, 2, QTableWidgetItem(str(service.cost)))
             header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+
+            table.setItem(rowService, 3, QTableWidgetItem(str(service.service_details)))
+            header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as err:
             print(f"Error Fetching(add_billing_service_to_service_table): {err}")
 
@@ -1586,12 +1618,10 @@ class MainApp(QMainWindow):
     #################### Appointment ####################
     def clear_appointment_fields(self):
         try:
-            
             ...
 
         except Exception as err:
             print(f"Error clearing appointment fields: {err}")
-
 
     def search_appointment(self, text):
         try:

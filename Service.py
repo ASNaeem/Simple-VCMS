@@ -133,5 +133,7 @@ def update_service(service_id, name, cost, service_details, service_availability
     except Exception as err:
         print(f"Sevice Update Failed!: {err}")
 
-
+def fetch_service_using_bill_id (id: int):
+    ...
+    
 ### End Services List For Billing###
