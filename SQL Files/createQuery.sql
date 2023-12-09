@@ -92,7 +92,7 @@ create table billings (
 	bid int auto_increment primary key,
 	day_care_id int,
 	aid int,
-	payment_date date,
+	billing_date date,
 	total_amount DECIMAL(8,2),
 	adjustment DECIMAL(8,2),
 	status varchar(10) DEFAULT "Due"

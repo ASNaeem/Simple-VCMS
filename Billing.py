@@ -7,7 +7,7 @@ class Bill:
         self,
         day_care_id: int,
         appointment_id: int,
-        payment_date: str,
+        billing_date: str,
         total_amount: float,
         adjustment: float,
         status: str = "Due",
@@ -15,7 +15,7 @@ class Bill:
         self.billing_id = None
         self.day_care_id = day_care_id
         self.appointment_id = appointment_id
-        self.payment_date = payment_date
+        self.billing_date = billing_date
         self.total_amount = total_amount
         self.adjustment = adjustment
         self.status = status
@@ -67,12 +67,12 @@ class Bill:
         self._adjustment = adjustment
 
     @property
-    def payment_date(self):
-        return self._payment_date
+    def billing_date(self):
+        return self._billing_date
 
-    @payment_date.setter
-    def payment_date(self, payment_date: str):
-        self._payment_date = payment_date
+    @billing_date.setter
+    def billing_date(self, billing_date: str):
+        self._billing_date = billing_date
 
     @property
     def status(self):
@@ -88,6 +88,7 @@ class Bill:
 ### Billing ####
 Billings = []
 
+
 def fetch_billings():
     try:
         Billings.clear()
@@ -102,7 +103,7 @@ def fetch_billings():
             billing = Bill(
                 day_care_id=int(row[1]),
                 appointment_id=int(row[2]),
-                payment_date=str(row[3]),
+                billing_date=str(row[3]),
                 total_amount=float(row[4]),
                 adjustment=float(row[5]),
                 status=row[6],
@@ -119,26 +120,27 @@ def fetch_billings():
     except Exception as err:
         print(f"Error Fetching: {err}")
 
+
 def add_bill(
     day_care_id: int,
     appointment_id: int,
-    payment_date: str,
+    billing_date: str,
     total_amount: float,
     adjustment: float,
     status: str,
 ):
     try:
-        payment_date = date.today()
+        billing_date = date.today()
         new_bill = Bill(
             day_Care_id, appointment_id, currentDate, total_amount, adjustment, status
         )
         Billings.append(new_bill)
 
-        query = "insert into animal (day_care_id, appointment_id, payment_date, total_amount, adjustment, status) values(%s,%s,%s,%s,%s,%s)"
+        query = "insert into animal (day_care_id, appointment_id, billing_date, total_amount, adjustment, status) values(%s,%s,%s,%s,%s,%s)"
         values = (
             day_care_id,
             appointment_id,
-            payment_date,
+            billing_date,
             total_amount,
             adjustment,
             status,
@@ -151,6 +153,7 @@ def add_bill(
         print("Entry Success!")
     except Exception as err:
         print(f"Error: {err}")
+
 
 def delete_bill(id: int):
     try:

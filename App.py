@@ -152,7 +152,9 @@ class MainApp(QMainWindow):
         self.page_expenses.button_expense_save.clicked.connect(self.update_expense)
 
         self.page_animal_reg.button_reg.clicked.connect(self.create_new_animal)
-        self.page_animal_info.button_delete_animal_info.clicked.connect(self.delete_animal)
+        self.page_animal_info.button_delete_animal_info.clicked.connect(
+            self.delete_animal
+        )
         self.page_animal_details.button_animal_save.clicked.connect(self.update_animal)
 
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
@@ -167,8 +169,12 @@ class MainApp(QMainWindow):
 
         self.page_service.button_service_cancel.clicked.connect(self.populate_service)
         self.page_service.button_service_add.clicked.connect(self.add_new_service)
-        self.page_service.button_service_save.clicked.connect(self.update_existing_service)
-        self.page_service.button_service_delete.clicked.connect(self.delete_existing_service)
+        self.page_service.button_service_save.clicked.connect(
+            self.update_existing_service
+        )
+        self.page_service.button_service_delete.clicked.connect(
+            self.delete_existing_service
+        )
 
         self.page_appointment.button_app_create.clicked.connect(
             self.show_appointment_create
@@ -1205,7 +1211,7 @@ class MainApp(QMainWindow):
             header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
             table = self.page_daycare.table_care
             table.insertRow(row)
-            '''table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
+            """table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
             header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
@@ -1216,7 +1222,7 @@ class MainApp(QMainWindow):
             table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
             header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
-            header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)'''
+            header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)"""
             table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
             table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
             table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
@@ -1444,10 +1450,14 @@ class MainApp(QMainWindow):
                 table.setRowHidden(row, not match)
         except Exception as err:
             print(f"Error Fetching(search_bill): {err}")
-    
+
     def add_new_bill(self):
         try:
-            ...
+            page = self.page_billing
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            animal_id = page.line_animal_id.text()
+            # other_expenses = page.line_other_expenses.
+
         except Exception as err:
             print(f"Error Fetching(add_new_bill): {err}")
 
@@ -1507,7 +1517,7 @@ class MainApp(QMainWindow):
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 2, QTableWidgetItem(str(billing.appointment_id)))
             header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-            table.setItem(row, 3, QTableWidgetItem(str(billing.payment_date)))
+            table.setItem(row, 3, QTableWidgetItem(str(billing.billing_date)))
             header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 4, QTableWidgetItem(str(billing.total_amount)))
             header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
