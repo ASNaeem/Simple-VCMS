@@ -289,7 +289,6 @@ end;
 //
 DELIMITER ;
 
-
 /* services */
 Create table services( service_id int auto_increment primary key, 
                 name varchar(45),
