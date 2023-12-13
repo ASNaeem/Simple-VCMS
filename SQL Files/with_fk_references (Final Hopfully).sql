@@ -287,5 +287,5 @@ insert into bill_services(bid, service_id) values(5,2);
 insert into bill_services (bid, service_id) values (8,4);
 insert into bill_services(bid, service_id) values(9,2);
 
-
+alter table employees drop column working_hours;
 
