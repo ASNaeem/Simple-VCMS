@@ -31,6 +31,8 @@ from Appointment import (
     fetch_appointment,
     add_appointment,
     delete_appointment,
+    update_appointment,
+    update_appointment_status
 )
 from Service import (
     Services,
@@ -197,6 +199,15 @@ class MainApp(QMainWindow):
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
+        self.page_appointment_modify.button_apt_save.clicked.connect(
+            self.update_existing_appointment
+        )
+        self.page_appointment_modify.button_apt_cancel_apt.clicked.connect(
+            self.cancel_existing_appointment
+        )
+        self.page_appointment_modify.button_apt_patient_details.clicked.connect(
+            self.show_animal_details
+        )
 
         self.page_daycare.button_care_delete.clicked.connect(self.delete_from_daycare)
         self.page_daycare.button_care_edit.clicked.connect(self.populate_daycare)
@@ -292,6 +303,7 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_appointment)
             self.page_appointment.appointment_table_widget_2.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Appointment")
+            self.set_appointment_table()
         except Exception as err:
             print(f"Error Fetching(show_appointment): {err}")
 
@@ -305,11 +317,20 @@ class MainApp(QMainWindow):
                 appointment_id = int(selected_item[0].text())
                 # animal_id = int(selected_item[1].text())
                 appointment = None
+                employee = None
 
                 for ap in Appointments:
                     if ap.appointment_id == appointment_id:
                         appointment = ap
                         break
+
+                for emp in Employees:
+                    if emp.employee_id == ap.vet_id:  
+                        employee = emp
+                        break
+
+                #vet_name = get_employee_name_by_id(self, vet_id)
+                self.page_appointment_modify.cb_vet_name.setCurrentText(emp.name)
 
                 page = self.page_appointment_modify
 
@@ -346,10 +367,11 @@ class MainApp(QMainWindow):
 
             vet_name = []
             for employee in Employees:
-                if "vet" in employee.designation.lower():
+                if "veterinarian" in employee.designation.lower():
                     vet_name.append((employee.name, employee.employee_id))
+            
             vet_info = [f"{vet[0]} ({vet[1]})" for vet in vet_name]
-            combo_box = self.page_appointment_modify.comboBox_vet_name
+            combo_box = self.page_appointment_modify.cb_vet_name
             combo_box.addItems(vet_info)
             combo_box.completer().setCompletionMode(
                 QtWidgets.QCompleter.PopupCompletion
@@ -394,11 +416,21 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(show_animal_reg): {err}")
 
-    def show_animal_details(self):
+    def show_animal_details(self): 
         try:
-            selected_item = self.page_animal_info.table_animal.selectedItems()
+            selected_item = None
+            flag = True
+            if self.stackedWidget.currentIndex() == self.stackedWidget.indexOf(self.page_appointment_modify):
+                selected_item = self.page_appointment.appointment_table_widget_2.selectedItems()
+                flag = False
+            elif self.stackedWidget.currentWidget() == self.page_animal_info:
+                selected_item = self.page_animal_info.table_animal.selectedItems()
+
             if selected_item:
-                animal_id = int(selected_item[0].text())
+                if flag == True:
+                    animal_id = int(selected_item[0].text())
+                else:
+                    animal_id = int(selected_item[1].text())
                 animal = None
                 for ob in Animals:
                     if ob.animal_id == animal_id:
@@ -453,7 +485,7 @@ class MainApp(QMainWindow):
 
                 # self.setWindowTitle("VCMS || Dashboard || Animal")
             else:
-                print("Select a row to view more details")
+                print("Select a row to view more animal details")
         except Exception as err:
             print(f"Error Fetching(show_animal_details): {err}")
 
@@ -1718,11 +1750,11 @@ class MainApp(QMainWindow):
             visit_reason = page.line_reason.text()
             vet_name = page.cb_vet_name.currentText()
             for emp in Employees:
-                if emp.name == vet_name and "vet" in emp.designation.lower():
+                if emp.name == vet_name and "veterinarian" in emp.designation.lower():
                     vet_id = emp.employee_id
                     break
                 else:
-                    print("Veterinarian Does Not Exists!")
+                    print("Veterinarian Does Not Exist!")
                     return
 
             appt_status = "Scheduled"
@@ -1840,16 +1872,47 @@ class MainApp(QMainWindow):
         try:
             page = self.page_appointment_modify
             current_widget = self.stackedWidget.setCurrentWidget(page)
+            vet_id = None
 
-            self.show_appointment
+            apt_id = int(page.line_apt_id.text())
+            animal_id = int(page.line_apt_animal_id.text())
+            print(vet_name)
+            for emp in Employees: #something wrong here
+                #if emp.name == vet_name and "veterinarian" in emp.designation.lower():
+                if emp.name == vet_name and emp.designation.lower() == "veterinarian":
+                    vet_id = emp.employee_id
+                    break
+                else:
+                    print("Veterinarian Does Not Exist!")
+                    return 
+            date_appt = page.date_appt.text()
+            date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
+            time_appt = page.time_appt.text().time()
+            time_appt_obj = time(time_appt.hour(), time_Appt.minute(), time_appt.second())
+            visit_reason = page.line_reason.text()
+            appt_status = page.line_apt_status.text()
+
+            update_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status, apt_id)
+            
+            self.show_appointment()
 
         except Exception as err:
             print(f"Error Fetching(update_existing_appointment): {err}")
 
+    def cancel_existing_appointment(self):
+        page = self.page_appointment_modify
+        current_widget = self.stackedWidget.setCurrentWidget(page)
+
+        apt_id = int(page.line_apt_id.text())
+        apt_status = "Cancelled"
+
+        update_appointment_status(apt_id, apt_status)
+        
+        self.show_appointment()
+
     def delete_existing_appointment(self):
         try:
-            page = self.page_appointment
-
+            ...
         except Exception as err:
             print(f"Error Fetching(delete_existing_appointment): {err}")
 

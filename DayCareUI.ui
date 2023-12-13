@@ -235,13 +235,16 @@
             <item>
              <widget class="QLineEdit" name="line_care_id">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="font">
                <font>
                 <family>Courier New</family>
                 <pointsize>12</pointsize>
                </font>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -265,13 +268,16 @@
             <item>
              <widget class="QLineEdit" name="line_animal_id">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="font">
                <font>
                 <family>Courier New</family>
                 <pointsize>12</pointsize>
                </font>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

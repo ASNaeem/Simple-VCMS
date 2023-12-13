@@ -99,13 +99,16 @@
         <item>
          <widget class="QLineEdit" name="line_animal_id">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="font">
            <font>
             <family>Shonar Bangla</family>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -973,7 +976,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="button_group_sterilized"/>
   <buttongroup name="button_group_gender"/>
+  <buttongroup name="button_group_sterilized"/>
  </buttongroups>
 </ui>

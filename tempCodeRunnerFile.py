@@ -1,3 +1,1 @@
-
-
-    ################### Billing ##################
+self.show_appointment()
