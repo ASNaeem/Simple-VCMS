@@ -46,7 +46,7 @@ from Animal import (
     delete_animal_from_db,
     update_animal_from_db,
 )
-from Billing import Billings, fetch_billings, delete_bill
+from Billing import Billings, fetch_billings, delete_bill, update_bill
 from Item import Items, fetch_items
 from DayCareService import (
     Day_Care_Service,
@@ -166,6 +166,10 @@ class MainApp(QMainWindow):
         self.page_billing.button_bill_edit.clicked.connect(self.populate_bill)
         self.page_billing.button_bill_save.clicked.connect(self.update_bill)
         self.page_billing.button_bill_delete.clicked.connect(self.delete_bill)
+        self.page_billing.button_add_service.clicked.connect(self.add_service_to_modify)
+        self.page_billing.button_remove_service.clicked.connect(
+            self.remove_service_from_modify
+        )
 
         self.page_service.button_service_cancel.clicked.connect(self.populate_service)
         self.page_service.button_service_add.clicked.connect(self.add_new_service)
@@ -350,6 +354,7 @@ class MainApp(QMainWindow):
                     vet_name.append((employee.name, employee.employee_id))
             vet_info = [f"{vet[0]} ({vet[1]})" for vet in vet_name]
             combo_box = self.page_appointment_modify.comboBox_vet_name
+            combo_box.clear()
             combo_box.addItems(vet_info)
             combo_box.completer().setCompletionMode(
                 QtWidgets.QCompleter.PopupCompletion
@@ -514,6 +519,16 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_billing)
             self.page_billing.table_bill.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Billing")
+
+            service_info = []
+            service_info = [f"{service.name}" for service in Services]
+            combo_box2 = self.page_billing.cb_services
+            combo_box2.clear()
+            combo_box2.addItems(service_info)
+            combo_box2.completer().setCompletionMode(
+                QtWidgets.QCompleter.PopupCompletion
+            )
+    
             self.set_bill_table()
         except Exception as err:
             print(f"Error Fetching(show_billing): {err}")
@@ -523,12 +538,13 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_expenses)
             self.page_expenses.table_expense.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Expenses")
-
+            combo_box = self.page_expenses.comboBox
+            combo_box.clear()
             employee_info = [
                 f"{employee.name} ({employee.employee_id})" for employee in Employees
             ]
             employee_info.insert(0, "Select")
-            combo_box = self.page_expenses.comboBox
+
             combo_box.addItems(employee_info)
             combo_box.completer().setCompletionMode(
                 QtWidgets.QCompleter.PopupCompletion
@@ -1480,12 +1496,34 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(add_new_bill): {err}")"""
 
+    def clear_bill_fields(self):
+        page = self.page_billing
+        page.line_bill_id.clear()
+        page.line_animal_id.clear()
+        page.line_adjustments.clear()
+        page.line_bill_cost.clear()
+
+    def get_animal_by_bill_id(self, id: int):
+        try:
+            mysql_handler = MySQLHandler()
+            mysql_handler.connect()
+            query = "select a.animal_id, a.owner_name, a.species from animals a, appointments ap, billings b where a.animal_id = ap.animal_id and ap.appointment_id = b.aid and bid = %s"
+            data = id
+            animal_info = mysql_handler.fetch_data(query, (data,))
+            mysql_handler.disconnect()
+            return animal_info[0][0], animal_info[0][1], animal_info[0][2]
+        except Exception as err:
+            print(f"Error Fetching(get_animal_by_bill_id): {err}")
+
     def populate_bill(self):
         try:
             page = self.page_billing
             selected_item = page.table_bill.selectedItems()
             if selected_item and page.button_bill_edit.text() == "Enable Edit":
-                page.button_bill_edit, setText("Cancel Edit")
+                page.cb_services.setEnabled(True)
+                page.button_add_service.setEnabled(True)
+                page.button_remove_service.setEnabled(True)
+                page.button_bill_edit.setText("Cancel Edit")
                 billing_id = int(selected_item[0].text())
                 billing = None
                 for bill in Billings:
@@ -1493,26 +1531,234 @@ class MainApp(QMainWindow):
                         billing = bill
                         break
                 page.line_bill_id.setText(str(billing.billing_id))
-                page.line_animal_id.setText(str(billing.animal_id))
-                page.cb_services.set
-                page.line_adjustments
-                page.line_bill_cost
-                page.rb_paid
-                page.rb_pending
+                animal_info = self.get_animal_by_bill_id(billing.billing_id)
+                """if animal_info is not None:
+                    page.comboBox_animal_id.setCurrentText(
+                        f"{animal_info[2]} {animal_info[1]} ({animal_info[0]})"
+                    )"""
+                page.line_animal_id.setText(str(animal_info[0]))
+                page.line_adjustments.setText(str(billing.adjustment))
+                page.line_bill_cost.setText(str(billing.total_amount))
+
+                if billing.status.lower() == "due":
+                    page.rb_pending.setChecked(True)
+                else:
+                    page.rb_paid.setChecked(True)
+            else:
+                page.button_bill_edit.setText("Enable Edit")
+                self.clear_bill_fields()
+                page.table_show_service.clearContents()
+                page.table_show_service.setRowCount(0)
+                self.show_billing()
         except Exception as err:
             print(f"Error Fetching(populate_bill): {err}")
 
     def delete_bill(self):
         try:
-            ...
+            page = self.page_billing
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            table = page.table_bill
+            selected_bill_new = table.currentRow()
+            if selected_bill_new != -1:
+                bill_id = int(table.item(selected_bill_new, 0).text())
+                table.removeRow(selected_bill_new)
+                delete_bill(bill_id)
+                QMessageBox.information(
+                    current_widget, "Information", "Record deleted successfully!"
+                )
+            else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to delete!"
+                )
         except Exception as err:
             print(f"Error Fetching(delete_bill): {err}")
 
+    def add_service_to_modify(self):
+        try:
+            page = self.page_billing
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            if page.table_bill.selectedItems():
+                selected_item = page.table_bill.selectedItems()
+            else:
+                selected_item = 1
+            if selected_item:
+                bill_id = None
+                if selected_item == 1:
+                    bill_id = int(page.line_bill_id.text())
+                else:
+                    bill_id = int(selected_item[0].text())
+                service_name = page.cb_services.currentText()
+                service_id = None
+                for srv in Services:
+                    if srv.name == service_name:
+                        service_id = srv.service_id
+                
+                service_ids = self.fetch_service_ids_from_bill_id(bill_id)
+                flag = False       
+                if service_id not in service_ids:
+                    flag = True
+                confirmed = (
+                    QMessageBox.question(
+                        current_widget,
+                        "Confirmation",
+                        "Do you want to add this service?",
+                        QMessageBox.Yes | QMessageBox.Cancel,
+                    )
+                    == QMessageBox.Yes
+                )
+                if confirmed and flag:
+                    mysql_handler = MySQLHandler()
+                    mysql_handler.connect()
+                    query = (
+                        "insert into bill_services (bid, service_id) values (%s , %s)"
+                    )
+                    data = (bill_id, service_id)
+                    mysql_handler.execute_query(query, data)
+
+                    query = "select total_amount from billings where bid = %s;"
+                    data = (bill_id,)
+                    amount_list = mysql_handler.fetch_data(query, data)
+                    total_amount = float(amount_list[0][0])
+
+                    query = "select cost from services where service_id = %s;"
+                    data = (service_id,)
+                    cost_list = mysql_handler.fetch_data(query, data)
+                    service_cost = float(cost_list[0][0])
+
+                    total_amount += service_cost
+                    query = "update billings set total_amount = %s where bid = %s;"
+                    data = (total_amount, bill_id)
+                    mysql_handler.execute_query(query, data)
+                    mysql_handler.disconnect()
+                    page.line_bill_cost.setText(str(total_amount))
+
+                    self.set_billing_service_to_service_table(bill_id)
+                    self.set_bill_table()
+                else:
+                    if not flag:
+                        QMessageBox.warning(
+                        current_widget, "Warning", "Service already taken!"
+                        )
+        except Exception as err:
+            print(f"Error Fetching(add_service_to_modify): {err}")
+
+    def remove_service_from_modify(self):
+        try:
+            page = self.page_billing
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            if page.table_bill.selectedItems():
+                selected_item_bill = page.table_bill.selectedItems()
+            else:
+                selected_item_bill = 1   
+
+            if selected_item_bill:
+                bill_id = None
+                if selected_item_bill == 1:
+                    bill_id = int(page.line_bill_id.text())
+                else:
+                    bill_id = int(selected_item_bill[0].text())
+                               
+                table = page.table_show_service
+                selected_item_service = table.currentRow()
+                if selected_item_service != -1:
+                    service_id = int(table.item(selected_item_service, 0).text())
+                    print(service_id)
+                    confirmed = (
+                        QMessageBox.question(
+                            current_widget,
+                            "Confirmation",
+                            "Do you want to remove this service?",
+                            QMessageBox.Yes | QMessageBox.Cancel,
+                        )
+                        == QMessageBox.Yes
+                    )
+                    if confirmed:
+                        table.removeRow(selected_item_service)
+                        mysql_handler = MySQLHandler()
+                        mysql_handler.connect()
+                        query = "delete from bill_services where service_id = %s and bid = %s;"
+                        data = (service_id, bill_id)
+                        mysql_handler.execute_query(query, data)
+
+                        query = "select total_amount from billings where bid = %s;"
+                        data = (bill_id,)
+                        amount_list = mysql_handler.fetch_data(query, data)
+                        total_amount = float(amount_list[0][0])
+
+                        query = "select cost from services where service_id = %s;"
+                        data = (service_id,)
+                        cost_list = mysql_handler.fetch_data(query, data)
+                        service_cost = float(cost_list[0][0])
+
+                        total_amount -= service_cost
+                        query = "update billings set total_amount = %s where bid = %s;"
+                        data = (total_amount, bill_id)
+                        mysql_handler.execute_query(query, data)
+                        mysql_handler.disconnect()
+                        page.line_bill_cost.setText(str(total_amount))
+                        self.set_billing_service_to_service_table(bill_id)
+                        self.show_billing()
+                    else:
+                        pass
+        except Exception as err:
+            print(f"Error Fetching(remove_service_from_modify): {err}")
+
     def update_bill(self):
         try:
-            ...
+            page = self.page_billing
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+            selected_item = page.table_bill.selectedItems()
+            if selected_item:
+                bill_id = int(selected_item[0].text())
+                animal_id = page.line_animal_id.text()
+                mysql_handler = MySQLHandler()
+                mysql_handler.connect()
+                query = "select adjustment,total_amount from billings where bid = %s;"
+                data = (bill_id,)
+                amount = mysql_handler.fetch_data(query, data)
+
+                pre_adjustment = float(amount[0][0])
+                total_amount = float(amount[0][1])
+                total_amount -= pre_adjustment
+
+                adjustment = float(page.line_adjustments.text())
+                total_amount += adjustment
+
+                if page.rb_pending.isChecked():
+                    status = "Due"
+                else:
+                    status = "Paid"
+
+                update_bill(total_amount, adjustment, status, bill_id)
+                page.button_bill_edit.setText("Enable Edit")
+                self.clear_bill_fields()
+                page.table_show_service.clearContents()
+                page.table_show_service.setRowCount(0)
+                self.show_billing()
         except Exception as err:
             print(f"Error Fetching(update_bill): {err}")
+
+    def fetch_service_ids_from_bill_id(self, billing_id: int):
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        query = "select service_id from bill_services where bid = %s;"
+        data = billing_id
+        service_ids = mysql_handler.fetch_data(query, (data,))
+        service_ids_list = [row[0] for row in service_ids]
+        mysql_handler.disconnect()
+        return service_ids_list
+    
+    def fetch_service_using_bill_id(self, billing_id: int):
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        query = "select service_id from bill_services where bid = %s;"
+        data = billing_id
+        service_ids = mysql_handler.fetch_data(query, (data,))
+        service_ids_list = [row[0] for row in service_ids]
+        mysql_handler.disconnect()
+        service_details = None
+        service_details = self.get_service_details(service_ids_list, Services)
+        return service_details
 
     def handle_selection_change(self):
         try:
@@ -1520,28 +1766,27 @@ class MainApp(QMainWindow):
             selected_item = page.table_bill.selectedItems()
             if selected_item:
                 billing_id = int(selected_item[0].text())
-                mysql_handler = MySQLHandler()
-                mysql_handler.connect()
-                query = "select service_id from bill_services where bid = %s;"
-                data = billing_id
-                service_ids = mysql_handler.fetch_data(query, (data,))
-                service_ids_list = [row[0] for row in service_ids]
-                mysql_handler.disconnect()
-                service_details = None
-                service_details = self.get_service_details(service_ids_list, Services)               
-                page.table_show_service.clearContents()
-                page.table_show_service.setRowCount(0)
-                page.table_show_service.setSortingEnabled(False)
-                if service_details :
-                    for rowService, service in enumerate(service_details):
-                        self.add_billing_service_to_service_table(rowService, service)
-                    page.table_show_service.setSortingEnabled(True)
-                    service_details.clear()
+                self.set_billing_service_to_service_table(billing_id)
                 page.button_remove_service.setEnabled(False)
                 page.button_add_service.setEnabled(False)
                 page.cb_services.setEnabled(False)
         except Exception as err:
             print(f"Error in showing services: {err}")
+
+    def set_billing_service_to_service_table(self, billing_id):
+        try:
+            page = self.page_billing
+            page.table_show_service.clearContents()
+            page.table_show_service.setRowCount(0)
+            page.table_show_service.setSortingEnabled(False)
+            service_details = self.fetch_service_using_bill_id(billing_id)
+            if service_details:
+                for rowService, service in enumerate(service_details):
+                    self.add_billing_service_to_service_table(rowService, service)
+                page.table_show_service.setSortingEnabled(True)
+                service_details.clear()
+        except Exception as err:
+            print(f"Error fetching(set_billing_service_to_service_table): {err}")
 
     def get_service_details(self, service_ids, services):
         try:
@@ -1556,7 +1801,7 @@ class MainApp(QMainWindow):
         try:
             self.page_billing.table_bill.clearContents()
             self.page_billing.table_bill.setRowCount(0)
-            fetch_billings()
+            fetch_billings()            
             self.page_billing.table_bill.setSortingEnabled(False)
             for row, billing in enumerate(Billings):
                 self.add_billing_to_table(row, billing)
@@ -1714,7 +1959,9 @@ class MainApp(QMainWindow):
             date_appt = page.date_appt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
             time_appt = page.time_appt.text().time()
-            time_appt_obj = time(time_appt.hour(), time_Appt.minute(), time_appt.second())
+            time_appt_obj = time(
+                time_appt.hour(), time_Appt.minute(), time_appt.second()
+            )
             visit_reason = page.line_reason.text()
             vet_name = page.cb_vet_name.currentText()
             for emp in Employees:
@@ -1804,7 +2051,14 @@ class MainApp(QMainWindow):
                     address,
                     med_condition,
                 )
-                add_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status)
+                add_appointment(
+                    animal_id,
+                    vet_id,
+                    date_appt_obj,
+                    time_appt_obj,
+                    visit_reason,
+                    appt_status,
+                )
                 if page.chk_box_day_care.isChecked():
                     day_care = True
                     page.line_stime.setEnabled(True)
@@ -1819,7 +2073,14 @@ class MainApp(QMainWindow):
 
             else:
                 animal_id = int(page.comboBox_animal_id.currentText())
-                add_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status)
+                add_appointment(
+                    animal_id,
+                    vet_id,
+                    date_appt_obj,
+                    time_appt_obj,
+                    visit_reason,
+                    appt_status,
+                )
                 if page.chk_box_day_care.isChecked():
                     day_care = True
                     page.line_stime.setEnabled(True)

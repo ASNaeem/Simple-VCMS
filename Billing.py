@@ -157,20 +157,30 @@ def add_bill(
 
 def delete_bill(id: int):
     try:
-        for bill in Billings:
+        for billing in Billings:
             if id == billing.billing_id:
                 mysql_handler = MySQLHandler()
                 mysql_handler.connect()
-                query = "delete from Billings where id = %s;"
+                query = "delete from Billings where biid = %s;"
                 data = id
                 mysql_handler.execute_query(query, (data,))
-                Appointments.remove(bill)
+                Billings.remove(billing)
                 mysql_handler.disconnect()
                 print("Delete Success!")
             else:
                 print("Delete Failed!")
     except Exception as err:
-        print(f"Error: {err}")
+        print(f"Error(delete_bill): {err}")
 
-
+def update_bill(total_amount, adjustment, status, bill_id):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        query = "update billings set total_amount = %s, adjustment = %s, status = %s where bid = %s;"
+        values = (total_amount, adjustment, status, bill_id)
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+        print("Bill Updated")
+    except Exception as err:
+        print(f"Error Fetching(update_bill_billing_class): {err}")
 ### End Billing ####
