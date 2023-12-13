@@ -227,12 +227,7 @@ class MainApp(QMainWindow):
             self.handle_selection_change
         )
         ##################### End Init #####################
-    
-    def logout(self):
-        if self.main_app:
-            self.main_app.quit()
-            self.show()
-    
+
     def search_Item(self, text):
         try:
             table = self.page_inventory.table_inventory
@@ -1881,8 +1876,8 @@ class MainApp(QMainWindow):
 
             apt_id = int(page.line_apt_id.text())
             animal_id = int(page.line_apt_animal_id.text())
-            print(vet_name)
-            for emp in Employees: #something wrong here
+            vet_name = page.cb_vet_name.currentText()
+            for emp in Employees:
                 #if emp.name == vet_name and "veterinarian" in emp.designation.lower():
                 if emp.name == vet_name and emp.designation.lower() == "veterinarian":
                     vet_id = emp.employee_id
