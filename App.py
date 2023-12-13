@@ -157,8 +157,6 @@ class MainApp(QMainWindow):
         )
         self.page_animal_details.button_animal_save.clicked.connect(self.update_animal)
 
-        self.page_expenses.button_expense_edit.clicked.connect(self.populate_expense)
-
         self.page_employee.button_edit.clicked.connect(self.populate_employee)
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
