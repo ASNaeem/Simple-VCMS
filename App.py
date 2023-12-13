@@ -227,7 +227,12 @@ class MainApp(QMainWindow):
             self.handle_selection_change
         )
         ##################### End Init #####################
-
+    
+    def logout(self):
+        if self.main_app:
+            self.main_app.quit()
+            self.show()
+    
     def search_Item(self, text):
         try:
             table = self.page_inventory.table_inventory
