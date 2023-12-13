@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1051</width>
-    <height>700</height>
+    <height>710</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -116,7 +116,7 @@
           <item>
            <widget class="QLineEdit" name="line_apt_id">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -129,6 +129,9 @@
               <family>Courier New</family>
               <pointsize>12</pointsize>
              </font>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -167,6 +170,9 @@
               <family>Courier New</family>
               <pointsize>12</pointsize>
              </font>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
             <property name="placeholderText">
              <string/>
@@ -209,6 +215,9 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -234,7 +243,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_vet_name">
+           <widget class="QComboBox" name="cb_vet_name">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -361,6 +370,9 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -398,6 +410,9 @@
               <family>Courier New</family>
               <pointsize>12</pointsize>
              </font>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
             <property name="placeholderText">
              <string>eg. 01XXX-XXXXXX</string>

@@ -105,7 +105,7 @@ def fetch_appointment():
         Appointments.clear()
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
-        query = "select ap.appointment_id, ap.animal_id, ap.employee_id, an.owner_name, an.phone, an.species, ap.a_date, ap.a_time, ap.visit_reason, ap.a_status from animals an join appointments ap on an.animal_id = ap.animal_id;"
+        query = "select ap.appointment_id, ap.animal_id, ap.employee_id, an.owner_name, an.phone, an.species, ap.a_date, ap.a_time, ap.visit_reason, ap.a_status from animals an, appointments ap where an.animal_id = ap.animal_id;"
         data = mysql_handler.fetch_data(query)
 
         for row in data:
@@ -202,3 +202,18 @@ def update_appointment(animal_id: int,
         print("Appointment Updated!")
     except Exception as err:
         print(f"Error Updating Appointment: {err}")
+
+def update_appointment_status(apt_id, apt_status):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+
+        query = '''
+                update appointments set a_status= %s where appointment_id = %s;
+                '''
+        values = (apt_status, apt_id)
+        mysql_handler.execute_query(query, values)
+        mysql_handler.disconnect()
+        print("Appointment Cancelled!")
+    except Exception as err:
+        print(f"Error Cancelling Appointment: {err}")

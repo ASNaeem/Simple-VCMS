@@ -168,9 +168,9 @@
        </widget>
       </item>
       <item row="17" column="0">
-       <widget class="QPushButton" name="button_exit">
+       <widget class="QPushButton" name="button_logout">
         <property name="text">
-         <string>Exit</string>
+         <string>Logout</string>
         </property>
        </widget>
       </item>
