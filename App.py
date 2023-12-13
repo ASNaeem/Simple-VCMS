@@ -1266,18 +1266,30 @@ class MainApp(QMainWindow):
             self.page_daycare.table_care.setRowCount(0)
             fetch_day_care()
             self.page_daycare.table_care.setSortingEnabled(False)
+            
             for row, day_care in enumerate(Day_Care_Service):
-                self.add_day_care_to_table(row, day_care)
+                animal_info = self.get_animal_by_id(day_care.animal_id)
+                self.add_day_care_to_table(row, day_care, animal_info)
             self.page_daycare.table_care.setSortingEnabled(True)
         except Exception as err:
             print(f"Error Fetching(set_day_care_table): {err}")
 
-    def add_day_care_to_table(self, row, day_care):
+    def get_animal_by_id(self, animal_id):
+        try:
+            for animal in Animals:
+                if animal.animal_id == animal_id:
+                    return animal.species, animal.owner_name
+            return None
+        except Exception as err:
+            print(f"Error Fetching(get_animal_by_id): {err}")
+
+    def add_day_care_to_table(self, row, day_care, animal_info):
         try:
             header = self.page_daycare.table_care.horizontalHeader()
             header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
             table = self.page_daycare.table_care
             table.insertRow(row)
+            
             """table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
             header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
@@ -1290,12 +1302,15 @@ class MainApp(QMainWindow):
             header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
             header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)"""
+            
             table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
             table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
-            table.setItem(row, 2, QTableWidgetItem(str(day_care.day_care_date)))
-            table.setItem(row, 3, QTableWidgetItem(str(day_care.start_time)))
-            table.setItem(row, 4, QTableWidgetItem(str(day_care.end_time)))
-            table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
+            table.setItem(row, 2, QTableWidgetItem(str(animal_info[0])))
+            table.setItem(row, 3, QTableWidgetItem(str(animal_info[1])))
+            table.setItem(row, 4, QTableWidgetItem(str(day_care.day_care_date)))
+            table.setItem(row, 5, QTableWidgetItem(str(day_care.start_time)))
+            table.setItem(row, 6, QTableWidgetItem(str(day_care.end_time)))
+            table.setItem(row, 7, QTableWidgetItem(str(day_care.notes)))
             self.resize_columns_to_contents_alternate2(table)
 
         except Exception as err:
@@ -1529,11 +1544,16 @@ class MainApp(QMainWindow):
             print(f"Error Fetching(add_new_bill): {err}")"""
 
     def clear_bill_fields(self):
-        page = self.page_billing
-        page.line_bill_id.clear()
-        page.line_animal_id.clear()
-        page.line_adjustments.clear()
-        page.line_bill_cost.clear()
+        try:
+            page = self.page_billing
+            page.line_bill_id.clear()
+            page.line_animal_id.clear()
+            page.line_adjustments.clear()
+            page.line_bill_cost.clear()
+            page.rb_pending.setChecked(True)
+            page.rb_paid.setChecked(False)
+        except Exception as err:
+            print(f"Error(clear_bill_fields): {err}")
 
     def get_animal_by_bill_id(self, id: int):
         try:
@@ -1932,16 +1952,6 @@ class MainApp(QMainWindow):
 
         except Exception as err:
             print(f"Error Fetching(checkbox_state_changed): {err}")
-
-    """def get_animal_by_id(self, animal_id):
-        try:
-            for animal in Animals:
-                if animal.animal_id == animal_id:
-                    return animal
-            return None
-
-        except Exception as err:
-            print(f"Error Fetching(get_animal_by_id): {err}")"""
 
     def set_appointment_table(self):
         try:
