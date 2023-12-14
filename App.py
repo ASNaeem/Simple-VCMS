@@ -2074,8 +2074,29 @@ class MainApp(QMainWindow):
 
     def checkbox_state_changed(self, state):
         try:
-            combo_box = self.page_appointment_create.comboBox_animal_id
+            page = self.page_appointment_create
+            combo_box = page.comboBox_animal_id
             if state == 0:
+                page.line_o_fname.setEnabled(False)
+                page.line_o_lname.setEnabled(False)
+                page.line_phone.setEnabled(False)
+                page.line_email.setEnabled(False)
+                page.line_address.setEnabled(False)
+
+                page.line_aname.setEnabled(False)
+                page.line_species.setEnabled(False)
+                page.line_breed.setEnabled(False)
+                page.date_appt_birth.setEnabled(False)
+
+                page.rb_male.setEnabled(False)
+                page.rb_female.setEnabled(False)
+                page.rb_ster_yes.setEnabled(False)
+                page.rb_ster_no.setEnabled(False)
+
+                page.line_colors.setEnabled(False)
+                page.line_behave.setEnabled(False)
+                page.date_appt_reg.setEnabled(False)
+
                 combo_box.setEnabled(True)
                 animal_info = [
                     f"{animal.species}, {animal.owner_name} ({animal.animal_id})"
@@ -2089,6 +2110,25 @@ class MainApp(QMainWindow):
             else:
                 combo_box.clear()
                 combo_box.setEnabled(False)
+                page.line_o_fname.setEnabled(True)
+                page.line_o_lname.setEnabled(True)
+                page.line_phone.setEnabled(True)
+                page.line_email.setEnabled(True)
+                page.line_address.setEnabled(True)
+
+                page.line_aname.setEnabled(True)
+                page.line_species.setEnabled(True)
+                page.line_breed.setEnabled(True)
+                page.date_appt_birth.setEnabled(True)
+
+                page.rb_male.setEnabled(True)
+                page.rb_female.setEnabled(True)
+                page.rb_ster_yes.setEnabled(True)
+                page.rb_ster_no.setEnabled(True)
+
+                page.line_colors.setEnabled(True)
+                page.line_behave.setEnabled(True)
+                page.date_appt_reg.setEnabled(True)
 
         except Exception as err:
             print(f"Error Fetching(checkbox_state_changed): {err}")
