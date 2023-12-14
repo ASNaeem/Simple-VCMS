@@ -2179,7 +2179,6 @@ class MainApp(QMainWindow):
             print(vet_name)
             for emp in Employees:
                 # if emp.name == vet_name and "veterinarian" in emp.designation.lower():
-                
                 if emp.name == vet_name and emp.designation.lower() == "veterinarian":
                     vet_id = emp.employee_id
                     print(emp.name)
