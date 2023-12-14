@@ -63,8 +63,8 @@ from Auth import LoginWindow
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 warnings.filterwarnings("ignore")
-theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
-
+light_theme_list = ["light_teal_500.xml"]
+dark_theme_list = ["dark_blue.xml", "dark_medical.xml",]
 
 class MainApp(QMainWindow):
     def __init__(self):
@@ -608,11 +608,22 @@ class MainApp(QMainWindow):
     #####   Setting    #####
     def change_theme(self):
         try:
+            invert:bool = False
+            if "light" in self.page_setting.comboBox_themes.currentText():
+                invert = True
             apply_stylesheet(
-                app,
+                self,
                 self.page_setting.comboBox_themes.currentText(),
-                invert_secondary=False,
+                invert_secondary=invert,
                 extra=extra,
+                css_file="custom.css"
+            )
+            apply_stylesheet(
+                self.login_window,
+                self.page_setting.comboBox_themes.currentText(),
+                invert_secondary=invert,
+                extra=extra,
+                css_file="custom.css"
             )
             with open("config.txt", "w") as f:
                 f.write(self.page_setting.comboBox_themes.currentText())
@@ -2470,19 +2481,31 @@ class MainApp(QMainWindow):
 
 
 #### UI density Scaling modifier ####
+density = '-2'
 extra = {
-    # Density Scale
-    "density_scale": "-2",
+    'danger': '#dc3545',
+    'warning': '#ffc107',
+    'success': '#17a2b8',
+    # Font
+    'font_family': 'Roboto',
+    # Density
+    'density_scale': density,
+    # Button Shape
+    'button_shape': 'default',
 }
 if __name__ == "__main__":
     app = QApplication([])
     window = MainApp()
     # window.show()
+    invert:bool = False
     with open("config.txt", "r") as f:
         read = f.read()
         if not read:
             read = "dark_medical.xml"
-        apply_stylesheet(app, theme=read, extra=extra)
+        
+        if "light" in read:
+            invert = True
+        apply_stylesheet(app, theme=read, invert_secondary=invert, extra=extra)
         window.page_setting.comboBox_themes.setCurrentText(read)
     # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
     window.adjustSize()
