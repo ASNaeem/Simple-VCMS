@@ -540,6 +540,47 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_home)
             # self.page_home.table_inventory.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Home")
+            page = self.page_home
+
+            mysql_handler = MySQLHandler()
+            mysql_handler.connect()
+
+            query_total_case_current_month = "select count(animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());"
+            data_total_case_current_month = mysql_handler.fetch_data(query_total_case_current_month)
+            print(data_total_case_current_month)
+            
+            query_total_patient_current_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());" 
+            data_total_patient_current_month = mysql_handler.fetch_data(query_total_patient_current_month)
+
+            query_total_case_last_month = "select count(animal_id) from appointments where year(a_date) = year(curdate() - interval 1 month) and month(a_date) = month(curdate() - interval 1 month)"
+            data_total_case_last_month = mysql_handler.fetch_data(query_total_case_last_month)
+
+            query_total_patient_last_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate() - interval 1 month) and month(a_date) = month(curdate() - interval 1 month)"
+            data_total_patient_last_month = mysql_handler.fetch_data(query_total_patient_last_month)
+
+            query_total_case_this_year = "select count(animal_id) from appointments where year(a_date) = year(curdate())"
+            data_total_case_this_year = mysql_handler.fetch_data(query_total_case_this_year)
+
+            query_total_patient_this_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate())" 
+            data_total_patient_this_year = mysql_handler.fetch_data(query_total_patient_this_year)
+
+            query_total_case_last_year = "select count(animal_id) from appointments where year(a_date) = year(curdate() - interval 1 year)"
+            data_total_case_last_year = mysql_handler.fetch_data(query_total_case_last_year)
+
+            query_total_patient_last_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate() - interval 1 year)"
+            data_total_patient_last_year = mysql_handler.fetch_data(query_total_patient_last_year)
+            print(data_total_patient_last_year)
+
+            page.total_case_current_month.setText(str(data_total_case_current_month[0][0]))
+            page.total_patient_current_month.setText(str(data_total_patient_current_month[0][0]))
+            page.total_case_last_month.setText(str(data_total_case_last_month[0][0]))
+            page.total_patient_last_month.setText(str(data_total_patient_last_month[0][0]))
+            page.total_case_this_year.setText(str(data_total_case_this_year[0][0]))
+            page.total_patient_this_year.setText(str(data_total_patient_this_year[0][0]))
+            page.total_case_last_year.setText(str(data_total_case_last_year[0][0]))
+            page.total_patient_last_year.setText(str(data_total_patient_last_year[0][0]))
+            
+            mysql_handler.disconnect()
             # self.stackedWidget.setCurrentWidget(self.page_home)
             # self.setWindowTitle("VCMS || Dashboard || Inventory")
         except Exception as err:
