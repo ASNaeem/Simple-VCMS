@@ -9,7 +9,6 @@ from PyQt5.QtWidgets import (
     QWidget,
     QCheckBox,
 )
-
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 from qt_material import apply_stylesheet, list_themes
@@ -59,7 +58,7 @@ from DayCareService import (
     update_daycare_to_db,
 )
 from Expense import Expenses, fetch_expenses, delete_expenses, update_expense_to_db
-
+from Auth import LoginWindow
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
@@ -72,7 +71,7 @@ class MainApp(QMainWindow):
         super().__init__()
         self.setWindowIcon(QtGui.QIcon("resources/windowIcon.png"))
         uic.loadUi("MainUI.ui", self)
-
+        self.login_window = None
         # self.page_animal = uic.loadUi("AnimalUI.ui")
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
         self.page_appointment_create = uic.loadUi("AppointmentCreateUI.ui")
@@ -234,8 +233,21 @@ class MainApp(QMainWindow):
         self.page_billing.table_bill.itemSelectionChanged.connect(
             self.handle_selection_change
         )
+        self.button_logout.clicked.connect(self.action_logout)
+        
         ##################### End Init #####################
-
+    def handleLoginReference(self, login_window_reference):
+        self.login_window = login_window_reference
+        self.adjustSize()
+        self.showMaximized()
+        self.show()
+        self.login_window.hide()
+        
+    def action_logout(self):
+        self.hide()
+        self.login_window.employee = None
+        self.login_window.show()
+        
     """def search_Item(self, text):
         try:
             table = self.page_home.table_inventory
@@ -338,7 +350,7 @@ class MainApp(QMainWindow):
                         break
 
                 # vet_name = get_employee_name_by_id(self, vet_id)
-                self.page_appointment_modify.cb_vet_name.setCurrentText(emp.name)
+                self.page_appointment_modify.cb_vet_name.setCurrentText(f"{emp.name} ({emp.employee_id})")
 
                 page = self.page_appointment_modify
 
@@ -1347,6 +1359,7 @@ class MainApp(QMainWindow):
     ################# Day Care Service End ################
 
     ###################### Expenses #######################
+
     def clear_expense_fields(self):
         try:
             page = page = self.page_expenses
@@ -2178,15 +2191,11 @@ class MainApp(QMainWindow):
 
             apt_id = int(page.line_apt_id.text())
             animal_id = int(page.line_apt_animal_id.text())
-            vet_name = page.cb_vet_name.currentText()
-            print(vet_name)
-            for emp in Employees:
-                # if emp.name == vet_name and "veterinarian" in emp.designation.lower():
-                if emp.name == vet_name and emp.designation.lower() == "veterinarian":
-                    vet_id = emp.employee_id
-                    print(emp.name)
-                else:
-                    print("Veterinarian Does Not Exist!")
+            vet_info = page.cb_vet_name.currentText()
+
+            start_index = vet_info.find("(")
+            end_index = vet_info.find(")")
+            vet_id = int(vet_info[start_index + 1 : end_index])
 
             date_appt = page.date_apt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
