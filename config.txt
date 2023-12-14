@@ -1,1 +1,1 @@
-light_cyan_500.xml
+dark_amber.xml

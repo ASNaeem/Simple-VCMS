@@ -43,6 +43,7 @@ from Service import (
 )
 from Animal import (
     Animals,
+    add_animal,
     fetch_animals,
     delete_record_from_db,
     delete_animal_from_db,
@@ -246,7 +247,7 @@ class MainApp(QMainWindow):
         Alternate_Phone = self.login_window.employee.phone[1]
         Designation = self.login_window.employee.designation
         Email = self.login_window.employee.email
-        print(self.login_window.employee.name)
+        #print(self.login_window.employee.name)
 
         self.page_home.label_name.setText(name)
         self.page_home.label_phone.setText(Phone)
@@ -381,8 +382,8 @@ class MainApp(QMainWindow):
                 page.line_apt_phone.setText(appointment.phone_number)
                 page.line_apt_status.setText(appointment.appointment_status)
                 page.text_visit_reason.setText(appointment.visit_reason)
-                print(type(appointment.appointment_date))
-                print(appointment.appointment_date)
+                #print(type(appointment.appointment_date))
+                #print(appointment.appointment_date)
                 qdate = QDate(
                     appointment.appointment_date.year,
                     appointment.appointment_date.month,
@@ -433,7 +434,7 @@ class MainApp(QMainWindow):
                 for employee in Employees
                 if "vet" in employee.designation.lower()
             ]
-            vet_info.insert(0, "Select")
+            #vet_info.insert(0, "Select")
             combo_box = self.page_appointment_create.cb_vet_name
             combo_box.clear()
             combo_box.addItems(vet_info)
@@ -554,7 +555,7 @@ class MainApp(QMainWindow):
 
             query_total_case_current_month = "select count(animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());"
             data_total_case_current_month = mysql_handler.fetch_data(query_total_case_current_month)
-            print(data_total_case_current_month)
+            #print(data_total_case_current_month)
             
             query_total_patient_current_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());" 
             data_total_patient_current_month = mysql_handler.fetch_data(query_total_patient_current_month)
@@ -576,7 +577,7 @@ class MainApp(QMainWindow):
 
             query_total_patient_last_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate() - interval 1 year)"
             data_total_patient_last_year = mysql_handler.fetch_data(query_total_patient_last_year)
-            print(data_total_patient_last_year)
+            #print(data_total_patient_last_year)
 
             page.total_case_current_month.setText(str(data_total_case_current_month[0][0]))
             page.total_patient_current_month.setText(str(data_total_patient_current_month[0][0]))
@@ -2198,19 +2199,19 @@ class MainApp(QMainWindow):
             time_appt_obj = page.time_appt.time().toString("hh:mm:ss")
             visit_reason = page.line_reason.text()
             vet_info = page.cb_vet_name.currentText()
-
+            #print(f"vet{vet_info}")
             start_index = vet_info.find("(")
             end_index = vet_info.find(")")
             vet_id = int(vet_info[start_index + 1 : end_index])
-
+            #print(f"vet id{vet_id}")
             appt_status = "Scheduled"
 
             if page.chk_box_new_animal.isChecked():
                 new_animal = True
+    
+                #animal_name = page.comboBox_animal_id.currentText()
 
-                animal_name = page.comboBox_animal_id.currentText()
-                if not animal_name:
-                    animal_name = "None"
+                animal_name = page.line_aname.text()
                 birth_date = page.date_appt_birth.text()
 
                 gender = ""
@@ -2222,7 +2223,7 @@ class MainApp(QMainWindow):
                 sterilized = ""
                 if page.rb_ster_yes.isChecked():
                     sterilized = "Yes"
-                elif page.rb_ster_yes.isChecked():
+                elif page.rb_ster_no.isChecked():
                     sterilized = "No"
 
                 species = page.line_species.text()
@@ -2235,8 +2236,6 @@ class MainApp(QMainWindow):
                     behavioral_warning = "None"
                 fname = page.line_o_fname.text()
                 lname = page.line_o_lname.text()
-                if not lname:
-                    lname = ""
                 owner_name = fname + " " + lname
                 email = page.line_email.text()
                 if not email:
@@ -2248,25 +2247,10 @@ class MainApp(QMainWindow):
 
                 reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
                 birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
-
-                if not all(
-                    [
-                        reg_date,
-                        species,
-                        color,
-                        gender,
-                        sterilized,
-                        med_condition,
-                        owner_name,
-                        phone,
-                        address,
-                        birth_date,
-                    ]
-                ):
-                    QMessageBox.warning(
-                        current_widget, "Warning", "Please fill in all fields."
-                    )
-                return
+                print("ok up to this")
+                if not all([reg_date,species,color,gender,sterilized, med_condition, owner_name, phone, address, birth_date]):
+                    QMessageBox.warning(current_widget, "Warning", "Please fill the required fields.")
+                    return
                 animal_id = add_animal(
                     animal_name,
                     birth_date_obj,
@@ -2282,31 +2266,44 @@ class MainApp(QMainWindow):
                     address,
                     med_condition,
                 )
+                print("animal added")
+                print(animal_id)
                 add_appointment(
                     animal_id,
                     vet_id,
+                    owner_name,
+                    phone,
+                    species,
                     date_appt_obj,
                     time_appt_obj,
                     visit_reason,
                     appt_status,
                 )
+                print("appointment added")
                 if page.chk_box_day_care.isChecked():
                     day_care = True
-                    page.line_stime.setEnabled(True)
+                    #page.line_stime.setEnabled(True)
                     page.stime_appt.setEnabled(True)
                     page.text_note.setEnabled(True)
 
                     stime = page.stime_appt.text().time()
-                    stime_obj = time(stime.hour(), stime.minute(), stime.second())
+                    #stime_obj = time(stime.hour(), stime.minute(), stime.second())
                     note = page.text_note.toPlainText()
 
-                    add_day_care(animal_id, date_appt_obj, stime_obj, note)
+                    add_day_care(animal_id, date_appt_obj, stime, note)
 
             else:
                 animal_id = int(page.comboBox_animal_id.currentText())
+                start_index = animal_info.find("(")
+                end_index = animal_info.find(")")
+                animal_id = int(animal_info[start_index + 1 : end_index])
+                
                 add_appointment(
                     animal_id,
                     vet_id,
+                    "unknown",
+                    "unknown",
+                    "unknown",
                     date_appt_obj,
                     time_appt_obj,
                     visit_reason,
@@ -2318,15 +2315,17 @@ class MainApp(QMainWindow):
                     page.stime_appt.setEnabled(True)
                     page.text_note.setEnabled(True)
 
-                    stime = page.stime_appt.text().time()
-                    stime_obj = time(stime.hour(), stime.minute(), stime.second())
+                    #stime = page.stime_appt.text().time()
+                    #stime_obj = time(stime.hour(), stime.minute(), stime.second())
+                    stime_str = page.stime_appt.text()
+                    stime_obj = QTime.fromString(stime_str, "hh:mm:ss")
                     note = page.text_note.toPlainText()
 
                     add_day_care(animal_id, date_appt_obj, stime_obj, note)
 
-            self.show_appointment
+            self.show_appointment()
         except Exception as err:
-            print(f"Error Fetching(create_appointment): {err}")
+            print(f"Error(create_appointment): {err}")
 
     def update_existing_appointment(self):
         try:
