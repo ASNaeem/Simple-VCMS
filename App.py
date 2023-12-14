@@ -2026,9 +2026,9 @@ class MainApp(QMainWindow):
             page = self.page_appointment_create
             current_widget = self.stackedWidget.setCurrentWidget(page)
 
-            date_appt = page.date_appt.text()
-            date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
-            time_appt = page.time_appt.text().time()
+            date_appt = page.date_apt.text()
+            date_appt_obj = datetime.strptime(str(date_apt), "%Y-%m-%d").date()
+            time_appt = page.time_apt.text().time()
             time_appt_obj = time(
                 time_appt.hour(), time_Appt.minute(), time_appt.second()
             )
