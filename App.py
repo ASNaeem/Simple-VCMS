@@ -2316,8 +2316,8 @@ class MainApp(QMainWindow):
 
                     #stime = page.stime_appt.text().time()
                     #stime_obj = time(stime.hour(), stime.minute(), stime.second())
-                    stime_str = page.stime_appt.text()
-                    stime_obj = QTime.fromString(stime_str, "hh:mm:ss")
+                    stime_str = page.stime_appt.time()
+                    #stime_obj = QTime.fromString(stime_str, "hh:mm:ss")
                     note = page.text_note.toPlainText()
 
                     add_day_care(animal_id, date_appt_obj, stime_obj, note)
