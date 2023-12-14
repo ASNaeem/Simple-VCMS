@@ -83,7 +83,7 @@ class MainApp(QMainWindow):
         self.page_home = uic.loadUi("HomeUi.ui")
         self.page_setting = uic.loadUi("SettingUI.ui")
         self.page_support = uic.loadUi("SupportUI.ui")
-        self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
+        #self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
         self.page_employee = uic.loadUi("EmployeeUI.ui")
         self.page_service = uic.loadUi("ServiceUI.ui")
         self.page_daycare = uic.loadUi("DayCareUI.ui")
@@ -100,7 +100,7 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_home)
         self.stackedWidget.addWidget(self.page_daycare)
         self.stackedWidget.addWidget(self.page_billing)
-        self.stackedWidget.addWidget(self.page_analytics_report)
+        #self.stackedWidget.addWidget(self.page_analytics_report)
         self.stackedWidget.addWidget(self.page_expenses)
         self.stackedWidget.addWidget(self.page_employee)
         self.stackedWidget.addWidget(self.page_service)
@@ -110,8 +110,8 @@ class MainApp(QMainWindow):
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
         self.button_daycare.clicked.connect(self.show_daycare)
-        self.button_inventory.clicked.connect(self.show_home)
-        self.button_analytics.clicked.connect(self.show_analytics_report)
+        self.button_home.clicked.connect(self.show_home)
+        #self.button_analytics.clicked.connect(self.show_analytics_report)
         self.button_expenses.clicked.connect(self.show_expenses)
         self.button_employees.clicked.connect(self.show_employee)
         self.button_services.clicked.connect(self.show_service)
@@ -526,14 +526,14 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(show_support): {err}")
 
-    def show_analytics_report(self):
+    '''def show_analytics_report(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_analytics_report)
             self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
             self.stackedWidget.setCurrentWidget(self.page_analytics_report)
             self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
         except Exception as err:
-            print(f"Error Fetching(show_analytics_report): {err}")
+            print(f"Error Fetching(show_analytics_report): {err}")'''
 
     def show_employee(self):
         try:
