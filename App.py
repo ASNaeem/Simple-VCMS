@@ -921,8 +921,9 @@ class MainApp(QMainWindow):
             self.page_employee.line_home_6.clear()
             self.page_employee.line_address_6.clear()
             self.page_employee.line_salary_6.clear()
+            self.page_employee.line_employee_password.clear()
             self.page_employee.dateEdit_joining_date_6.setDate(QDate(2000, 1, 1))
-            self.page_employee.rb_working.setChecked(False)
+            self.page_employee.rb_working.setChecked(True)
             self.page_employee.rb_on_leave.setChecked(False)
             self.page_employee.comboBox_designation_6.setCurrentIndex(0)
             self.page_employee.combobox_access_level_6.setCurrentIndex(0)
@@ -1055,6 +1056,8 @@ class MainApp(QMainWindow):
 
                 self.set_employee_table()
                 self.clear_employee_fields()
+                self.page_employee.button_edit.setText("Edit")
+                self.page_employee.button_register.setEnabled(True)
             else:
                 print("Select a Row!")
         except Exception as err:
