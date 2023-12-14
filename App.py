@@ -254,6 +254,11 @@ class MainApp(QMainWindow):
         self.page_home.label_designation.setText(Designation)
         self.page_home.label_email.setText(Email)
 
+        if self.login_window.employee.access_level < 3:
+            self.button_employees.hide()
+            self.page_billing.button_bill_delete.hide()
+            self.page_expenses.button_expense_delete.hide()
+
         self.adjustSize()
         self.showMaximized()
         self.show()
