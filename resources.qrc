@@ -3,6 +3,8 @@
     <file>resources/user.png</file>
     <file>resources/lock.png</file>
     <file>resources/mail.png</file>
+	<file>resources/employee.png</file>
+	<file>resources/animal.png</file>
     <file>resources/WindowIcon.png</file>
   </qresource>
 </RCC>
