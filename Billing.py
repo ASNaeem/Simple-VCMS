@@ -98,10 +98,14 @@ def fetch_billings():
         data = mysql_handler.fetch_data(query)
         query = "select * from bill_services;"
         dataServices = mysql_handler.fetch_data(query)
-
+        day_care_id_previous = None
         for row in data:
+            if row[1] == None:
+                day_care_id_previous = 0
+            else:
+                day_care_id_previous = int(row[1])
             billing = Bill(
-                day_care_id=int(row[1]),
+                day_care_id = day_care_id_previous, 
                 appointment_id=int(row[2]),
                 billing_date=str(row[3]),
                 total_amount=float(row[4]),
@@ -109,16 +113,14 @@ def fetch_billings():
                 status=row[6],
             )
             billing.billing_id = int(row[0])
-
             for rowServices in dataServices:
                 if billing.billing_id == rowServices[0]:
                     billing.add_services(rowServices[1])
 
             Billings.append(billing)
         mysql_handler.disconnect()
-        print(f"Er")
     except Exception as err:
-        print(f"Error Fetching: {err}")
+        print(f"Error Fetching(fetch_billings): {err}")
 
 
 def add_bill(
