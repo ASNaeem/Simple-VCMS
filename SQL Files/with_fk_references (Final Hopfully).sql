@@ -1,3 +1,4 @@
+drop database VCMS;
 create database if not exists VCMS;
 use VCMS;
 /* animal */

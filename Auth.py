@@ -1,29 +1,31 @@
-from App import MainApp
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtCore
 from MySQLHandler import MySQLHandler
 from qt_material import apply_stylesheet, list_themes
+from Employee import Employee
 class LoginWindow(QtWidgets.QMainWindow):
+    login_reference_signal = QtCore.pyqtSignal(object)
     def __init__(self):
         super().__init__()
         uic.loadUi('LoginUI.ui', self)
+        self.employee:Employee = None
         self.checkRemembered()
         self.button_login.clicked.connect(self.authenticate)
         #self.main_app.button_logout.clicked.connect(self.logout)
     
     def authenticate(self):
-        email = self.line_login_email.text()
-        password = self.line_login_pass.text()
+        email = self.line_login_email.text().strip()
+        password = self.line_login_pass.text().strip()
         try:
             mysql_handler = MySQLHandler()
             mysql_handler.connect()
-            query = "select email, password from employees where email = %s and password = %s"
-            values = email, password
+            query = "select email, password from employees where email = %s"
+            values = email
             auth = None
-            auth = mysql_handler.fetch_data(query, values)
-            print(auth)
+            auth = mysql_handler.fetch_data(query, (values,))
+            print(auth[0][0])
             mysql_handler.disconnect()
             
-            if auth:
+            if auth[0][0].strip()==email and auth[0][1].strip()==password:
                 authenticated = True
                 if self.cb_remember.isChecked():
                     try:
@@ -33,27 +35,32 @@ class LoginWindow(QtWidgets.QMainWindow):
                         print("Error writing remmber to file: {e}")
                 #self.self.line_login_email.clear()
                 #self.self.line_login_pass.clear()
+                self.line_login_pass.clear()
                 self.start_main()
             else:
+                self.line_login_pass.clear()
                 print("wrong login!")
         except Exception as err:
             print("Login error: {err}")
-        
-    def logout(self):
-        if self.main_app:
-            self.main_app.quit()
-            self.show()
     
     def start_main(self):
-        self.main_app = MainApp()
-        self.hide()
+        try:
+            #from App import MainApp
 
-        apply_stylesheet(self.main_app, theme=read, extra=extra)
-        self.main_app.page_setting.comboBox_themes.setCurrentText(read)
-            # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
-        self.main_app.adjustSize()
-        self.main_app.showMaximized()
-        self.main_app.show()
+            self.hide()
+            self.login_reference_signal.emit(self)
+            '''
+            apply_stylesheet(self.main_app, theme=read, extra=extra)
+            
+            self.main_app.page_setting.comboBox_themes.setCurrentText(read)
+                # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
+            self.main_app.adjustSize()
+            self.main_app.showMaximized()
+            self.main_app.show()
+            '''
+        except Exception as err:
+            self.show()
+            print("Error starting main app: {err}")
         
     def checkRemembered(self):
         try:
@@ -75,8 +82,15 @@ with open("config.txt", "r") as f:
             if not read:
                 read = "dark_medical.xml"
 if __name__=="__main__":
+    from App import MainApp
     app = QtWidgets.QApplication([])
+    
+    main_app = MainApp()
     login_window = LoginWindow()
+    
+    login_window.login_reference_signal.connect(main_app.handleLoginReference)
+    
+    apply_stylesheet(main_app, theme=read, extra=extra)
     apply_stylesheet(login_window, theme=read, extra=extra)
     login_window.show()
     app.exec_()

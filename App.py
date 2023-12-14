@@ -9,7 +9,6 @@ from PyQt5.QtWidgets import (
     QWidget,
     QCheckBox,
 )
-
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 from qt_material import apply_stylesheet, list_themes
@@ -59,7 +58,7 @@ from DayCareService import (
     update_daycare_to_db,
 )
 from Expense import Expenses, fetch_expenses, delete_expenses, update_expense_to_db
-
+from Auth import LoginWindow
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
@@ -72,7 +71,7 @@ class MainApp(QMainWindow):
         super().__init__()
         self.setWindowIcon(QtGui.QIcon("resources/windowIcon.png"))
         uic.loadUi("MainUI.ui", self)
-
+        self.login_window = None
         # self.page_animal = uic.loadUi("AnimalUI.ui")
         self.page_appointment = uic.loadUi("AppointmentUI.ui")
         self.page_appointment_create = uic.loadUi("AppointmentCreateUI.ui")
@@ -234,8 +233,21 @@ class MainApp(QMainWindow):
         self.page_billing.table_bill.itemSelectionChanged.connect(
             self.handle_selection_change
         )
+        self.button_logout.clicked.connect(self.action_logout)
+        
         ##################### End Init #####################
-
+    def handleLoginReference(self, login_window_reference):
+        self.login_window = login_window_reference
+        self.adjustSize()
+        self.showMaximized()
+        self.show()
+        self.login_window.hide()
+        
+    def action_logout(self):
+        self.hide()
+        self.login_window.employee = None
+        self.login_window.show()
+        
     """def search_Item(self, text):
         try:
             table = self.page_home.table_inventory
@@ -2028,11 +2040,11 @@ class MainApp(QMainWindow):
             page = self.page_appointment_create
             current_widget = self.stackedWidget.setCurrentWidget(page)
 
-            date_appt = page.date_apt.text()
-            date_appt_obj = datetime.strptime(str(date_apt), "%Y-%m-%d").date()
-            time_appt = page.time_apt.text().time()
+            date_appt = page.date_appt.text()
+            date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
+            time_appt = page.time_appt.text().time()
             time_appt_obj = time(
-                time_appt.hour(), time_Appt.minute(), time_appt.second()
+                time_appt.hour(), time_appt.minute(), time_appt.second()
             )
             visit_reason = page.line_reason.text()
             vet_name = page.cb_vet_name.currentText()
@@ -2042,7 +2054,6 @@ class MainApp(QMainWindow):
                     break
                 else:
                     print("Veterinarian Does Not Exist!")
-                    return
 
             appt_status = "Scheduled"
 
