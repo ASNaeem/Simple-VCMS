@@ -109,7 +109,6 @@ def fetch_appointment():
         data = mysql_handler.fetch_data(query)
 
         for row in data:
-            print(row)
             appointment = Appointment(
                 animal_id=int(row[1]),
                 vet_id=int(row[2]),
