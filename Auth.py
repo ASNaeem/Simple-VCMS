@@ -10,6 +10,7 @@ class LoginWindow(QtWidgets.QMainWindow):
         self.employee:Employee = None
         self.checkRemembered()
         self.button_login.clicked.connect(self.authenticate)
+        self.wrong_login.hide()
         #self.main_app.button_logout.clicked.connect(self.logout)
     
     def authenticate(self):
@@ -26,7 +27,8 @@ class LoginWindow(QtWidgets.QMainWindow):
             mysql_handler.disconnect()
             
             if auth[0][0].strip()==email and auth[0][1].strip()==password:
-                authenticated = True
+                #authenticated = True
+                self.wrong_login.hide()
                 if self.cb_remember.isChecked():
                     try:
                         with open("remember.text", "w")as f:
@@ -37,16 +39,19 @@ class LoginWindow(QtWidgets.QMainWindow):
                 #self.self.line_login_pass.clear()
                 self.line_login_pass.clear()
                 self.start_main()
+            elif email is None or password is None:
+                self.wrong_login.show()
+                self.wrong_login.setText("Please fill all fields!")
             else:
                 self.line_login_pass.clear()
-                print("wrong login!")
+                self.wrong_login.show()
+                self.wrong_login.setText("Wrong Login Info!").show()
         except Exception as err:
             print("Login error: {err}")
     
     def start_main(self):
         try:
             #from App import MainApp
-
             self.hide()
             self.login_reference_signal.emit(self)
             '''
