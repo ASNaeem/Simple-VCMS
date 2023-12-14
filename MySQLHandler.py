@@ -3,7 +3,7 @@ import mysql.connector
 
 class MySQLHandler:
     def __init__(
-        self, host="localhost", user="root", password="1234", port=3307, database="vcms"
+        self, host="localhost", user="vcms-admin", password="1234", port=3306, database="vcms"
     ):
         self.host = host
         self.user = user

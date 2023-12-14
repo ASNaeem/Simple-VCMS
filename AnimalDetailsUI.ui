@@ -976,7 +976,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="button_group_gender"/>
   <buttongroup name="button_group_sterilized"/>
+  <buttongroup name="button_group_gender"/>
  </buttongroups>
 </ui>

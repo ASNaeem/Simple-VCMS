@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
+     <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0,0,0,10">
       <property name="spacing">
        <number>20</number>
       </property>
@@ -307,6 +307,9 @@
               <property name="displayFormat">
                <string>yyyy-MM-dd</string>
               </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -337,6 +340,9 @@
               <property name="displayFormat">
                <string>hh:mm:ss</string>
               </property>
+              <property name="calendarPopup">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -366,6 +372,9 @@
               </property>
               <property name="displayFormat">
                <string>hh:mm:ss</string>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
