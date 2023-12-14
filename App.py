@@ -982,6 +982,7 @@ class MainApp(QMainWindow):
             update_employee_status(employee_id, status)
 
             self.set_employee_table()
+            self.clear_employee_fields()
 
         except Exception as err:
             print(f"Error Updating Resigned Employee: {err}")
@@ -1032,6 +1033,7 @@ class MainApp(QMainWindow):
                 )
 
                 self.set_employee_table()
+                self.clear_employee_fields()
             else:
                 print("Select a Row!")
         except Exception as err:
@@ -2190,15 +2192,18 @@ class MainApp(QMainWindow):
             print(f"Error Fetching(update_existing_appointment): {err}")
 
     def cancel_existing_appointment(self):
-        page = self.page_appointment_modify
-        current_widget = self.stackedWidget.setCurrentWidget(page)
+        try:
+            page = self.page_appointment_modify
+            current_widget = self.stackedWidget.setCurrentWidget(page)
 
-        apt_id = int(page.line_apt_id.text())
-        apt_status = "Cancelled"
+            apt_id = int(page.line_apt_id.text())
+            apt_status = "Cancelled"
 
-        update_appointment_status(apt_id, apt_status)
-        
-        self.show_appointment()
+            update_appointment_status(apt_id, apt_status)
+            
+            self.show_appointment()
+        except Exception as err:
+            print(f"Error Cancelling Appointment: {err}")
 
     def delete_existing_appointment(self):
         try:
