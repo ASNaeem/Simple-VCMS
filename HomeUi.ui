@@ -97,23 +97,32 @@
               </font>
              </property>
              <property name="text">
-              <string>User Name</string>
+              <string>Name</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="label_name">
              <property name="font">
               <font>
                <family>Courier New</family>
                <pointsize>12</pointsize>
               </font>
              </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(255, 255, 255)</string>
+              <string notr="true">background-color: rgb(53, 75, 130);</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -132,10 +141,13 @@
              <property name="text">
               <string>Phone</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_11">
+            <widget class="QLabel" name="label_phone">
              <property name="font">
               <font>
                <family>Courier New</family>
@@ -143,10 +155,52 @@
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(255, 255, 255)</string>
+              <string notr="true">background-color: rgb(53, 75, 130);</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="label_16">
+             <property name="font">
+              <font>
+               <family>Courier New</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Alternate Phone</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_alt_phn">
+             <property name="font">
+              <font>
+               <family>Courier New</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(53, 75, 130);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -165,10 +219,13 @@
              <property name="text">
               <string>Designation</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_13">
+            <widget class="QLabel" name="label_designation">
              <property name="font">
               <font>
                <family>Courier New</family>
@@ -176,43 +233,13 @@
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);</string>
+              <string notr="true">background-color: rgb(53, 75, 130);</string>
              </property>
              <property name="text">
               <string/>
              </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
-           <item>
-            <widget class="QLabel" name="label_16">
-             <property name="font">
-              <font>
-               <family>Courier New</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Password</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_17">
-             <property name="font">
-              <font>
-               <family>Courier New</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string/>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -231,10 +258,13 @@
              <property name="text">
               <string>Email</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_15">
+            <widget class="QLabel" name="label_email">
              <property name="font">
               <font>
                <family>Courier New</family>
@@ -242,10 +272,13 @@
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(255, 255, 255)</string>
+              <string notr="true">background-color: rgb(53, 75, 130);</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -337,7 +370,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -353,7 +386,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -429,7 +462,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -445,7 +478,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -544,7 +577,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -560,7 +593,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -636,7 +669,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -652,7 +685,7 @@
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color:rgb(255, 255, 255)</string>
+                  <string notr="true">background-color: rgb(53, 75, 130);</string>
                  </property>
                  <property name="text">
                   <string/>

@@ -122,9 +122,8 @@ FUNCTIONALITIES:
           Animal - 1
           Medical Records
           Employee-1
-          Billing
+          Billing - 1
           Services-1
-          Item
           Veterinarian 
           Day Care - 1
           Expenses - 1
@@ -134,7 +133,7 @@ FUNCTIONALITIES:
           Animal - 1
           Medical Records - 1
           Employee - 1
-          Billing
+          Billing - 1
           Services-1
           Veterinarian 
           Day Care - 1
@@ -144,7 +143,7 @@ FUNCTIONALITIES:
           Appointment - 1
           Animal - 1
           Employee - 1
-          Billing
+          Billing - 1
           Services-1
           Veterinarian 
           Day Care - 1
@@ -167,10 +166,17 @@ FUNCTIONALITIES:
           Employee-1
           Billing-1
           Services-1
-          Item-1
           Veterinarian-0
           Day Care-1
           Expenses-1
 
-     Login-0
-     Homepage-0
+     Login- 1
+     Homepage- 1
+
+     mssg adding
+          bill - 1 
+          animal - 1
+          employee - 
+          expenses - 
+          services - 1
+          appointments - 

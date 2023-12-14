@@ -82,7 +82,7 @@ class MainApp(QMainWindow):
         self.page_home = uic.loadUi("HomeUi.ui")
         self.page_setting = uic.loadUi("SettingUI.ui")
         self.page_support = uic.loadUi("SupportUI.ui")
-        #self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
+        # self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
         self.page_employee = uic.loadUi("EmployeeUI.ui")
         self.page_service = uic.loadUi("ServiceUI.ui")
         self.page_daycare = uic.loadUi("DayCareUI.ui")
@@ -99,7 +99,7 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_home)
         self.stackedWidget.addWidget(self.page_daycare)
         self.stackedWidget.addWidget(self.page_billing)
-        #self.stackedWidget.addWidget(self.page_analytics_report)
+        # self.stackedWidget.addWidget(self.page_analytics_report)
         self.stackedWidget.addWidget(self.page_expenses)
         self.stackedWidget.addWidget(self.page_employee)
         self.stackedWidget.addWidget(self.page_service)
@@ -110,7 +110,7 @@ class MainApp(QMainWindow):
         self.button_animal.clicked.connect(self.show_animal_info)
         self.button_daycare.clicked.connect(self.show_daycare)
         self.button_home.clicked.connect(self.show_home)
-        #self.button_analytics.clicked.connect(self.show_analytics_report)
+        # self.button_analytics.clicked.connect(self.show_analytics_report)
         self.button_expenses.clicked.connect(self.show_expenses)
         self.button_employees.clicked.connect(self.show_employee)
         self.button_services.clicked.connect(self.show_service)
@@ -234,31 +234,33 @@ class MainApp(QMainWindow):
             self.handle_selection_change
         )
         self.button_logout.clicked.connect(self.action_logout)
-        
+
         ##################### End Init #####################
+
     def handleLoginReference(self, login_window_reference):
         self.login_window = login_window_reference
+        name = self.login_window.employee.name
+        Phone = self.login_window.employee.phone[0]
+        Alternate_Phone = self.login_window.employee.phone[1]
+        Designation = self.login_window.employee.designation
+        Email = self.login_window.employee.email
+        print(self.login_window.employee.name)
+
+        self.page_home.label_name.setText(name)
+        self.page_home.label_phone.setText(Phone)
+        self.page_home.label_alt_phn.setText(Alternate_Phone)
+        self.page_home.label_designation.setText(Designation)
+        self.page_home.label_email.setText(Email)
+
         self.adjustSize()
         self.showMaximized()
         self.show()
         self.login_window.hide()
-        
+
     def action_logout(self):
         self.hide()
         self.login_window.employee = None
         self.login_window.show()
-        
-    """def search_Item(self, text):
-        try:
-            table = self.page_home.table_inventory
-            for row in range(table.rowCount()):
-                match = any(
-                    text.lower() in table.item(row, col).text().lower()
-                    for col in range(table.columnCount())
-                )
-                table.setRowHidden(row, not match)
-        except Exception as err:
-            print(f"Error Fetching(search_Item): {err}")"""
 
     def search_service(self, text):
         try:
@@ -287,6 +289,7 @@ class MainApp(QMainWindow):
     def add_record(self):
         try:
             page = self.page_animal_details
+            current_widget = self.stackedWidget.setCurrentWidget(page)
             table = page.table_animal_record
             diagnosis = page.line_new_record.text().strip()
             if diagnosis:
@@ -304,7 +307,14 @@ class MainApp(QMainWindow):
 
                 page.line_new_record.clear()
 
+                QMessageBox.information(
+                    current_widget, "Information", "Record added successfully!"
+                )
+
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Record Add Failed! Input a diagnosis record."
+                )
                 print("Input a diagnosis record to add!")
         except Exception as err:
             print(f"Error Fetching(add_record): {err}")
@@ -330,6 +340,7 @@ class MainApp(QMainWindow):
     def show_appointment_modify(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
             selected_item = (
                 self.page_appointment.appointment_table_widget_2.selectedItems()
             )
@@ -350,7 +361,9 @@ class MainApp(QMainWindow):
                         break
 
                 # vet_name = get_employee_name_by_id(self, vet_id)
-                self.page_appointment_modify.cb_vet_name.setCurrentText(f"{emp.name} ({emp.employee_id})")
+                self.page_appointment_modify.cb_vet_name.setCurrentText(
+                    f"{emp.name} ({emp.employee_id})"
+                )
 
                 page = self.page_appointment_modify
 
@@ -379,8 +392,10 @@ class MainApp(QMainWindow):
                 qtime = QTime.fromString(str(appointment.appointment_time), "hh:mm:ss")
 
                 page.time_apt.setTime(qtime)
-
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "No row selected! Select a row to view more details."
+                )
                 print("No row selected! Select a row to view more details.")
 
             self.setWindowTitle("VCMS || Dashboard || Appointment Details")
@@ -441,6 +456,9 @@ class MainApp(QMainWindow):
         try:
             selected_item = None
             flag = True
+
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_animal_info)
+
             if self.stackedWidget.currentIndex() == self.stackedWidget.indexOf(
                 self.page_appointment_modify
             ):
@@ -510,6 +528,9 @@ class MainApp(QMainWindow):
 
                 # self.setWindowTitle("VCMS || Dashboard || Animal")
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a row to view more animal details"
+                )
                 print("Select a row to view more animal details")
         except Exception as err:
             print(f"Error Fetching(show_animal_details): {err}")
@@ -517,7 +538,7 @@ class MainApp(QMainWindow):
     def show_home(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_home)
-            #self.page_home.table_inventory.setCurrentCell(-1, 0)
+            # self.page_home.table_inventory.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Home")
             # self.stackedWidget.setCurrentWidget(self.page_home)
             # self.setWindowTitle("VCMS || Dashboard || Inventory")
@@ -537,15 +558,6 @@ class MainApp(QMainWindow):
             self.setWindowTitle("VCMS || Dashboard || Support")
         except Exception as err:
             print(f"Error Fetching(show_support): {err}")
-
-    '''def show_analytics_report(self):
-        try:
-            self.stackedWidget.setCurrentWidget(self.page_analytics_report)
-            self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
-            self.stackedWidget.setCurrentWidget(self.page_analytics_report)
-            self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
-        except Exception as err:
-            print(f"Error Fetching(show_analytics_report): {err}")'''
 
     def show_employee(self):
         try:
@@ -736,12 +748,18 @@ class MainApp(QMainWindow):
                     med_condition,
                 )
                 mysql_handler.execute_query(query, values)
+                QMessageBox.information(
+                    current_widget, "Information", "Animal Add successful!"
+                )
                 print("Animal Entry Success!")
                 mysql_handler.disconnect()
                 self.set_animal_table()
                 self.clear_animal_fields()
                 self.show_animal_info()
             except Exception as err:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Animal Add Failed!"
+                )
                 print("Animal Entry Failed!", err)
 
         except Exception as err:
@@ -750,6 +768,8 @@ class MainApp(QMainWindow):
     def update_animal(self):
         try:
             page = self.page_animal_details
+
+            current_widget = self.stackedWidget.setCurrentWidget(page)
 
             animal_id = int(page.line_animal_id.text())
             name = page.line_animal_name.text()
@@ -790,6 +810,9 @@ class MainApp(QMainWindow):
                 condition,
                 animal_id,
             )
+            QMessageBox.information(
+                    current_widget, "Information", "Animal Update Succesful!"
+                )
             self.show_animal_info()
         except Exception as err:
             print(f"Animal update failed: {err}")
@@ -955,6 +978,7 @@ class MainApp(QMainWindow):
 
     def populate_employee(self):
         try:
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_employee)
             selected_item = self.page_employee.table_employee.selectedItems()
             if selected_item and self.page_employee.button_edit.text() == "Edit":
                 self.page_employee.button_edit.setText("Cancel")
@@ -995,6 +1019,9 @@ class MainApp(QMainWindow):
                 page.combobox_access_level_6.setCurrentText(str(employee.access_level))
                 page.comboBox_designation_6.setCurrentText(employee.designation)
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a row!"
+                )
                 self.page_employee.button_edit.setText("Edit")
                 self.clear_employee_fields()
                 self.page_employee.button_register.setEnabled(True)
@@ -1005,14 +1032,21 @@ class MainApp(QMainWindow):
     def resigned_employee(self):
         try:
             selected_item = self.page_employee.table_employee.selectedItems()
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_employee)
             if selected_item:
                 employee_id = int(selected_item[0].text())
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a row!"
+                )
                 print("Select an Employee")
 
             status = "Resigned"
 
             update_employee_status(employee_id, status)
+            QMessageBox.information(
+                    current_widget, "Information", "Employee Status Updated!"
+                )
 
             self.set_employee_table()
             self.clear_employee_fields()
@@ -1022,6 +1056,7 @@ class MainApp(QMainWindow):
 
     def update_employee(self):
         try:
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_employee)
             selected_item = self.page_employee.table_employee.selectedItems()
             if selected_item:
                 employee_id = int(selected_item[0].text())
@@ -1069,6 +1104,9 @@ class MainApp(QMainWindow):
                 self.clear_employee_fields()
                 self.page_employee.button_edit.setText("Edit")
                 self.page_employee.button_register.setEnabled(True)
+                QMessageBox.information(
+                    current_widget, "Information", "Employee Information Updated!"
+                )
             else:
                 print("Select a Row!")
         except Exception as err:
@@ -1138,6 +1176,9 @@ class MainApp(QMainWindow):
             mysql_handler.execute_query(query_phone, data_phone1)
             mysql_handler.execute_query(query_phone, data_phone2)
             mysql_handler.disconnect()
+            QMessageBox.information(
+                    current_widget, "Information", "Entry Success!"
+                )
             print("Entry Success!")
             self.clear_employee_fields()
 
@@ -1273,6 +1314,7 @@ class MainApp(QMainWindow):
                 page.text_care_notes.setPlainText(daycare.notes)
 
             else:
+                
                 page.button_care_edit.setText("Enable Edit")
                 self.clear_daycare_fields()
                 page.button_care_details.setEnabled(True)
@@ -1585,16 +1627,6 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(search_bill): {err}")
 
-    """def add_new_bill(self):
-        try:
-            page = self.page_billing
-            current_widget = self.stackedWidget.setCurrentWidget(page)
-            animal_id = page.line_animal_id.text()
-            # other_expenses = page.line_other_expenses.
-
-        except Exception as err:
-            print(f"Error Fetching(add_new_bill): {err}")"""
-
     def clear_bill_fields(self):
         try:
             page = self.page_billing
@@ -1622,6 +1654,7 @@ class MainApp(QMainWindow):
     def populate_bill(self):
         try:
             page = self.page_billing
+            current_widget = current_widget = self.stackedWidget.setCurrentWidget(page)
             selected_item = page.table_bill.selectedItems()
             if selected_item and page.button_bill_edit.text() == "Enable Edit":
                 page.cb_services.setEnabled(True)
@@ -1636,10 +1669,6 @@ class MainApp(QMainWindow):
                         break
                 page.line_bill_id.setText(str(billing.billing_id))
                 animal_info = self.get_animal_by_bill_id(billing.billing_id)
-                """if animal_info is not None:
-                    page.comboBox_animal_id.setCurrentText(
-                        f"{animal_info[2]} {animal_info[1]} ({animal_info[0]})"
-                    )"""
                 page.line_animal_id.setText(str(animal_info[0]))
                 page.line_adjustments.setText(str(billing.adjustment))
                 page.line_bill_cost.setText(str(billing.total_amount))
@@ -1648,6 +1677,10 @@ class MainApp(QMainWindow):
                     page.rb_pending.setChecked(True)
                 else:
                     page.rb_paid.setChecked(True)
+            elif not selected_item:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to Edit!"
+                )
             else:
                 page.button_bill_edit.setText("Enable Edit")
                 self.clear_bill_fields()
@@ -1824,21 +1857,28 @@ class MainApp(QMainWindow):
                 pre_adjustment = float(amount[0][0])
                 total_amount = float(amount[0][1])
                 total_amount -= pre_adjustment
-
-                adjustment = float(page.line_adjustments.text())
-                total_amount += adjustment
-
-                if page.rb_pending.isChecked():
-                    status = "Due"
+                adjustment = page.line_adjustments.text()
+                if adjustment == "":
+                    QMessageBox.warning(
+                        current_widget, "Warning", "Please fill all fields!"
+                    )
                 else:
-                    status = "Paid"
+                    total_amount += float(adjustment)
+                    if page.rb_pending.isChecked():
+                        status = "Due"
+                    else:
+                        status = "Paid"
 
-                update_bill(total_amount, adjustment, status, bill_id)
-                page.button_bill_edit.setText("Enable Edit")
-                self.clear_bill_fields()
-                page.table_show_service.clearContents()
-                page.table_show_service.setRowCount(0)
-                self.show_billing()
+                    update_bill(total_amount, adjustment, status, bill_id)
+                    page.button_bill_edit.setText("Enable Edit")
+                    self.clear_bill_fields()
+                    page.table_show_service.clearContents()
+                    page.table_show_service.setRowCount(0)
+                    self.show_billing()
+            else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to Edit!"
+                )
         except Exception as err:
             print(f"Error Fetching(update_bill): {err}")
 
@@ -2307,9 +2347,9 @@ class MainApp(QMainWindow):
 
     def populate_service(self):
         try:
-            # service = None
+            page = self.page_service
+            current_widget = self.stackedWidget.setCurrentWidget(page)
             selected_item = self.page_service.table_service.selectedItems()
-            # service = None
             if (
                 selected_item
                 and self.page_service.button_service_cancel.text() == "Enable Edit"
@@ -2343,6 +2383,11 @@ class MainApp(QMainWindow):
                     page.rb_service_unavailable.setChecked(True)
 
                 page.pte_service_details.setPlainText(service.service_details)
+
+            elif not selected_item:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to Edit!"
+                )
 
             else:
                 self.page_service.button_service_cancel.setText("Enable Edit")
@@ -2379,6 +2424,8 @@ class MainApp(QMainWindow):
 
     def update_existing_service(self):
         try:
+            page = self.page_service
+            current_widget = self.stackedWidget.setCurrentWidget(page)
             selected_item = self.page_service.table_service.selectedItems()
             if selected_item:
                 service_id = int(selected_item[0].text())
@@ -2386,20 +2433,32 @@ class MainApp(QMainWindow):
                 page = self.page_service
 
                 name = page.line_service_name.text()
-                cost = float(page.line_service_cost.text())
-                details = page.pte_service_details.toPlainText()
-                if page.rb_service_available.isChecked():
-                    availability = "Yes"
-                elif page.rb_service_unavailable.isChecked():
-                    availability = "No"
+                cost = page.line_service_cost.text()
+                if cost == "":
+                    cost = None
+                else:
+                    cost = float(cost)
 
-                update_service(service_id, name, cost, details, availability)
-                self.clear_service_fields()
-                self.show_service()
-                self.page_service.button_service_add.setEnabled(True)
-                self.page_service.button_service_cancel.setText("Enable Edit")
+                    details = page.pte_service_details.toPlainText()
+                    if page.rb_service_available.isChecked():
+                        availability = "Yes"
+                    elif page.rb_service_unavailable.isChecked():
+                        availability = "No"                                    
+
+                    if details is "" or name is "":
+                        QMessageBox.warning(
+                            current_widget, "Warning", "Please fill all fields!"
+                        )
+                    else:
+                        update_service(service_id, name, cost, details, availability)
+                        self.clear_service_fields()
+                        self.show_service()
+                        self.page_service.button_service_add.setEnabled(True)
+                        self.page_service.button_service_cancel.setText("Enable Edit")
             else:
-                print("Select a Row!")
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a record to Edit!"
+                )
         except Exception as err:
             print(f"Error Fetching(update_existing_service): {err}")
 
@@ -2414,9 +2473,8 @@ class MainApp(QMainWindow):
                 service_id = int(table.item(selected_service_row, 0).text())
                 table.removeRow(selected_service_row)
                 delete_service(service_id)
-
             else:
-                QMessageBox.warning(current_widget, "Warning! Select a row to delete.")
+                QMessageBox.warning(current_widget, "Warning!", "Select a row to delete." )
 
         except Exception as err:
             print(f"Service Delete Failed!: {err}")
