@@ -758,6 +758,8 @@ class MainApp(QMainWindow):
         try:
             page = self.page_animal_details
 
+            current_widget = self.stackedWidget.setCurrentWidget(page)
+
             animal_id = int(page.line_animal_id.text())
             name = page.line_animal_name.text()
 
@@ -797,7 +799,9 @@ class MainApp(QMainWindow):
                 condition,
                 animal_id,
             )
-
+            QMessageBox.information(
+                    current_widget, "Information", "Animal Update Succesful!"
+                )
             self.show_animal_info()
         except Exception as err:
             print(f"Animal update failed: {err}")
@@ -963,6 +967,7 @@ class MainApp(QMainWindow):
 
     def populate_employee(self):
         try:
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_employee)
             selected_item = self.page_employee.table_employee.selectedItems()
             if selected_item and self.page_employee.button_edit.text() == "Edit":
                 self.page_employee.button_edit.setText("Cancel")
@@ -1003,6 +1008,9 @@ class MainApp(QMainWindow):
                 page.combobox_access_level_6.setCurrentText(str(employee.access_level))
                 page.comboBox_designation_6.setCurrentText(employee.designation)
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a row!"
+                )
                 self.page_employee.button_edit.setText("Edit")
                 self.clear_employee_fields()
                 self.page_employee.button_register.setEnabled(True)
@@ -1013,14 +1021,21 @@ class MainApp(QMainWindow):
     def resigned_employee(self):
         try:
             selected_item = self.page_employee.table_employee.selectedItems()
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_employee)
             if selected_item:
                 employee_id = int(selected_item[0].text())
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a row!"
+                )
                 print("Select an Employee")
 
             status = "Resigned"
 
             update_employee_status(employee_id, status)
+            QMessageBox.information(
+                    current_widget, "Information", "Employee Status Updated!"
+                )
 
             self.set_employee_table()
             self.clear_employee_fields()
@@ -1030,6 +1045,7 @@ class MainApp(QMainWindow):
 
     def update_employee(self):
         try:
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_employee)
             selected_item = self.page_employee.table_employee.selectedItems()
             if selected_item:
                 employee_id = int(selected_item[0].text())
@@ -1077,6 +1093,9 @@ class MainApp(QMainWindow):
                 self.clear_employee_fields()
                 self.page_employee.button_edit.setText("Edit")
                 self.page_employee.button_register.setEnabled(True)
+                QMessageBox.information(
+                    current_widget, "Information", "Employee Information Updated!"
+                )
             else:
                 print("Select a Row!")
         except Exception as err:
@@ -1146,6 +1165,9 @@ class MainApp(QMainWindow):
             mysql_handler.execute_query(query_phone, data_phone1)
             mysql_handler.execute_query(query_phone, data_phone2)
             mysql_handler.disconnect()
+            QMessageBox.information(
+                    current_widget, "Information", "Entry Success!"
+                )
             print("Entry Success!")
             self.clear_employee_fields()
 
@@ -1281,6 +1303,7 @@ class MainApp(QMainWindow):
                 page.text_care_notes.setPlainText(daycare.notes)
 
             else:
+                
                 page.button_care_edit.setText("Enable Edit")
                 self.clear_daycare_fields()
                 page.button_care_details.setEnabled(True)
