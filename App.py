@@ -1326,7 +1326,7 @@ class MainApp(QMainWindow):
             header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 5, QTableWidgetItem(str(day_care.notes)))
             header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)"""
-            
+
             table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
             table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
             table.setItem(row, 2, QTableWidgetItem(str(animal_info[0])))
@@ -1894,7 +1894,11 @@ class MainApp(QMainWindow):
             table.insertRow(row)
             table.setItem(row, 0, QTableWidgetItem(str(billing.billing_id)))
             header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
-            table.setItem(row, 1, QTableWidgetItem(str(billing.day_care_id)))
+            day_care_id_prev = billing.day_care_id
+            if day_care_id_prev == 0:
+                table.setItem(row, 1, QTableWidgetItem("Null"))
+            else:
+                table.setItem(row, 1, QTableWidgetItem(str(billing.day_care_id)))
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 2, QTableWidgetItem(str(billing.appointment_id)))
             header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
