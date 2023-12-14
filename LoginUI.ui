@@ -226,17 +226,35 @@ font: 10pt &quot;Courier New&quot;;</string>
    <widget class="QLabel" name="wrong_login">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>290</x>
       <y>150</y>
       <width>171</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Courier New</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 0, 0);</string>
     </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
     <property name="text">
      <string>Wrong Login Info!</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
