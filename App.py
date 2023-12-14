@@ -1178,12 +1178,7 @@ class MainApp(QMainWindow):
 
     ################### End of Employee ###################
 
-    ################### Day Care Service ##################
-    """def add_to_daycare(self):
-        try:
-            ...
-        except Exception as err:
-            print(f"Error Fetching (add_to_daycare): {err}")"""
+    ################### Day Care Service #################
 
     def clear_daycare_fields(self):
         try:
@@ -2182,35 +2177,33 @@ class MainApp(QMainWindow):
             apt_id = int(page.line_apt_id.text())
             animal_id = int(page.line_apt_animal_id.text())
             vet_name = page.cb_vet_name.currentText()
+            print(vet_name)
             for emp in Employees:
                 # if emp.name == vet_name and "veterinarian" in emp.designation.lower():
+                
                 if emp.name == vet_name and emp.designation.lower() == "veterinarian":
                     vet_id = emp.employee_id
-                    break
-                else:
-                    print("Veterinarian Does Not Exist!")
-                    return
-            date_appt = page.date_appt.text()
+                    print(emp.name)
+
+            date_appt = page.date_apt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
-            time_appt = page.time_appt.text().time()
-            time_appt_obj = time(
-                time_appt.hour(), time_Appt.minute(), time_appt.second()
-            )
-            visit_reason = page.line_reason.text()
+
+            time_apt = page.time_apt.time().toString("hh:mm:ss")
+
+            visit_reason = page.text_visit_reason.toPlainText()
             appt_status = page.line_apt_status.text()
 
             update_appointment(
                 animal_id,
                 vet_id,
                 date_appt_obj,
-                time_appt_obj,
+                time_apt,
                 visit_reason,
                 appt_status,
                 apt_id,
             )
 
             self.show_appointment()
-
         except Exception as err:
             print(f"Error Fetching(update_existing_appointment): {err}")
 
