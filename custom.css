@@ -1,0 +1,22 @@
+QPushButton {{
+    color: {QTMATERIAL_SECONDARYCOLOR};
+    text-transform: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+
+    background-color: {QTMATERIAL_SECONDARYTEXTCOLOR};
+  }}
+  
+
+QPushButton:pressed {{
+    color: {QTMATERIAL_SECONDARYCOLOR};
+    
+}}
+
+QPushButton:hover{{
+    color: {QTMATERIAL_PRIMARYCOLOR};
+}}
+   
+  .big_button {{
+    height: 64px;
+  }}

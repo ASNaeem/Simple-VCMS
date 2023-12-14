@@ -97,8 +97,11 @@ if __name__=="__main__":
     login_window = LoginWindow()
     
     login_window.login_reference_signal.connect(main_app.handleLoginReference)
+    invert:bool = False
+    if "light" in read:
+        invert = True   
+    apply_stylesheet(main_app, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
+    apply_stylesheet(login_window, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
     
-    apply_stylesheet(main_app, theme=read, extra=extra)
-    apply_stylesheet(login_window, theme=read, extra=extra)
     login_window.show()
     app.exec_()

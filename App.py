@@ -63,8 +63,8 @@ from Auth import LoginWindow
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 warnings.filterwarnings("ignore")
-theme_list = ["dark_blue.xml", "dark_medical.xml", "light_teal_500.xml"]
-
+light_theme_list = ["light_teal_500.xml"]
+dark_theme_list = ["dark_blue.xml", "dark_medical.xml",]
 
 class MainApp(QMainWindow):
     def __init__(self):
@@ -203,6 +203,7 @@ class MainApp(QMainWindow):
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
             self.checkbox_state_changed
         )
+        self.page_appointment_create.chk_box_day_care.stateChanged.connect(self.checkbox_state_changed_daycare)
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
@@ -234,6 +235,7 @@ class MainApp(QMainWindow):
             self.handle_selection_change
         )
         self.button_logout.clicked.connect(self.action_logout)
+        self.show_home()
 
         ##################### End Init #####################
 
@@ -661,11 +663,22 @@ class MainApp(QMainWindow):
     #####   Setting    #####
     def change_theme(self):
         try:
+            invert:bool = False
+            if "light" in self.page_setting.comboBox_themes.currentText():
+                invert = True
             apply_stylesheet(
-                app,
+                self,
                 self.page_setting.comboBox_themes.currentText(),
-                invert_secondary=False,
+                invert_secondary=invert,
                 extra=extra,
+                css_file="custom.css"
+            )
+            apply_stylesheet(
+                self.login_window,
+                self.page_setting.comboBox_themes.currentText(),
+                invert_secondary=invert,
+                extra=extra,
+                css_file="custom.css"
             )
             with open("config.txt", "w") as f:
                 f.write(self.page_setting.comboBox_themes.currentText())
@@ -869,7 +882,6 @@ class MainApp(QMainWindow):
             page = self.page_animal_details
             selected_animal_row = self.page_animal_info.table_animal.currentRow()
             current_widget = self.stackedWidget.setCurrentWidget(page)
-            print(f"this is delete record 1: {selected_animal_row}")
             animal_id = int(
                 self.page_animal_info.table_animal.item(selected_animal_row, 0).text()
             )
@@ -877,12 +889,11 @@ class MainApp(QMainWindow):
             table = page.table_animal_record
             selected_row = table.currentRow()
             if selected_row != -1:
-                print(f"this is delete record 1: {selected_row}")
                 row_data = [
                     table.item(selected_row, col).text()
                     for col in range(table.columnCount())
                 ]
-                # print(row_data)
+
                 table.removeRow(selected_row)
                 delete_record_from_db(animal_id, row_data)
             else:
@@ -1581,7 +1592,6 @@ class MainApp(QMainWindow):
                 expense_date_obj = datetime.strptime(
                     str(expense_date), "%Y-%m-%d"
                 ).date()
-                print("testing the update expense!")
                 handler_info = page.comboBox.currentText()
                 start_index = handler_info.find("(")
                 end_index = handler_info.find(")")
@@ -1829,7 +1839,6 @@ class MainApp(QMainWindow):
                 selected_item_service = table.currentRow()
                 if selected_item_service != -1:
                     service_id = int(table.item(selected_item_service, 0).text())
-                    print(service_id)
                     confirmed = (
                         QMessageBox.question(
                             current_widget,
@@ -2079,6 +2088,20 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(checkbox_state_changed): {err}")
 
+    def checkbox_state_changed_daycare(self, state):
+        try:
+            start_time = self.page_appointment_create.stime_appt
+            Note = self.page_appointment_create.text_note
+            if state == 0:
+                start_time.setEnabled(False)
+                Note.setEnabled(False)
+            else:
+                start_time.setEnabled(True)
+                Note.setEnabled(True)
+
+        except Exception as err:
+            print(f"Error Fetching(checkbox_state_changed): {err}")
+
     def set_appointment_table(self):
         try:
             self.page_appointment.appointment_table_widget_2.clearContents()
@@ -2126,28 +2149,24 @@ class MainApp(QMainWindow):
 
             date_appt = page.date_appt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
-            time_appt = page.time_appt.text().time()
-            time_appt_obj = time(
-                time_appt.hour(), time_appt.minute(), time_appt.second()
-            )
+
+            time_appt_obj = page.time_appt.time().toString("hh:mm:ss")
             visit_reason = page.line_reason.text()
-            vet_name = page.cb_vet_name.currentText()
-            for emp in Employees:
-                if emp.name == vet_name and "veterinarian" in emp.designation.lower():
-                    vet_id = emp.employee_id
-                    break
-                else:
-                    print("Veterinarian Does Not Exist!")
+            vet_info = page.cb_vet_name.currentText()
+
+            start_index = vet_info.find("(")
+            end_index = vet_info.find(")")
+            vet_id = int(vet_info[start_index + 1 : end_index])
 
             appt_status = "Scheduled"
 
             if page.chk_box_new_animal.isChecked():
                 new_animal = True
 
-                animal_name = page.comboBox_animal_id.currentItem()
+                animal_name = page.comboBox_animal_id.currentText()
                 if not animal_name:
                     animal_name = "None"
-                birth_date = page.date_appt_birth.Text()
+                birth_date = page.date_appt_birth.text()
 
                 gender = ""
                 if page.rb_male.isChecked():
@@ -2161,26 +2180,26 @@ class MainApp(QMainWindow):
                 elif page.rb_ster_yes.isChecked():
                     sterilized = "No"
 
-                species = page.line_species.Text()
-                breed = page.line_breed.Text()
+                species = page.line_species.text()
+                breed = page.line_breed.text()
                 if not breed:
                     breed = "Unidentified"
-                color = page.line_colors.Text()
-                behavioral_warning = page.line_behave.Text()
+                color = page.line_colors.text()
+                behavioral_warning = page.line_behave.text()
                 if not behavioral_warning:
                     behavioral_warning = "None"
-                fname = page.line_o_fname.Text()
-                lname = page.line_o_lname.Text()
+                fname = page.line_o_fname.text()
+                lname = page.line_o_lname.text()
                 if not lname:
                     lname = ""
                 owner_name = fname + " " + lname
-                email = page.line_email.Text()
+                email = page.line_email.text()
                 if not email:
                     email = "None"
-                phone = page.line_phone.Text()
-                address = page.line_address.Text()
-                reg_date = page.date_appt_reg.Text()
-                med_condition = page.line_reason.Text()
+                phone = page.line_phone.text()
+                address = page.line_address.text()
+                reg_date = page.date_appt_reg.text()
+                med_condition = page.line_reason.text()
 
                 reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
                 birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
@@ -2475,7 +2494,7 @@ class MainApp(QMainWindow):
                     elif page.rb_service_unavailable.isChecked():
                         availability = "No"                                    
 
-                    if details is "" or name is "":
+                    if details == "" or name == "":
                         QMessageBox.warning(
                             current_widget, "Warning", "Please fill all fields!"
                         )
@@ -2569,19 +2588,31 @@ class MainApp(QMainWindow):
 
 
 #### UI density Scaling modifier ####
+density = '-2'
 extra = {
-    # Density Scale
-    "density_scale": "-2",
+    'danger': '#dc3545',
+    'warning': '#ffc107',
+    'success': '#17a2b8',
+    # Font
+    'font_family': 'Roboto',
+    # Density
+    'density_scale': density,
+    # Button Shape
+    'button_shape': 'default',
 }
 if __name__ == "__main__":
     app = QApplication([])
     window = MainApp()
     # window.show()
+    invert:bool = False
     with open("config.txt", "r") as f:
         read = f.read()
         if not read:
             read = "dark_medical.xml"
-        apply_stylesheet(app, theme=read, extra=extra)
+        
+        if "light" in read:
+            invert = True
+        apply_stylesheet(app, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
         window.page_setting.comboBox_themes.setCurrentText(read)
     # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
     window.adjustSize()

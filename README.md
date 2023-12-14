@@ -175,8 +175,8 @@ FUNCTIONALITIES:
 
      mssg adding
           bill - 1 
-          animal - 
+          animal - 1
           employee - 
-          expenses -
-          services -
+          expenses - 
+          services - 1
           appointments - 
