@@ -2460,7 +2460,7 @@ class MainApp(QMainWindow):
                     elif page.rb_service_unavailable.isChecked():
                         availability = "No"                                    
 
-                    if details is "" or name is "":
+                    if details == "" or name == "":
                         QMessageBox.warning(
                             current_widget, "Warning", "Please fill all fields!"
                         )
