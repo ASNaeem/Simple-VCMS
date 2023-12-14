@@ -254,6 +254,11 @@ class MainApp(QMainWindow):
         self.page_home.label_designation.setText(Designation)
         self.page_home.label_email.setText(Email)
 
+        if self.login_window.employee.access_level < 3:
+            self.button_employees.hide()
+            self.page_billing.button_bill_delete.hide()
+            self.page_expenses.button_expense_delete.hide()
+
         self.adjustSize()
         self.showMaximized()
         self.show()
@@ -542,6 +547,47 @@ class MainApp(QMainWindow):
             self.stackedWidget.setCurrentWidget(self.page_home)
             # self.page_home.table_inventory.setCurrentCell(-1, 0)
             self.setWindowTitle("VCMS || Dashboard || Home")
+            page = self.page_home
+
+            mysql_handler = MySQLHandler()
+            mysql_handler.connect()
+
+            query_total_case_current_month = "select count(animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());"
+            data_total_case_current_month = mysql_handler.fetch_data(query_total_case_current_month)
+            print(data_total_case_current_month)
+            
+            query_total_patient_current_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());" 
+            data_total_patient_current_month = mysql_handler.fetch_data(query_total_patient_current_month)
+
+            query_total_case_last_month = "select count(animal_id) from appointments where year(a_date) = year(curdate() - interval 1 month) and month(a_date) = month(curdate() - interval 1 month)"
+            data_total_case_last_month = mysql_handler.fetch_data(query_total_case_last_month)
+
+            query_total_patient_last_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate() - interval 1 month) and month(a_date) = month(curdate() - interval 1 month)"
+            data_total_patient_last_month = mysql_handler.fetch_data(query_total_patient_last_month)
+
+            query_total_case_this_year = "select count(animal_id) from appointments where year(a_date) = year(curdate())"
+            data_total_case_this_year = mysql_handler.fetch_data(query_total_case_this_year)
+
+            query_total_patient_this_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate())" 
+            data_total_patient_this_year = mysql_handler.fetch_data(query_total_patient_this_year)
+
+            query_total_case_last_year = "select count(animal_id) from appointments where year(a_date) = year(curdate() - interval 1 year)"
+            data_total_case_last_year = mysql_handler.fetch_data(query_total_case_last_year)
+
+            query_total_patient_last_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate() - interval 1 year)"
+            data_total_patient_last_year = mysql_handler.fetch_data(query_total_patient_last_year)
+            print(data_total_patient_last_year)
+
+            page.total_case_current_month.setText(str(data_total_case_current_month[0][0]))
+            page.total_patient_current_month.setText(str(data_total_patient_current_month[0][0]))
+            page.total_case_last_month.setText(str(data_total_case_last_month[0][0]))
+            page.total_patient_last_month.setText(str(data_total_patient_last_month[0][0]))
+            page.total_case_this_year.setText(str(data_total_case_this_year[0][0]))
+            page.total_patient_this_year.setText(str(data_total_patient_this_year[0][0]))
+            page.total_case_last_year.setText(str(data_total_case_last_year[0][0]))
+            page.total_patient_last_year.setText(str(data_total_patient_last_year[0][0]))
+            
+            mysql_handler.disconnect()
             # self.stackedWidget.setCurrentWidget(self.page_home)
             # self.setWindowTitle("VCMS || Dashboard || Inventory")
         except Exception as err:
@@ -2028,8 +2074,29 @@ class MainApp(QMainWindow):
 
     def checkbox_state_changed(self, state):
         try:
-            combo_box = self.page_appointment_create.comboBox_animal_id
+            page = self.page_appointment_create
+            combo_box = page.comboBox_animal_id
             if state == 0:
+                page.line_o_fname.setEnabled(False)
+                page.line_o_lname.setEnabled(False)
+                page.line_phone.setEnabled(False)
+                page.line_email.setEnabled(False)
+                page.line_address.setEnabled(False)
+
+                page.line_aname.setEnabled(False)
+                page.line_species.setEnabled(False)
+                page.line_breed.setEnabled(False)
+                page.date_appt_birth.setEnabled(False)
+
+                page.rb_male.setEnabled(False)
+                page.rb_female.setEnabled(False)
+                page.rb_ster_yes.setEnabled(False)
+                page.rb_ster_no.setEnabled(False)
+
+                page.line_colors.setEnabled(False)
+                page.line_behave.setEnabled(False)
+                page.date_appt_reg.setEnabled(False)
+
                 combo_box.setEnabled(True)
                 animal_info = [
                     f"{animal.species}, {animal.owner_name} ({animal.animal_id})"
@@ -2043,6 +2110,25 @@ class MainApp(QMainWindow):
             else:
                 combo_box.clear()
                 combo_box.setEnabled(False)
+                page.line_o_fname.setEnabled(True)
+                page.line_o_lname.setEnabled(True)
+                page.line_phone.setEnabled(True)
+                page.line_email.setEnabled(True)
+                page.line_address.setEnabled(True)
+
+                page.line_aname.setEnabled(True)
+                page.line_species.setEnabled(True)
+                page.line_breed.setEnabled(True)
+                page.date_appt_birth.setEnabled(True)
+
+                page.rb_male.setEnabled(True)
+                page.rb_female.setEnabled(True)
+                page.rb_ster_yes.setEnabled(True)
+                page.rb_ster_no.setEnabled(True)
+
+                page.line_colors.setEnabled(True)
+                page.line_behave.setEnabled(True)
+                page.date_appt_reg.setEnabled(True)
 
         except Exception as err:
             print(f"Error Fetching(checkbox_state_changed): {err}")
