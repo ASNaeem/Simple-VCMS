@@ -998,7 +998,23 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="button_employee_resigned">
+           <property name="font">
+            <font>
+             <family>Courier New</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Resigned</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="button_delete">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="font">
             <font>
              <family>Courier New</family>

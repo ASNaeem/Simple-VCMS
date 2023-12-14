@@ -295,5 +295,20 @@ def update_employee_phone_to_db(employee_id:int, phone1, phone1prev, phone2, pho
     except Exception as err:
         print(f"Employee Phone Number Update Failed!: {err}")
 
+def update_employee_status(emp_id:int, status: str):
+    try:
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+
+        query = "UPDATE employees SET status = %s where employee_id = %s"
+        values = (status, emp_id)
+        mysql_handler.execute_query(query, values)
+
+        mysql_handler.disconnect()
+        print("Employee Resigned!")
+
+    except Exception as err:
+        print(f"Employee Status Update Failed!: {err}")
+
 
 ##################### End of Employee #########################

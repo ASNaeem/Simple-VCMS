@@ -25,6 +25,7 @@ from Employee import (
     delete_employee,
     update_employee_phone_to_db,
     update_employee_to_db,
+    update_employee_status
 )
 from Appointment import (
     Appointments,
@@ -163,6 +164,7 @@ class MainApp(QMainWindow):
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
+        self.page_employee.button_employee_resigned.clicked.connect(self.resigned_employee)
 
         # self.page_billing.button_bill_add.clicked.connect(self.add_new_bill)
         self.page_billing.button_bill_edit.clicked.connect(self.populate_bill)
@@ -967,6 +969,24 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching Employee: {err}")
 
+    def resigned_employee(self):
+        try:
+            selected_item = self.page_employee.table_employee.selectedItems()
+            if selected_item:
+                employee_id = int(selected_item[0].text())
+            else:
+                print("Select an Employee")
+
+            status = "Resigned"
+
+            update_employee_status(employee_id, status)
+
+            self.set_employee_table()
+            self.clear_employee_fields()
+
+        except Exception as err:
+            print(f"Error Updating Resigned Employee: {err}")
+
     def update_employee(self):
         try:
             selected_item = self.page_employee.table_employee.selectedItems()
@@ -1013,6 +1033,7 @@ class MainApp(QMainWindow):
                 )
 
                 self.set_employee_table()
+                self.clear_employee_fields()
             else:
                 print("Select a Row!")
         except Exception as err:
@@ -2175,15 +2196,18 @@ class MainApp(QMainWindow):
             print(f"Error Fetching(update_existing_appointment): {err}")
 
     def cancel_existing_appointment(self):
-        page = self.page_appointment_modify
-        current_widget = self.stackedWidget.setCurrentWidget(page)
+        try:
+            page = self.page_appointment_modify
+            current_widget = self.stackedWidget.setCurrentWidget(page)
 
-        apt_id = int(page.line_apt_id.text())
-        apt_status = "Cancelled"
+            apt_id = int(page.line_apt_id.text())
+            apt_status = "Cancelled"
 
-        update_appointment_status(apt_id, apt_status)
-        
-        self.show_appointment()
+            update_appointment_status(apt_id, apt_status)
+            
+            self.show_appointment()
+        except Exception as err:
+            print(f"Error Cancelling Appointment: {err}")
 
     def delete_existing_appointment(self):
         try:
