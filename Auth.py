@@ -100,8 +100,8 @@ if __name__=="__main__":
     invert:bool = False
     if "light" in read:
         invert = True   
-    apply_stylesheet(main_app, theme=read, invert_secondary=invert, extra=extra)
-    apply_stylesheet(login_window, theme=read, invert_secondary=invert, extra=extra)
+    apply_stylesheet(main_app, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
+    apply_stylesheet(login_window, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
     
     login_window.show()
     app.exec_()
