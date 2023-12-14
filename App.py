@@ -82,7 +82,7 @@ class MainApp(QMainWindow):
         self.page_home = uic.loadUi("HomeUi.ui")
         self.page_setting = uic.loadUi("SettingUI.ui")
         self.page_support = uic.loadUi("SupportUI.ui")
-        self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
+        #self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
         self.page_employee = uic.loadUi("EmployeeUI.ui")
         self.page_service = uic.loadUi("ServiceUI.ui")
         self.page_daycare = uic.loadUi("DayCareUI.ui")
@@ -99,7 +99,7 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_home)
         self.stackedWidget.addWidget(self.page_daycare)
         self.stackedWidget.addWidget(self.page_billing)
-        self.stackedWidget.addWidget(self.page_analytics_report)
+        #self.stackedWidget.addWidget(self.page_analytics_report)
         self.stackedWidget.addWidget(self.page_expenses)
         self.stackedWidget.addWidget(self.page_employee)
         self.stackedWidget.addWidget(self.page_service)
@@ -109,8 +109,8 @@ class MainApp(QMainWindow):
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
         self.button_daycare.clicked.connect(self.show_daycare)
-        self.button_inventory.clicked.connect(self.show_home)
-        self.button_analytics.clicked.connect(self.show_analytics_report)
+        self.button_home.clicked.connect(self.show_home)
+        #self.button_analytics.clicked.connect(self.show_analytics_report)
         self.button_expenses.clicked.connect(self.show_expenses)
         self.button_employees.clicked.connect(self.show_employee)
         self.button_services.clicked.connect(self.show_service)
@@ -538,14 +538,14 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(show_support): {err}")
 
-    def show_analytics_report(self):
+    '''def show_analytics_report(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_analytics_report)
             self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
             self.stackedWidget.setCurrentWidget(self.page_analytics_report)
             self.setWindowTitle("VCMS || Dashboard || AnalyticsReport")
         except Exception as err:
-            print(f"Error Fetching(show_analytics_report): {err}")
+            print(f"Error Fetching(show_analytics_report): {err}")'''
 
     def show_employee(self):
         try:
@@ -1190,12 +1190,7 @@ class MainApp(QMainWindow):
 
     ################### End of Employee ###################
 
-    ################### Day Care Service ##################
-    """def add_to_daycare(self):
-        try:
-            ...
-        except Exception as err:
-            print(f"Error Fetching (add_to_daycare): {err}")"""
+    ################### Day Care Service #################
 
     def clear_daycare_fields(self):
         try:
@@ -2048,7 +2043,7 @@ class MainApp(QMainWindow):
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
             time_appt = page.time_appt.text().time()
             time_appt_obj = time(
-                time_appt.hour(), time_Appt.minute(), time_appt.second()
+                time_appt.hour(), time_appt.minute(), time_appt.second()
             )
             visit_reason = page.line_reason.text()
             vet_name = page.cb_vet_name.currentText()
@@ -2058,7 +2053,6 @@ class MainApp(QMainWindow):
                     break
                 else:
                     print("Veterinarian Does Not Exist!")
-                    return
 
             appt_status = "Scheduled"
 
@@ -2194,35 +2188,34 @@ class MainApp(QMainWindow):
             apt_id = int(page.line_apt_id.text())
             animal_id = int(page.line_apt_animal_id.text())
             vet_name = page.cb_vet_name.currentText()
+            print(vet_name)
             for emp in Employees:
                 # if emp.name == vet_name and "veterinarian" in emp.designation.lower():
                 if emp.name == vet_name and emp.designation.lower() == "veterinarian":
                     vet_id = emp.employee_id
-                    break
+                    print(emp.name)
                 else:
                     print("Veterinarian Does Not Exist!")
-                    return
-            date_appt = page.date_appt.text()
+
+            date_appt = page.date_apt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
-            time_appt = page.time_appt.text().time()
-            time_appt_obj = time(
-                time_appt.hour(), time_Appt.minute(), time_appt.second()
-            )
-            visit_reason = page.line_reason.text()
+
+            time_apt = page.time_apt.time().toString("hh:mm:ss")
+
+            visit_reason = page.text_visit_reason.toPlainText()
             appt_status = page.line_apt_status.text()
 
             update_appointment(
                 animal_id,
                 vet_id,
                 date_appt_obj,
-                time_appt_obj,
+                time_apt,
                 visit_reason,
                 appt_status,
                 apt_id,
             )
 
             self.show_appointment()
-
         except Exception as err:
             print(f"Error Fetching(update_existing_appointment): {err}")
 
