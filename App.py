@@ -956,8 +956,11 @@ class MainApp(QMainWindow):
 
                 if employee.employee_status.lower() == "working":
                     page.rb_working.setChecked(True)
-                else:
+                elif employee.employee_status.lower() == "on leave":
                     page.rb_on_leave.setChecked(True)
+                else:
+                    page.rb_on_leave.setChecked(False)
+                    page.rb_working.setChecked(False)
 
                 page.combobox_access_level_6.setCurrentText(str(employee.access_level))
                 page.comboBox_designation_6.setCurrentText(employee.designation)
