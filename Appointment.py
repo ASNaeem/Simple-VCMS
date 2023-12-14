@@ -127,7 +127,7 @@ def fetch_appointment():
         print(f"Appointments fetched!")
         
     except Exception as err:
-        print(f"Entry Failed!:{err}") 
+        print(f"Appointment Fetch Failed!:{err}") 
 
 def add_appointment(
     animal_id: int,

@@ -42,7 +42,7 @@ class LoginWindow(QtWidgets.QMainWindow):
                     if email == e.email:
                         self.employee = e
                 self.start_main()
-            elif email is None or password is None:
+            elif email == '' or password == '':
                 self.wrong_login.show()
                 self.wrong_login.setText("Please fill all fields!")
             else:

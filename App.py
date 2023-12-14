@@ -289,6 +289,7 @@ class MainApp(QMainWindow):
     def add_record(self):
         try:
             page = self.page_animal_details
+            current_widget = self.stackedWidget.setCurrentWidget(page)
             table = page.table_animal_record
             diagnosis = page.line_new_record.text().strip()
             if diagnosis:
@@ -306,7 +307,14 @@ class MainApp(QMainWindow):
 
                 page.line_new_record.clear()
 
+                QMessageBox.information(
+                    current_widget, "Information", "Record added successfully!"
+                )
+
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Record Add Failed! Input a diagnosis record."
+                )
                 print("Input a diagnosis record to add!")
         except Exception as err:
             print(f"Error Fetching(add_record): {err}")
@@ -332,6 +340,7 @@ class MainApp(QMainWindow):
     def show_appointment_modify(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
             selected_item = (
                 self.page_appointment.appointment_table_widget_2.selectedItems()
             )
@@ -383,8 +392,10 @@ class MainApp(QMainWindow):
                 qtime = QTime.fromString(str(appointment.appointment_time), "hh:mm:ss")
 
                 page.time_apt.setTime(qtime)
-
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "No row selected! Select a row to view more details."
+                )
                 print("No row selected! Select a row to view more details.")
 
             self.setWindowTitle("VCMS || Dashboard || Appointment Details")
@@ -445,6 +456,9 @@ class MainApp(QMainWindow):
         try:
             selected_item = None
             flag = True
+
+            current_widget = self.stackedWidget.setCurrentWidget(self.page_animal_info)
+
             if self.stackedWidget.currentIndex() == self.stackedWidget.indexOf(
                 self.page_appointment_modify
             ):
@@ -514,6 +528,9 @@ class MainApp(QMainWindow):
 
                 # self.setWindowTitle("VCMS || Dashboard || Animal")
             else:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Select a row to view more animal details"
+                )
                 print("Select a row to view more animal details")
         except Exception as err:
             print(f"Error Fetching(show_animal_details): {err}")
@@ -720,12 +737,18 @@ class MainApp(QMainWindow):
                     med_condition,
                 )
                 mysql_handler.execute_query(query, values)
+                QMessageBox.information(
+                    current_widget, "Information", "Animal Add successful!"
+                )
                 print("Animal Entry Success!")
                 mysql_handler.disconnect()
                 self.set_animal_table()
                 self.clear_animal_fields()
                 self.show_animal_info()
             except Exception as err:
+                QMessageBox.warning(
+                    current_widget, "Warning", "Animal Add Failed!"
+                )
                 print("Animal Entry Failed!", err)
 
         except Exception as err:
@@ -774,6 +797,7 @@ class MainApp(QMainWindow):
                 condition,
                 animal_id,
             )
+
             self.show_animal_info()
         except Exception as err:
             print(f"Animal update failed: {err}")
@@ -916,8 +940,9 @@ class MainApp(QMainWindow):
             self.page_employee.line_home_6.clear()
             self.page_employee.line_address_6.clear()
             self.page_employee.line_salary_6.clear()
+            self.page_employee.line_employee_password.clear()
             self.page_employee.dateEdit_joining_date_6.setDate(QDate(2000, 1, 1))
-            self.page_employee.rb_working.setChecked(False)
+            self.page_employee.rb_working.setChecked(True)
             self.page_employee.rb_on_leave.setChecked(False)
             self.page_employee.comboBox_designation_6.setCurrentIndex(0)
             self.page_employee.combobox_access_level_6.setCurrentIndex(0)
@@ -1050,6 +1075,8 @@ class MainApp(QMainWindow):
 
                 self.set_employee_table()
                 self.clear_employee_fields()
+                self.page_employee.button_edit.setText("Edit")
+                self.page_employee.button_register.setEnabled(True)
             else:
                 print("Select a Row!")
         except Exception as err:
