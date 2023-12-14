@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_37">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_23" stretch="0,0,80">
+    <layout class="QVBoxLayout" name="verticalLayout_23" stretch="0,0,0,80">
      <property name="leftMargin">
       <number>50</number>
      </property>
@@ -28,6 +28,19 @@
      <property name="bottomMargin">
       <number>50</number>
      </property>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="leftMargin">
@@ -103,7 +116,8 @@
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(53, 75, 130);</string>
+              <string notr="true">background-color: rgb(53, 75, 130);
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string/>
@@ -142,7 +156,8 @@
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(53, 75, 130);</string>
+              <string notr="true">background-color: rgb(53, 75, 130);
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string/>
@@ -181,7 +196,8 @@
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(53, 75, 130);</string>
+              <string notr="true">background-color: rgb(53, 75, 130);
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string/>
@@ -220,7 +236,8 @@
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(53, 75, 130);</string>
+              <string notr="true">background-color: rgb(53, 75, 130);
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string/>
