@@ -2182,6 +2182,8 @@ class MainApp(QMainWindow):
                 if emp.name == vet_name and emp.designation.lower() == "veterinarian":
                     vet_id = emp.employee_id
                     print(emp.name)
+                else:
+                    print("Veterinarian Does Not Exist!")
 
             date_appt = page.date_apt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
