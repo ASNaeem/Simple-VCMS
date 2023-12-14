@@ -2032,11 +2032,11 @@ class MainApp(QMainWindow):
             page = self.page_appointment_create
             current_widget = self.stackedWidget.setCurrentWidget(page)
 
-            date_appt = page.date_apt.text()
-            date_appt_obj = datetime.strptime(str(date_apt), "%Y-%m-%d").date()
-            time_appt = page.time_apt.text().time()
+            date_appt = page.date_appt.text()
+            date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
+            time_appt = page.time_appt.text().time()
             time_appt_obj = time(
-                time_appt.hour(), time_Appt.minute(), time_appt.second()
+                time_appt.hour(), time_appt.minute(), time_appt.second()
             )
             visit_reason = page.line_reason.text()
             vet_name = page.cb_vet_name.currentText()
@@ -2046,7 +2046,6 @@ class MainApp(QMainWindow):
                     break
                 else:
                     print("Veterinarian Does Not Exist!")
-                    return
 
             appt_status = "Scheduled"
 
