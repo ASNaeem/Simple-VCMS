@@ -62,7 +62,6 @@ from Expense import Expenses, fetch_expenses, delete_expenses, update_expense_to
 from Auth import LoginWindow
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
-
 warnings.filterwarnings("ignore")
 light_theme_list = ["light_teal_500.xml"]
 dark_theme_list = ["dark_blue.xml", "dark_medical.xml",]

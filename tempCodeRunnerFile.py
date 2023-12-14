@@ -1,1 +1,1 @@
-self.show_appointment()
+warnings

@@ -4,7 +4,7 @@ from qt_material import apply_stylesheet, list_themes
 from Employee import Employee, Employees
 import os
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
-warnings.filterwarnings("ignore")
+#Warning.filterwarnings("ignore")
 class LoginWindow(QtWidgets.QMainWindow):
     login_reference_signal = QtCore.pyqtSignal(object)
     def __init__(self):
