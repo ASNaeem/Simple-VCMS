@@ -300,7 +300,7 @@ def update_employee_status(emp_id:int, status: str):
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
 
-        query = "UPDATE employees SET status = %s where employee_id = %s"
+        query = "UPDATE employees SET employee_status = %s where employee_id = %s"
         values = (status, emp_id)
         mysql_handler.execute_query(query, values)
 
