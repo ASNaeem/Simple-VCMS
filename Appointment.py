@@ -131,6 +131,9 @@ def fetch_appointment():
 def add_appointment(
     animal_id: int,
     vet_id: int,
+    owner_name: str,
+    phone_number: str,
+    species: str,
     appointment_date: str,
     appointment_time: str,
     visit_reason: str,
@@ -140,6 +143,9 @@ def add_appointment(
         new_appointment = Appointment(
             animal_id,
             vet_id,
+            owner_name,
+            phone_number,
+            species,
             appointment_date,
             appointment_time,
             visit_reason,
@@ -147,7 +153,7 @@ def add_appointment(
         )
         Appointments.append(new_appointment)
 
-        query = "insert into appointments(animal_id, employee_id, appointment_date, appointment_time, visit_reason, appointment_status) values(%s, %s, %s, %s, %s, %s)"
+        query = "insert into appointments(animal_id, employee_id, a_date, a_time, visit_reason, a_status) values(%s, %s, %s, %s, %s, %s)"
         values = (animal_id, 
                     vet_id,
                     appointment_date, 

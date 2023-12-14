@@ -330,6 +330,7 @@ def add_animal(
         new_animal.animal_id = mysql_handler.fetch_data("Select LAST_INSERT_ID()")[0][0]
         Animals.append(new_animal)
         mysql_handler.disconnect()
+        print(new_animal.animal_id)
         return new_animal.animal_id
     except Exception as err:
         return "Entry Failed!"

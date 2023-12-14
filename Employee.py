@@ -157,7 +157,7 @@ def fetch_employees():
                 employee_status=row[9],
                 phone=phone_numbers,
             )
-            print(employee.phone)
+            #print(employee.phone)
             employee.employee_id = int(row[0])
             Employees.append(employee)
         mysql_handler.disconnect()
