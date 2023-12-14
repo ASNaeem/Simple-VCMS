@@ -203,6 +203,7 @@ class MainApp(QMainWindow):
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
             self.checkbox_state_changed
         )
+        self.page_appointment_create.chk_box_day_care.stateChanged.connect(self.checkbox_state_changed_daycare)
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
@@ -2034,6 +2035,20 @@ class MainApp(QMainWindow):
             else:
                 combo_box.clear()
                 combo_box.setEnabled(False)
+
+        except Exception as err:
+            print(f"Error Fetching(checkbox_state_changed): {err}")
+
+    def checkbox_state_changed_daycare(self, state):
+        try:
+            start_time = self.page_appointment_create.stime_appt
+            Note = self.page_appointment_create.text_note
+            if state == 0:
+                start_time.setEnabled(False)
+                Note.setEnabled(False)
+            else:
+                start_time.setEnabled(True)
+                Note.setEnabled(True)
 
         except Exception as err:
             print(f"Error Fetching(checkbox_state_changed): {err}")

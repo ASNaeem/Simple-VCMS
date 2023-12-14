@@ -24,13 +24,13 @@
        <number>50</number>
       </property>
       <property name="topMargin">
-       <number>50</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
        <number>50</number>
       </property>
       <property name="bottomMargin">
-       <number>50</number>
+       <number>0</number>
       </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_Main_label">
@@ -413,19 +413,6 @@
             </item>
            </layout>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_20">
-            <property name="font">
-             <font>
-              <family>Courier New</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Note</string>
-            </property>
-           </widget>
-          </item>
           <item row="4" column="1">
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
@@ -439,23 +426,10 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="0">
-           <widget class="QTextEdit" name="text_note">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="font">
-             <font>
-              <family>Courier New</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
            <widget class="QTimeEdit" name="stime_appt">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="font">
              <font>
@@ -468,10 +442,23 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLineEdit" name="line_stime">
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_20">
+            <property name="font">
+             <font>
+              <family>Courier New</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Note</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QTextEdit" name="text_note">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="font">
              <font>
@@ -479,6 +466,10 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_19">
             <property name="text">
              <string>Start Time*</string>
             </property>
