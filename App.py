@@ -338,7 +338,7 @@ class MainApp(QMainWindow):
                         break
 
                 # vet_name = get_employee_name_by_id(self, vet_id)
-                self.page_appointment_modify.cb_vet_name.setCurrentText(emp.name)
+                self.page_appointment_modify.cb_vet_name.setCurrentText(f"{emp.name} ({emp.employee_id})")
 
                 page = self.page_appointment_modify
 
@@ -1344,6 +1344,7 @@ class MainApp(QMainWindow):
     ################# Day Care Service End ################
 
     ###################### Expenses #######################
+
     def clear_expense_fields(self):
         try:
             page = page = self.page_expenses
@@ -2176,14 +2177,11 @@ class MainApp(QMainWindow):
 
             apt_id = int(page.line_apt_id.text())
             animal_id = int(page.line_apt_animal_id.text())
-            vet_name = page.cb_vet_name.currentText()
-            print(vet_name)
-            for emp in Employees:
-                # if emp.name == vet_name and "veterinarian" in emp.designation.lower():
-                
-                if emp.name == vet_name and emp.designation.lower() == "veterinarian":
-                    vet_id = emp.employee_id
-                    print(emp.name)
+            vet_info = page.cb_vet_name.currentText()
+
+            start_index = vet_info.find("(")
+            end_index = vet_info.find(")")
+            vet_id = int(vet_info[start_index + 1 : end_index])
 
             date_appt = page.date_apt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
