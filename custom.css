@@ -9,7 +9,7 @@ QPushButton {{
   
 
 QPushButton:pressed {{
-    color: {QTMATERIAL_SECONDARYCOLOR};
+    color: {QTMATERIAL_PRIMARYCOLOR};
     
 }}
 

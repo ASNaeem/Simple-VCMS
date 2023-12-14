@@ -233,6 +233,9 @@
               <property name="displayFormat">
                <string>yyyy-MM-dd</string>
               </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -788,6 +791,9 @@
               <property name="displayFormat">
                <string>yyyy-MM-dd</string>
               </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -978,7 +984,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="button_group_gender"/>
   <buttongroup name="button_group_sterilized"/>
+  <buttongroup name="button_group_gender"/>
  </buttongroups>
 </ui>
