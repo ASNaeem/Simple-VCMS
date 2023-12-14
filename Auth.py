@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic, QtCore
 from MySQLHandler import MySQLHandler
 from qt_material import apply_stylesheet, list_themes
-from Employee import Employee
+from Employee import Employee, Employees
 class LoginWindow(QtWidgets.QMainWindow):
     login_reference_signal = QtCore.pyqtSignal(object)
     def __init__(self):
@@ -38,6 +38,9 @@ class LoginWindow(QtWidgets.QMainWindow):
                 #self.self.line_login_email.clear()
                 #self.self.line_login_pass.clear()
                 self.line_login_pass.clear()
+                for e in Employees:
+                    if email == e.email:
+                        self.employee = e
                 self.start_main()
             elif email == '' or password == '':
                 self.wrong_login.show()
