@@ -2571,7 +2571,7 @@ if __name__ == "__main__":
         
         if "light" in read:
             invert = True
-        apply_stylesheet(app, theme=read, invert_secondary=invert, extra=extra)
+        apply_stylesheet(app, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
         window.page_setting.comboBox_themes.setCurrentText(read)
     # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
     window.adjustSize()
