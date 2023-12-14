@@ -38,12 +38,12 @@ class Ui_MainWindow(object):
         self.label_3.setGeometry(QtCore.QRect(320, 60, 47, 13))
         self.label_3.setObjectName("label_3")
         self.stackedWidget.addWidget(self.page_employee)
-        self.page_inventory = QtWidgets.QWidget()
-        self.page_inventory.setObjectName("page_inventory")
-        self.label_4 = QtWidgets.QLabel(self.page_inventory)
+        self.page_home = QtWidgets.QWidget()
+        self.page_home.setObjectName("page_home")
+        self.label_4 = QtWidgets.QLabel(self.page_home)
         self.label_4.setGeometry(QtCore.QRect(320, 90, 47, 13))
         self.label_4.setObjectName("label_4")
-        self.stackedWidget.addWidget(self.page_inventory)
+        self.stackedWidget.addWidget(self.page_home)
         self.page_service = QtWidgets.QWidget()
         self.page_service.setObjectName("page_service")
         self.label_5 = QtWidgets.QLabel(self.page_service)
@@ -159,6 +159,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

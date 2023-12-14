@@ -25,7 +25,7 @@ from Employee import (
     delete_employee,
     update_employee_phone_to_db,
     update_employee_to_db,
-    update_employee_status
+    update_employee_status,
 )
 from Appointment import (
     Appointments,
@@ -33,7 +33,7 @@ from Appointment import (
     add_appointment,
     delete_appointment,
     update_appointment,
-    update_appointment_status
+    update_appointment_status,
 )
 from Service import (
     Services,
@@ -80,7 +80,7 @@ class MainApp(QMainWindow):
         self.page_animal_info = uic.loadUi("AnimalInformationUI.ui")
         self.page_animal_reg = uic.loadUi("AnimalRegistrationUI.ui")
         self.page_animal_details = uic.loadUi("AnimalDetailsUI.ui")
-        self.page_inventory = uic.loadUi("InventoryUI.ui")
+        self.page_home = uic.loadUi("HomeUi.ui")
         self.page_setting = uic.loadUi("SettingUI.ui")
         self.page_support = uic.loadUi("SupportUI.ui")
         self.page_analytics_report = uic.loadUi("AnalyticsReportUI.ui")
@@ -97,7 +97,7 @@ class MainApp(QMainWindow):
         self.stackedWidget.addWidget(self.page_animal_info)
         self.stackedWidget.addWidget(self.page_animal_reg)
         self.stackedWidget.addWidget(self.page_animal_details)
-        self.stackedWidget.addWidget(self.page_inventory)
+        self.stackedWidget.addWidget(self.page_home)
         self.stackedWidget.addWidget(self.page_daycare)
         self.stackedWidget.addWidget(self.page_billing)
         self.stackedWidget.addWidget(self.page_analytics_report)
@@ -110,7 +110,7 @@ class MainApp(QMainWindow):
         # self.button_animal.clicked.connect(self.show_animal)
         self.button_animal.clicked.connect(self.show_animal_info)
         self.button_daycare.clicked.connect(self.show_daycare)
-        self.button_inventory.clicked.connect(self.show_inventory)
+        self.button_inventory.clicked.connect(self.show_home)
         self.button_analytics.clicked.connect(self.show_analytics_report)
         self.button_expenses.clicked.connect(self.show_expenses)
         self.button_employees.clicked.connect(self.show_employee)
@@ -164,7 +164,9 @@ class MainApp(QMainWindow):
         self.page_employee.button_save.clicked.connect(self.update_employee)
         self.page_employee.button_register.clicked.connect(self.register_employee)
         self.page_employee.button_delete.clicked.connect(self.delete_employee)
-        self.page_employee.button_employee_resigned.clicked.connect(self.resigned_employee)
+        self.page_employee.button_employee_resigned.clicked.connect(
+            self.resigned_employee
+        )
 
         # self.page_billing.button_bill_add.clicked.connect(self.add_new_bill)
         self.page_billing.button_bill_edit.clicked.connect(self.populate_bill)
@@ -228,15 +230,15 @@ class MainApp(QMainWindow):
         )
         self.page_billing.line_bill_search.textChanged.connect(self.search_bill)
         self.page_service.line_service_search.textChanged.connect(self.search_service)
-        self.page_inventory.line_inventory_search.textChanged.connect(self.search_Item)
+        # self.page_home.line_inventory_search.textChanged.connect(self.search_Item)
         self.page_billing.table_bill.itemSelectionChanged.connect(
             self.handle_selection_change
         )
         ##################### End Init #####################
 
-    def search_Item(self, text):
+    """def search_Item(self, text):
         try:
-            table = self.page_inventory.table_inventory
+            table = self.page_home.table_inventory
             for row in range(table.rowCount()):
                 match = any(
                     text.lower() in table.item(row, col).text().lower()
@@ -244,7 +246,7 @@ class MainApp(QMainWindow):
                 )
                 table.setRowHidden(row, not match)
         except Exception as err:
-            print(f"Error Fetching(search_Item): {err}")
+            print(f"Error Fetching(search_Item): {err}")"""
 
     def search_service(self, text):
         try:
@@ -331,11 +333,11 @@ class MainApp(QMainWindow):
                         break
 
                 for emp in Employees:
-                    if emp.employee_id == ap.vet_id:  
+                    if emp.employee_id == ap.vet_id:
                         employee = emp
                         break
 
-                #vet_name = get_employee_name_by_id(self, vet_id)
+                # vet_name = get_employee_name_by_id(self, vet_id)
                 self.page_appointment_modify.cb_vet_name.setCurrentText(emp.name)
 
                 page = self.page_appointment_modify
@@ -375,7 +377,7 @@ class MainApp(QMainWindow):
             for employee in Employees:
                 if "veterinarian" in employee.designation.lower():
                     vet_name.append((employee.name, employee.employee_id))
-            
+
             vet_info = [f"{vet[0]} ({vet[1]})" for vet in vet_name]
             combo_box = self.page_appointment_modify.cb_vet_name
             combo_box.clear()
@@ -423,12 +425,16 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(show_animal_reg): {err}")
 
-    def show_animal_details(self): 
+    def show_animal_details(self):
         try:
             selected_item = None
             flag = True
-            if self.stackedWidget.currentIndex() == self.stackedWidget.indexOf(self.page_appointment_modify):
-                selected_item = self.page_appointment.appointment_table_widget_2.selectedItems()
+            if self.stackedWidget.currentIndex() == self.stackedWidget.indexOf(
+                self.page_appointment_modify
+            ):
+                selected_item = (
+                    self.page_appointment.appointment_table_widget_2.selectedItems()
+                )
                 flag = False
             elif self.stackedWidget.currentWidget() == self.page_animal_info:
                 selected_item = self.page_animal_info.table_animal.selectedItems()
@@ -496,15 +502,15 @@ class MainApp(QMainWindow):
         except Exception as err:
             print(f"Error Fetching(show_animal_details): {err}")
 
-    def show_inventory(self):
+    def show_home(self):
         try:
-            self.stackedWidget.setCurrentWidget(self.page_inventory)
-            self.page_inventory.table_inventory.setCurrentCell(-1, 0)
-            self.setWindowTitle("VCMS || Dashboard || Inventory")
-            # self.stackedWidget.setCurrentWidget(self.page_inventory)
+            self.stackedWidget.setCurrentWidget(self.page_home)
+            #self.page_home.table_inventory.setCurrentCell(-1, 0)
+            self.setWindowTitle("VCMS || Dashboard || Home")
+            # self.stackedWidget.setCurrentWidget(self.page_home)
             # self.setWindowTitle("VCMS || Dashboard || Inventory")
         except Exception as err:
-            print(f"Error Fetching(show_inventory): {err}")
+            print(f"Error Fetching(show_home): {err}")
 
     def show_setting(self):
         try:
@@ -562,7 +568,7 @@ class MainApp(QMainWindow):
             combo_box2.completer().setCompletionMode(
                 QtWidgets.QCompleter.PopupCompletion
             )
-    
+
             self.set_bill_table()
         except Exception as err:
             print(f"Error Fetching(show_billing): {err}")
@@ -1287,7 +1293,7 @@ class MainApp(QMainWindow):
             self.page_daycare.table_care.setRowCount(0)
             fetch_day_care()
             self.page_daycare.table_care.setSortingEnabled(False)
-            
+
             for row, day_care in enumerate(Day_Care_Service):
                 animal_info = self.get_animal_by_id(day_care.animal_id)
                 self.add_day_care_to_table(row, day_care, animal_info)
@@ -1310,7 +1316,7 @@ class MainApp(QMainWindow):
             header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
             table = self.page_daycare.table_care
             table.insertRow(row)
-            
+
             """table.setItem(row, 0, QTableWidgetItem(str(day_care.day_Care_id)))
             header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
             table.setItem(row, 1, QTableWidgetItem(str(day_care.animal_id)))
@@ -1332,7 +1338,7 @@ class MainApp(QMainWindow):
             table.setItem(row, 5, QTableWidgetItem(str(day_care.start_time)))
             table.setItem(row, 6, QTableWidgetItem(str(day_care.end_time)))
             table.setItem(row, 7, QTableWidgetItem(str(day_care.notes)))
-            self.resize_columns_to_contents_alternate2(table)
+            self.resize_columns_to_contents_alternate(table)
 
         except Exception as err:
             print(f"Error Fetching(add_day_care_to_table): {err}")
@@ -1665,9 +1671,9 @@ class MainApp(QMainWindow):
                 for srv in Services:
                     if srv.name == service_name:
                         service_id = srv.service_id
-                
+
                 service_ids = self.fetch_service_ids_from_bill_id(bill_id)
-                flag = False       
+                flag = False
                 if service_id not in service_ids:
                     flag = True
                 confirmed = (
@@ -1710,7 +1716,7 @@ class MainApp(QMainWindow):
                 else:
                     if not flag:
                         QMessageBox.warning(
-                        current_widget, "Warning", "Service already taken!"
+                            current_widget, "Warning", "Service already taken!"
                         )
         except Exception as err:
             print(f"Error Fetching(add_service_to_modify): {err}")
@@ -1722,7 +1728,7 @@ class MainApp(QMainWindow):
             if page.table_bill.selectedItems():
                 selected_item_bill = page.table_bill.selectedItems()
             else:
-                selected_item_bill = 1   
+                selected_item_bill = 1
 
             if selected_item_bill:
                 bill_id = None
@@ -1730,7 +1736,7 @@ class MainApp(QMainWindow):
                     bill_id = int(page.line_bill_id.text())
                 else:
                     bill_id = int(selected_item_bill[0].text())
-                               
+
                 table = page.table_show_service
                 selected_item_service = table.currentRow()
                 if selected_item_service != -1:
@@ -1820,7 +1826,7 @@ class MainApp(QMainWindow):
         service_ids_list = [row[0] for row in service_ids]
         mysql_handler.disconnect()
         return service_ids_list
-    
+
     def fetch_service_using_bill_id(self, billing_id: int):
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
@@ -1874,7 +1880,7 @@ class MainApp(QMainWindow):
         try:
             self.page_billing.table_bill.clearContents()
             self.page_billing.table_bill.setRowCount(0)
-            fetch_billings()            
+            fetch_billings()
             self.page_billing.table_bill.setSortingEnabled(False)
             for row, billing in enumerate(Billings):
                 self.add_billing_to_table(row, billing)
@@ -2174,22 +2180,32 @@ class MainApp(QMainWindow):
             animal_id = int(page.line_apt_animal_id.text())
             vet_name = page.cb_vet_name.currentText()
             for emp in Employees:
-                #if emp.name == vet_name and "veterinarian" in emp.designation.lower():
+                # if emp.name == vet_name and "veterinarian" in emp.designation.lower():
                 if emp.name == vet_name and emp.designation.lower() == "veterinarian":
                     vet_id = emp.employee_id
                     break
                 else:
                     print("Veterinarian Does Not Exist!")
-                    return 
+                    return
             date_appt = page.date_appt.text()
             date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
             time_appt = page.time_appt.text().time()
-            time_appt_obj = time(time_appt.hour(), time_Appt.minute(), time_appt.second())
+            time_appt_obj = time(
+                time_appt.hour(), time_Appt.minute(), time_appt.second()
+            )
             visit_reason = page.line_reason.text()
             appt_status = page.line_apt_status.text()
 
-            update_appointment(animal_id, vet_id, date_appt_obj, time_appt_obj, visit_reason, appt_status, apt_id)
-            
+            update_appointment(
+                animal_id,
+                vet_id,
+                date_appt_obj,
+                time_appt_obj,
+                visit_reason,
+                appt_status,
+                apt_id,
+            )
+
             self.show_appointment()
 
         except Exception as err:
@@ -2204,7 +2220,7 @@ class MainApp(QMainWindow):
             apt_status = "Cancelled"
 
             update_appointment_status(apt_id, apt_status)
-            
+
             self.show_appointment()
         except Exception as err:
             print(f"Error Cancelling Appointment: {err}")
