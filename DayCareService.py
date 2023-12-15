@@ -99,33 +99,30 @@ def fetch_day_care():
 
 
 def add_day_care(
-    animal_id: int,
-    day_care_date: str,
-    start_time: str,
-    notes: str,
+    animal_id,
+    day_care_date,
+    start_time,
+    notes,
     end_time = None
 ):
     try:
-        new_day_care = DayCareService(
-            animal_id, day_care_date, start_time, end_time, notes
-        )
-        Day_Care_Service.append(new_day_care)
-
         query = "insert into day_care (animal_id, dos, start_time, notes) values (%s, %s, %s, %s);"
-        data = values(animal_id, day_care_date, start_time, notes)
+        data = animal_id, day_care_date, start_time, notes
 
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, data)
 
-        new_day_care_id = mysql_handler.fetch_data("Select LAST_INSERT_ID()")[0][0]
+        LAST_INSERT_ID = mysql_handler.fetch_data("Select LAST_INSERT_ID()")
+        new_day_care_id =  LAST_INSERT_ID[0][0]
 
-        query2 = "UPDATE day_care SET end_time=TIME_ADD(start_time=%s, INTERVAL 1 HOUR) WHERE day_care_id=%s"
-        data2 = values(start_time, new_day_care_id)
+        query2 = "UPDATE day_care SET end_time = TIME_ADD(start_time = %s, INTERVAL 1 HOUR) WHERE day_care_id=%s"
+        data2 = start_time, new_day_care_id
         mysql_handler.execute_query(query2, data2)
 
         mysql_handler.disconnect()
         print("Entry Success!")
+        
     except Exception as err:
         print(f"Entry Failed: {err}")
 
@@ -146,7 +143,6 @@ def delete_day_care(id: int):
                 print("Delete Failed!")
     except Exception as err:
         print(f"Error Delete: {err}")
-
 
 def update_daycare_to_db(
     daycare_id: int, day_care_date_obj: str, start_time: str, end_time: str, notes: str

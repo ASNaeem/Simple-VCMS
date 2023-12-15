@@ -64,7 +64,11 @@ from Auth import LoginWindow
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 warnings.filterwarnings("ignore")
 light_theme_list = ["light_teal_500.xml"]
-dark_theme_list = ["dark_blue.xml", "dark_medical.xml",]
+dark_theme_list = [
+    "dark_blue.xml",
+    "dark_medical.xml",
+]
+
 
 class MainApp(QMainWindow):
     def __init__(self):
@@ -203,7 +207,9 @@ class MainApp(QMainWindow):
         self.page_appointment_create.chk_box_new_animal.stateChanged.connect(
             self.checkbox_state_changed
         )
-        self.page_appointment_create.chk_box_day_care.stateChanged.connect(self.checkbox_state_changed_daycare)
+        self.page_appointment_create.chk_box_day_care.stateChanged.connect(
+            self.checkbox_state_changed_daycare
+        )
         self.page_appointment_modify.button_apt_back.clicked.connect(
             self.show_appointment
         )
@@ -246,7 +252,7 @@ class MainApp(QMainWindow):
         Alternate_Phone = self.login_window.employee.phone[1]
         Designation = self.login_window.employee.designation
         Email = self.login_window.employee.email
-        #print(self.login_window.employee.name)
+        # print(self.login_window.employee.name)
 
         self.page_home.label_name.setText(name)
         self.page_home.label_phone.setText(Phone)
@@ -320,7 +326,9 @@ class MainApp(QMainWindow):
 
             else:
                 QMessageBox.warning(
-                    current_widget, "Warning", "Record Add Failed! Input a diagnosis record."
+                    current_widget,
+                    "Warning",
+                    "Record Add Failed! Input a diagnosis record.",
                 )
                 print("Input a diagnosis record to add!")
         except Exception as err:
@@ -347,7 +355,9 @@ class MainApp(QMainWindow):
     def show_appointment_modify(self):
         try:
             self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
-            current_widget = self.stackedWidget.setCurrentWidget(self.page_appointment_modify)
+            current_widget = self.stackedWidget.setCurrentWidget(
+                self.page_appointment_modify
+            )
             selected_item = (
                 self.page_appointment.appointment_table_widget_2.selectedItems()
             )
@@ -381,8 +391,8 @@ class MainApp(QMainWindow):
                 page.line_apt_phone.setText(appointment.phone_number)
                 page.line_apt_status.setText(appointment.appointment_status)
                 page.text_visit_reason.setText(appointment.visit_reason)
-                #print(type(appointment.appointment_date))
-                #print(appointment.appointment_date)
+                # print(type(appointment.appointment_date))
+                # print(appointment.appointment_date)
                 qdate = QDate(
                     appointment.appointment_date.year,
                     appointment.appointment_date.month,
@@ -401,7 +411,9 @@ class MainApp(QMainWindow):
                 page.time_apt.setTime(qtime)
             else:
                 QMessageBox.warning(
-                    current_widget, "Warning", "No row selected! Select a row to view more details."
+                    current_widget,
+                    "Warning",
+                    "No row selected! Select a row to view more details.",
                 )
                 print("No row selected! Select a row to view more details.")
 
@@ -433,7 +445,7 @@ class MainApp(QMainWindow):
                 for employee in Employees
                 if "vet" in employee.designation.lower()
             ]
-            #vet_info.insert(0, "Select")
+            # vet_info.insert(0, "Select")
             combo_box = self.page_appointment_create.cb_vet_name
             combo_box.clear()
             combo_box.addItems(vet_info)
@@ -536,7 +548,9 @@ class MainApp(QMainWindow):
                 # self.setWindowTitle("VCMS || Dashboard || Animal")
             else:
                 QMessageBox.warning(
-                    current_widget, "Warning", "Select a row to view more animal details"
+                    current_widget,
+                    "Warning",
+                    "Select a row to view more animal details",
                 )
                 print("Select a row to view more animal details")
         except Exception as err:
@@ -553,40 +567,66 @@ class MainApp(QMainWindow):
             mysql_handler.connect()
 
             query_total_case_current_month = "select count(animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());"
-            data_total_case_current_month = mysql_handler.fetch_data(query_total_case_current_month)
-            #print(data_total_case_current_month)
-            
-            query_total_patient_current_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());" 
-            data_total_patient_current_month = mysql_handler.fetch_data(query_total_patient_current_month)
+            data_total_case_current_month = mysql_handler.fetch_data(
+                query_total_case_current_month
+            )
+            # print(data_total_case_current_month)
+
+            query_total_patient_current_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate()) and month(a_date) = month(curdate());"
+            data_total_patient_current_month = mysql_handler.fetch_data(
+                query_total_patient_current_month
+            )
 
             query_total_case_last_month = "select count(animal_id) from appointments where year(a_date) = year(curdate() - interval 1 month) and month(a_date) = month(curdate() - interval 1 month)"
-            data_total_case_last_month = mysql_handler.fetch_data(query_total_case_last_month)
+            data_total_case_last_month = mysql_handler.fetch_data(
+                query_total_case_last_month
+            )
 
             query_total_patient_last_month = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate() - interval 1 month) and month(a_date) = month(curdate() - interval 1 month)"
-            data_total_patient_last_month = mysql_handler.fetch_data(query_total_patient_last_month)
+            data_total_patient_last_month = mysql_handler.fetch_data(
+                query_total_patient_last_month
+            )
 
             query_total_case_this_year = "select count(animal_id) from appointments where year(a_date) = year(curdate())"
-            data_total_case_this_year = mysql_handler.fetch_data(query_total_case_this_year)
+            data_total_case_this_year = mysql_handler.fetch_data(
+                query_total_case_this_year
+            )
 
-            query_total_patient_this_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate())" 
-            data_total_patient_this_year = mysql_handler.fetch_data(query_total_patient_this_year)
+            query_total_patient_this_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate())"
+            data_total_patient_this_year = mysql_handler.fetch_data(
+                query_total_patient_this_year
+            )
 
             query_total_case_last_year = "select count(animal_id) from appointments where year(a_date) = year(curdate() - interval 1 year)"
-            data_total_case_last_year = mysql_handler.fetch_data(query_total_case_last_year)
+            data_total_case_last_year = mysql_handler.fetch_data(
+                query_total_case_last_year
+            )
 
             query_total_patient_last_year = "select count(distinct animal_id) from appointments where year(a_date) = year(curdate() - interval 1 year)"
-            data_total_patient_last_year = mysql_handler.fetch_data(query_total_patient_last_year)
-            #print(data_total_patient_last_year)
+            data_total_patient_last_year = mysql_handler.fetch_data(
+                query_total_patient_last_year
+            )
+            # print(data_total_patient_last_year)
 
-            page.total_case_current_month.setText(str(data_total_case_current_month[0][0]))
-            page.total_patient_current_month.setText(str(data_total_patient_current_month[0][0]))
+            page.total_case_current_month.setText(
+                str(data_total_case_current_month[0][0])
+            )
+            page.total_patient_current_month.setText(
+                str(data_total_patient_current_month[0][0])
+            )
             page.total_case_last_month.setText(str(data_total_case_last_month[0][0]))
-            page.total_patient_last_month.setText(str(data_total_patient_last_month[0][0]))
+            page.total_patient_last_month.setText(
+                str(data_total_patient_last_month[0][0])
+            )
             page.total_case_this_year.setText(str(data_total_case_this_year[0][0]))
-            page.total_patient_this_year.setText(str(data_total_patient_this_year[0][0]))
+            page.total_patient_this_year.setText(
+                str(data_total_patient_this_year[0][0])
+            )
             page.total_case_last_year.setText(str(data_total_case_last_year[0][0]))
-            page.total_patient_last_year.setText(str(data_total_patient_last_year[0][0]))
-            
+            page.total_patient_last_year.setText(
+                str(data_total_patient_last_year[0][0])
+            )
+
             mysql_handler.disconnect()
             # self.stackedWidget.setCurrentWidget(self.page_home)
             # self.setWindowTitle("VCMS || Dashboard || Inventory")
@@ -668,7 +708,7 @@ class MainApp(QMainWindow):
     #####   Setting    #####
     def change_theme(self):
         try:
-            invert:bool = False
+            invert: bool = False
             if "light" in self.page_setting.comboBox_themes.currentText():
                 invert = True
             apply_stylesheet(
@@ -676,14 +716,14 @@ class MainApp(QMainWindow):
                 self.page_setting.comboBox_themes.currentText(),
                 invert_secondary=invert,
                 extra=extra,
-                css_file="custom.css"
+                css_file="custom.css",
             )
             apply_stylesheet(
                 self.login_window,
                 self.page_setting.comboBox_themes.currentText(),
                 invert_secondary=invert,
                 extra=extra,
-                css_file="custom.css"
+                css_file="custom.css",
             )
             with open("config.txt", "w") as f:
                 f.write(self.page_setting.comboBox_themes.currentText())
@@ -805,9 +845,7 @@ class MainApp(QMainWindow):
                 self.clear_animal_fields()
                 self.show_animal_info()
             except Exception as err:
-                QMessageBox.warning(
-                    current_widget, "Warning", "Animal Add Failed!"
-                )
+                QMessageBox.warning(current_widget, "Warning", "Animal Add Failed!")
                 print("Animal Entry Failed!", err)
 
         except Exception as err:
@@ -859,8 +897,8 @@ class MainApp(QMainWindow):
                 animal_id,
             )
             QMessageBox.information(
-                    current_widget, "Information", "Animal Update Succesful!"
-                )
+                current_widget, "Information", "Animal Update Succesful!"
+            )
             self.show_animal_info()
         except Exception as err:
             print(f"Animal update failed: {err}")
@@ -1065,9 +1103,7 @@ class MainApp(QMainWindow):
                 page.combobox_access_level_6.setCurrentText(str(employee.access_level))
                 page.comboBox_designation_6.setCurrentText(employee.designation)
             else:
-                QMessageBox.warning(
-                    current_widget, "Warning", "Select a row!"
-                )
+                QMessageBox.warning(current_widget, "Warning", "Select a row!")
                 self.page_employee.button_edit.setText("Edit")
                 self.clear_employee_fields()
                 self.page_employee.button_register.setEnabled(True)
@@ -1082,17 +1118,15 @@ class MainApp(QMainWindow):
             if selected_item:
                 employee_id = int(selected_item[0].text())
             else:
-                QMessageBox.warning(
-                    current_widget, "Warning", "Select a row!"
-                )
+                QMessageBox.warning(current_widget, "Warning", "Select a row!")
                 print("Select an Employee")
 
             status = "Resigned"
 
             update_employee_status(employee_id, status)
             QMessageBox.information(
-                    current_widget, "Information", "Employee Status Updated!"
-                )
+                current_widget, "Information", "Employee Status Updated!"
+            )
 
             self.set_employee_table()
             self.clear_employee_fields()
@@ -1222,9 +1256,7 @@ class MainApp(QMainWindow):
             mysql_handler.execute_query(query_phone, data_phone1)
             mysql_handler.execute_query(query_phone, data_phone2)
             mysql_handler.disconnect()
-            QMessageBox.information(
-                    current_widget, "Information", "Entry Success!"
-                )
+            QMessageBox.information(current_widget, "Information", "Entry Success!")
             print("Entry Success!")
             self.clear_employee_fields()
 
@@ -1360,7 +1392,6 @@ class MainApp(QMainWindow):
                 page.text_care_notes.setPlainText(daycare.notes)
 
             else:
-                
                 page.button_care_edit.setText("Enable Edit")
                 self.clear_daycare_fields()
                 page.button_care_details.setEnabled(True)
@@ -2193,135 +2224,100 @@ class MainApp(QMainWindow):
             current_widget = self.stackedWidget.setCurrentWidget(page)
 
             date_appt = page.date_appt.text()
-            date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
+            # date_appt_obj = datetime.strptime(str(date_appt), "%Y-%m-%d").date()
 
-            time_appt_obj = page.time_appt.time().toString("hh:mm:ss")
+            time_appt= page.time_appt.time().toString("HH:mm:ss")
             visit_reason = page.line_reason.text()
             vet_info = page.cb_vet_name.currentText()
-            #print(f"vet{vet_info}")
+
             start_index = vet_info.find("(")
             end_index = vet_info.find(")")
             vet_id = int(vet_info[start_index + 1 : end_index])
-            #print(f"vet id{vet_id}")
+
             appt_status = "Scheduled"
+
+            animal_id: int = None
+            name = None
+            phone = None
+            email = None
+            address = None
 
             if page.chk_box_new_animal.isChecked():
                 new_animal = True
-    
-                #animal_name = page.comboBox_animal_id.currentText()
 
                 animal_name = page.line_aname.text()
-                birth_date = page.date_appt_birth.text()
-
-                gender = ""
-                if page.rb_male.isChecked():
-                    gender = "Male"
-                elif page.rb_female.isChecked():
-                    gender = "Female"
-
-                sterilized = ""
-                if page.rb_ster_yes.isChecked():
-                    sterilized = "Yes"
-                elif page.rb_ster_no.isChecked():
-                    sterilized = "No"
 
                 species = page.line_species.text()
                 breed = page.line_breed.text()
-                if not breed:
-                    breed = "Unidentified"
-                color = page.line_colors.text()
-                behavioral_warning = page.line_behave.text()
-                if not behavioral_warning:
-                    behavioral_warning = "None"
-                fname = page.line_o_fname.text()
-                lname = page.line_o_lname.text()
-                owner_name = fname + " " + lname
-                email = page.line_email.text()
-                if not email:
-                    email = "None"
-                phone = page.line_phone.text()
-                address = page.line_address.text()
+                colors = page.line_colors.text()
+                behave = page.line_aname.text()
                 reg_date = page.date_appt_reg.text()
-                med_condition = page.line_reason.text()
+                birth_date = page.date_appt_birth.text()
 
-                reg_date_obj = datetime.strptime(str(reg_date), "%Y-%m-%d").date()
-                birth_date_obj = datetime.strptime(str(birth_date), "%Y-%m-%d").date()
-                print("ok up to this")
-                if not all([reg_date,species,color,gender,sterilized, med_condition, owner_name, phone, address, birth_date]):
-                    QMessageBox.warning(current_widget, "Warning", "Please fill the required fields.")
-                    return
+                if page.rb_male.isChecked():
+                    gender = "male"
+                else:
+                    gender = "female"
+
+                if page.rb_ster_yes.isChecked():
+                    sterilized = "Yes"
+                else:
+                    sterilized = "No"
+
+                name = page.line_o_fname.text() + " " + page.line_o_lname.text()
+                phone = page.line_phone.text()
+                email = page.line_email.text()
+                address = page.line_address.text()
+
                 animal_id = add_animal(
                     animal_name,
-                    birth_date_obj,
+                    birth_date,
                     sterilized,
                     gender,
                     species,
                     breed,
-                    color,
-                    behavioral_warning,
-                    owner_name,
+                    colors,
+                    behave,
+                    name,
                     email,
                     phone,
                     address,
-                    med_condition,
                 )
-                print("animal added")
-                print(animal_id)
-                add_appointment(
-                    animal_id,
-                    vet_id,
-                    owner_name,
-                    phone,
-                    species,
-                    date_appt_obj,
-                    time_appt_obj,
-                    visit_reason,
-                    appt_status,
-                )
-                print("appointment added")
-                if page.chk_box_day_care.isChecked():
-                    day_care = True
-                    #page.line_stime.setEnabled(True)
-                    page.stime_appt.setEnabled(True)
-                    page.text_note.setEnabled(True)
-
-                    stime = page.stime_appt.text().time()
-                    #stime_obj = time(stime.hour(), stime.minute(), stime.second())
-                    note = page.text_note.toPlainText()
-
-                    add_day_care(animal_id, date_appt_obj, stime, note)
-
             else:
-                animal_id = int(page.comboBox_animal_id.currentText())
+                animal_info = page.comboBox_animal_id.currentText()
                 start_index = animal_info.find("(")
                 end_index = animal_info.find(")")
                 animal_id = int(animal_info[start_index + 1 : end_index])
+                 
+                animal:Animal = None
+                for ob in Animals:
+                    if ob.animal_id == animal_id:
+                        animal = ob
+                        break
+
+                name = animal.owner_name
+                species = animal.species
+                phone = animal.phone               
+
+            if page.chk_box_day_care.isChecked():
+                note = page.text_note.toPlainText()
+                       
+                stime = page.stime_appt.time().toString("HH:mm:ss")
+
+                add_day_care(animal_id, date_appt, stime, note) 
                 
-                add_appointment(
-                    animal_id,
-                    vet_id,
-                    "unknown",
-                    "unknown",
-                    "unknown",
-                    date_appt_obj,
-                    time_appt_obj,
-                    visit_reason,
-                    appt_status,
-                )
-                if page.chk_box_day_care.isChecked():
-                    day_care = True
-                    page.line_stime.setEnabled(True)
-                    page.stime_appt.setEnabled(True)
-                    page.text_note.setEnabled(True)
-
-                    #stime = page.stime_appt.text().time()
-                    #stime_obj = time(stime.hour(), stime.minute(), stime.second())
-                    stime_str = page.stime_appt.time()
-                    #stime_obj = QTime.fromString(stime_str, "hh:mm:ss")
-                    note = page.text_note.toPlainText()
-
-                    add_day_care(animal_id, date_appt_obj, stime_obj, note)
-
+            add_appointment(
+                animal_id,
+                vet_id,
+                name,
+                phone,
+                species,
+                date_appt,
+                time_appt,
+                visit_reason,
+                appt_status,
+            )
+            self.clear_appointment_fields()
             self.show_appointment()
         except Exception as err:
             print(f"Error(create_appointment): {err}")
@@ -2535,7 +2531,7 @@ class MainApp(QMainWindow):
                     if page.rb_service_available.isChecked():
                         availability = "Yes"
                     elif page.rb_service_unavailable.isChecked():
-                        availability = "No"                                    
+                        availability = "No"
 
                     if details == "" or name == "":
                         QMessageBox.warning(
@@ -2566,7 +2562,9 @@ class MainApp(QMainWindow):
                 table.removeRow(selected_service_row)
                 delete_service(service_id)
             else:
-                QMessageBox.warning(current_widget, "Warning!", "Select a row to delete." )
+                QMessageBox.warning(
+                    current_widget, "Warning!", "Select a row to delete."
+                )
 
         except Exception as err:
             print(f"Service Delete Failed!: {err}")
@@ -2631,31 +2629,33 @@ class MainApp(QMainWindow):
 
 
 #### UI density Scaling modifier ####
-density = '-2'
+density = "-2"
 extra = {
-    'danger': '#dc3545',
-    'warning': '#ffc107',
-    'success': '#17a2b8',
+    "danger": "#dc3545",
+    "warning": "#ffc107",
+    "success": "#17a2b8",
     # Font
-    'font_family': 'Roboto',
+    "font_family": "Roboto",
     # Density
-    'density_scale': density,
+    "density_scale": density,
     # Button Shape
-    'button_shape': 'default',
+    "button_shape": "default",
 }
 if __name__ == "__main__":
     app = QApplication([])
     window = MainApp()
     # window.show()
-    invert:bool = False
+    invert: bool = False
     with open("config.txt", "r") as f:
         read = f.read()
         if not read:
             read = "dark_medical.xml"
-        
+
         if "light" in read:
             invert = True
-        apply_stylesheet(app, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
+        apply_stylesheet(
+            app, theme=read, invert_secondary=invert, extra=extra, css_file="custom.css"
+        )
         window.page_setting.comboBox_themes.setCurrentText(read)
     # apply_stylesheet(app, theme='light_blue.xml', css_file='custom.css')
     window.adjustSize()
