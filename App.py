@@ -1374,7 +1374,7 @@ class MainApp(QMainWindow):
             selected_item = page.table_care.selectedItems()
             if selected_item and page.button_care_edit.text() == "Enable Edit":
                 page.button_care_edit.setText("Cancel")
-                page.button_care_details.setEnabled(False)
+                #page.button_care_save.setEnabled(False)
                 day_care_id = int(selected_item[0].text())
                 daycare = None
                 for care in Day_Care_Service:
@@ -1390,12 +1390,12 @@ class MainApp(QMainWindow):
                 qtime_end = QTime.fromString(str(daycare.end_time), "hh:mm:ss")
                 page.time_care_end.setTime(qtime_end)
                 page.text_care_notes.setPlainText(daycare.notes)
-
+              
             else:
                 page.button_care_edit.setText("Enable Edit")
+                #page.button_care_save.setEnabled(True)               
                 self.clear_daycare_fields()
-                page.button_care_details.setEnabled(True)
-                self.show_daycare()
+                self.show_daycare()                              
         except Exception as err:
             print(f"Error Fetching (populate_daycare): {err}")
 
@@ -1425,7 +1425,7 @@ class MainApp(QMainWindow):
                 )
                 self.clear_daycare_fields()
                 self.show_daycare()
-                page.button_care_details.setEnabled(True)
+                page.button_care_edit.setEnabled(True)
                 page.button_care_edit.setText("Enable Edit")
         except Exception as err:
             print(f"Error Fetching (update_daycare): {err}")
@@ -2629,7 +2629,7 @@ class MainApp(QMainWindow):
 
 
 #### UI density Scaling modifier ####
-density = "-2"
+density = "1"
 extra = {
     "danger": "#dc3545",
     "warning": "#ffc107",

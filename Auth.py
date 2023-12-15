@@ -105,6 +105,6 @@ if __name__=="__main__":
         invert = True   
     apply_stylesheet(main_app, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
     apply_stylesheet(login_window, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
-    
+    #login_window.adjustSize()
     login_window.show()
     app.exec_()
