@@ -85,7 +85,7 @@ class LoginWindow(QtWidgets.QMainWindow):
             print(f"Error reading file: {err}") 
 extra = {
     # Density Scale
-    "density_scale": "-2",
+    "density_scale": "-1",
 }
 with open("config.txt", "r") as f:
             read = f.read()   

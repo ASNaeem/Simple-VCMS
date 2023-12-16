@@ -164,9 +164,12 @@ def add_appointment(
         mysql_handler = MySQLHandler()
         mysql_handler.connect()
         mysql_handler.execute_query(query, values)
+        
+        query = "select count(*) from appointments;"
+        appointment_id = int(mysql_handler.fetch_data(query)[0][0])
         mysql_handler.disconnect()
         print("Entry Success!")
-
+        return appointment_id
     except Exception as err:
         print(f"Entry Failed!:{err}") 
 

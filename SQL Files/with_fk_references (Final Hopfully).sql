@@ -290,3 +290,17 @@ insert into bill_services(bid, service_id) values(9,2);
 
 alter table employees drop column working_hours;
 
+DELIMITER //
+
+CREATE PROCEDURE CreateBillingForAppointment(
+    IN p_appointment_id INT,
+    IN p_day_care_id INT
+)
+BEGIN
+    -- Insert into billings table with initial values
+    INSERT INTO billings (day_care_id, aid, billing_date, total_amount, adjustment, status)
+    VALUES (p_day_care_id, p_appointment_id, CURDATE(), 0.00, 0.00, 'Scheduled');
+END;
+
+//
+DELIMITER ;

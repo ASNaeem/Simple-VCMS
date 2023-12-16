@@ -2219,7 +2219,7 @@ class MainApp(QMainWindow):
         try:
             new_animal: bool = False
             day_care: bool = False
-
+            d_id = None
             page = self.page_appointment_create
             current_widget = self.stackedWidget.setCurrentWidget(page)
 
@@ -2304,9 +2304,9 @@ class MainApp(QMainWindow):
                        
                 stime = page.stime_appt.time().toString("HH:mm:ss")
 
-                add_day_care(animal_id, date_appt, stime, note) 
+                d_id = add_day_care(animal_id, date_appt, stime, note) 
                 
-            add_appointment(
+            apt_id = add_appointment(
                 animal_id,
                 vet_id,
                 name,
@@ -2317,6 +2317,16 @@ class MainApp(QMainWindow):
                 visit_reason,
                 appt_status,
             )
+            mysql_handler = MySQLHandler()
+            mysql_handler.connect()
+            query = "call CreateBillingForAppointment(%s, %s)"
+            values = None
+            if d_id:
+                values = apt_id, d_id
+            else:
+                values = apt_id, None
+            mysql_handler.execute_query(query, values)
+            mysql_handler.disconnect()
             self.clear_appointment_fields()
             self.show_appointment()
         except Exception as err:
@@ -2629,7 +2639,7 @@ class MainApp(QMainWindow):
 
 
 #### UI density Scaling modifier ####
-density = "1"
+density = "-1"
 extra = {
     "danger": "#dc3545",
     "warning": "#ffc107",
