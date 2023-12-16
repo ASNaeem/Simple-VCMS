@@ -1,4 +1,5 @@
-from PyQt5 import QtWidgets, uic, QtCore
+from PyQt5 import QtWidgets, uic, QtCore, QtGui
+from PyQt5.QtCore import Qt
 from MySQLHandler import MySQLHandler
 from qt_material import apply_stylesheet, list_themes
 from Employee import Employee, Employees
@@ -8,6 +9,7 @@ class LoginWindow(QtWidgets.QMainWindow):
     login_reference_signal = QtCore.pyqtSignal(object)
     def __init__(self):
         super().__init__()
+        self.setWindowIcon(QtGui.QIcon("resources/windowIcon.png"))
         uic.loadUi('LoginUI.ui', self)
         self.employee:Employee = None
         self.checkRemembered()
