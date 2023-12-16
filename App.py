@@ -2086,10 +2086,22 @@ class MainApp(QMainWindow):
     #################### Appointment ####################
     def clear_appointment_fields(self):
         try:
-            ...
-
+            page = self.page_appointment_create
+            page.line_o_fname.clear()
+            page.line_o_lname.clear()
+            page.line_phone.clear()
+            page.line_email.clear()
+            page.line_address.clear()
+            page.line_aname.clear()
+            page.line_species.clear()
+            page.line_breed.clear()
+            page.line_behave.clear()
+            page.line_colors.clear()
+            page.text_note.clear()
+            page.line_reason.clear()
         except Exception as err:
-            print(f"Error clearing appointment fields: {err}")
+            print(f"Error clear_appointment_fields: {err}")
+            
 
     def search_appointment(self, text):
         try:
@@ -2384,7 +2396,16 @@ class MainApp(QMainWindow):
 
     def delete_existing_appointment(self):
         try:
-            ...
+            page = self.page_appointment
+            table = page.appointment_table_widget_2
+            #current_widget = self.stackedWidget.setCurrentWidget(page)
+            selected_apt_row = table.currentRow()
+
+            if selected_apt_row != -1:
+                apt_id = int(table.item(selected_apt_row, 0).text())
+                table.removeRow(selected_apt_row)
+                delete_appointment(apt_id)
+                self.show_appointment()
         except Exception as err:
             print(f"Error Fetching(delete_existing_appointment): {err}")
 

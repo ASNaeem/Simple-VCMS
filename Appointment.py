@@ -173,19 +173,19 @@ def add_appointment(
     except Exception as err:
         print(f"Entry Failed!:{err}") 
 
-def delete_appointment(id:int):
+def delete_appointment(apt_id:int):
     try:
-        for appointment in Appointments: 
-            if id == appointment.appointment_id:
-                mysql_handler = MySQLHandler()
-                mysql_handler.connect()
-                query = "delete from appointments where id = %s;"
-                data = appointment.appointment.id
-                mysql_handler.execute_query(query, (data,))
-                Appointments.remove(appointment)
-                mysql_handler.disconnect()
-                print("Delete Success!")
-                break
+
+        mysql_handler = MySQLHandler()
+        mysql_handler.connect()
+        query = "delete from appointments where appointment_id = %s;"
+        data = apt_id
+        
+        mysql_handler.execute_query(query, (data,))
+
+        mysql_handler.disconnect()
+        print("Delete Success!")
+
     except Exception as err:
         print(f"Error: {err}")
 
