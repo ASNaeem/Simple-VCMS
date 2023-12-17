@@ -3,7 +3,7 @@ import mysql.connector
 
 
 class MySQLHandler:
-    CONFIG_FILE_PATH = "mysql_config.txt"
+    CONFIG_FILE_PATH = "mysql_config.config"
 
     def __init__(self, host="localhost", user=None, password=None, port=None, database="vcms"):
         self.host = host

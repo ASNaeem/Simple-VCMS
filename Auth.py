@@ -1,23 +1,27 @@
-#from PyQt5 import sip
+# from PyQt5 import sip
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import Qt
 from MySQLHandler import MySQLHandler
 from qt_material import apply_stylesheet, list_themes
 from Employee import Employee, Employees
 import warnings
+
 warnings.filterwarnings("ignore")
+
+
 class LoginWindow(QtWidgets.QMainWindow):
     login_reference_signal = QtCore.pyqtSignal(object)
+
     def __init__(self):
         super().__init__()
         self.setWindowIcon(QtGui.QIcon("resources/windowIcon.png"))
-        uic.loadUi('LoginUI.ui', self)
-        self.employee:Employee = None
+        uic.loadUi("LoginUI.ui", self)
+        self.employee: Employee = None
         self.checkRemembered()
         self.button_login.clicked.connect(self.authenticate)
         self.wrong_login.hide()
-        #self.main_app.button_logout.clicked.connect(self.logout)
-    
+        # self.main_app.button_logout.clicked.connect(self.logout)
+
     def authenticate(self):
         email = self.line_login_email.text().strip()
         password = self.line_login_pass.text().strip()
@@ -30,24 +34,24 @@ class LoginWindow(QtWidgets.QMainWindow):
             auth = mysql_handler.fetch_data(query, (values,))
             print(auth[0][0])
             mysql_handler.disconnect()
-            
-            if auth[0][0].strip()==email and auth[0][1].strip()==password:
-                #authenticated = True
+
+            if auth[0][0].strip() == email and auth[0][1].strip() == password:
+                # authenticated = True
                 self.wrong_login.hide()
                 if self.cb_remember.isChecked():
                     try:
-                        with open("remember.text", "w")as f:
+                        with open("remember.config", "w") as f:
                             f.write(email)
                     except Exception as e:
                         print("Error writing remmber to file: {e}")
-                #self.self.line_login_email.clear()
-                #self.self.line_login_pass.clear()
+                # self.self.line_login_email.clear()
+                # self.self.line_login_pass.clear()
                 self.line_login_pass.clear()
                 for e in Employees:
                     if email == e.email:
                         self.employee = e
                 self.start_main()
-            elif email == '' or password == '':
+            elif email == "" or password == "":
                 self.wrong_login.show()
                 self.wrong_login.setText("Please fill all fields!")
             else:
@@ -56,13 +60,13 @@ class LoginWindow(QtWidgets.QMainWindow):
                 self.wrong_login.setText("Wrong Login Info!").show()
         except Exception as err:
             print("Login error: {err}")
-    
+
     def start_main(self):
         try:
-            #from App import MainApp
+            # from App import MainApp
             self.hide()
             self.login_reference_signal.emit(self)
-            '''
+            """
             apply_stylesheet(self.main_app, theme=read, extra=extra)
             
             self.main_app.page_setting.comboBox_themes.setCurrentText(read)
@@ -70,14 +74,14 @@ class LoginWindow(QtWidgets.QMainWindow):
             self.main_app.adjustSize()
             self.main_app.showMaximized()
             self.main_app.show()
-            '''
+            """
         except Exception as err:
             self.show()
             print("Error starting main app: {err}")
-        
+
     def checkRemembered(self):
         try:
-            with open("remember.text", "r") as f:
+            with open("remember.config", "r") as f:
                 content = f.read()
                 if content:
                     self.line_login_email.setText(content.strip())
@@ -85,28 +89,42 @@ class LoginWindow(QtWidgets.QMainWindow):
         except FileNotFoundError:
             print("File not found.")
         except Exception as err:
-            print(f"Error reading file: {err}") 
+            print(f"Error reading file: {err}")
+
 extra = {
     # Density Scale
     "density_scale": "-1",
 }
 with open("config.txt", "r") as f:
-            read = f.read()   
-            if not read:
-                read = "dark_medical.xml"
-if __name__=="__main__":
+    read = f.read()
+    if not read:
+        read = "dark_medical.xml"
+if __name__ == "__main__":
     from App import MainApp
+
     app = QtWidgets.QApplication([])
-    
+
     main_app = MainApp()
     login_window = LoginWindow()
-    
+
     login_window.login_reference_signal.connect(main_app.handleLoginReference)
-    invert:bool = False
+    invert: bool = False
     if "light" in read:
-        invert = True   
-    apply_stylesheet(main_app, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
-    apply_stylesheet(login_window, theme=read, invert_secondary=invert, extra=extra,  css_file="custom.css")
-    #login_window.adjustSize()
+        invert = True
+    apply_stylesheet(
+        main_app,
+        theme=read,
+        invert_secondary=invert,
+        extra=extra,
+        css_file="custom.css",
+    )
+    apply_stylesheet(
+        login_window,
+        theme=read,
+        invert_secondary=invert,
+        extra=extra,
+        css_file="custom.css",
+    )
+    # login_window.adjustSize()
     login_window.show()
     app.exec_()
