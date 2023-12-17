@@ -1,4 +1,4 @@
-from PyQt5 import sip
+#from PyQt5 import sip
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtCore import Qt
 from MySQLHandler import MySQLHandler

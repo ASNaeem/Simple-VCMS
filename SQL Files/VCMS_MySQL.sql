@@ -304,3 +304,7 @@ END;
 
 //
 DELIMITER ;
+
+create user if not exists 'vcms-admin'@'localhost' identified by 'admin';
+grant all privileges on vcms.* to 'vcms-admin'@'localhost';
+flush privileges;
