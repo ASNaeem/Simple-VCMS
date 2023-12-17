@@ -1,6 +1,7 @@
 import sys
 import warnings
 import os
+from PyQt5 import sip
 from datetime import datetime, timedelta
 from PyQt5.QtWidgets import (
     QApplication,
