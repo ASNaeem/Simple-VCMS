@@ -1,0 +1,3 @@
+user = vcms-admin
+password = admin
+port = 3306

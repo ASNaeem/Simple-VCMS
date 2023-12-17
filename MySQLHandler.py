@@ -1,10 +1,11 @@
+import os
 import mysql.connector
 
 
 class MySQLHandler:
-    def __init__(
-        self, host="localhost", user="root", password="1234", port=3307, database="vcms"
-    ):
+    CONFIG_FILE_PATH = "mysql_config.txt"
+
+    def __init__(self, host="localhost", user=None, password=None, port=None, database="vcms"):
         self.host = host
         self.user = user
         self.password = password
@@ -12,8 +13,29 @@ class MySQLHandler:
         self.connection = None
         self.port = port
 
+    def load_config_from_file(self):
+        if os.path.exists(self.CONFIG_FILE_PATH):
+            with open(self.CONFIG_FILE_PATH, "r") as config_file:
+                lines = config_file.readlines()
+                for line in lines:
+                    key, value = map(str.strip, line.split("="))
+                    if key == "user":
+                        self.user = value
+                    elif key == "password":
+                        self.password = value
+                    elif key == "port":
+                        self.port = int(value)
+
+    def save_config_to_file(self):
+        with open(self.CONFIG_FILE_PATH, "w") as config_file:
+            config_file.write(f"user = {self.user}\n")
+            config_file.write(f"password = {self.password}\n")
+            config_file.write(f"port = {self.port}\n")
+
     def connect(self):
         try:
+            self.load_config_from_file()
+
             print(
                 f"Connecting to MySQL database with parameters: {self.host}, {self.user}, {self.database}, {self.port}"
             )
