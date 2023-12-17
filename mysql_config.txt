@@ -1,3 +1,3 @@
-user = root
-password = 1234
-port = 3307
+user = vcms-admin
+password = admin
+port = 3306
