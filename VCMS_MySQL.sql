@@ -63,6 +63,7 @@ values ('Luci','2022-10-3','no','female','Cat','Persian','brown','none',
  /* employee */
 create table employees (employee_id int auto_increment primary key, name varchar(45), email varchar(100), password varchar(50), address varchar(100), designation varchar(50), access_level int, working_hours varchar(50), salary decimal(10,2), joining_date date, employee_status varchar(10));
 
+insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('VCMS Admin', 'admin@vcms.com', 'admin', 'vet clinic', 'Admin', 4, '7:00 - 15:00', 50000, '2023-01-01', 'Working');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Marie-jeanne MacGinney', 'mmacginney0@goo.gl', 'pE9"''*''E', '49517 Mayfield Parkway', 'Manager', 2, '7:00 - 15:00', 32568.01, '2022-09-23', 'Working');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Korey MacCaull', 'kmaccaull1@multiply.com', 'lU6{)3gfw', '25 Hoard Terrace', 'Manager', 3, '7:00 - 15:00', 45196.66, '2022-06-04', 'Working');
 insert into employees (name, email, password, address, designation, access_level, working_hours, salary, joining_date, employee_status) values ('Avivah Barnard', 'abarnard2@mayoclinic.com', 'lF7*b!yxT#Vy8s', '766 Schmedeman Terrace', 'Manager', 3, '11:00 - 10:00', 27244.32, '2022-05-08', 'Working');
